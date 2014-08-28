@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
+		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
+		E93648DC19AF6EC800CE5542 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E93648DB19AF6EC800CE5542 /* TuCaoList.plist */; };
 		E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26819AD9DBC00E2824E /* Icon-60.png */; };
 		E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26919AD9DBC00E2824E /* Icon-60@2x.png */; };
 		E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26A19AD9DBC00E2824E /* Icon-72.png */; };
@@ -47,6 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E93648D419AF336300CE5542 /* TuCao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuCao.h; sourceTree = "<group>"; };
+		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
+		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
+		E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTuCaoTableViewCell.m; sourceTree = "<group>"; };
+		E93648DB19AF6EC800CE5542 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E968E26819AD9DBC00E2824E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		E968E26919AD9DBC00E2824E /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		E968E26A19AD9DBC00E2824E /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -106,6 +114,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E93648D319AF324700CE5542 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E93648D419AF336300CE5542 /* TuCao.h */,
+				E93648D519AF336300CE5542 /* TuCao.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E93648D719AF6C2200CE5542 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */,
+				E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */,
+			);
+			name = TableCell;
+			sourceTree = "<group>";
+		};
 		E968E26719AD9C2B00E2824E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +195,8 @@
 		E981F9D719AC323F007BD2DE /* CheYou */ = {
 			isa = PBXGroup;
 			children = (
+				E93648D719AF6C2200CE5542 /* TableCell */,
+				E93648D319AF324700CE5542 /* Model */,
 				E981F9E019AC323F007BD2DE /* CheYouAppDelegate.h */,
 				E981F9E119AC323F007BD2DE /* CheYouAppDelegate.m */,
 				E981F9E319AC323F007BD2DE /* Main.storyboard */,
@@ -205,6 +233,7 @@
 			children = (
 				E981F9F819AC323F007BD2DE /* CheYouTests-Info.plist */,
 				E981F9F919AC323F007BD2DE /* InfoPlist.strings */,
+				E93648DB19AF6EC800CE5542 /* TuCaoList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -312,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */,
+				E93648DC19AF6EC800CE5542 /* TuCaoList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +353,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E981F9DE19AC323F007BD2DE /* main.m in Sources */,
+				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
+				E93648D619AF336300CE5542 /* TuCao.m in Sources */,
 				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */,
 			);
@@ -407,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -439,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -454,7 +486,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CheYou/CheYou-Prefix.pch";
 				INFOPLIST_FILE = "CheYou/CheYou-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -469,7 +501,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CheYou/CheYou-Prefix.pch";
 				INFOPLIST_FILE = "CheYou/CheYou-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -28,13 +28,17 @@
     NSDictionary *barAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
                                      NSForegroundColorAttributeName:[UIColor blackColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:barAttributes];
+    //设置全局底部导航栏的背景颜色
+    [[UITabBar appearance] setBarTintColor:[LuJieCommon UIColorFromRGB:0xe4e4e4]];
     
+    // require iOS 5+
     //设置home页三个功能按钮
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UINavigationController *publishNavController = tabBarController.viewControllers[0];
+    
     UITabBarItem *publishitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
     [publishitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_home_select"]
-       withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
+          withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
     publishNavController.tabBarItem = publishitem;
     publishitem.imageInsets  = UIEdgeInsetsMake(6, 10, -6, -10);
     
@@ -51,7 +55,6 @@
        withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
     mineNavController.tabBarItem = mineitem;
     mineitem.imageInsets  = UIEdgeInsetsMake(6, -10, -6, 10);
-    
     
     return YES;
 }
