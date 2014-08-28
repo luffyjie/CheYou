@@ -19,6 +19,7 @@
 		E968E27B19AD9DBC00E2824E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27119AD9DBC00E2824E /* Icon@2x.png */; };
 		E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27C19AD9DD200E2824E /* iTunesArtwork.png */; };
 		E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */; };
+		E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E968E28219ADA16200E2824E /* LuJieCommon.m */; };
 		E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
 		E981F9D419AC323F007BD2DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D319AC323F007BD2DE /* CoreGraphics.framework */; };
 		E981F9D619AC323F007BD2DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D519AC323F007BD2DE /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 		E968E27119AD9DBC00E2824E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E968E27C19AD9DD200E2824E /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		E968E28119ADA16200E2824E /* LuJieCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuJieCommon.h; sourceTree = "<group>"; };
+		E968E28219ADA16200E2824E /* LuJieCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuJieCommon.m; sourceTree = "<group>"; };
 		E981F9CE19AC323F007BD2DE /* CheYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E981F9D119AC323F007BD2DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E981F9D319AC323F007BD2DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,9 +125,19 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		E968E28019ADA11100E2824E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E968E28119ADA16200E2824E /* LuJieCommon.h */,
+				E968E28219ADA16200E2824E /* LuJieCommon.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E968E28019ADA11100E2824E /* Common */,
 				E968E26719AD9C2B00E2824E /* Resource */,
 				E981F9D719AC323F007BD2DE /* CheYou */,
 				E981F9F619AC323F007BD2DE /* CheYouTests */,
@@ -311,6 +324,7 @@
 			files = (
 				E981F9DE19AC323F007BD2DE /* main.m in Sources */,
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
+				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

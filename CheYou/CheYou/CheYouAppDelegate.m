@@ -7,12 +7,52 @@
 //
 
 #import "CheYouAppDelegate.h"
+#import "LuJieCommon.h"
+#import "CheYouViewController.h"
 
 @implementation CheYouAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //设置全局导航栏的背景颜色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x37D077]];
+    //设置
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+   //设置导航栏自定义的按钮的颜色
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    // 设置文本的属性
+    NSDictionary *barAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
+                                     NSForegroundColorAttributeName:[UIColor blackColor]};
+    [[UINavigationBar appearance] setTitleTextAttributes:barAttributes];
+    
+    //设置home页三个功能按钮
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *publishNavController = tabBarController.viewControllers[0];
+    UITabBarItem *publishitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
+    [publishitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_home_select"]
+       withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
+    publishNavController.tabBarItem = publishitem;
+    publishitem.imageInsets  = UIEdgeInsetsMake(6, 10, -6, -10);
+    
+    UINavigationController *midNavController = tabBarController.viewControllers[1];
+    UITabBarItem *miditem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
+    [miditem setFinishedSelectedImage:[UIImage imageNamed:@"publish"]
+          withFinishedUnselectedImage:[UIImage imageNamed:@"publish"]];
+    midNavController.tabBarItem = miditem;
+    miditem.imageInsets  = UIEdgeInsetsMake(5, 0, -5, 0);
+    
+    UINavigationController *mineNavController = tabBarController.viewControllers[2];
+    UITabBarItem *mineitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
+    [mineitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_my_select"]
+       withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
+    mineNavController.tabBarItem = mineitem;
+    mineitem.imageInsets  = UIEdgeInsetsMake(6, -10, -6, 10);
+    
+    
     return YES;
 }
 							
