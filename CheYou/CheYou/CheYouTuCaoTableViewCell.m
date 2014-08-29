@@ -90,7 +90,7 @@
 
 - (CGRect)created_atFrame {
     
-    return CGRectMake(IMAGE_WIDTH_SIZE + 12.f + 15.f, 35.f, 100.f, 12.f);
+    return CGRectMake(IMAGE_WIDTH_SIZE + 12.f + 15.f, 38.f, 100.f, 12.f);
 }
 
 - (void)layoutSubviews {

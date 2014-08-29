@@ -9,6 +9,7 @@
 #import "CheYouAppDelegate.h"
 #import "LuJieCommon.h"
 #import "CheYouViewController.h"
+#import "CheYouPublishViewController.h"
 
 @implementation CheYouAppDelegate
 
@@ -17,10 +18,9 @@
     // Override point for customization after application launch.
     
     //设置全局导航栏的背景颜色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x37D077]];
-    //设置
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //设置状态栏颜色
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
     
    //设置导航栏自定义的按钮的颜色
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
@@ -30,31 +30,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:barAttributes];
     //设置全局底部导航栏的背景颜色
     [[UITabBar appearance] setBarTintColor:[LuJieCommon UIColorFromRGB:0xe4e4e4]];
-    
-    // require iOS 5+
-    //设置home页三个功能按钮
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    UINavigationController *publishNavController = tabBarController.viewControllers[0];
-    
-    UITabBarItem *publishitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
-    [publishitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_home_select"]
-          withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
-    publishNavController.tabBarItem = publishitem;
-    publishitem.imageInsets  = UIEdgeInsetsMake(6, 10, -6, -10);
-    
-    UINavigationController *midNavController = tabBarController.viewControllers[1];
-    UITabBarItem *miditem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
-    [miditem setFinishedSelectedImage:[UIImage imageNamed:@"publish"]
-          withFinishedUnselectedImage:[UIImage imageNamed:@"publish"]];
-    midNavController.tabBarItem = miditem;
-    miditem.imageInsets  = UIEdgeInsetsMake(6, 0, -6, 0);
-    
-    UINavigationController *mineNavController = tabBarController.viewControllers[2];
-    UITabBarItem *mineitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
-    [mineitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_my_select"]
-       withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
-    mineNavController.tabBarItem = mineitem;
-    mineitem.imageInsets  = UIEdgeInsetsMake(6, -10, -6, 10);
+
     
     UIImageView *scroll = [[UIImageView alloc] init];
     scroll.frame = CGRectMake(self.window.bounds.size.width - 5.f, self.window.bounds.size.height/2,5, 44);
@@ -63,10 +39,10 @@
 //    [self.window addSubview:scroll];
 //    [self.window makeKeyAndVisible];
 //    [self.window bringSubviewToFront:scroll];
-    
+
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Che You Tab Bar View Controller-->
         <scene sceneID="W71-ds-An0">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="dGi-3X-pDZ" sceneMemberID="viewController">
+                <tabBarController definesPresentationContext="YES" id="dGi-3X-pDZ" customClass="CheYouTabBarViewController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="lyk-KO-gUd">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -17,40 +17,32 @@
                     </tabBar>
                     <connections>
                         <segue destination="vdG-0Z-OXR" kind="relationship" relationship="viewControllers" id="LBT-wO-V54"/>
-                        <segue destination="L8o-VN-jIe" kind="relationship" relationship="viewControllers" id="b32-qb-eld"/>
                         <segue destination="W0o-Ds-9wf" kind="relationship" relationship="viewControllers" id="5uf-h7-B3w"/>
+                        <segue destination="pOp-Dr-Ye7" kind="modal" identifier="pb_segue" id="esp-HN-Kmc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jmu-hp-F5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-759" y="198"/>
         </scene>
-        <!--View Controller - 发布吐槽-->
-        <scene sceneID="VGu-Yw-BGw">
+        <!--Che You Publish View Controller-->
+        <scene sceneID="i5G-VC-Pbr">
             <objects>
-                <viewController id="eWR-jb-Icu" sceneMemberID="viewController">
+                <viewController id="pOp-Dr-Ye7" customClass="CheYouPublishViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3GE-LC-Uue"/>
-                        <viewControllerLayoutGuide type="bottom" id="PAQ-d3-yQf"/>
+                        <viewControllerLayoutGuide type="top" id="VNL-du-oXV"/>
+                        <viewControllerLayoutGuide type="bottom" id="lkV-UB-UhM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="55M-ek-Cji">
+                    <view key="view" contentMode="scaleToFill" id="bmf-M8-2UM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="asdasdasd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TqO-ni-qtx">
-                                <rect key="frame" x="91" y="229" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="发布吐槽" id="htX-7m-W3r"/>
+                    <navigationItem key="navigationItem" id="xVj-U3-sL9"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iwu-B4-Vcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eA7-Q2-Gbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360" y="312"/>
+            <point key="canvasLocation" x="-234" y="198"/>
         </scene>
         <!--Che You View Controller - 车友吐槽-->
         <scene sceneID="RTE-ap-ftn">
@@ -149,26 +141,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-ed-k2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="295" y="-429"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="PZ6-m0-CKl">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L8o-VN-jIe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="publish" id="jaC-i6-3Jb"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4em-d5-4fi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eWR-jb-Icu" kind="relationship" relationship="rootViewController" id="kxE-O2-KPP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pHa-Jo-l14" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-198" y="346"/>
+            <point key="canvasLocation" x="275" y="-421"/>
         </scene>
         <!--View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">
@@ -195,15 +168,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeL-vP-PYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="1206"/>
+            <point key="canvasLocation" x="301" y="956"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Hc-xD-ujB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W0o-Ds-9wf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_my_unselect" id="aQd-76-7Ab">
-                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="tab_my_unselect" id="aQd-76-7Ab"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ILU-IM-TVN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -216,7 +187,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9g-22-lN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-181" y="1206"/>
+            <point key="canvasLocation" x="-226" y="917"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cvV-4H-EUP">
@@ -235,12 +206,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2S-7b-kr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231" y="-429"/>
+            <point key="canvasLocation" x="-258" y="-551"/>
         </scene>
     </scenes>
     <resources>
         <image name="luoli" width="48" height="48"/>
-        <image name="publish" width="60" height="34"/>
         <image name="tab_home_select" width="24" height="24"/>
         <image name="tab_my_unselect" width="24" height="24"/>
     </resources>
