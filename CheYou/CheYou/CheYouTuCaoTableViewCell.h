@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TuCao.h"
 
 @interface CheYouTuCaoTableViewCell : UITableViewCell
+@property (nonatomic, strong) TuCao *tucao;
 
 @end

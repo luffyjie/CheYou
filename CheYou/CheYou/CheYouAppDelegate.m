@@ -47,7 +47,7 @@
     [miditem setFinishedSelectedImage:[UIImage imageNamed:@"publish"]
           withFinishedUnselectedImage:[UIImage imageNamed:@"publish"]];
     midNavController.tabBarItem = miditem;
-    miditem.imageInsets  = UIEdgeInsetsMake(5, 0, -5, 0);
+    miditem.imageInsets  = UIEdgeInsetsMake(6, 0, -6, 0);
     
     UINavigationController *mineNavController = tabBarController.viewControllers[2];
     UITabBarItem *mineitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:2];
@@ -55,6 +55,14 @@
        withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
     mineNavController.tabBarItem = mineitem;
     mineitem.imageInsets  = UIEdgeInsetsMake(6, -10, -6, 10);
+    
+    UIImageView *scroll = [[UIImageView alloc] init];
+    scroll.frame = CGRectMake(self.window.bounds.size.width - 5.f, self.window.bounds.size.height/2,5, 44);
+    scroll.image = [UIImage imageNamed:@"scroll"];
+//    
+//    [self.window addSubview:scroll];
+//    [self.window makeKeyAndVisible];
+//    [self.window bringSubviewToFront:scroll];
     
     return YES;
 }

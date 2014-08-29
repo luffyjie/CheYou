@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
-		E93648DC19AF6EC800CE5542 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E93648DB19AF6EC800CE5542 /* TuCaoList.plist */; };
 		E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26819AD9DBC00E2824E /* Icon-60.png */; };
 		E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26919AD9DBC00E2824E /* Icon-60@2x.png */; };
 		E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26A19AD9DBC00E2824E /* Icon-72.png */; };
@@ -37,6 +36,7 @@
 		E981F9F319AC323F007BD2DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D519AC323F007BD2DE /* UIKit.framework */; };
 		E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E981F9F919AC323F007BD2DE /* InfoPlist.strings */; };
 		E981F9FD19AC323F007BD2DE /* CheYouTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E981F9FC19AC323F007BD2DE /* CheYouTests.m */; };
+		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,6 @@
 		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
 		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
 		E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTuCaoTableViewCell.m; sourceTree = "<group>"; };
-		E93648DB19AF6EC800CE5542 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E968E26819AD9DBC00E2824E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		E968E26919AD9DBC00E2824E /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		E968E26A19AD9DBC00E2824E /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		E981F9F819AC323F007BD2DE /* CheYouTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheYouTests-Info.plist"; sourceTree = "<group>"; };
 		E981F9FA19AC323F007BD2DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E981F9FC19AC323F007BD2DE /* CheYouTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheYouTests.m; sourceTree = "<group>"; };
+		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +215,7 @@
 				E981F9DA19AC323F007BD2DE /* InfoPlist.strings */,
 				E981F9DD19AC323F007BD2DE /* main.m */,
 				E981F9DF19AC323F007BD2DE /* CheYou-Prefix.pch */,
+				E9ECC9A519B019D200C894E5 /* TuCaoList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -233,7 +234,6 @@
 			children = (
 				E981F9F819AC323F007BD2DE /* CheYouTests-Info.plist */,
 				E981F9F919AC323F007BD2DE /* InfoPlist.strings */,
-				E93648DB19AF6EC800CE5542 /* TuCaoList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -332,6 +332,7 @@
 				E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */,
 				E968E27819AD9DBC00E2824E /* Icon-Small.png in Resources */,
 				E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */,
+				E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */,
 				E968E27919AD9DBC00E2824E /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,7 +342,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */,
-				E93648DC19AF6EC800CE5542 /* TuCaoList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -471,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -486,7 +486,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CheYou/CheYou-Prefix.pch";
 				INFOPLIST_FILE = "CheYou/CheYou-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -501,7 +501,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CheYou/CheYou-Prefix.pch";
 				INFOPLIST_FILE = "CheYou/CheYou-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

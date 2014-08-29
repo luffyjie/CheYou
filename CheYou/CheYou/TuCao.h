@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TuCao : NSObject
-@property (nonatomic, assign) NSInteger *tu_id;
+@property (nonatomic, copy) NSString *tu_id;
 @property (nonatomic, copy) NSString *screen_name;
 @property (nonatomic, copy) NSString *profile_image_url;
 @property (nonatomic, copy) NSString *tuCaotext;

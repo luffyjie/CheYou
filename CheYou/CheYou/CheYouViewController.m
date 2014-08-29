@@ -9,10 +9,10 @@
 #import "CheYouViewController.h"
 #import "TuCao.h"
 #import "CheYouTuCaoTableViewCell.h"
+#import "LuJieCommon.h"
 
 @interface CheYouViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tuCaoTableView;
-
+@property (nonatomic, strong) UIImageView *scroll;
 @end
 
 @implementation CheYouViewController
@@ -24,12 +24,27 @@
 {
     [super viewDidLoad];
     //获取测试数据
-//    [self getDataFormFiles];
+    [self getDataFormFiles];
 	// Do any additional setup after loading the view, typically from a nib.
-//    NSLog(@"%@",_tuCaoList);
-    
+    //设置吐槽tale
+    self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
 }
+
+ - (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    self.scroll.hidden = NO;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+//    self.scroll.hidden = YES;
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -42,13 +57,11 @@
 {
     _tuCaoList = [[NSMutableArray alloc] init];
 	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
-        NSLog(@"%@",parkDictionaries);
-	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name",
-                              @"profile_image_url", @"tuCaotext", @"tuCaotag", @"created_at", nil];
-	for (NSDictionary *townDictionary in parkDictionaries) {
+	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext", @"tuCaotag", @"created_at", nil];
+	for (NSDictionary *tuCaoDic in parkDictionaries) {
 		TuCao *tucao = [[TuCao alloc] init];
 		for (NSString *property in propertyNames) {
-            [tucao setValue:[townDictionary objectForKey:property] forKey:property];
+            [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
 		}
 		[_tuCaoList addObject:tucao];
 	}
@@ -67,19 +80,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    CheYouTuCaoTableViewCell *tocaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
-    if (tocaoCell == nil){
-        tocaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+    CheYouTuCaoTableViewCell *tucaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
+    if (tucaoCell == nil){
+        tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
     }
-    tocaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    return tocaoCell;
+    tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+    
+    return tucaoCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //设置cell的高度
-    return 200.0;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
