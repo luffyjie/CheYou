@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
+		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
+		E93AD96919B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD96619B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m */; };
+		E93AD96A19B2CDC60081259E /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = E93AD96719B2CDC60081259E /* easing.c */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
 		E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26819AD9DBC00E2824E /* Icon-60.png */; };
 		E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26919AD9DBC00E2824E /* Icon-60@2x.png */; };
@@ -57,6 +60,11 @@
 		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
 		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
 		E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTuCaoTableViewCell.m; sourceTree = "<group>"; };
+		E93AD96219B2CCBB0081259E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E93AD96519B2CDC60081259E /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAKeyframeAnimation+AHEasing.h"; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
+		E93AD96619B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
+		E93AD96719B2CDC60081259E /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/easing.c"; sourceTree = "<group>"; };
+		E93AD96819B2CDC60081259E /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/easing.h"; sourceTree = "<group>"; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
 		E968E26819AD9DBC00E2824E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -104,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */,
 				E981F9D419AC323F007BD2DE /* CoreGraphics.framework in Frameworks */,
 				E981F9D619AC323F007BD2DE /* UIKit.framework in Frameworks */,
 				E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */,
@@ -141,6 +150,17 @@
 			name = TableCell;
 			sourceTree = "<group>";
 		};
+		E93AD96419B2CD960081259E /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				E93AD96519B2CDC60081259E /* CAKeyframeAnimation+AHEasing.h */,
+				E93AD96619B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m */,
+				E93AD96719B2CDC60081259E /* easing.c */,
+				E93AD96819B2CDC60081259E /* easing.h */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
 		E968E26719AD9C2B00E2824E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +192,7 @@
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E93AD96419B2CD960081259E /* Animation */,
 				E968E28019ADA11100E2824E /* Common */,
 				E968E26719AD9C2B00E2824E /* Resource */,
 				E981F9D719AC323F007BD2DE /* CheYou */,
@@ -193,6 +214,7 @@
 		E981F9D019AC323F007BD2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E93AD96219B2CCBB0081259E /* QuartzCore.framework */,
 				E981F9D119AC323F007BD2DE /* Foundation.framework */,
 				E981F9D319AC323F007BD2DE /* CoreGraphics.framework */,
 				E981F9D519AC323F007BD2DE /* UIKit.framework */,
@@ -373,8 +395,10 @@
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
 				E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */,
 				E93648D619AF336300CE5542 /* TuCao.m in Sources */,
+				E93AD96919B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */,
+				E93AD96A19B2CDC60081259E /* easing.c in Sources */,
 				E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

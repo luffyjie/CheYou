@@ -9,54 +9,40 @@
 #import "CheYouPublishViewController.h"
 #import "LuJieCommon.h"
 #include "CheYouFaXianViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "CAKeyframeAnimation+AHEasing.h"
+
+@interface CheYouPublishViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *pb_faxian;
+@property (weak, nonatomic) IBOutlet UIButton *pb_duche;
+@property (weak, nonatomic) IBOutlet UIButton *pb_tietiao;
+@property (weak, nonatomic) IBOutlet UIButton *pb_suixin;
+@property (weak, nonatomic) IBOutlet UIButton *pb_close;
+@property (weak, nonatomic) IBOutlet UILabel *footLabel;
+
+@end
 
 @implementation CheYouPublishViewController
-{
-    UIButton *pb_faxian;
-    UIButton *pb_duche;
-    UIButton *pb_tietiao;
-    UIButton *pb_suixin;
-    UIButton *pb_close;
-    UILabel *footLable;
-}
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [LuJieCommon UIColorFromRGB:0xf2f2f2];
-    
-    pb_faxian = [[UIButton alloc] initWithFrame:CGRectMake(25, 166, 70, 70)];
-    [pb_faxian setBackgroundImage:[UIImage imageNamed:@"pb_faxian"] forState:UIControlStateNormal];
-    [pb_faxian addTarget:self action:@selector(pb_faxianAction:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:pb_faxian];
-    
-    pb_duche = [[UIButton alloc] initWithFrame:CGRectMake(25 + 70 + 30, 166, 70, 70)];
-    [pb_duche setBackgroundImage:[UIImage imageNamed:@"pb_duche"] forState:UIControlStateNormal];
-    [pb_duche addTarget:self action:@selector(pb_ducheAction:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:pb_duche];
-    
-    pb_tietiao = [[UIButton alloc] initWithFrame:CGRectMake(25 + 70 + 30 + 70 + 30, 166, 70, 70)];
-    [pb_tietiao setBackgroundImage:[UIImage imageNamed:@"pb_tietiao"] forState:UIControlStateNormal];
-    [pb_tietiao addTarget:self action:@selector(pb_tietiaoAction:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:pb_tietiao];
-    
-    pb_suixin = [[UIButton alloc] initWithFrame:CGRectMake(25, 166 + 70 + 48, 70, 70)];
-    [pb_suixin setBackgroundImage:[UIImage imageNamed:@"pb_suixin"] forState:UIControlStateNormal];
-    [pb_suixin addTarget:self action:@selector(pb_suixinAction:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:pb_suixin];
-    
-    footLable = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44)];
-    footLable.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:footLable];
-    
-    pb_close = [[UIButton alloc] initWithFrame:CGRectMake(148, self.view.bounds.size.height - 34, 24, 24)];
-    [pb_close setBackgroundImage:[UIImage imageNamed:@"pb_close"] forState:UIControlStateNormal];
-    [pb_close addTarget:self action:@selector(pb_closeAction:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:pb_close];
+    self.pb_faxian.frame = CGRectMake(25, self.view.bounds.size.height, 70, 70);
+    self.pb_duche.frame = CGRectMake(25 + 70 + 30, self.view.bounds.size.height, 70, 70);
+    self.pb_tietiao.frame =  CGRectMake(25 + 70 + 30 + 70 + 30, self.view.bounds.size.height, 70, 70);
+    self.pb_suixin.frame = CGRectMake(25, self.view.bounds.size.height, 70, 70);
+    self.pb_close.frame =  CGRectMake(148, self.view.bounds.size.height - 34, 24, 24);
+    self.footLabel.frame = CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44);
+}
 
-
+-(void)MakeAn
+{
+    [self buttonAnimation:self.pb_faxian over:CGPointMake(60, 201)];
+    [self buttonAnimation:self.pb_duche over:CGPointMake(160, 201)];
+    [self buttonAnimation:self.pb_tietiao over:CGPointMake(260, 201)];
+    [self buttonAnimation:self.pb_suixin over:CGPointMake(60, 319)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,38 +51,65 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)pb_closeAction:(id)sender
+-(void)viewWillAppear:(BOOL)animated
 {
- 
+    [super viewWillDisappear:animated];
+    [self performSelector:@selector(MakeAn) withObject:nil afterDelay:0.2f];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    CGPoint toPoint = CGPointMake(60, 201);
+    [self buttonAnimation:self.pb_faxian over:toPoint];
+}
+
+#pragma 绑定按钮事件
+
+- (IBAction)pb_faxianAction:(id)sender {
+    
+    [self performSegueWithIdentifier:@"faxian_segue" sender:self];
+}
+
+- (IBAction)pb_closeAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion: nil];
 }
 
-- (void)pb_faxianAction:(id)sender
-{
-    CheYouFaXianViewController *faxianView = [[CheYouFaXianViewController alloc] init];
-    faxianView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:faxianView animated:YES completion: nil];
-}
-
-- (void)pb_ducheAction:(id)sender
-{
+- (IBAction)pb_ducheAction:(id)sender {
     
-
+    [self performSegueWithIdentifier:@"duche_segue" sender:self];
 }
 
-- (void)pb_tietiaoAction:(id)sender
-{
+- (IBAction)pb_tietiaoAction:(id)sender {
     
-
+    [self performSegueWithIdentifier:@"tietiao_segue" sender:self];
 }
 
-- (void)pb_suixinAction:(id)sender
-{
+- (IBAction)pb_suixinAction:(id)sender {
     
-
+    [self performSegueWithIdentifier:@"faxian_segue" sender:self];
 }
 
 
+#pragma 按钮加载动画效果
+
+-(void)buttonAnimation:(UIButton *)button over:(CGPoint)toPoint
+{
+ 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position" function:CircularEaseOut
+                                                                     fromPoint: CGPointMake(button.center.x, button.center.y) toPoint:toPoint keyframeCount:90];
+	animation.duration = 0.5;
+	[button.layer addAnimation:animation forKey:@"easing"];
+    [button setCenter:toPoint];
+}
+
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"faxian_segue"]) {
+        
+    }
+    
+}
 
 
 @end

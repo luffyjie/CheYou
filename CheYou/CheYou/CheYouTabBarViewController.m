@@ -41,6 +41,7 @@
     [self.pb_fabu setBackgroundImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [self.pb_fabu addTarget:self action:@selector(pb_fabuAction:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.pb_fabu];
+    
 }
 
 - (void)didReceiveMemoryWarning

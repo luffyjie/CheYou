@@ -24,10 +24,14 @@
     
    //设置导航栏自定义的按钮的颜色
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    NSDictionary *barItemAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
+                                     NSForegroundColorAttributeName:[UIColor blackColor]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
     // 设置文本的属性
-    NSDictionary *barAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
+    NSDictionary *barAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
                                      NSForegroundColorAttributeName:[UIColor blackColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:barAttributes];
+
     //设置全局底部导航栏的背景颜色
     [[UITabBar appearance] setBarTintColor:[LuJieCommon UIColorFromRGB:0xe4e4e4]];
 
