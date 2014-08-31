@@ -12,6 +12,16 @@
 		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
 		E93AD96919B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD96619B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m */; };
 		E93AD96A19B2CDC60081259E /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = E93AD96719B2CDC60081259E /* easing.c */; };
+		E93AD98019B30D540081259E /* UIImage+UzysExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD96E19B30D540081259E /* UIImage+UzysExtension.m */; };
+		E93AD98119B30D540081259E /* UzysAppearanceConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97019B30D540081259E /* UzysAppearanceConfig.m */; };
+		E93AD98219B30D540081259E /* UzysAssetPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E93AD97119B30D540081259E /* UzysAssetPickerController.bundle */; };
+		E93AD98319B30D540081259E /* UzysAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97419B30D540081259E /* UzysAssetsPickerController.m */; };
+		E93AD98419B30D540081259E /* UzysAssetsPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93AD97519B30D540081259E /* UzysAssetsPickerController.xib */; };
+		E93AD98519B30D540081259E /* UzysAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97719B30D540081259E /* UzysAssetsViewCell.m */; };
+		E93AD98619B30D540081259E /* UzysGroupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97919B30D540081259E /* UzysGroupPickerView.m */; };
+		E93AD98719B30D540081259E /* UzysGroupPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97B19B30D540081259E /* UzysGroupPickerViewController.m */; };
+		E93AD98819B30D540081259E /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97D19B30D540081259E /* UzysGroupViewCell.m */; };
+		E93AD98919B30D540081259E /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97F19B30D540081259E /* UzysWrapperPickerController.m */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
 		E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26819AD9DBC00E2824E /* Icon-60.png */; };
 		E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26919AD9DBC00E2824E /* Icon-60@2x.png */; };
@@ -65,6 +75,25 @@
 		E93AD96619B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
 		E93AD96719B2CDC60081259E /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/easing.c"; sourceTree = "<group>"; };
 		E93AD96819B2CDC60081259E /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = "../../../Downloads/github下载/Examples-master/IconBouncing/bouncetest/AHEasing/easing.h"; sourceTree = "<group>"; };
+		E93AD96D19B30D540081259E /* UIImage+UzysExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+UzysExtension.h"; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UIImage+UzysExtension.h"; sourceTree = "<group>"; };
+		E93AD96E19B30D540081259E /* UIImage+UzysExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+UzysExtension.m"; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UIImage+UzysExtension.m"; sourceTree = "<group>"; };
+		E93AD96F19B30D540081259E /* UzysAppearanceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysAppearanceConfig.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAppearanceConfig.h"; sourceTree = "<group>"; };
+		E93AD97019B30D540081259E /* UzysAppearanceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysAppearanceConfig.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAppearanceConfig.m"; sourceTree = "<group>"; };
+		E93AD97119B30D540081259E /* UzysAssetPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = UzysAssetPickerController.bundle; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetPickerController.bundle"; sourceTree = "<group>"; };
+		E93AD97219B30D540081259E /* UzysAssetsPickerController_Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysAssetsPickerController_Configuration.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsPickerController_Configuration.h"; sourceTree = "<group>"; };
+		E93AD97319B30D540081259E /* UzysAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysAssetsPickerController.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsPickerController.h"; sourceTree = "<group>"; };
+		E93AD97419B30D540081259E /* UzysAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysAssetsPickerController.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsPickerController.m"; sourceTree = "<group>"; };
+		E93AD97519B30D540081259E /* UzysAssetsPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UzysAssetsPickerController.xib; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsPickerController.xib"; sourceTree = "<group>"; };
+		E93AD97619B30D540081259E /* UzysAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysAssetsViewCell.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsViewCell.h"; sourceTree = "<group>"; };
+		E93AD97719B30D540081259E /* UzysAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysAssetsViewCell.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysAssetsViewCell.m"; sourceTree = "<group>"; };
+		E93AD97819B30D540081259E /* UzysGroupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysGroupPickerView.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupPickerView.h"; sourceTree = "<group>"; };
+		E93AD97919B30D540081259E /* UzysGroupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysGroupPickerView.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupPickerView.m"; sourceTree = "<group>"; };
+		E93AD97A19B30D540081259E /* UzysGroupPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysGroupPickerViewController.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupPickerViewController.h"; sourceTree = "<group>"; };
+		E93AD97B19B30D540081259E /* UzysGroupPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysGroupPickerViewController.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupPickerViewController.m"; sourceTree = "<group>"; };
+		E93AD97C19B30D540081259E /* UzysGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysGroupViewCell.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupViewCell.h"; sourceTree = "<group>"; };
+		E93AD97D19B30D540081259E /* UzysGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysGroupViewCell.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysGroupViewCell.m"; sourceTree = "<group>"; };
+		E93AD97E19B30D540081259E /* UzysWrapperPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UzysWrapperPickerController.h; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysWrapperPickerController.h"; sourceTree = "<group>"; };
+		E93AD97F19B30D540081259E /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysWrapperPickerController.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysWrapperPickerController.m"; sourceTree = "<group>"; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
 		E968E26819AD9DBC00E2824E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
@@ -161,6 +190,32 @@
 			name = Animation;
 			sourceTree = "<group>";
 		};
+		E93AD96C19B30D2C0081259E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				E93AD96D19B30D540081259E /* UIImage+UzysExtension.h */,
+				E93AD96E19B30D540081259E /* UIImage+UzysExtension.m */,
+				E93AD96F19B30D540081259E /* UzysAppearanceConfig.h */,
+				E93AD97019B30D540081259E /* UzysAppearanceConfig.m */,
+				E93AD97119B30D540081259E /* UzysAssetPickerController.bundle */,
+				E93AD97219B30D540081259E /* UzysAssetsPickerController_Configuration.h */,
+				E93AD97319B30D540081259E /* UzysAssetsPickerController.h */,
+				E93AD97419B30D540081259E /* UzysAssetsPickerController.m */,
+				E93AD97519B30D540081259E /* UzysAssetsPickerController.xib */,
+				E93AD97619B30D540081259E /* UzysAssetsViewCell.h */,
+				E93AD97719B30D540081259E /* UzysAssetsViewCell.m */,
+				E93AD97819B30D540081259E /* UzysGroupPickerView.h */,
+				E93AD97919B30D540081259E /* UzysGroupPickerView.m */,
+				E93AD97A19B30D540081259E /* UzysGroupPickerViewController.h */,
+				E93AD97B19B30D540081259E /* UzysGroupPickerViewController.m */,
+				E93AD97C19B30D540081259E /* UzysGroupViewCell.h */,
+				E93AD97D19B30D540081259E /* UzysGroupViewCell.m */,
+				E93AD97E19B30D540081259E /* UzysWrapperPickerController.h */,
+				E93AD97F19B30D540081259E /* UzysWrapperPickerController.m */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		E968E26719AD9C2B00E2824E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +247,7 @@
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E93AD96C19B30D2C0081259E /* Camera */,
 				E93AD96419B2CD960081259E /* Animation */,
 				E968E28019ADA11100E2824E /* Common */,
 				E968E26719AD9C2B00E2824E /* Resource */,
@@ -366,6 +422,8 @@
 				E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */,
 				E968E27619AD9DBC00E2824E /* Icon-Small-50.png in Resources */,
 				E981F9E519AC323F007BD2DE /* Main.storyboard in Resources */,
+				E93AD98419B30D540081259E /* UzysAssetsPickerController.xib in Resources */,
+				E93AD98219B30D540081259E /* UzysAssetPickerController.bundle in Resources */,
 				E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */,
 				E968E27819AD9DBC00E2824E /* Icon-Small.png in Resources */,
 				E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */,
@@ -390,16 +448,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				E981F9DE19AC323F007BD2DE /* main.m in Sources */,
+				E93AD98619B30D540081259E /* UzysGroupPickerView.m in Sources */,
+				E93AD98119B30D540081259E /* UzysAppearanceConfig.m in Sources */,
 				E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */,
 				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,
+				E93AD98819B30D540081259E /* UzysGroupViewCell.m in Sources */,
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
 				E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */,
 				E93648D619AF336300CE5542 /* TuCao.m in Sources */,
 				E93AD96919B2CDC60081259E /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */,
+				E93AD98519B30D540081259E /* UzysAssetsViewCell.m in Sources */,
 				E93AD96A19B2CDC60081259E /* easing.c in Sources */,
+				E93AD98019B30D540081259E /* UIImage+UzysExtension.m in Sources */,
 				E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */,
+				E93AD98319B30D540081259E /* UzysAssetsPickerController.m in Sources */,
+				E93AD98919B30D540081259E /* UzysWrapperPickerController.m in Sources */,
+				E93AD98719B30D540081259E /* UzysGroupPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

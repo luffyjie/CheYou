@@ -401,11 +401,11 @@
     </scenes>
     <resources>
         <image name="luoli" width="48" height="48"/>
-        <image name="pb_close" width="24" height="24"/>
-        <image name="pb_duche" width="70" height="70"/>
-        <image name="pb_faxian" width="70" height="70"/>
-        <image name="pb_suixin" width="70" height="70"/>
-        <image name="pb_tietiao" width="70" height="70"/>
+        <image name="pb_close" width="48" height="48"/>
+        <image name="pb_duche" width="140" height="140"/>
+        <image name="pb_faxian" width="140" height="140"/>
+        <image name="pb_suixin" width="140" height="140"/>
+        <image name="pb_tietiao" width="140" height="140"/>
         <image name="tab_home_select" width="24" height="24"/>
         <image name="tab_my_unselect" width="24" height="24"/>
     </resources>

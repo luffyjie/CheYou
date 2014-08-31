@@ -19,6 +19,7 @@
 @end
 
 @implementation CheYouFaXianViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -29,7 +30,7 @@
     
     self.accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
     [self.accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
-    [self.accphoto addTarget:self action:@selector(accphotoAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.accphoto addTarget:self action:@selector(accphotoAction:) forControlEvents:UIControlEventTouchDown];
     [self.accessoryView addSubview:self.accphoto];
     
     self.accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
@@ -50,7 +51,7 @@
     //监听键盘 设置输入框的高度
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hidekeyboard:) name:UIKeyboardDidHideNotification object:nil];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,8 +91,18 @@
 
 - (void)accphotoAction:(id)sender
 {
-
-    NSLog(@"111");
+    
+#if 1
+    UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
+    appearanceConfig.finishSelectionButtonColor = [LuJieCommon UIColorFromRGB:0x37D077];
+    appearanceConfig.assetsGroupSelectedImageName = @"checker";
+    [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
+#endif
+    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+    picker.delegate = self;
+    picker.maximumNumberOfSelectionVideo = 0;
+    picker.maximumNumberOfSelectionPhoto = 5;
+    [self presentViewController:picker animated:YES completion:^{}];
 }
 
 - (void)accsharpAction:(id)sender
@@ -104,6 +115,23 @@
 {
     
     NSLog(@"33333");
+}
+
+#pragma mark - UzysAssetsPickerControllerDelegate methods
+- (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+        DLog(@"assets %@",assets);
+
+}
+
+- (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"目前只允许选择5张图片！"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确认"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 

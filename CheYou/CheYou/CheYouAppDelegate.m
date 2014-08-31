@@ -19,9 +19,6 @@
     
     //设置全局导航栏的背景颜色
     [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x37D077]];
-    //设置状态栏颜色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-    
    //设置导航栏自定义的按钮的颜色
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     NSDictionary *barItemAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],

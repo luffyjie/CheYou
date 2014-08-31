@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UzysAssetsPickerController.h"
 
-@interface CheYouFaXianViewController : UIViewController
+@interface CheYouFaXianViewController : UIViewController <UzysAssetsPickerControllerDelegate>
 
 @end
