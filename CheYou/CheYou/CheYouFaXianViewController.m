@@ -11,46 +11,77 @@
 
 @interface CheYouFaXianViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (nonatomic, strong) UIView *accessoryView;
-@property (nonatomic, strong) UIButton *accphoto;
-@property (nonatomic, strong) UIButton *accsharp;
-@property (nonatomic, strong) UIButton *accwink;
+@property (weak, nonatomic) IBOutlet UIView *keyboarbarView;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *canceButton;
+
 
 @end
 
 @implementation CheYouFaXianViewController
 
+{
+    UIView *accessoryView;
+    UIButton *accphoto;
+    UIButton *accsharp;
+    UIButton *accwink;
+}
+
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor greenColor];
+    [self.sendButton setEnabled:YES];
     //键盘工具栏初始化
-    self.accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
-    self.accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
-    
-    self.accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
-    [self.accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
-    [self.accphoto addTarget:self action:@selector(accphotoAction:) forControlEvents:UIControlEventTouchDown];
-    [self.accessoryView addSubview:self.accphoto];
-    
-    self.accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [self.accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
-    [self.accsharp addTarget:self action:@selector(accsharpAction:) forControlEvents:UIControlEventTouchDown];
-    [self.accessoryView addSubview:self.accsharp];
-    
-    self.accwink = [[UIButton alloc] initWithFrame:CGRectMake(145, 13, 20, 20)];
-    [self.accwink setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
-    [self.accwink addTarget:self action:@selector(accwinkAction:) forControlEvents:UIControlEventTouchDown];
-    [self.accessoryView addSubview:self.accwink];
-    
-    //默认显示键盘
-    [self.textView becomeFirstResponder];
+    self.keyboarbarView.frame = CGRectMake(0,  0, self.view.bounds.size.width, 46);
+    //设置textview
     self.textView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 216 - 46);
-    self.textView.inputAccessoryView = self.accessoryView;
+    self.textView.font = [UIFont systemFontOfSize:16.f];
+    self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.textView.inputAccessoryView = self.keyboarbarView;
+    self.textView.delegate = self;
     
     //监听键盘 设置输入框的高度
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hidekeyboard:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hidekeyboard:) name:UIKeyboardWillHideNotification object:nil];
+
+    //另外设置一个工具栏
+    accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
+    accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+    accessoryView.hidden = YES;
+    [self.view addSubview:accessoryView];
+    
+    accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
+    [accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
+    [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:accphoto];
+    
+    
+    accwink = [[UIButton alloc] initWithFrame:CGRectMake(145, 13, 20, 20)];
+    [accwink setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
+    [accwink addTarget:self action:@selector(winkAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:accwink];
+    
+    accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
+    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
+    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:accsharp];
+    
+    //图片模块
+    UIImageView *userPhoto1 = [[UIImageView alloc] initWithFrame:CGRectMake(14, self.textView.bounds.size.height - 180 , 92, 92)];
+    userPhoto1.image = [UIImage imageNamed:@"welcome"];
+    [self.textView addSubview:userPhoto1];
+    
+    UIImageView *userPhoto2 = [[UIImageView alloc] initWithFrame:CGRectMake(14 + 92 + 6, self.textView.bounds.size.height - 180 , 92, 92)];
+    userPhoto2.image = [UIImage imageNamed:@"welcome"];
+    [self.textView addSubview:userPhoto2];
+    
+    UIImageView *userPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(14 + 92 + 92 + 6 + 6, self.textView.bounds.size.height - 180 , 92, 92)];
+    userPhoto.image = [UIImage imageNamed:@"user_photo"];
+    [self.textView addSubview:userPhoto];
     
 }
 
@@ -59,6 +90,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    //默认显示键盘
+    [self.textView becomeFirstResponder];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    //释放之前注册的键盘监控事件
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+#pragma textview 委托
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    self.promptLabel.hidden = YES;
+//    NSString *textLength = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    if (textLength.length > 0) {
+//        self.promptLabel.hidden = YES;
+//        [self.sendButton setEnabled:YES];
+//    }else
+//    {
+//        [self.sendButton setEnabled:NO];
+//        self.promptLabel.hidden = NO;
+//    }
+}
+    
+#pragma 导航按钮事件
+
 - (IBAction)cancelAction:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion: nil];
@@ -72,12 +136,12 @@
 #pragma 动态设置输入框的高度
 
 - (void)keyboardWasChange:(NSNotification *)aNotification {
+
     NSDictionary *info = [aNotification userInfo];
     
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     if (kbSize.height == 262) {
         self.textView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height - 262);
-    
     }else if(kbSize.height == 298){
         self.textView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height - 298);
     }
@@ -85,12 +149,22 @@
 
 -(void)hidekeyboard:(NSNotification *)aNotification {
     
+    accessoryView.hidden = NO;
+//    self.textView.frame = CGRectMake(0, 0, 320, self.view.bounds.size.height - 46);
+//    CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGRect frame = self.textView.frame;
+//    frame.size.height += keyboardRect.size.height - 46;
+    frame.size.height = self.view.bounds.size.height - 46;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.textView.frame = frame;
+    [UIView commitAnimations];
 }
 
-#pragma accessry 键盘附加栏按钮事件
+#pragma accessry 键盘工具栏按钮事件
 
-- (void)accphotoAction:(id)sender
-{
+- (IBAction)photoAction:(id)sender {
     
 #if 1
     UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
@@ -105,16 +179,12 @@
     [self presentViewController:picker animated:YES completion:^{}];
 }
 
-- (void)accsharpAction:(id)sender
-{
+- (IBAction)winkAction:(id)sender {
     
-    NSLog(@"2221222");
 }
 
-- (void)accwinkAction:(id)sender
-{
+- (IBAction)sharpAction:(id)sender {
     
-    NSLog(@"33333");
 }
 
 #pragma mark - UzysAssetsPickerControllerDelegate methods
@@ -133,7 +203,6 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
-
 
 
 @end
