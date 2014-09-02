@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */; };
 		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
 		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
@@ -23,6 +24,7 @@
 		E93AD98819B30D540081259E /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97D19B30D540081259E /* UzysGroupViewCell.m */; };
 		E93AD98919B30D540081259E /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93AD97F19B30D540081259E /* UzysWrapperPickerController.m */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
+		E964151119B55D8900FD2A08 /* CheYouDucheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E964151019B55D8900FD2A08 /* CheYouDucheViewController.m */; };
 		E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26819AD9DBC00E2824E /* Icon-60.png */; };
 		E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26919AD9DBC00E2824E /* Icon-60@2x.png */; };
 		E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E26A19AD9DBC00E2824E /* Icon-72.png */; };
@@ -66,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTieTaoViewController.h; sourceTree = "<group>"; };
+		E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTieTaoViewController.m; sourceTree = "<group>"; };
 		E93648D419AF336300CE5542 /* TuCao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuCao.h; sourceTree = "<group>"; };
 		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
 		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 		E93AD97F19B30D540081259E /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UzysWrapperPickerController.m; path = "../../../Downloads/UzysAssetsPickerController-master-3/UzysAssetsPickerController/Library/UzysWrapperPickerController.m"; sourceTree = "<group>"; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
+		E964150F19B55D8900FD2A08 /* CheYouDucheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouDucheViewController.h; sourceTree = "<group>"; };
+		E964151019B55D8900FD2A08 /* CheYouDucheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouDucheViewController.m; sourceTree = "<group>"; };
 		E968E26819AD9DBC00E2824E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		E968E26919AD9DBC00E2824E /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		E968E26A19AD9DBC00E2824E /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -295,6 +301,10 @@
 				E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */,
 				E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */,
 				E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */,
+				E964150F19B55D8900FD2A08 /* CheYouDucheViewController.h */,
+				E964151019B55D8900FD2A08 /* CheYouDucheViewController.m */,
+				E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */,
+				E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */,
 				E981F9E919AC323F007BD2DE /* Images.xcassets */,
 				E981F9D819AC323F007BD2DE /* Supporting Files */,
 			);
@@ -450,8 +460,10 @@
 				E981F9DE19AC323F007BD2DE /* main.m in Sources */,
 				E93AD98619B30D540081259E /* UzysGroupPickerView.m in Sources */,
 				E93AD98119B30D540081259E /* UzysAppearanceConfig.m in Sources */,
+				E964151119B55D8900FD2A08 /* CheYouDucheViewController.m in Sources */,
 				E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */,
 				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,
+				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
 				E93AD98819B30D540081259E /* UzysGroupViewCell.m in Sources */,
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
 				E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */,

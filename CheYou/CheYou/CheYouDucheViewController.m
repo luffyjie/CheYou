@@ -1,23 +1,22 @@
 //
-//  CheYouFaXianViewController.m
+//  CheYouDucheViewController.m
 //  CheYou
 //
-//  Created by lujie on 14-8-30.
+//  Created by lujie on 14-9-2.
 //  Copyright (c) 2014年 CheYou. All rights reserved.
 //
 
-#import "CheYouFaXianViewController.h"
+#import "CheYouDucheViewController.h"
 #import "LuJieCommon.h"
 
-@interface CheYouFaXianViewController ()
-@property (weak, nonatomic) IBOutlet UIView *keyboarbarView;
+@interface CheYouDucheViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+@property (strong, nonatomic) IBOutlet UIView *keywordBarView;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIView *photoView;
-
 @end
 
-@implementation CheYouFaXianViewController
+@implementation CheYouDucheViewController
 
 {
     UIButton *accphoto;
@@ -27,14 +26,15 @@
     UILabel *promptLabel;
     NSMutableArray *userPhotoList;
 }
+
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
     
-    //    self.scrollView.backgroundColor=[UIColor redColor];
-    //    self.photoView.backgroundColor = [UIColor blueColor];
-    //    self.textView.backgroundColor = [UIColor greenColor];
+//    self.scrollView.backgroundColor=[UIColor redColor];
+//    self.photoView.backgroundColor = [UIColor blueColor];
+//    self.textView.backgroundColor = [UIColor greenColor];
     self.sendButton.enabled = NO;
     userPhotoList = [[NSMutableArray alloc] init];
     
@@ -50,13 +50,13 @@
     
     //提示内容
     promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
-    promptLabel.text = @"最新发现...";
+    promptLabel.text = @"我们是首堵...";
     promptLabel.font = [UIFont systemFontOfSize:14];
     promptLabel.textColor = [LuJieCommon UIColorFromRGB:0x999999];
     [self.textView addSubview:promptLabel];
-    
+
     //键盘工具栏
-    self.keyboarbarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+   self.keywordBarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
     
     //底部工具栏
     accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
@@ -71,7 +71,7 @@
     [accwink setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
     [accwink addTarget:self action:@selector(winkAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accwink];
-    
+
     accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
     [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
     [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
@@ -120,7 +120,7 @@
     // note: you can create the accessory view programmatically (in code), or from the storyboard
     if (self.textView.inputAccessoryView == nil) {
         
-        self.textView.inputAccessoryView = self.keyboarbarView;
+        self.textView.inputAccessoryView = self.keywordBarView;
     }
     
     return YES;
@@ -148,7 +148,7 @@
 {
     if (textView.text.length == 0) {
         promptLabel.text = @"我们是首堵...";
-        self.sendButton.enabled = NO;
+            self.sendButton.enabled = NO;
     }else{
         promptLabel.text = @"";
         self.sendButton.enabled = YES;
@@ -157,7 +157,7 @@
 
 #pragma 导航按钮事件
 
-- (IBAction)cancelAction:(id)sender {
+- (IBAction)canceAction:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion: nil];
 }

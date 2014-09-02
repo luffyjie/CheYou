@@ -23,7 +23,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jmu-hp-F5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="198"/>
+            <point key="canvasLocation" x="-885" y="188"/>
         </scene>
         <!--Che You Publish View Controller-->
         <scene sceneID="i5G-VC-Pbr">
@@ -102,77 +102,24 @@
                         <outlet property="pb_suixin" destination="LaH-YB-OV7" id="Pq8-uN-g0w"/>
                         <outlet property="pb_tietiao" destination="X3X-pM-FJa" id="H4u-80-5e3"/>
                         <segue destination="KYh-g2-Nxd" kind="modal" identifier="faxian_segue" id="gky-0C-ihA"/>
-                        <segue destination="ODN-2n-ECM" kind="modal" identifier="duche_segue" id="r33-x1-BVc"/>
                         <segue destination="QBz-HM-Z2j" kind="modal" identifier="tietiao_segue" id="1nA-Cc-Nvm"/>
+                        <segue destination="eGV-Pi-O5m" kind="modal" identifier="duche_segue" id="79G-Zg-PYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eA7-Q2-Gbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="198"/>
+            <point key="canvasLocation" x="-55" y="222"/>
         </scene>
-        <!--Che You Fa Xian View Controller - 发现+随心-->
+        <!--Che You Fa Xian View Controller - 发现-->
         <scene sceneID="rTg-Ur-nzm">
             <objects>
                 <viewController id="RaD-ac-D9K" customClass="CheYouFaXianViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMj-gq-Oqc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="b5R-Db-hO5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="522"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享新发现..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5es-rB-De7">
-                                <rect key="frame" x="7" y="69" width="100" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" id="tcc-Qf-fDm">
-                                <rect key="frame" x="0.0" y="522" width="320" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gn7-Xb-Ijf">
-                                        <rect key="frame" x="21" y="13" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="keyboard_image">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="photoAction:" destination="RaD-ac-D9K" eventType="touchDown" id="akI-vC-5rw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7c-d5-VpU">
-                                        <rect key="frame" x="83" y="13" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="keyboard_wink">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="winkAction:" destination="RaD-ac-D9K" eventType="touchDown" id="kmh-Vk-7zx"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qch-KZ-rSR">
-                                        <rect key="frame" x="145" y="13" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="keyboard_sharp">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sharpAction:" destination="RaD-ac-D9K" eventType="touchDown" id="mWA-JD-ta7"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="发现+随心" id="qbf-X3-hyR">
+                    <navigationItem key="navigationItem" title="发现" id="qbf-X3-hyR">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="yUk-Yh-faa">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -187,16 +134,118 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="canceButton" destination="yUk-Yh-faa" id="ZCl-sd-tZk"/>
                         <outlet property="keyboarbarView" destination="tcc-Qf-fDm" id="eni-r2-7xI"/>
-                        <outlet property="promptLabel" destination="5es-rB-De7" id="2Yh-Qm-Azc"/>
-                        <outlet property="sendButton" destination="NQL-IX-Gbn" id="2cv-Yr-bNC"/>
-                        <outlet property="textView" destination="b5R-Db-hO5" id="QHY-Jc-2da"/>
+                        <outlet property="sendButton" destination="NQL-IX-Gbn" id="w9C-BD-dQa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qca-KL-rV7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="tcc-Qf-fDm">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gn7-Xb-Ijf">
+                            <rect key="frame" x="21" y="13" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="keyboard_image">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="photoAction:" destination="RaD-ac-D9K" eventType="touchDown" id="akI-vC-5rw"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7c-d5-VpU">
+                            <rect key="frame" x="83" y="13" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="keyboard_wink">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="winkAction:" destination="RaD-ac-D9K" eventType="touchDown" id="kmh-Vk-7zx"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qch-KZ-rSR">
+                            <rect key="frame" x="145" y="13" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="keyboard_sharp">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sharpAction:" destination="RaD-ac-D9K" eventType="touchDown" id="mWA-JD-ta7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1398" y="-630"/>
+            <point key="canvasLocation" x="1364" y="-636"/>
+        </scene>
+        <!--Che You Duche View Controller - 堵车-->
+        <scene sceneID="EWN-xb-kRy">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqn-Ig-xkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="I4S-OY-E5O">
+                    <rect key="frame" x="0.0" y="414" width="320" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EqD-6o-cpH">
+                            <rect key="frame" x="-6" y="12" width="75" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="keyboard_image">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="photoAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="skR-GA-9ve"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X6C-GA-ZEB">
+                            <rect key="frame" x="56" y="12" width="75" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="keyboard_wink">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="winkAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="rEJ-5V-KSs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X7v-0X-FiL">
+                            <rect key="frame" x="118" y="12" width="75" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="keyboard_sharp">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sharpAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="DSo-Iy-L75"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <viewController id="asP-GS-l4h" customClass="CheYouDucheViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ast-Ss-A0R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="堵车" id="v82-z6-SeT">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="7uf-T5-CPQ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="canceAction:" destination="asP-GS-l4h" id="H1M-xv-tUK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="发送" id="l1u-SG-EfB">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="sendAction:" destination="asP-GS-l4h" id="ILQ-6w-K7O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="keywordBarView" destination="I4S-OY-E5O" id="2s2-EA-x2y"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1125" y="168"/>
         </scene>
         <!--View Controller - 贴条-->
         <scene sceneID="2JP-gq-f5l">
@@ -213,26 +262,13 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmc-ho-3dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="XW8-4O-Myo">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1380" y="884"/>
-        </scene>
-        <!--View Controller - 堵车-->
-        <scene sceneID="RsI-cw-2ej">
-            <objects>
-                <viewController id="Opp-74-Ety" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xuI-Dk-XmM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="堵车" id="piJ-So-Ieb">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="uzi-QF-UqG"/>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="UgD-LM-5Ty"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GzL-32-bVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1348" y="135"/>
+            <point key="canvasLocation" x="1152" y="892"/>
         </scene>
         <!--Che You View Controller - 车友吐槽-->
         <scene sceneID="RTE-ap-ftn">
@@ -413,24 +449,6 @@
             <point key="canvasLocation" x="835" y="-594"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="H2q-D7-pm8">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ODN-2n-ECM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ltK-U5-7tV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Opp-74-Ety" kind="relationship" relationship="rootViewController" id="s1c-we-8s2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4PD-5U-ee1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="816" y="141"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QBz-HM-Z2j" sceneMemberID="viewController">
@@ -446,7 +464,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yaf-2i-mPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810" y="892"/>
+            <point key="canvasLocation" x="636" y="892"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FiL-GA-tBg">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eGV-Pi-O5m" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EMd-RN-Kdz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="asP-GS-l4h" kind="relationship" relationship="rootViewController" id="RsX-4v-abU"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="636" y="168"/>
         </scene>
     </scenes>
     <resources>
