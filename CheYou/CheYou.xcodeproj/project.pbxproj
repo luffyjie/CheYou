@@ -55,6 +55,7 @@
 		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
 		E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */; };
+		E9F9DC5719B708A000401C35 /* UIImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F9DC5619B708A000401C35 /* UIImageExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,8 @@
 		E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTabBarViewController.m; sourceTree = "<group>"; };
 		E9ECC9B219B0C0A400C894E5 /* CheYouPublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouPublishViewController.h; sourceTree = "<group>"; };
 		E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouPublishViewController.m; sourceTree = "<group>"; };
+		E9F9DC5519B708A000401C35 /* UIImageExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageExt.h; sourceTree = "<group>"; };
+		E9F9DC5619B708A000401C35 /* UIImageExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageExt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +249,8 @@
 			children = (
 				E968E28119ADA16200E2824E /* LuJieCommon.h */,
 				E968E28219ADA16200E2824E /* LuJieCommon.m */,
+				E9F9DC5519B708A000401C35 /* UIImageExt.h */,
+				E9F9DC5619B708A000401C35 /* UIImageExt.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				E93AD98519B30D540081259E /* UzysAssetsViewCell.m in Sources */,
 				E93AD96A19B2CDC60081259E /* easing.c in Sources */,
 				E93AD98019B30D540081259E /* UIImage+UzysExtension.m in Sources */,
+				E9F9DC5719B708A000401C35 /* UIImageExt.m in Sources */,
 				E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */,
 				E93AD98319B30D540081259E /* UzysAssetsPickerController.m in Sources */,
 				E93AD98919B30D540081259E /* UzysWrapperPickerController.m in Sources */,

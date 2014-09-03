@@ -13,6 +13,7 @@
 
 @interface CheYouViewController ()
 @property (nonatomic, strong) UIImageView *scroll;
+
 @end
 
 @implementation CheYouViewController
@@ -57,10 +58,13 @@
 {
     _tuCaoList = [[NSMutableArray alloc] init];
 	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
-	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext", @"tuCaotag", @"created_at", nil];
+	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
+                              @"tuCaotag", @"created_at", @"pic_urls",nil];
+    
 	for (NSDictionary *tuCaoDic in parkDictionaries) {
 		TuCao *tucao = [[TuCao alloc] init];
 		for (NSString *property in propertyNames) {
+            
             [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
 		}
 		[_tuCaoList addObject:tucao];
@@ -80,10 +84,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    CheYouTuCaoTableViewCell *tucaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
-    if (tucaoCell == nil){
-        tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
-    }
+//    CheYouTuCaoTableViewCell *tucaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
+//    if (tucaoCell == nil){
+    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+//    }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     

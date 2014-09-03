@@ -182,6 +182,30 @@
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
             <objects>
+                <viewController id="asP-GS-l4h" customClass="CheYouDucheViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ast-Ss-A0R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="堵车" id="v82-z6-SeT">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="7uf-T5-CPQ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="canceAction:" destination="asP-GS-l4h" id="H1M-xv-tUK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="发送" id="l1u-SG-EfB">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="sendAction:" destination="asP-GS-l4h" id="ILQ-6w-K7O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="keywordBarView" destination="I4S-OY-E5O" id="2s2-EA-x2y"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqn-Ig-xkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="I4S-OY-E5O">
                     <rect key="frame" x="0.0" y="414" width="320" height="46"/>
@@ -220,30 +244,6 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <viewController id="asP-GS-l4h" customClass="CheYouDucheViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ast-Ss-A0R">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="堵车" id="v82-z6-SeT">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="7uf-T5-CPQ">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="canceAction:" destination="asP-GS-l4h" id="H1M-xv-tUK"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="发送" id="l1u-SG-EfB">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="sendAction:" destination="asP-GS-l4h" id="ILQ-6w-K7O"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="keywordBarView" destination="I4S-OY-E5O" id="2s2-EA-x2y"/>
-                    </connections>
-                </viewController>
             </objects>
             <point key="canvasLocation" x="1125" y="168"/>
         </scene>
@@ -279,7 +279,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="pGK-lY-WJK" customClass="CheYouTuCaoTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="sconddentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="sconddentifier" rowHeight="180" id="pGK-lY-WJK" customClass="CheYouTuCaoTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGK-lY-WJK" id="ex0-Cs-9g5">
@@ -469,7 +469,6 @@
         <!--Navigation Controller-->
         <scene sceneID="FiL-GA-tBg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eGV-Pi-O5m" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EMd-RN-Kdz">
@@ -481,6 +480,7 @@
                         <segue destination="asP-GS-l4h" kind="relationship" relationship="rootViewController" id="RsX-4v-abU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="636" y="168"/>
         </scene>

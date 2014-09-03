@@ -42,7 +42,7 @@
     self.textView.text = @"";
     self.textView.returnKeyType = UIReturnKeyDone;
     self.textView.selectedRange = NSMakeRange(0,0);
-    self.textView.font = [UIFont systemFontOfSize:15.f];
+    self.textView.font = [UIFont systemFontOfSize:16.f];
     [self.view addSubview: self.textView];
     
     self.photoView = [[UIView alloc] initWithFrame: CGRectMake(0, self.textView.bounds.size.height, self.view.bounds.size.width, 100)];
@@ -51,7 +51,7 @@
     //提示内容
     promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
     promptLabel.text = @"我们是首堵...";
-    promptLabel.font = [UIFont systemFontOfSize:14];
+    promptLabel.font = [UIFont systemFontOfSize:16];
     promptLabel.textColor = [LuJieCommon UIColorFromRGB:0x999999];
     [self.textView addSubview:promptLabel];
 
