@@ -17,7 +17,7 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
-			<string>pic_luoli.png</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg</string>
 		</array>
 	</dict>
     <dict>
@@ -35,8 +35,9 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
-			<string>pic_luoli1.png</string>
-            <string>pic_luoli2.png</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
 		</array>
 	</dict>
     <dict>
@@ -54,11 +55,11 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
-			<string>pic_luoli1.png</string>
-            <string>pic_luoli2.png</string>
+			<string>http://ww4.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg</string>
+            <string>http://ww4.sinaimg.cn/bmiddle/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif</string>
             <string>pic_luoli3.png</string>
-            <string>pic_luoli4.png</string>
-            <string>pic_luoli5.png</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
 		</array>
 	</dict>
     <dict>
@@ -76,6 +77,12 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
+            <string>http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg</string>
+            <string>http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg</string>
+            <string>http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg</string>
+            <string>http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg</string>
+            <string>http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg</string>
+            <string>http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
 		</array>
 	</dict>
     <dict>
@@ -93,7 +100,7 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
-			<string>pic_luoli3.png</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
 		</array>
 	</dict>
     <dict>
@@ -111,7 +118,8 @@
 		<string>11:20</string>
 		<key>pic_urls</key>
 		<array>
-			<string>pic_luoli4.png</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg</string>
+            <string>http://ww3.sinaimg.cn/bmiddle/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg</string>
 		</array>
 	</dict>
 </array>

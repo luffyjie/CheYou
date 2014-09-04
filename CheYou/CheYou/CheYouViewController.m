@@ -10,6 +10,9 @@
 #import "TuCao.h"
 #import "CheYouTuCaoTableViewCell.h"
 #import "LuJieCommon.h"
+#import "UIImageView+MJWebCache.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 
 @interface CheYouViewController ()
 @property (nonatomic, strong) UIImageView *scroll;
@@ -101,7 +104,7 @@
     [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
     [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:commentbutton];
-    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over: tucaoCell];
+    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
     return tucaoCell;
 }
 
@@ -135,20 +138,19 @@
 }
 
 #pragma 生成吐槽的图片
--(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell
+-(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(int)row
 {
-
+    UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     if (tucao.pic_urls.count == 1) {
-        UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10,0, 150, 100)];
+        UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
+        // 下载图片
+        [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+        // 事件监听
+        photo.tag = 0;
         photo.clipsToBounds = YES;
         photo.contentMode = UIViewContentModeScaleAspectFill;
-
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 100);
-        UIImage *image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:0]];
-        photo.image = image;
         photo.userInteractionEnabled = YES;
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoPress:)];
-        [photo addGestureRecognizer:singleTap];
+        [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
         [cell.userPhotoView addSubview: photo];
 
     }
@@ -157,9 +159,14 @@
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
+            // 下载图片
+            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            // 事件监听
+            photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
             photo.contentMode = UIViewContentModeScaleAspectFill;
-            photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
+            photo.userInteractionEnabled = YES;
+            [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
             [cell.userPhotoView addSubview: photo];
         }
     }
@@ -169,12 +176,38 @@
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
-            photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
+            // 下载图片
+            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            // 事件监听
+            photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
             photo.contentMode = UIViewContentModeScaleAspectFill;
+            photo.userInteractionEnabled = YES;
+            [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
             [cell.userPhotoView addSubview: photo];
         }
     }
+}
+
+- (void)tapImage:(UITapGestureRecognizer *)tap
+{
+    TuCao *tucao = [_tuCaoList objectAtIndex:(tap.view.tag/10)];
+    int count =  [[tucao pic_urls] count];
+    // 1.封装图片数据
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        // 替换为中等尺寸图片
+        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:url]; // 图片路径]
+        photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView
+        [photos addObject:photo];
+    }
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = (tap.view.tag%10); // 弹出相册时显示的第一张图片是？
+    browser.photos = photos; // 设置所有的图片
+    [browser show];
 }
 
 @end

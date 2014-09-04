@@ -77,7 +77,7 @@
 //        created_at.backgroundColor = [UIColor yellowColor];
 //        tuCaoTag.backgroundColor = [UIColor redColor];
 //        tuCaoText.backgroundColor = [UIColor greenColor];
-//        userPhotoView.backgroundColor = [UIColor purpleColor];
+//        userPhotoView.backgroundColor = [UIColor redColor];
     }
     return self;
 }
@@ -145,17 +145,15 @@
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
     CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
-    //添加图片到内容下方
-
-    
+    //设置图片的位置和大小
     if (_tucao.pic_urls.count > 0) {
         if (_tucao.pic_urls.count ==1) {
             userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width,100);
         }else{
-            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170): CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
+            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
+            : CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
         }
     }
-//    NSLog(@"%f",userPhotoView.bounds.size.height);
     //计算出cell自适应的高度
     frame.size.height = textSize.height + userPhotoView.bounds.size.height + 123.f;
     self.frame = frame;

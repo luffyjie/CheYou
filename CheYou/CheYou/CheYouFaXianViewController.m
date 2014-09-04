@@ -44,6 +44,7 @@
     self.textView.selectedRange = NSMakeRange(0,0);
     self.textView.font = [UIFont systemFontOfSize:16.f];
     [self.view addSubview: self.textView];
+    self.textView.delegate = self;
     
     self.photoView = [[UIView alloc] initWithFrame: CGRectMake(0, self.textView.bounds.size.height, self.view.bounds.size.width, 100)];
     [self.view addSubview:self.photoView];
@@ -88,7 +89,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.textView.delegate = self;
     [self.textView becomeFirstResponder];
 }
 
@@ -212,6 +212,8 @@
                                          orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
             UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, (idx/3)*102, 92, 92)];
             userImage.image = img;
+            userImage.clipsToBounds = YES;
+            userImage.contentMode = UIViewContentModeScaleAspectFill;
             [self.photoView addSubview:userImage];
             [userPhotoList addObject:userImage];
         }];
