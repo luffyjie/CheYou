@@ -90,7 +90,18 @@
 //    }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+    //添加吐槽下方点赞 评论 按钮
+    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(12, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
+    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
+    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [tucaoCell.contentView addSubview:gasolinebutton];
     
+    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(90, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
+    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [tucaoCell.contentView addSubview:commentbutton];
+    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over: tucaoCell];
     return tucaoCell;
 }
 
@@ -105,17 +116,58 @@
     
 }
 
-- (IBAction)angerButton:(id)sender {
-    NSLog(@"angerButton");
+#pragma 评论 点赞 点击附件图片 事件处理
+- (void)gasolinebuttonAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
 }
 
-- (IBAction)chatButton:(id)sender {
-    NSLog(@"chatButton");
+- (void)commentbuttonAction:(id)sender
+{
+    
 }
 
-- (IBAction)xelementButton:(id)sender {
-    NSLog(@"xelementButton");
+- (void)photoPress:(id)sender
+{
+//   UIImageView *photo = (UIImageView *)sender;
+    NSLog(@"00-----000---");
 }
 
+#pragma 生成吐槽的图片
+-(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell
+{
+
+    if (tucao.pic_urls.count == 1) {
+        UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10,0, 150, 100)];
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 100);
+        UIImage *image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:0]];
+        photo.image = image;
+        photo.userInteractionEnabled = YES;
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoPress:)];
+        [photo addGestureRecognizer:singleTap];
+        [cell.userPhotoView addSubview: photo];
+
+    }
+    
+    if (tucao.pic_urls.count >1 && tucao.pic_urls.count < 4) {
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
+        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+            UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
+            photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
+            [cell.userPhotoView addSubview: photo];
+        }
+    }
+    
+    if(tucao.pic_urls.count > 3)
+    {
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
+        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+            UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
+            photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
+            [cell.userPhotoView addSubview: photo];
+        }
+    }
+}
 
 @end

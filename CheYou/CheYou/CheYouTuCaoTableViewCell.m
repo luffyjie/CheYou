@@ -16,19 +16,22 @@
 #define TAG_DISTANCE_WIDTH  100.f
 
 @implementation CheYouTuCaoTableViewCell
+
 {
     UIImageView *userImage;
     UILabel *screen_name;
     UILabel *created_at;
     UILabel *tuCaoTag;
-    UILabel *tuCaoText;
-    UIView *userPhotoView;
+//    UILabel *tuCaoText;
     UILabel *midLine;
     UILabel *footLine;
+//    UIView *userPhotoView;
+    UIButton *xgasolinebutton;
     UIButton *commentbutton;
 }
 
-
+@synthesize userPhotoView = userPhotoView;
+@synthesize tuCaoText = tuCaoText;
 @synthesize tucao = _tucao;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -67,9 +70,6 @@
         footLine = [[UILabel alloc] init];
         footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xD7D7D7];
         [self.contentView addSubview: footLine];
-        
-        
-        commentbutton = [[UIButton alloc] init];
         
         //add by lujie for debug
 //        userImage.backgroundColor = [UIColor lightGrayColor];
@@ -146,65 +146,23 @@
     CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //添加图片到内容下方
+
+    
     if (_tucao.pic_urls.count > 0) {
-        
-        if (_tucao.pic_urls.count == 1) {
-            UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10,0, 150, 100)];
-            userPhotoView.frame = CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 100);
-            UIImage *image = [UIImage imageNamed: [_tucao.pic_urls objectAtIndex:0]];
-            photo.image = image;
-            [userPhotoView addSubview: photo];
-        }
-        
-        if (_tucao.pic_urls.count >1 && _tucao.pic_urls.count < 4) {
-            userPhotoView.frame = CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
-            for (int idx = 0; idx < _tucao.pic_urls.count; idx++) {
-                UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
-                photo.image = [UIImage imageNamed: [_tucao.pic_urls objectAtIndex:idx]];
-                [userPhotoView addSubview: photo];
-            }
-        }
-        
-        if(_tucao.pic_urls.count > 3)
-        {
-            userPhotoView.frame = CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170);
-            for (int idx = 0; idx < _tucao.pic_urls.count; idx++) {
-                UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
-                photo.image = [UIImage imageNamed: [_tucao.pic_urls objectAtIndex:idx]];
-                [userPhotoView addSubview: photo];
-            }
+        if (_tucao.pic_urls.count ==1) {
+            userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width,100);
+        }else{
+            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170): CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
         }
     }
 //    NSLog(@"%f",userPhotoView.bounds.size.height);
     //计算出cell自适应的高度
     frame.size.height = textSize.height + userPhotoView.bounds.size.height + 123.f;
     self.frame = frame;
+    self.contentView.frame = frame;
     //最后设置foot+mid 间隔框的位置
     footLine.frame = CGRectMake(0, frame.size.height - 10.f, frame.size.width, 10.f);
-    midLine.frame = CGRectMake(0, frame.size.height - 50.f, frame.size.width, 1.f);
-}
-
--(void)makeUserPhoto
-{
-    if (_tucao.pic_urls.count > 0) {
-        if (_tucao.pic_urls.count < 4) {
-            userPhotoView.frame = CGRectMake(0, 0, self.contentView.bounds.size.width, 60);
-            for (int idx = 0; idx < _tucao.pic_urls.count; idx++) {
-                UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*60+(idx%3+1)*10, (idx/3)*62, 60, 60)];
-                photo.image = [UIImage imageNamed: [_tucao.pic_urls objectAtIndex:idx]];
-                [userPhotoView addSubview: photo];
-//                NSLog(@"%@",[_tucao.pic_urls objectAtIndex:idx]);
-            }
-        }else{
-            userPhotoView.frame = CGRectMake(0, 0, self.contentView.bounds.size.width, 130);
-            for (int idx = 0; idx < _tucao.pic_urls.count; idx++) {
-                UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*60+(idx%3+1)*10, (idx/3)*62, 60, 60)];
-                photo.image = [UIImage imageNamed: [_tucao.pic_urls objectAtIndex:idx]];
-                [userPhotoView addSubview: photo];
-            }
-        }
-    }
-    
+    midLine.frame = CGRectMake(0, frame.size.height - 50.f, frame.size.width, 1.0f);
 }
 
 @end

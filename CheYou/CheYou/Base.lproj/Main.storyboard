@@ -218,7 +218,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="photoAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="skR-GA-9ve"/>
+                                <action selector="photoAction:" destination="asP-GS-l4h" eventType="touchDown" id="Yxu-mC-NCS"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X6C-GA-ZEB">
@@ -228,7 +228,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="winkAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="rEJ-5V-KSs"/>
+                                <action selector="winkAction:" destination="asP-GS-l4h" eventType="touchDown" id="g8Q-qg-AQc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X7v-0X-FiL">
@@ -238,7 +238,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="sharpAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="DSo-Iy-L75"/>
+                                <action selector="sharpAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="NHX-3R-35p"/>
                             </connections>
                         </button>
                     </subviews>

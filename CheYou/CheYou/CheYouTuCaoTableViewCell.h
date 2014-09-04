@@ -11,5 +11,6 @@
 
 @interface CheYouTuCaoTableViewCell : UITableViewCell
 @property (nonatomic, strong) TuCao *tucao;
-
+@property (nonatomic, strong) UIView *userPhotoView;
+@property (nonatomic, strong) UILabel *tuCaoText;
 @end

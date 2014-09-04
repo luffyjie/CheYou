@@ -168,7 +168,6 @@
 }
 
 #pragma accessry 键盘工具栏按钮事件
-
 - (IBAction)photoAction:(id)sender {
     
 #if 1
@@ -183,13 +182,12 @@
     picker.maximumNumberOfSelectionPhoto = 6;
     [self presentViewController:picker animated:YES completion:^{}];
 }
-
 - (IBAction)winkAction:(id)sender {
-    
+
 }
 
 - (IBAction)sharpAction:(id)sender {
-    
+
 }
 
 #pragma mark - UzysAssetsPickerControllerDelegate methods
