@@ -131,7 +131,7 @@
 - (void)photoPress:(id)sender
 {
 //   UIImageView *photo = (UIImageView *)sender;
-    NSLog(@"00-----000---");
+    NSLog(@"photoPress");
 }
 
 #pragma 生成吐槽的图片
@@ -140,6 +140,9 @@
 
     if (tucao.pic_urls.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10,0, 150, 100)];
+        photo.clipsToBounds = YES;
+        photo.contentMode = UIViewContentModeScaleAspectFill;
+
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 100);
         UIImage *image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:0]];
         photo.image = image;
@@ -154,6 +157,8 @@
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
+            photo.clipsToBounds = YES;
+            photo.contentMode = UIViewContentModeScaleAspectFill;
             photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
             [cell.userPhotoView addSubview: photo];
         }
@@ -165,6 +170,8 @@
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             photo.image = [UIImage imageNamed: [tucao.pic_urls objectAtIndex:idx]];
+            photo.clipsToBounds = YES;
+            photo.contentMode = UIViewContentModeScaleAspectFill;
             [cell.userPhotoView addSubview: photo];
         }
     }
