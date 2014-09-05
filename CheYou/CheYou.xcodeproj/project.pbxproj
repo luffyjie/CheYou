@@ -78,6 +78,7 @@
 		E981F9F319AC323F007BD2DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D519AC323F007BD2DE /* UIKit.framework */; };
 		E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E981F9F919AC323F007BD2DE /* InfoPlist.strings */; };
 		E981F9FD19AC323F007BD2DE /* CheYouTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E981F9FC19AC323F007BD2DE /* CheYouTests.m */; };
+		E982164C19B9A07000F088BB /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E982164B19B9A07000F088BB /* PRButton.m */; };
 		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
 		E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */; };
@@ -213,6 +214,8 @@
 		E981F9F819AC323F007BD2DE /* CheYouTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheYouTests-Info.plist"; sourceTree = "<group>"; };
 		E981F9FA19AC323F007BD2DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E981F9FC19AC323F007BD2DE /* CheYouTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheYouTests.m; sourceTree = "<group>"; };
+		E982164A19B9A07000F088BB /* PRButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRButton.h; sourceTree = "<group>"; };
+		E982164B19B9A07000F088BB /* PRButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRButton.m; sourceTree = "<group>"; };
 		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E9ECC9AD19B0983400C894E5 /* CheYouTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTabBarViewController.h; sourceTree = "<group>"; };
 		E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTabBarViewController.m; sourceTree = "<group>"; };
@@ -252,6 +255,8 @@
 			children = (
 				E93648D419AF336300CE5542 /* TuCao.h */,
 				E93648D519AF336300CE5542 /* TuCao.m */,
+				E982164A19B9A07000F088BB /* PRButton.h */,
+				E982164B19B9A07000F088BB /* PRButton.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 				E9617A8C19B81740000543D2 /* SDWebImageManager.m in Sources */,
 				E981F9E219AC323F007BD2DE /* CheYouAppDelegate.m in Sources */,
 				E9617A7D19B81740000543D2 /* MJPhoto.m in Sources */,
+				E982164C19B9A07000F088BB /* PRButton.m in Sources */,
 				E9617A3919B7FAAC000543D2 /* UIImage+UzysExtension.m in Sources */,
 				E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */,
 				E9617A8B19B81740000543D2 /* SDWebImageManager+MJ.m in Sources */,

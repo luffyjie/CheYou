@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UzysAssetsPickerController.h"
 
-@interface CheYouDucheViewController : UIViewController <UITextViewDelegate, UzysAssetsPickerControllerDelegate>
+@interface CheYouDucheViewController : UIViewController <UITextViewDelegate, UzysAssetsPickerControllerDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end

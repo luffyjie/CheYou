@@ -8,15 +8,18 @@
 
 #import "CheYouDucheViewController.h"
 #import "LuJieCommon.h"
+#import "PRButton.h"
 
 @interface CheYouDucheViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
 @property (strong, nonatomic) IBOutlet UIView *keywordBarView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIView *photoView;
+@property (weak, nonatomic) IBOutlet PRButton *ducheCaseButton;
+@property (weak, nonatomic) IBOutlet PRButton *ducheTimeButton;
 
-//@property (nonatomic, strong) UITextView *textView;
-//@property (nonatomic, strong) UIView *photoView;
+@property (strong, nonatomic) UIPickerView *casepicker;
+
 @end
 
 @implementation CheYouDucheViewController
@@ -28,6 +31,7 @@
     UIView *accessoryView;
     UILabel *promptLabel;
     NSMutableArray *userPhotoList;
+    NSMutableArray *caseList;
 }
 
 - (void)viewDidLoad
@@ -56,6 +60,14 @@
     self.keywordBarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
     self.keywordBarView.frame = CGRectMake(0, self.view.bounds.size.height + 300, self.view.bounds.size.height, 46);
     [self.view addSubview:self.keywordBarView];
+    
+    //堵车原因picker
+    self.casepicker = [[UIPickerView alloc] init];
+    self.casepicker.tag = 0;
+    self.casepicker.dataSource = self;
+    self.casepicker.delegate = self;
+    self.casepicker.showsSelectionIndicator = YES;
+    self.ducheCaseButton.inputView = [self casepicker];
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,7 +165,6 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    NSLog(@"%f",keyboardFrame.size.height);
     if (up) {
         [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - keyboardFrame.size.height - 46, self.view.bounds.size.width, 46)];
     }else{
@@ -256,5 +267,60 @@
     [alert show];
 }
 
+#pragma mark - make DataSource
+
+- (NSMutableArray *)caseList
+{
+    if(!caseList) {
+        caseList= [[NSMutableArray alloc] init];
+        [caseList addObject:@"大流量"];
+        [caseList addObject:@"事故"];
+        [caseList addObject:@"积水"];
+        [caseList addObject:@"信号灯故障"];
+        [caseList addObject:@"其他"];
+        
+    }
+    return caseList;
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    //    NSLog(@"numberOfRowsInComponent %i", pickerView.tag);
+    if (pickerView.tag == 0) {
+        return self.caseList.count;
+    }
+    else {
+        return self.caseList.count;
+    }
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    //        NSLog(@"titleForRow %i", pickerView.tag);
+    if (pickerView.tag == 0) {
+        return self.caseList[row];
+    }
+    else {
+        return self.caseList[row];
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"%@",[self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component]);
+    if (pickerView.tag ==0) {
+//        self.ducheCaseButton.text = [self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
+    } else{
+//        self.ducheCaseButton.text = [self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
+    }
+}
 
 @end
