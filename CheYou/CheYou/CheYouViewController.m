@@ -192,7 +192,7 @@
 - (void)tapImage:(UITapGestureRecognizer *)tap
 {
     TuCao *tucao = [_tuCaoList objectAtIndex:(tap.view.tag/10)];
-    int count =  [[tucao pic_urls] count];
+    NSInteger count =  [[tucao pic_urls] count];
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {

@@ -50,7 +50,7 @@
         tuCaoTag.textAlignment = NSTextAlignmentRight;
         tuCaoTag.font = [UIFont boldSystemFontOfSize:14.f];
         tuCaoTag.textColor = [LuJieCommon UIColorFromRGB:0x3498db];
-        [self.contentView addSubview: tuCaoTag];
+//        [self.contentView addSubview: tuCaoTag];
         
         created_at = [[UILabel alloc] init];
         created_at.font = [UIFont boldSystemFontOfSize:10.f];

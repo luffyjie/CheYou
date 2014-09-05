@@ -12,8 +12,11 @@
 @interface CheYouDucheViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
 @property (strong, nonatomic) IBOutlet UIView *keywordBarView;
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) UIView *photoView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIView *photoView;
+
+//@property (nonatomic, strong) UITextView *textView;
+//@property (nonatomic, strong) UIView *photoView;
 @end
 
 @implementation CheYouDucheViewController
@@ -32,22 +35,16 @@
     
     [super viewDidLoad];
     
-//    self.scrollView.backgroundColor=[UIColor redColor];
-//    self.photoView.backgroundColor = [UIColor blueColor];
+//    self.photoView.backgroundColor = [UIColor redColor];
 //    self.textView.backgroundColor = [UIColor greenColor];
+    
     self.sendButton.enabled = NO;
     userPhotoList = [[NSMutableArray alloc] init];
-    
-    self.textView = [[UITextView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, 166)];
     self.textView.text = @"";
     self.textView.returnKeyType = UIReturnKeyDone;
     self.textView.selectedRange = NSMakeRange(0,0);
     self.textView.font = [UIFont systemFontOfSize:16.f];
     [self.view addSubview: self.textView];
-    
-    self.photoView = [[UIView alloc] initWithFrame: CGRectMake(0, self.textView.bounds.size.height, self.view.bounds.size.width, 100)];
-    [self.view addSubview:self.photoView];
-    
     //提示内容
     promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
     promptLabel.text = @"我们是首堵...";
@@ -56,28 +53,9 @@
     [self.textView addSubview:promptLabel];
 
     //键盘工具栏
-   self.keywordBarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
-    
-    //底部工具栏
-    accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
-    accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
-    
-    accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
-    [accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
-    [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accphoto];
-    
-    accwink = [[UIButton alloc] initWithFrame:CGRectMake(145, 13, 20, 20)];
-    [accwink setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
-    [accwink addTarget:self action:@selector(winkAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accwink];
-
-    accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
-    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accsharp];
-    [self.view addSubview:accessoryView];
-    accessoryView.hidden = YES;
+    self.keywordBarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+    self.keywordBarView.frame = CGRectMake(0, self.view.bounds.size.height + 300, self.view.bounds.size.height, 46);
+    [self.view addSubview:self.keywordBarView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,8 +64,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    // Listen for will show/hide notifications
     self.textView.delegate = self;
     [self.textView becomeFirstResponder];
 }
@@ -106,7 +97,7 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
+
     [self adjustSelection:textView];
 }
 
@@ -115,32 +106,8 @@
     [self adjustSelection:textView];
 }
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
-    
-    // note: you can create the accessory view programmatically (in code), or from the storyboard
-    if (self.textView.inputAccessoryView == nil) {
-        
-        self.textView.inputAccessoryView = self.keywordBarView;
-    }
-    
-    return YES;
-}
-
-- (BOOL)textViewShouldEndEditing:(UITextView *)aTextView {
-    [aTextView resignFirstResponder];
-    
-    return YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if ([text isEqualToString:@"\n"]) {
-        // Be sure to test for equality using the "isEqualToString" message
-        [textView resignFirstResponder];
-        accessoryView.hidden = NO;
-        // Return FALSE so that the final '\n' character doesn't get added
-        return FALSE;
-    }
+- (BOOL)textViewShouldEndEditing:(UITextView *)TextView {
+    [TextView resignFirstResponder];
     return YES;
 }
 
@@ -148,11 +115,62 @@
 {
     if (textView.text.length == 0) {
         promptLabel.text = @"我们是首堵...";
-            self.sendButton.enabled = NO;
+        self.sendButton.enabled = NO;
     }else{
         promptLabel.text = @"";
         self.sendButton.enabled = YES;
     }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        [textView resignFirstResponder];
+        accessoryView.hidden = NO;
+        // Return FALSE so that the final '\n' character doesn't get added
+        return FALSE;
+    }
+
+    return YES;
+}
+
+#pragma mark - forKeyboard bar animation helpers
+
+// Helper method for moving the toolbar frame based on user action
+- (void)moveToolBarUp:(BOOL)up forKeyboardNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get animation info from userInfo
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardFrame;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+    
+    // Animate up or down
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    NSLog(@"%f",keyboardFrame.size.height);
+    if (up) {
+        [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - keyboardFrame.size.height - 46, self.view.bounds.size.width, 46)];
+    }else{
+        [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
+    }
+    [UIView commitAnimations];
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    // move the toolbar frame up as keyboard animates into view
+    [self moveToolBarUp:YES forKeyboardNotification:notification];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    // move the toolbar frame down as keyboard animates into view
+    [self moveToolBarUp:NO forKeyboardNotification:notification];
 }
 
 #pragma 导航按钮事件
@@ -167,6 +185,15 @@
     [self.textView resignFirstResponder];
 }
 
+#pragma 堵车 堵车时间事件
+- (IBAction)ducheCaseAction:(id)sender {
+    
+}
+
+- (IBAction)ducheTime:(id)sender {
+    
+}
+
 #pragma accessry 键盘工具栏按钮事件
 - (IBAction)photoAction:(id)sender {
     
@@ -179,7 +206,7 @@
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
     picker.maximumNumberOfSelectionVideo = 0;
-    picker.maximumNumberOfSelectionPhoto = 6;
+    picker.maximumNumberOfSelectionPhoto = 3;
     [self presentViewController:picker animated:YES completion:^{}];
 }
 - (IBAction)winkAction:(id)sender {
@@ -208,7 +235,7 @@
             UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
                                                scale:representation.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
-            UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, (idx/3)*102, 92, 92)];
+            UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, 10, 92, 92)];
             userImage.image = img;
             userImage.clipsToBounds = YES;
             userImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -222,7 +249,7 @@
 - (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"目前只允许选择6张图片！"
+                                                    message:@"目前只允许选择3张图片！"
                                                    delegate:nil
                                           cancelButtonTitle:@"确认"
                                           otherButtonTitles:nil];
