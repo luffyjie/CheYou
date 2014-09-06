@@ -17,21 +17,22 @@
 @property (weak, nonatomic) IBOutlet UIView *photoView;
 @property (weak, nonatomic) IBOutlet PRButton *ducheCaseButton;
 @property (weak, nonatomic) IBOutlet PRButton *ducheTimeButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UILabel *ducheLable;
+@property (weak, nonatomic) IBOutlet UILabel *timeLable;
 @property (strong, nonatomic) UIPickerView *casepicker;
+@property (strong, nonatomic) UIPickerView *timepicker;
 
 @end
 
 @implementation CheYouDucheViewController
 
 {
-    UIButton *accphoto;
-    UIButton *accsharp;
-    UIButton *accwink;
-    UIView *accessoryView;
     UILabel *promptLabel;
     NSMutableArray *userPhotoList;
     NSMutableArray *caseList;
+    NSMutableArray *timeList;
 }
 
 - (void)viewDidLoad
@@ -43,12 +44,15 @@
 //    self.textView.backgroundColor = [UIColor greenColor];
     
     self.sendButton.enabled = NO;
+    self.doneButton.hidden = YES;
     userPhotoList = [[NSMutableArray alloc] init];
     self.textView.text = @"";
     self.textView.returnKeyType = UIReturnKeyDone;
     self.textView.selectedRange = NSMakeRange(0,0);
     self.textView.font = [UIFont systemFontOfSize:16.f];
+    self.textView.inputAccessoryView = [self makekeywordBarView];
     [self.view addSubview: self.textView];
+    
     //提示内容
     promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
     promptLabel.text = @"我们是首堵...";
@@ -58,7 +62,7 @@
 
     //键盘工具栏
     self.keywordBarView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
-    self.keywordBarView.frame = CGRectMake(0, self.view.bounds.size.height + 300, self.view.bounds.size.height, 46);
+    [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
     [self.view addSubview:self.keywordBarView];
     
     //堵车原因picker
@@ -68,6 +72,17 @@
     self.casepicker.delegate = self;
     self.casepicker.showsSelectionIndicator = YES;
     self.ducheCaseButton.inputView = [self casepicker];
+    self.ducheCaseButton.inputAccessoryView = [self makepickerBarView];
+    
+    //堵车事件picker
+    //堵车原因picker
+    self.timepicker = [[UIPickerView alloc] init];
+    self.timepicker.tag = 1;
+    self.timepicker.dataSource = self;
+    self.timepicker.delegate = self;
+    self.timepicker.showsSelectionIndicator = YES;
+    self.ducheTimeButton.inputView = [self timepicker];
+    self.ducheTimeButton.inputAccessoryView = [self makepickerBarView2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,8 +93,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -138,50 +152,11 @@
     if ([text isEqualToString:@"\n"]) {
         // Be sure to test for equality using the "isEqualToString" message
         [textView resignFirstResponder];
-        accessoryView.hidden = NO;
         // Return FALSE so that the final '\n' character doesn't get added
         return FALSE;
     }
 
     return YES;
-}
-
-#pragma mark - forKeyboard bar animation helpers
-
-// Helper method for moving the toolbar frame based on user action
-- (void)moveToolBarUp:(BOOL)up forKeyboardNotification:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-    
-    // Get animation info from userInfo
-    NSTimeInterval animationDuration;
-    UIViewAnimationCurve animationCurve;
-    CGRect keyboardFrame;
-    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-    
-    // Animate up or down
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:animationCurve];
-    if (up) {
-        [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - keyboardFrame.size.height - 46, self.view.bounds.size.width, 46)];
-    }else{
-        [self.keywordBarView setFrame:CGRectMake(0, self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
-    }
-    [UIView commitAnimations];
-    [UIView commitAnimations];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    // move the toolbar frame up as keyboard animates into view
-    [self moveToolBarUp:YES forKeyboardNotification:notification];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    // move the toolbar frame down as keyboard animates into view
-    [self moveToolBarUp:NO forKeyboardNotification:notification];
 }
 
 #pragma 导航按钮事件
@@ -228,10 +203,26 @@
 
 }
 
+-(void)doneAction:(id)sender
+{
+    [self.ducheCaseButton resignFirstResponder];
+    if (self.ducheLable.text.length == 0 ) {
+        self.ducheLable.text =@"大流量";
+    }
+}
+
+-(void)doneAction2:(id)sender
+{
+    [self.ducheTimeButton resignFirstResponder];
+    if (self.timeLable.text.length == 0) {
+        self.timeLable.text =@"15分钟左右";
+    }
+}
+
 #pragma mark - UzysAssetsPickerControllerDelegate methods
 - (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
-    DLog(@"assets %@",assets);
+//    DLog(@"assets %@",assets);
     for(UIImageView* view in userPhotoList)
     {
         [view removeFromSuperview];
@@ -254,7 +245,6 @@
             [userPhotoList addObject:userImage];
         }];
     }
-    
 }
 
 - (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
@@ -283,6 +273,18 @@
     return caseList;
 }
 
+- (NSMutableArray *)timeList
+{
+    if(!timeList) {
+        timeList= [[NSMutableArray alloc] init];
+        [timeList addObject:@"15分钟左右"];
+        [timeList addObject:@"半小时左右"];
+        [timeList addObject:@"堵车45分钟左右"];
+        [timeList addObject:@"大于1个小时"];
+    }
+    return timeList;
+}
+
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -297,7 +299,7 @@
         return self.caseList.count;
     }
     else {
-        return self.caseList.count;
+        return self.timeList.count;
     }
 }
 
@@ -310,17 +312,63 @@
         return self.caseList[row];
     }
     else {
-        return self.caseList[row];
+        return self.timeList[row];
     }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"%@",[self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component]);
+
     if (pickerView.tag ==0) {
-//        self.ducheCaseButton.text = [self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
+        self.ducheLable.text =[self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
     } else{
-//        self.ducheCaseButton.text = [self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
+        self.timeLable.text =[self.casepicker.delegate pickerView:pickerView titleForRow:row forComponent:component];
     }
+}
+
+#pragma made keyworad toolbar
+
+-(UIView *)makekeywordBarView
+{
+    UIView * accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
+    accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+    UIButton * accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
+    [accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
+    [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:accphoto];
+    UIButton *  accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
+    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
+    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:accsharp];
+    
+    return accessoryView;
+}
+
+-(UIView *)makepickerBarView
+{
+    UIView * accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
+    accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+    UIButton * done = [[UIButton alloc] initWithFrame:CGRectMake(accessoryView.bounds.size.width - 60, 10, 52, 30)];
+    [done setTitle:@"确定" forState:UIControlStateNormal];
+    done.titleLabel.font = [UIFont systemFontOfSize: 14.0];
+    [done setBackgroundImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+    [done addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:done];
+    
+    return accessoryView;
+}
+
+-(UIView *)makepickerBarView2
+{
+    UIView * accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
+    accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
+    UIButton * done = [[UIButton alloc] initWithFrame:CGRectMake(accessoryView.bounds.size.width - 60, 10, 52, 30)];
+    [done setTitle:@"确定" forState:UIControlStateNormal];
+    done.titleLabel.font = [UIFont systemFontOfSize: 14.0];
+    [done setBackgroundImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+    [done addTarget:self action:@selector(doneAction2:) forControlEvents:UIControlEventTouchDown];
+    [accessoryView addSubview:done];
+    
+    return accessoryView;
 }
 
 @end
