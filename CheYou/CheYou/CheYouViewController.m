@@ -94,13 +94,13 @@
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     //添加吐槽下方点赞 评论 按钮
-    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(12, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(20.f, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
     [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
     [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
     [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:gasolinebutton];
     
-    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(90, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 50.f, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
     [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
     [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:commentbutton];

@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *photoView;
 @property (weak, nonatomic) IBOutlet PRButton *ducheCaseButton;
 @property (weak, nonatomic) IBOutlet PRButton *ducheTimeButton;
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UILabel *ducheLable;
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
@@ -44,7 +43,6 @@
 //    self.textView.backgroundColor = [UIColor greenColor];
     
     self.sendButton.enabled = NO;
-    self.doneButton.hidden = YES;
     userPhotoList = [[NSMutableArray alloc] init];
     self.textView.text = @"";
     self.textView.returnKeyType = UIReturnKeyDone;
@@ -194,9 +192,6 @@
     picker.maximumNumberOfSelectionVideo = 0;
     picker.maximumNumberOfSelectionPhoto = 3;
     [self presentViewController:picker animated:YES completion:^{}];
-}
-- (IBAction)winkAction:(id)sender {
-
 }
 
 - (IBAction)sharpAction:(id)sender {
