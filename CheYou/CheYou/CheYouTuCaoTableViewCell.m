@@ -68,7 +68,7 @@
         [self.contentView addSubview: midLine];
         
         footLine = [[UILabel alloc] init];
-        footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xD7D7D7];
+        footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
         [self.contentView addSubview: footLine];
         
         //add by lujie for debug
@@ -159,7 +159,7 @@
     self.frame = frame;
     self.contentView.frame = frame;
     //最后设置foot+mid 间隔框的位置
-    footLine.frame = CGRectMake(0, frame.size.height - 10.f, frame.size.width, 10.f);
+    footLine.frame = CGRectMake(0, frame.size.height - 10.f, frame.size.width, 5.f);
     midLine.frame = CGRectMake(0, frame.size.height - 50.f, frame.size.width, 1.0f);
 }
 
