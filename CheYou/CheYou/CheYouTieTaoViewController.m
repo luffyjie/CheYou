@@ -249,7 +249,7 @@
     [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accphoto];
     UIButton *  accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
+    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
     [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accsharp];
     

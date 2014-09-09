@@ -68,15 +68,10 @@
     [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accphoto];
     
-    accwink = [[UIButton alloc] initWithFrame:CGRectMake(145, 13, 20, 20)];
+    accwink = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
     [accwink setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
     [accwink addTarget:self action:@selector(winkAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accwink];
-    
-    accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_wink"] forState:UIControlStateNormal];
-    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accsharp];
     [self.view addSubview:accessoryView];
     accessoryView.hidden = YES;
 }
