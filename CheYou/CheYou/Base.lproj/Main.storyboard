@@ -589,7 +589,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="211" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="95e-Vf-Fdw">
                                 <rect key="frame" x="54" y="173" width="44" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喇叭" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="upa-0y-SZQ">
@@ -607,18 +607,22 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1133" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dFI-qq-HPG">
                                 <rect key="frame" x="154" y="173" width="39" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_line" id="cGy-Sd-wIM">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MOH-Xa-hex">
                                 <rect key="frame" x="1" y="198" width="104" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <color key="backgroundColor" red="0.21568627450980393" green="0.81568627450980391" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的设置" id="7z6-U5-MRm"/>
                     <connections>
+                        <outlet property="greenLabel" destination="MOH-Xa-hex" id="Ioi-Sm-Q4U"/>
                         <outlet property="labaButton" destination="zGL-1l-KRq" id="Hk3-NG-8UE"/>
                         <outlet property="laba_num" destination="95e-Vf-Fdw" id="4qj-tT-LOn"/>
                         <outlet property="nameView" destination="PCe-yP-7f4" id="ZdY-Zc-agq"/>
@@ -729,7 +733,6 @@
         <image name="keyboard_image" width="20" height="20"/>
         <image name="keyboard_sharp" width="20" height="20"/>
         <image name="luoli" width="48" height="48"/>
-        <image name="my_line" width="104" height="2"/>
         <image name="my_talk" width="106" height="35"/>
         <image name="pb_close" width="48" height="48"/>
         <image name="pb_duche" width="140" height="140"/>

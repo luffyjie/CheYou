@@ -13,4 +13,7 @@
 @property (nonatomic, strong) TuCao *tucao;
 @property (nonatomic, strong) UIView *userPhotoView;
 @property (nonatomic, strong) UILabel *tuCaoText;
+@property (nonatomic, strong) UILabel *gasolineLabel;
+@property (nonatomic, strong) UILabel *commentLabel;
+
 @end

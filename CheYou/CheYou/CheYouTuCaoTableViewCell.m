@@ -33,6 +33,8 @@
 @synthesize userPhotoView = userPhotoView;
 @synthesize tuCaoText = tuCaoText;
 @synthesize tucao = _tucao;
+@synthesize gasolineLabel = gasolineLabel;
+@synthesize commentLabel = commentLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -71,6 +73,17 @@
         footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
         [self.contentView addSubview: footLine];
         
+
+        gasolineLabel = [[UILabel alloc] init];
+        gasolineLabel.text = @"0";
+        gasolineLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:gasolineLabel];
+        
+        commentLabel = [[UILabel alloc] init];
+        commentLabel.text = @"0";
+        commentLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:commentLabel];
+        
         //add by lujie for debug
 //        userImage.backgroundColor = [UIColor lightGrayColor];
 //        screen_name.backgroundColor = [UIColor blueColor];
@@ -78,6 +91,7 @@
 //        tuCaoTag.backgroundColor = [UIColor redColor];
 //        tuCaoText.backgroundColor = [UIColor greenColor];
 //        userPhotoView.backgroundColor = [UIColor redColor];
+//        self.contentView.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
@@ -132,6 +146,8 @@
         created_at.text = _tucao.created_at;
         tuCaoTag.text = [NSString stringWithFormat:@"#%@", _tucao.tuCaotag];
         tuCaoText.text = _tucao.tuCaotext;
+        gasolineLabel.text = _tucao.tu_id;
+        commentLabel.text = _tucao.tu_id;
         [self makeContentFrame];
     }
 }
@@ -159,8 +175,11 @@
     self.frame = frame;
     self.contentView.frame = frame;
     //最后设置foot+mid 间隔框的位置
-    footLine.frame = CGRectMake(0, frame.size.height - 10.f, frame.size.width, 5.f);
-    midLine.frame = CGRectMake(0, frame.size.height - 50.f, frame.size.width, 1.0f);
+    footLine.frame = CGRectMake(0, frame.size.height - 5.f, frame.size.width, 5.f);
+    midLine.frame = CGRectMake(0, frame.size.height - 45.f, frame.size.width, 1.0f);
+    //设置评论计数位置
+    gasolineLabel.frame = CGRectMake(frame.size.width - 50.f, frame.size.height - 34.f, 40.f, 20.f);
+    commentLabel.frame = CGRectMake(frame.size.width/2, frame.size.height - 34.f, 40.f, 20.f);
 }
 
 @end

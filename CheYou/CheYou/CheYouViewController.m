@@ -104,14 +104,14 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 //    }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
-    //添加吐槽下方点赞 评论 按钮
-    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(20.f, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    //添加吐槽下方点赞按钮
+    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 80.f, tucaoCell.frame.size.height - 34.f, 20.f, 20.f)];
     [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
     [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
     [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:gasolinebutton];
-    
-    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 50.f, tucaoCell.frame.size.height - 40.f, 20.f, 20.f)];
+    //评论
+    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 32.f, 20.f, 20.f)];
     [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
     [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:commentbutton];
@@ -127,7 +127,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
 }
 
 #pragma 评论 点赞 点击附件图片 事件处理
@@ -135,6 +135,14 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
+    CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    if (button.selected) {
+         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
+         cell.gasolineLabel.textColor = [UIColor redColor];
+    }else
+    {
+         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
+    }
 }
 
 - (void)commentbuttonAction:(id)sender
