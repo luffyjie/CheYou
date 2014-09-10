@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1C8681CB-1CBF-4F85-8076-08C71D355B34</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CheYou</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7251688B-F141-484E-B3B2-C2A23BE7A4C4</key>
+		<string>https://github.com/luffyjie/CheYou.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CheYou/CheYou.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7251688B-F141-484E-B3B2-C2A23BE7A4C4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/luffyjie/CheYou.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7251688B-F141-484E-B3B2-C2A23BE7A4C4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7251688B-F141-484E-B3B2-C2A23BE7A4C4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CheYou</string>
+		</dict>
+	</array>
+</dict>
+</plist>
