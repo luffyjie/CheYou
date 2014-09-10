@@ -14,6 +14,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "MJRefresh.h"
+#import "CheYouCommentViewController.h"
 
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
@@ -127,7 +128,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    [self performSegueWithIdentifier:@"comment_segue" sender:self];
 }
 
 #pragma 评论 点赞 点击附件图片 事件处理
@@ -142,18 +143,15 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     }else
     {
          cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
+         cell.gasolineLabel.textColor = [UIColor blackColor];
     }
 }
 
 - (void)commentbuttonAction:(id)sender
 {
-    
-}
-
-- (void)photoPress:(id)sender
-{
-//   UIImageView *photo = (UIImageView *)sender;
-    NSLog(@"photoPress");
+    [self performSegueWithIdentifier:@"comment_segue" sender:self];
+//    CheYouCommentViewController *commentView = [[CheYouCommentViewController alloc] init];
+//    [self.navigationController pushViewController:commentView animated:YES];
 }
 
 #pragma 生成吐槽的图片
@@ -271,6 +269,23 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView footerEndRefreshing];
     });
+}
+
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"comment_segue"]) {
+//        CheYouCommentViewController *commentView = (CheYouCommentViewController *) segue.destinationViewController;
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        // 设置返回按钮的文本
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"返回"
+                                       style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationItem setBackBarButtonItem:backButton];
+        
+    }
+    
 }
 
 @end

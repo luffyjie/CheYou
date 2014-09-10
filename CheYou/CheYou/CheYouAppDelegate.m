@@ -31,7 +31,7 @@
     NSDictionary *barAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
                                      NSForegroundColorAttributeName:[UIColor blackColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:barAttributes];
-
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     //设置全局底部导航栏的背景颜色
     [[UITabBar appearance] setBarTintColor:[LuJieCommon UIColorFromRGB:0xe4e4e4]];
 
