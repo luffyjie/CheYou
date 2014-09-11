@@ -20,6 +20,8 @@
 @implementation CheYouCommentViewController
 {
     NSMutableArray *commentList;
+    UILabel *commentLabel;
+    UILabel *gasolineLabel;
 }
 
 - (void)viewDidLoad
@@ -27,8 +29,8 @@
     [super viewDidLoad];
     [self getDataFormFiles];
     // Do any additional setup after loading the view.
+//    self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
     self.tableView.tableHeaderView = [self makeHeadview];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -70,6 +72,48 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return commentList.count;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    //设置评论计数位置
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40.f)];
+    sectionView.backgroundColor = [UIColor whiteColor];//[LuJieCommon UIColorFromRGB:0xd7d7d7];
+    
+    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 52.f,
+                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
+    gasolineLabel.text = self.tucao.tu_id;
+    gasolineLabel.font = [UIFont systemFontOfSize:14];
+    gasolineLabel.textColor = [UIColor grayColor];
+    [sectionView addSubview:gasolineLabel];
+    
+    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 2,
+                                                                      sectionView.frame.size.height - 29.f, 40.f, 20.f)];
+    commentLabel.text = self.tucao.tu_id;
+    commentLabel.font = [UIFont systemFontOfSize:14];
+    commentLabel.textColor = [UIColor grayColor];
+    [sectionView addSubview:commentLabel];
+    
+    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 80.f,
+                                                                              sectionView.frame.size.height - 26.f, 15.f, 15.f)];
+    gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+    [sectionView addSubview:gasolineView];
+    
+    UIImageView *commentView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 30,
+                                                                             sectionView.frame.size.height - 25.f, 15.f, 15.f)];
+    commentView.image = [UIImage imageNamed:@"tc_comment"];
+    [sectionView addSubview:commentView];
+    
+    UIImageView *commentFoot = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, sectionView.frame.size.width, 40.f)];
+    commentFoot.image = [UIImage imageNamed:@"comment_foot"];
+    [sectionView addSubview:commentFoot];
+    
+    return sectionView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
