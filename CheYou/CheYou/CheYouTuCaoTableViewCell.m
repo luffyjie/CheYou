@@ -35,6 +35,7 @@
 @synthesize tucao = _tucao;
 @synthesize gasolineLabel = gasolineLabel;
 @synthesize commentLabel = commentLabel;
+@synthesize gasolineView = gasolineView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -83,6 +84,10 @@
         commentLabel.text = @"0";
         commentLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:commentLabel];
+        
+        gasolineView = [[UIImageView alloc] init];
+        gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+        [self.contentView addSubview:gasolineView];
         
         //add by lujie for debug
 //        userImage.backgroundColor = [UIColor lightGrayColor];
@@ -178,8 +183,9 @@
     footLine.frame = CGRectMake(0, frame.size.height - 5.f, frame.size.width, 5.f);
     midLine.frame = CGRectMake(0, frame.size.height - 34.f, frame.size.width, 1.0f);
     //设置评论计数位置
-    gasolineLabel.frame = CGRectMake(frame.size.width - 50.f, frame.size.height - 29.f, 40.f, 20.f);
-    commentLabel.frame = CGRectMake(frame.size.width/2, frame.size.height - 29.f, 40.f, 20.f);
+    gasolineLabel.frame = CGRectMake(frame.size.width - 52.f, frame.size.height - 29.f, 40.f, 20.f);
+    commentLabel.frame = CGRectMake(frame.size.width/2 - 2, frame.size.height - 29.f, 40.f, 20.f);
+    gasolineView.frame = CGRectMake(frame.size.width - 80.f, frame.size.height - 26.f, 15.f, 15.f);
 }
 
 @end

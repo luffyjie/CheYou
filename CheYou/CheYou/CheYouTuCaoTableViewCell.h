@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UILabel *tuCaoText;
 @property (nonatomic, strong) UILabel *gasolineLabel;
 @property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) UIImageView *gasolineView;
 
 @end

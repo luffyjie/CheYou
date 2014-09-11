@@ -106,11 +106,16 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     //添加吐槽下方点赞按钮
-    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 80.f, tucaoCell.frame.size.height - 26.f, 15.f, 15.f)];
-    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
-    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
-    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
-    [tucaoCell.contentView addSubview:gasolinebutton];
+//    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 80.f, tucaoCell.frame.size.height - 26.f, 15.f, 15.f)];
+//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
+//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
+//    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
+//    [tucaoCell.contentView addSubview:gasolinebutton];
+    //添加一个透明的按钮到点赞按钮上方，增大接触面积
+    UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
+//    overbutton.backgroundColor = [UIColor redColor];
+    [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [tucaoCell.contentView addSubview:overbutton];
     //评论
     UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
     [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
@@ -138,12 +143,14 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     button.selected = !button.selected;
     CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
     if (button.selected) {
-         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
-         cell.gasolineLabel.textColor = [UIColor redColor];
+        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
+        cell.gasolineLabel.textColor = [UIColor redColor];
     }else
     {
-         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
-         cell.gasolineLabel.textColor = [UIColor blackColor];
+//        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+//        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
+//        cell.gasolineLabel.textColor = [UIColor blackColor];
     }
 }
 
