@@ -156,7 +156,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2270" y="-540"/>
+            <point key="canvasLocation" x="1698" y="-564"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -507,7 +507,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="车友吐槽" id="mHA-bX-kBO"/>
                     <connections>
-                        <segue destination="BJa-MK-4Ww" kind="push" identifier="comment_segue" id="G8R-S5-HZc"/>
+                        <segue destination="PSg-SK-lQN" kind="push" identifier="comment_segue" id="xrI-pk-T8M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-ed-k2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -515,19 +515,33 @@
             <point key="canvasLocation" x="-302" y="-993"/>
         </scene>
         <!--Che You Comment View Controller - 评论-->
-        <scene sceneID="e8c-jo-gvb">
+        <scene sceneID="EIc-Gv-qdH">
             <objects>
-                <viewController id="BJa-MK-4Ww" customClass="CheYouCommentViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IdM-pw-qZL">
+                <tableViewController id="PSg-SK-lQN" customClass="CheYouCommentViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LXM-qe-fK9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="评论" id="ScQ-a1-Ycs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q4H-05-ogg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3mP-kx-jAD">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3mP-kx-jAD" id="IxG-u4-XWL">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PSg-SK-lQN" id="Pq0-pV-m61"/>
+                            <outlet property="delegate" destination="PSg-SK-lQN" id="Xv3-Fk-gW0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="评论" id="WjJ-iT-OlQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KWq-3p-1DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="239" y="-993"/>
+            <point key="canvasLocation" x="171" y="-993"/>
         </scene>
         <!--Che You User View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">
@@ -683,7 +697,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2S-7b-kr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-922" y="-971"/>
+            <point key="canvasLocation" x="-870" y="-993"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZMh-lf-VKR">
@@ -701,7 +715,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnD-t3-bgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="-540"/>
+            <point key="canvasLocation" x="809" y="-564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">

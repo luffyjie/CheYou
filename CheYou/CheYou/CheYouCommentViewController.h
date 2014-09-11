@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TuCao.h"
+#import "CheYouTuCaoTableViewCell.h"
 
-@interface CheYouCommentViewController : UIViewController
+@interface CheYouCommentViewController : UITableViewController
+@property (nonatomic, strong) TuCao *tucao;
+@property (nonatomic, strong) NSIndexPath *indexpath;
 
 @end

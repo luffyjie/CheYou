@@ -117,10 +117,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:overbutton];
     //评论
-    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
-    [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
-    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
-    [tucaoCell.contentView addSubview:commentbutton];
+//    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
+//    [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
+//    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
+//    [tucaoCell.contentView addSubview:commentbutton];
+    
     [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
     return tucaoCell;
 }
@@ -283,8 +284,10 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqual:@"comment_segue"]) {
-//        CheYouCommentViewController *commentView = (CheYouCommentViewController *) segue.destinationViewController;
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        CheYouCommentViewController *commentView = (CheYouCommentViewController *) segue.destinationViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        commentView.indexpath = indexPath;
         // 设置返回按钮的文本
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                        initWithTitle:@"返回"

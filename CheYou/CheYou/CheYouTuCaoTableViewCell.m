@@ -22,12 +22,11 @@
     UILabel *screen_name;
     UILabel *created_at;
     UILabel *tuCaoTag;
-//    UILabel *tuCaoText;
+    UILabel *tuCaoText;
     UILabel *midLine;
     UILabel *footLine;
-//    UIView *userPhotoView;
-    UIButton *xgasolinebutton;
-    UIButton *commentbutton;
+    UIView *userPhotoView;
+    UIImageView *commentView;
 }
 
 @synthesize userPhotoView = userPhotoView;
@@ -88,6 +87,10 @@
         gasolineView = [[UIImageView alloc] init];
         gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
         [self.contentView addSubview:gasolineView];
+        
+        commentView = [[UIImageView alloc] init];
+        commentView.image = [UIImage imageNamed:@"tc_comment"];
+        [self.contentView addSubview:commentView];
         
         //add by lujie for debug
 //        userImage.backgroundColor = [UIColor lightGrayColor];
@@ -186,6 +189,7 @@
     gasolineLabel.frame = CGRectMake(frame.size.width - 52.f, frame.size.height - 29.f, 40.f, 20.f);
     commentLabel.frame = CGRectMake(frame.size.width/2 - 2, frame.size.height - 29.f, 40.f, 20.f);
     gasolineView.frame = CGRectMake(frame.size.width - 80.f, frame.size.height - 26.f, 15.f, 15.f);
+    commentView.frame = CGRectMake(frame.size.width/2 - 30, frame.size.height - 25.f, 15.f, 15.f);
 }
 
 @end
