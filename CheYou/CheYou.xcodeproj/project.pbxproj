@@ -90,6 +90,7 @@
 		E982164C19B9A07000F088BB /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E982164B19B9A07000F088BB /* PRButton.m */; };
 		E99BBA9C19C0046C00AF4C1B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E99BBA9B19C0046C00AF4C1B /* Podfile */; };
 		E99BBA9F19C0374200AF4C1B /* CheYouCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBA9E19C0374200AF4C1B /* CheYouCommentViewController.m */; };
+		E99BBAA419C18BBA00AF4C1B /* CheYouCommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */; };
 		E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99EE50B19BEE506004CBABA /* CheYouUserViewController.m */; };
 		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
@@ -249,6 +250,8 @@
 		E99BBA9B19C0046C00AF4C1B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		E99BBA9D19C0374200AF4C1B /* CheYouCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentViewController.h; sourceTree = "<group>"; };
 		E99BBA9E19C0374200AF4C1B /* CheYouCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouCommentViewController.m; sourceTree = "<group>"; };
+		E99BBAA219C18BBA00AF4C1B /* CheYouCommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentViewCell.h; sourceTree = "<group>"; };
+		E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouCommentViewCell.m; sourceTree = "<group>"; };
 		E99EE50A19BEE506004CBABA /* CheYouUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouUserViewController.h; sourceTree = "<group>"; };
 		E99EE50B19BEE506004CBABA /* CheYouUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouUserViewController.m; sourceTree = "<group>"; };
 		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 			children = (
 				E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */,
 				E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */,
+				E99BBAA219C18BBA00AF4C1B /* CheYouCommentViewCell.h */,
+				E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */,
 			);
 			name = TableCell;
 			sourceTree = "<group>";
@@ -784,6 +789,7 @@
 				E911674119BB107D007EA117 /* MJRefreshBaseView.m in Sources */,
 				E9617A3C19B7FAAC000543D2 /* UzysAssetsPickerController.m in Sources */,
 				E911674719BB107D007EA117 /* UIView+MJExtension.m in Sources */,
+				E99BBAA419C18BBA00AF4C1B /* CheYouCommentViewCell.m in Sources */,
 				E9617A7A19B81740000543D2 /* MBProgressHUD+Add.m in Sources */,
 				E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */,
 				E9617A9319B81740000543D2 /* UIImageView+WebCache.m in Sources */,

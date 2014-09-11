@@ -11,6 +11,7 @@
 #import "UIImageView+MJWebCache.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "CheYouCommentViewCell.h"
 
 @interface CheYouCommentViewController ()
 
@@ -18,19 +19,13 @@
 
 @implementation CheYouCommentViewController
 {
-    UIView *headView;
-    UIImageView *userImage;
-    UILabel *screen_name;
-    UILabel *created_at;
-    UILabel *tuCaoText;
-    UILabel *midLine;
-    UILabel *footLine;
-    UIView *userPhotoView;
+    NSMutableArray *commentList;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getDataFormFiles];
     // Do any additional setup after loading the view.
     self.tableView.tableHeaderView = [self makeHeadview];
 
@@ -48,7 +43,41 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark 获取属性文件数据
+-(void)getDataFormFiles
+{
+    commentList = [[NSMutableArray alloc] init];
+	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
+	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
+                              @"tuCaotag", @"created_at", @"pic_urls",nil];
+    
+	for (NSDictionary *tuCaoDic in parkDictionaries) {
+		TuCao *tucao = [[TuCao alloc] init];
+		for (NSString *property in propertyNames) {
+            
+            [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
+		}
+		[commentList addObject:tucao];
+	}
+}
+
 #pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return commentList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.tucao = [commentList objectAtIndex:indexPath.row];
+    return cell;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    return self.tableView.tableHeaderView.bounds.size.height;
@@ -60,27 +89,27 @@
 
 -(UIView *)makeHeadview
 {
-    headView = [[UIView alloc] init];
+    UIView *headView = [[UIView alloc] init];
     
-    userImage = [[UIImageView alloc] initWithFrame:CGRectMake( 12.f, 12.f, 34.f, 34.f)];
+    UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake( 12.f, 12.f, 34.f, 34.f)];
     [headView addSubview: userImage];
     
-    screen_name = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 15.f, 100.f, 20.f)];
+    UILabel *screen_name = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 15.f, 100.f, 20.f)];
     screen_name.font = [UIFont boldSystemFontOfSize:14.f];
     [headView addSubview: screen_name];
     
-    created_at = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 38.f, 100.f, 12.f)];
+    UILabel *created_at = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 38.f, 100.f, 12.f)];
     created_at.font = [UIFont boldSystemFontOfSize:10.f];
     [headView addSubview: created_at];
     
-    tuCaoText = [[UILabel alloc] init];
+    UILabel *tuCaoText = [[UILabel alloc] init];
     tuCaoText.font = [UIFont systemFontOfSize:14.f];
     [headView addSubview: tuCaoText];
     
-    userPhotoView = [[UIView alloc] init];
+    UIView *userPhotoView = [[UIView alloc] init];
     [headView addSubview: userPhotoView];
     
-    footLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height- 34.f, self.view.frame.size.width, 1.0f)];
+    UILabel *footLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height- 34.f, self.view.frame.size.width, 1.0f)];
     footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
     [headView addSubview: footLine];
     
@@ -108,7 +137,6 @@
     headView.frame = CGRectMake(0, 0, self.view.frame.size.width, textSize.height + userPhotoView.bounds.size.height + 80.f);
     //最后设置foot+mid 间隔框的位置
     footLine.frame = CGRectMake(0, headView.frame.size.height - 5.f, headView.frame.size.width, 5.f);
-    midLine.frame = CGRectMake(0, headView.frame.size.height - 34.f, headView.frame.size.width, 1.0f);
     
     //生成图片列表
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
