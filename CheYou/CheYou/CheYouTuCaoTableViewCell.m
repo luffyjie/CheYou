@@ -171,15 +171,15 @@
         }
     }
     //计算出cell自适应的高度
-    frame.size.height = textSize.height + userPhotoView.bounds.size.height + 123.f;
+    frame.size.height = textSize.height + userPhotoView.bounds.size.height + 113.f;
     self.frame = frame;
     self.contentView.frame = frame;
     //最后设置foot+mid 间隔框的位置
     footLine.frame = CGRectMake(0, frame.size.height - 5.f, frame.size.width, 5.f);
-    midLine.frame = CGRectMake(0, frame.size.height - 45.f, frame.size.width, 1.0f);
+    midLine.frame = CGRectMake(0, frame.size.height - 34.f, frame.size.width, 1.0f);
     //设置评论计数位置
-    gasolineLabel.frame = CGRectMake(frame.size.width - 50.f, frame.size.height - 34.f, 40.f, 20.f);
-    commentLabel.frame = CGRectMake(frame.size.width/2, frame.size.height - 34.f, 40.f, 20.f);
+    gasolineLabel.frame = CGRectMake(frame.size.width - 50.f, frame.size.height - 29.f, 40.f, 20.f);
+    commentLabel.frame = CGRectMake(frame.size.width/2, frame.size.height - 29.f, 40.f, 20.f);
 }
 
 @end
