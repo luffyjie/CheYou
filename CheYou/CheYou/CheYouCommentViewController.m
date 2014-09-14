@@ -15,6 +15,10 @@
 #import "CheYouCommentTopViewCell.h"
 
 @interface CheYouCommentViewController ()
+@property (strong, nonatomic) IBOutlet UIView *tabView;
+@property (weak, nonatomic) IBOutlet UIButton *oilButton;
+@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 @end
 
@@ -23,6 +27,10 @@
     NSMutableArray *commentList;
     UILabel *commentLabel;
     UILabel *gasolineLabel;
+    UIImageView *gasolinefootView;
+    UIImageView *commentfootView;
+    UILabel *gasolinefootLabel;
+    UILabel *commentfootLabel;
     CheYouCommentTopViewCell *topCell;
 }
 
@@ -37,6 +45,10 @@
     backButton.image = [UIImage imageNamed:@"back"];
     [self.navigationItem setLeftBarButtonItem:backButton];
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.tabView];
+    self.tabView.backgroundColor = [UIColor redColor];
+    self.tabView.frame = CGRectMake( 0, self.view.bounds.size.height-46, self.view.bounds.size.width, 46);
+    
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
 }
@@ -125,10 +137,64 @@
     return sectionView;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return nil;
+    }
+    //设置底部工具栏
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.f)];
+    sectionView.backgroundColor = [LuJieCommon UIColorFromRGB:0xe4e4e4];
+    
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.bounds.size.width - 122, sectionView.frame.size.height - 32.f, 1.f, 20.f)];
+    lineLabel.backgroundColor = [LuJieCommon UIColorFromRGB:0x868686];
+    [sectionView addSubview:lineLabel];
+    
+    //添加一个透明的按钮到点赞按钮上方，增大接触面积
+    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(sectionView.frame.size.width - 105,
+                                                                       sectionView.frame.size.height - 40.f, 70.f, 35.f)];
+    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [sectionView addSubview:gasolinebutton];
+    
+    UIButton *commentbutton = [[UIButton alloc] initWithFrame: CGRectMake(sectionView.frame.size.width - 210,
+                                                                       sectionView.frame.size.height - 40.f, 70.f, 35.f)];
+    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [sectionView addSubview:commentbutton];
+    
+    gasolinefootView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 95, sectionView.frame.size.height - 32.f, 20, 20)];
+    gasolinefootView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+    [sectionView addSubview:gasolinefootView];
+    
+    gasolinefootLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 65, sectionView.frame.size.height - 32.f, 50, 20)];
+    gasolinefootLabel.text = @"加油";
+    gasolinefootLabel.font = [UIFont systemFontOfSize:13];
+    [sectionView addSubview:gasolinefootLabel];
+    
+    commentfootView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width-200, sectionView.frame.size.height - 32.f, 20, 20)];
+    commentfootView.image = [UIImage imageNamed:@"tc_comment"];
+    [sectionView addSubview:commentfootView];
+    
+    commentfootLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 170, sectionView.frame.size.height - 32.f, 50, 20)];
+    commentfootLabel.text = @"评论";
+    commentfootLabel.font = [UIFont systemFontOfSize:13];
+    [sectionView addSubview:commentfootLabel];
+    
+    return sectionView;
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
         return 40.f;
+    }
+    return 0.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 1) {
+        return 44.f;
     }
     return 0.f;
 }
@@ -229,6 +295,23 @@
 - (void)backAction:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion: nil];
+}
+
+#pragma 评论 点赞
+- (void)gasolinebuttonAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+    if (button.selected) {
+        gasolinefootView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+        gasolineLabel.text = [NSString stringWithFormat: @"%d", [gasolineLabel.text intValue] + 1];
+        gasolinefootLabel.textColor = [UIColor redColor];
+    }
+}
+
+- (void)commentbuttonAction:(id)sender
+{
+//    [self performSegueWithIdentifier:@"comment_segue" sender:self];
 }
 
 @end
