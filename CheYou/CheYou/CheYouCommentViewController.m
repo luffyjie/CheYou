@@ -30,6 +30,12 @@
 {
     [super viewDidLoad];
     [self getDataFormFiles];
+    // 设置返回按钮
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"返回"
+                                   style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+    backButton.image = [UIImage imageNamed:@"back"];
+    [self.navigationItem setLeftBarButtonItem:backButton];
     // Do any additional setup after loading the view.
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
@@ -95,7 +101,7 @@
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
     
-    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 10,
+    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 11,
                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     commentLabel.text = self.tucao.tu_id;
     commentLabel.font = [UIFont systemFontOfSize:14];
@@ -217,6 +223,12 @@
     browser.currentPhotoIndex = (tap.view.tag%10); // 弹出相册时显示的第一张图片是？
     browser.photos = photos; // 设置所有的图片
     [browser show];
+}
+
+#pragma 导航返回
+- (void)backAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion: nil];
 }
 
 @end

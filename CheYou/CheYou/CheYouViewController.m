@@ -147,19 +147,12 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
         cell.gasolineLabel.textColor = [UIColor redColor];
-    }else
-    {
-//        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
-//        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
-//        cell.gasolineLabel.textColor = [UIColor blackColor];
     }
 }
 
 - (void)commentbuttonAction:(id)sender
 {
     [self performSegueWithIdentifier:@"comment_segue" sender:self];
-//    CheYouCommentViewController *commentView = [[CheYouCommentViewController alloc] init];
-//    [self.navigationController pushViewController:commentView animated:YES];
 }
 
 #pragma 生成吐槽的图片
@@ -284,16 +277,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqual:@"comment_segue"]) {
-        CheYouCommentViewController *commentView = (CheYouCommentViewController *) segue.destinationViewController;
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        CheYouCommentViewController *commentView = (CheYouCommentViewController *)nav.topViewController;
         commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         commentView.indexpath = indexPath;
-        // 设置返回按钮的文本
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                       initWithTitle:@"返回"
-                                       style:UIBarButtonItemStylePlain target:nil action:nil];
-        [self.navigationItem setBackBarButtonItem:backButton];
-        
     }
     
 }

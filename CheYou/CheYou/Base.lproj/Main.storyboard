@@ -156,7 +156,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1698" y="-564"/>
+            <point key="canvasLocation" x="2224" y="-564"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -507,7 +507,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="车友吐槽" id="mHA-bX-kBO"/>
                     <connections>
-                        <segue destination="PSg-SK-lQN" kind="push" identifier="comment_segue" id="xrI-pk-T8M"/>
+                        <segue destination="hNH-Fb-FBc" kind="modal" identifier="comment_segue" modalTransitionStyle="coverVertical" id="wTg-sC-ONI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-ed-k2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -541,7 +541,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWq-3p-1DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="-993"/>
+            <point key="canvasLocation" x="697" y="-993"/>
         </scene>
         <!--Che You User View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">
@@ -715,7 +715,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnD-t3-bgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="-564"/>
+            <point key="canvasLocation" x="1335" y="-564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">
@@ -752,6 +752,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="823" y="160"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nal-9C-4mo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hNH-Fb-FBc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="mwV-aS-wzx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HIw-P2-JWD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PSg-SK-lQN" kind="relationship" relationship="rootViewController" id="B3l-zX-z9N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PiW-c6-mdP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="171" y="-993"/>
         </scene>
     </scenes>
     <resources>
