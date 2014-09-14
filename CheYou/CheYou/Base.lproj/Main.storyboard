@@ -156,7 +156,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2224" y="-564"/>
+            <point key="canvasLocation" x="2396" y="-564"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -507,7 +507,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="车友吐槽" id="mHA-bX-kBO"/>
                     <connections>
-                        <segue destination="hNH-Fb-FBc" kind="modal" identifier="comment_segue" modalTransitionStyle="coverVertical" id="wTg-sC-ONI"/>
+                        <segue destination="dfj-IX-maX" kind="modal" identifier="comment_segue" id="PqB-w0-fVN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-ed-k2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -515,33 +515,19 @@
             <point key="canvasLocation" x="-302" y="-993"/>
         </scene>
         <!--Che You Comment View Controller - 评论-->
-        <scene sceneID="EIc-Gv-qdH">
+        <scene sceneID="1uO-Xj-com">
             <objects>
-                <tableViewController id="PSg-SK-lQN" customClass="CheYouCommentViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LXM-qe-fK9">
+                <viewController id="gJF-yN-V89" customClass="CheYouCommentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VYg-0q-Ocz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3mP-kx-jAD">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3mP-kx-jAD" id="IxG-u4-XWL">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="PSg-SK-lQN" id="Pq0-pV-m61"/>
-                            <outlet property="delegate" destination="PSg-SK-lQN" id="Xv3-Fk-gW0"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="评论" id="WjJ-iT-OlQ"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KWq-3p-1DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="评论" id="8Br-Si-RoD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wEu-jN-eWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="697" y="-993"/>
+            <point key="canvasLocation" x="718" y="-993"/>
         </scene>
         <!--Che You User View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">
@@ -715,7 +701,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnD-t3-bgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1335" y="-564"/>
+            <point key="canvasLocation" x="1861" y="-564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">
@@ -754,23 +740,22 @@
             <point key="canvasLocation" x="823" y="160"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Nal-9C-4mo">
+        <scene sceneID="a67-3a-Z9K">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hNH-Fb-FBc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dfj-IX-maX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="mwV-aS-wzx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HIw-P2-JWD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mVU-Df-Pud">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PSg-SK-lQN" kind="relationship" relationship="rootViewController" id="B3l-zX-z9N"/>
+                        <segue destination="gJF-yN-V89" kind="relationship" relationship="rootViewController" id="Tgb-FN-Vb3"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PiW-c6-mdP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Upj-Vx-tRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="-993"/>
+            <point key="canvasLocation" x="220" y="-993"/>
         </scene>
     </scenes>
     <resources>

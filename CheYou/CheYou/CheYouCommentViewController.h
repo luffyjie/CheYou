@@ -10,7 +10,7 @@
 #import "TuCao.h"
 #import "CheYouTuCaoTableViewCell.h"
 
-@interface CheYouCommentViewController : UITableViewController
+@interface CheYouCommentViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) TuCao *tucao;
 @property (nonatomic, strong) NSIndexPath *indexpath;
 
