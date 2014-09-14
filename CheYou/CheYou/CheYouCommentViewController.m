@@ -12,6 +12,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "CheYouCommentViewCell.h"
+#import "CheYouCommentTopViewCell.h"
 
 @interface CheYouCommentViewController ()
 
@@ -22,6 +23,7 @@
     NSMutableArray *commentList;
     UILabel *commentLabel;
     UILabel *gasolineLabel;
+    CheYouCommentTopViewCell *topCell;
 }
 
 - (void)viewDidLoad
@@ -29,14 +31,14 @@
     [super viewDidLoad];
     [self getDataFormFiles];
     // Do any additional setup after loading the view.
-//    self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
-    self.tableView.tableHeaderView = [self makeHeadview];
+    self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView setContentOffset:CGPointMake(0,self.tableView.tableHeaderView.bounds.size.height) animated:YES];
+    [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height + 10) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,40 +68,46 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (section == 0) {
+        return 1;
+    }
     return commentList.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return nil;
+    }
     //设置评论计数位置
     UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40.f)];
     sectionView.backgroundColor = [UIColor whiteColor];//[LuJieCommon UIColorFromRGB:0xd7d7d7];
     
-    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 52.f,
+    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 45.f,
                                                                        sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     gasolineLabel.text = self.tucao.tu_id;
     gasolineLabel.font = [UIFont systemFontOfSize:14];
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
     
-    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 2,
+    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 10,
                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     commentLabel.text = self.tucao.tu_id;
     commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:commentLabel];
     
-    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 80.f,
+    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 75.f,
                                                                               sectionView.frame.size.height - 26.f, 15.f, 15.f)];
     gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
     [sectionView addSubview:gasolineView];
     
-    UIImageView *commentView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 30,
+    UIImageView *commentView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 20,
                                                                              sectionView.frame.size.height - 25.f, 15.f, 15.f)];
     commentView.image = [UIImage imageNamed:@"tc_comment"];
     [sectionView addSubview:commentView];
@@ -113,10 +121,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40.f;
+    if (section == 1) {
+        return 40.f;
+    }
+    return 0.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        topCell = [[CheYouCommentTopViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+        topCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        topCell.tucao = self.tucao;
+        [self makeUserPhotos:self.tucao over:topCell over:indexPath.row];
+        return topCell;
+    }
     CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.tucao = [commentList objectAtIndex:indexPath.row];
@@ -124,114 +142,60 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return self.tableView.tableHeaderView.bounds.size.height;
     UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
 }
 
-#pragma 生成headview
-
--(UIView *)makeHeadview
+#pragma 生成吐槽的图片
+-(void)makeUserPhotos:(TuCao *)tucao over:(CheYouCommentTopViewCell *)cell over:(int)row
 {
-    UIView *headView = [[UIView alloc] init];
-    
-    UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake( 12.f, 12.f, 34.f, 34.f)];
-    [headView addSubview: userImage];
-    
-    UILabel *screen_name = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 15.f, 100.f, 20.f)];
-    screen_name.font = [UIFont boldSystemFontOfSize:14.f];
-    [headView addSubview: screen_name];
-    
-    UILabel *created_at = [[UILabel alloc] initWithFrame:CGRectMake(34.f + 12.f + 15.f, 38.f, 100.f, 12.f)];
-    created_at.font = [UIFont boldSystemFontOfSize:10.f];
-    [headView addSubview: created_at];
-    
-    UILabel *tuCaoText = [[UILabel alloc] init];
-    tuCaoText.font = [UIFont systemFontOfSize:14.f];
-    [headView addSubview: tuCaoText];
-    
-    UIView *userPhotoView = [[UIView alloc] init];
-    [headView addSubview: userPhotoView];
-    
-    UILabel *footLine = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height- 34.f, self.view.frame.size.width, 1.0f)];
-    footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
-    [headView addSubview: footLine];
-    
-    userImage.image = [UIImage imageNamed:self.tucao.profile_image_url];
-    screen_name.text = self.tucao.screen_name;
-    created_at.text = self.tucao.created_at;
-    tuCaoText.text = self.tucao.tuCaotext;
-    
-    //计算设置headView的高度
-    //设置label的最大行数
-    tuCaoText.numberOfLines = 0;
-    CGSize size = CGSizeMake(self.view.frame.size.width - 12.f - 12.f, 1000);
-    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-    tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
-    //设置图片的位置和大小
-    if (self.tucao.pic_urls.count > 0) {
-        if (self.tucao.pic_urls.count ==1) {
-            userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.view.bounds.size.width,100);
-        }else{
-            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.view.bounds.size.width, 170)
-            : CGRectMake(0, textSize.height + 70.f, self.view.bounds.size.width, 80);
-        }
-    }
-    //计算出cell自适应的高度
-    headView.frame = CGRectMake(0, 0, self.view.frame.size.width, textSize.height + userPhotoView.bounds.size.height + 80.f);
-    //最后设置foot+mid 间隔框的位置
-    footLine.frame = CGRectMake(0, headView.frame.size.height - 5.f, headView.frame.size.width, 5.f);
-    
-    //生成图片列表
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    if (self.tucao.pic_urls.count == 1) {
+    if (tucao.pic_urls.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [self.tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+        [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
         photo.contentMode = UIViewContentModeScaleAspectFill;
         photo.userInteractionEnabled = YES;
         [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
-        [userPhotoView addSubview: photo];
+        [cell.userPhotoView addSubview: photo];
         
     }
     
-    if (self.tucao.pic_urls.count >1 && self.tucao.pic_urls.count < 4) {
-        userPhotoView.frame = CGRectMake(0, textSize.height + 70.f, textSize.width, 80);
-        for (int idx = 0; idx < self.tucao.pic_urls.count; idx++) {
+    if (tucao.pic_urls.count >1 && tucao.pic_urls.count < 4) {
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
+        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [self.tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
             // 事件监听
-            photo.tag = idx+(10*self.indexpath.row);
+            photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
             photo.contentMode = UIViewContentModeScaleAspectFill;
             photo.userInteractionEnabled = YES;
             [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
-            [userPhotoView addSubview: photo];
+            [cell.userPhotoView addSubview: photo];
         }
     }
     
-    if(self.tucao.pic_urls.count > 3)
+    if(tucao.pic_urls.count > 3)
     {
-        userPhotoView.frame = CGRectMake(0, textSize.height + 70.f, textSize.width, 170);
-        for (int idx = 0; idx < self.tucao.pic_urls.count; idx++) {
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
+        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [self.tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
             // 事件监听
-            photo.tag = idx+(10*self.indexpath.row);
+            photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
             photo.contentMode = UIViewContentModeScaleAspectFill;
             photo.userInteractionEnabled = YES;
             [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
-            [userPhotoView addSubview: photo];
+            [cell.userPhotoView addSubview: photo];
         }
     }
-
-    return headView;
 }
 
 #pragma 点击照片浏览
