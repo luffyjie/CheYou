@@ -157,7 +157,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2345" y="-564"/>
+            <point key="canvasLocation" x="2871" y="-564"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -526,26 +526,51 @@
                     </view>
                     <navigationItem key="navigationItem" title="评论" id="8Br-Si-RoD"/>
                     <connections>
-                        <segue destination="Dsl-P7-jcE" kind="modal" identifier="lulu" id="WfG-RY-Yax"/>
+                        <segue destination="OPM-Xw-mw3" kind="modal" identifier="pb_comment_segue" id="LwS-AQ-rFJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEu-jN-eWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472" y="-993"/>
+            <point key="canvasLocation" x="111" y="-993"/>
         </scene>
-        <!--Che You Pb Comment View Controller-->
+        <!--Che You Pb Comment View Controller - 发布评论-->
         <scene sceneID="16P-rL-4Nh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lm4-Wu-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Dsl-P7-jcE" customClass="CheYouPbCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l3q-RW-Hyq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rfJ-7E-yGp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="发布评论" id="Hd3-Qq-NZ8">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="tDh-kr-WBh">
+                            <connections>
+                                <action selector="canceButton:" destination="Dsl-P7-jcE" id="jBY-YW-YU0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="发布" id="S2i-hO-ITq">
+                            <connections>
+                                <action selector="sendButton:" destination="Dsl-P7-jcE" id="nuP-UN-hmS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sendButton" destination="S2i-hO-ITq" id="nZy-nC-RX4"/>
+                        <outlet property="textView" destination="rfJ-7E-yGp" id="m98-Wk-e87"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lm4-Wu-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082" y="-993"/>
+            <point key="canvasLocation" x="1119" y="-999"/>
         </scene>
         <!--Che You User View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">
@@ -719,7 +744,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnD-t3-bgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1861" y="-564"/>
+            <point key="canvasLocation" x="2387" y="-564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">
@@ -756,6 +781,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="823" y="160"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ncQ-OT-v4f">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OPM-Xw-mw3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7nY-zR-nKy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dsl-P7-jcE" kind="relationship" relationship="rootViewController" id="Oqv-cS-ejY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UvH-yB-e8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="567" y="-999"/>
         </scene>
     </scenes>
     <resources>

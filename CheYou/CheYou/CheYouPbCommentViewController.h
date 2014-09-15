@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheYouPbCommentViewController : UIViewController
+@interface CheYouPbCommentViewController : UIViewController <UITextViewDelegate>
 
 @end

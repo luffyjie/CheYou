@@ -301,7 +301,7 @@
 
 - (void)commentbuttonAction:(id)sender
 {
-    [self performSegueWithIdentifier:@"lulu" sender:self];
+    [self performSegueWithIdentifier:@"pb_comment_segue" sender:self];
 }
 
 #pragma mark 处理segue
