@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CF7249E78624E7C9C631956 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F33340C1BA54B25BF6872E5 /* libPods.a */; };
 		E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */; };
 		E911674019BB107D007EA117 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E911673019BB107D007EA117 /* MJRefresh.bundle */; };
 		E911674119BB107D007EA117 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E911673319BB107D007EA117 /* MJRefreshBaseView.m */; };
@@ -90,7 +89,6 @@
 		E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E981F9F919AC323F007BD2DE /* InfoPlist.strings */; };
 		E981F9FD19AC323F007BD2DE /* CheYouTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E981F9FC19AC323F007BD2DE /* CheYouTests.m */; };
 		E982164C19B9A07000F088BB /* PRButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E982164B19B9A07000F088BB /* PRButton.m */; };
-		E99BBA9C19C0046C00AF4C1B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E99BBA9B19C0046C00AF4C1B /* Podfile */; };
 		E99BBA9F19C0374200AF4C1B /* CheYouCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBA9E19C0374200AF4C1B /* CheYouCommentViewController.m */; };
 		E99BBAA419C18BBA00AF4C1B /* CheYouCommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */; };
 		E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99EE50B19BEE506004CBABA /* CheYouUserViewController.m */; };
@@ -111,7 +109,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F33340C1BA54B25BF6872E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTieTaoViewController.h; sourceTree = "<group>"; };
 		E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTieTaoViewController.m; sourceTree = "<group>"; };
 		E911673019BB107D007EA117 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
@@ -252,7 +249,6 @@
 		E981F9FC19AC323F007BD2DE /* CheYouTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheYouTests.m; sourceTree = "<group>"; };
 		E982164A19B9A07000F088BB /* PRButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRButton.h; sourceTree = "<group>"; };
 		E982164B19B9A07000F088BB /* PRButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRButton.m; sourceTree = "<group>"; };
-		E99BBA9B19C0046C00AF4C1B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		E99BBA9D19C0374200AF4C1B /* CheYouCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentViewController.h; sourceTree = "<group>"; };
 		E99BBA9E19C0374200AF4C1B /* CheYouCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouCommentViewController.m; sourceTree = "<group>"; };
 		E99BBAA219C18BBA00AF4C1B /* CheYouCommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentViewCell.h; sourceTree = "<group>"; };
@@ -277,7 +273,6 @@
 				E981F9D419AC323F007BD2DE /* CoreGraphics.framework in Frameworks */,
 				E981F9D619AC323F007BD2DE /* UIKit.framework in Frameworks */,
 				E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */,
-				3CF7249E78624E7C9C631956 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,7 +470,6 @@
 				E968E26F19AD9DBC00E2824E /* Icon-Small@2x.png */,
 				E968E27019AD9DBC00E2824E /* Icon.png */,
 				E968E27119AD9DBC00E2824E /* Icon@2x.png */,
-				E99BBA9B19C0046C00AF4C1B /* Podfile */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -524,7 +518,6 @@
 				E981F9D319AC323F007BD2DE /* CoreGraphics.framework */,
 				E981F9D519AC323F007BD2DE /* UIKit.framework */,
 				E981F9F019AC323F007BD2DE /* XCTest.framework */,
-				4F33340C1BA54B25BF6872E5 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -598,11 +591,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E981FA0019AC323F007BD2DE /* Build configuration list for PBXNativeTarget "CheYou" */;
 			buildPhases = (
-				FFE06E04853F45C3A03A3048 /* Check Pods Manifest.lock */,
 				E981F9CA19AC323F007BD2DE /* Sources */,
 				E981F9CB19AC323F007BD2DE /* Frameworks */,
 				E981F9CC19AC323F007BD2DE /* Resources */,
-				2748C87AE981466293067C46 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -683,7 +674,6 @@
 				E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */,
 				E981F9DC19AC323F007BD2DE /* InfoPlist.strings in Resources */,
 				E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */,
-				E99BBA9C19C0046C00AF4C1B /* Podfile in Resources */,
 				E968E27619AD9DBC00E2824E /* Icon-Small-50.png in Resources */,
 				E981F9E519AC323F007BD2DE /* Main.storyboard in Resources */,
 				E9617A3D19B7FAAC000543D2 /* UzysAssetsPickerController.xib in Resources */,
@@ -707,39 +697,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2748C87AE981466293067C46 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FFE06E04853F45C3A03A3048 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E981F9CA19AC323F007BD2DE /* Sources */ = {
