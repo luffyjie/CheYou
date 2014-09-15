@@ -16,6 +16,7 @@
                         <color key="barTintColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="deviceRGB"/>
                     </tabBar>
                     <connections>
+                        <outlet property="hmtabBar" destination="lyk-KO-gUd" id="He8-ur-0sP"/>
                         <segue destination="vdG-0Z-OXR" kind="relationship" relationship="viewControllers" id="LBT-wO-V54"/>
                         <segue destination="W0o-Ds-9wf" kind="relationship" relationship="viewControllers" id="5uf-h7-B3w"/>
                         <segue destination="pOp-Dr-Ye7" kind="modal" identifier="pb_segue" id="esp-HN-Kmc"/>
@@ -156,7 +157,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2396" y="-564"/>
+            <point key="canvasLocation" x="2345" y="-564"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -524,10 +525,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="评论" id="8Br-Si-RoD"/>
+                    <connections>
+                        <segue destination="Dsl-P7-jcE" kind="modal" identifier="lulu" id="WfG-RY-Yax"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEu-jN-eWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="718" y="-993"/>
+            <point key="canvasLocation" x="640" y="-993"/>
+        </scene>
+        <!--Che You Pb Comment View Controller-->
+        <scene sceneID="16P-rL-4Nh">
+            <objects>
+                <viewController id="Dsl-P7-jcE" customClass="CheYouPbCommentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l3q-RW-Hyq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lm4-Wu-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="-993"/>
         </scene>
         <!--Che You User View Controller - 我的设置-->
         <scene sceneID="kwa-zQ-cGt">

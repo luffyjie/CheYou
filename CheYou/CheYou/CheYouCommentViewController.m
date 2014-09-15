@@ -283,7 +283,8 @@
 #pragma 导航返回
 - (void)backAction:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion: nil];
+//    [self dismissViewControllerAnimated:YES completion: nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma 评论 点赞
@@ -300,7 +301,14 @@
 
 - (void)commentbuttonAction:(id)sender
 {
-//    [self performSegueWithIdentifier:@"comment_segue" sender:self];
+    [self performSegueWithIdentifier:@"lulu" sender:self];
+}
+
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
 }
 
 @end

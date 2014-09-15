@@ -134,7 +134,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"comment_segue" sender:self];
+    CheYouCommentViewController *commentView = [[CheYouCommentViewController alloc] init];
+    commentView.hidesBottomBarWhenPushed = YES;
+    commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+    commentView.indexpath = indexPath;
+    [self.navigationController pushViewController:commentView animated:YES];
 }
 
 #pragma 评论 点赞 点击附件图片 事件处理
