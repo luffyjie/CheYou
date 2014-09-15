@@ -134,11 +134,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CheYouCommentViewController *commentView = [[CheYouCommentViewController alloc] init];
-    commentView.hidesBottomBarWhenPushed = YES;
-    commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
-    commentView.indexpath = indexPath;
-    [self.navigationController pushViewController:commentView animated:YES];
+    [self performSegueWithIdentifier:@"comment_segue" sender:self];
 }
 
 #pragma 评论 点赞 点击附件图片 事件处理
@@ -281,9 +277,9 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqual:@"comment_segue"]) {
-        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        CheYouCommentViewController *commentView = (CheYouCommentViewController *)segue.destinationViewController;
+        commentView.hidesBottomBarWhenPushed = YES;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        CheYouCommentViewController *commentView = (CheYouCommentViewController *)nav.topViewController;
         commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         commentView.indexpath = indexPath;
     }

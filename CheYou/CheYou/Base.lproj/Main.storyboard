@@ -508,7 +508,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="车友吐槽" id="mHA-bX-kBO"/>
                     <connections>
-                        <segue destination="dfj-IX-maX" kind="modal" identifier="comment_segue" id="PqB-w0-fVN"/>
+                        <segue destination="gJF-yN-V89" kind="push" identifier="comment_segue" id="v9s-rG-dIB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1YU-ed-k2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -531,7 +531,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEu-jN-eWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="640" y="-993"/>
+            <point key="canvasLocation" x="472" y="-993"/>
         </scene>
         <!--Che You Pb Comment View Controller-->
         <scene sceneID="16P-rL-4Nh">
@@ -756,24 +756,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="823" y="160"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="a67-3a-Z9K">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dfj-IX-maX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mVU-Df-Pud">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gJF-yN-V89" kind="relationship" relationship="rootViewController" id="Tgb-FN-Vb3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Upj-Vx-tRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="220" y="-993"/>
         </scene>
     </scenes>
     <resources>
