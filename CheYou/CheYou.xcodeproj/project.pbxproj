@@ -111,7 +111,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E14280C5B71491A8AD8711A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		4F33340C1BA54B25BF6872E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTieTaoViewController.h; sourceTree = "<group>"; };
 		E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTieTaoViewController.m; sourceTree = "<group>"; };
@@ -505,7 +504,6 @@
 				E981F9F619AC323F007BD2DE /* CheYouTests */,
 				E981F9D019AC323F007BD2DE /* Frameworks */,
 				E981F9CF19AC323F007BD2DE /* Products */,
-				0E14280C5B71491A8AD8711A /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -928,7 +926,6 @@
 		};
 		E981FA0119AC323F007BD2DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E14280C5B71491A8AD8711A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -944,7 +941,6 @@
 		};
 		E981FA0219AC323F007BD2DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E14280C5B71491A8AD8711A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
