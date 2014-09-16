@@ -111,13 +111,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="发现" id="qbf-X3-hyR">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="yUk-Yh-faa">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancelAction:" destination="RaD-ac-D9K" id="h4I-eh-NDT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="发送" id="NQL-IX-Gbn">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="sendAction:" destination="RaD-ac-D9K" id="gy1-mk-cwy"/>
                             </connections>
@@ -261,13 +259,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="堵车" id="v82-z6-SeT">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="7uf-T5-CPQ">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="canceAction:" destination="asP-GS-l4h" id="H1M-xv-tUK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="发送" id="l1u-SG-EfB">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="sendAction:" destination="asP-GS-l4h" id="ILQ-6w-K7O"/>
                             </connections>
@@ -393,13 +389,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="贴条" id="FFq-y0-MZs">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="mbo-Jl-h7I">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="canceAction:" destination="UQi-3m-Aii" id="AcA-u8-D0T"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="发送" id="yDF-T0-r5I">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="sendAction:" destination="UQi-3m-Aii" id="ARS-fL-E9p"/>
                             </connections>
@@ -536,7 +530,6 @@
         <!--Che You Pb Comment View Controller - 发布评论-->
         <scene sceneID="16P-rL-4Nh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lm4-Wu-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Dsl-P7-jcE" customClass="CheYouPbCommentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l3q-RW-Hyq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -569,6 +562,7 @@
                         <outlet property="textView" destination="rfJ-7E-yGp" id="m98-Wk-e87"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lm4-Wu-jSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1119" y="-999"/>
         </scene>
