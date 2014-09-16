@@ -11,5 +11,6 @@
 @interface LuJieCommon : NSObject
 
 + (UIColor *)UIColorFromRGB:(int)rgbValue;
++ (UIColor *)UIColorFromRGB:(int)rgbValue over:(float)alpha;
 
 @end

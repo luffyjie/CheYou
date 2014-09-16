@@ -24,7 +24,7 @@
     NSDictionary *buttonItemAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
                                      NSForegroundColorAttributeName:[UIColor blackColor]};
     NSDictionary *buttonItemDisabledAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
-                                            NSForegroundColorAttributeName:[LuJieCommon UIColorFromRGB:0x999999]};
+                                            NSForegroundColorAttributeName:[LuJieCommon UIColorFromRGB:0x000000 over:0.2]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:buttonItemAttributes forState:UIControlStateNormal];
     [[UIBarButtonItem appearance] setTitleTextAttributes:buttonItemDisabledAttributes forState:UIControlStateDisabled];
     // 设置文本的属性
