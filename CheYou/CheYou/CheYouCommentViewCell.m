@@ -98,7 +98,14 @@
         userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
         screen_name.text = _tucao.screen_name;
         created_at.text = _tucao.created_at;
-        tuCaoText.text = _tucao.tuCaotext;
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.firstLineHeadIndent = 50.f;
+        paragraphStyle.headIndent = 50.f;
+        paragraphStyle.alignment = NSTextAlignmentLeft;
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                      NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName:[UIColor blackColor]};
+        tuCaoText.attributedText = [[NSAttributedString alloc]initWithString: _tucao.tuCaotext attributes:attributes];
         [self makeContentFrame];
     }
 }
