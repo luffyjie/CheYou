@@ -32,8 +32,8 @@
 @implementation CheYouUserViewController
 {
     UITableView *tableview;
+    UITableView *dianzanTableview;
     NSMutableArray *_tuCaoList;
-    BOOL dianZan;
 }
 
 -(void)viewDidLoad{
@@ -58,8 +58,22 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.delegate = self;
     tableview.dataSource = self;
-    //刷新获取数据
+    tableview.tag = 1;
+    //创建刷新
     [self refreshConfig];
+    
+    //初始化点赞
+    dianzanTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
+    [self.view addSubview:dianzanTableview];
+    dianzanTableview.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
+    dianzanTableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,5)];
+    dianzanTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    dianzanTableview.delegate = self;
+    dianzanTableview.dataSource = self;
+    dianzanTableview.tag = 2;
+    dianzanTableview.hidden = YES;
+    //创建刷新
+    [self refreshDianzanConfig];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,15 +105,17 @@
 #pragma 按钮事件
 - (void)oilButtonAction:(id)sender
 {
-    dianZan = YES;
+    dianzanTableview.hidden = NO;
+    tableview.hidden = YES;
     [tableview reloadData];
     self.greenLabel.frame = CGRectMake(108, 198, 104, 2);
 }
 
 - (void)labaButtonAction:(id)sender
 {
-    dianZan = NO;
-    [tableview reloadData];
+    dianzanTableview.hidden = YES;
+    tableview.hidden = NO;
+    [dianzanTableview reloadData];
     self.greenLabel.frame = CGRectMake(1, 198, 104, 2);
 }
 
@@ -120,6 +136,21 @@
     tableview.footerRefreshingText = @"正在刷新中...";
 }
 
+-(void)refreshDianzanConfig
+{
+    [dianzanTableview addHeaderWithTarget:self action:@selector(dianzanheaderRereshing)];
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    dianzanTableview.headerPullToRefreshText = @"下拉可以刷新了";
+    dianzanTableview.headerReleaseToRefreshText = @"松开马上刷新了";
+    dianzanTableview.headerRefreshingText = @"正在刷新中...";
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [dianzanTableview addFooterWithTarget:self action:@selector(dianzanfooterRereshing)];
+    dianzanTableview.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    dianzanTableview.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    dianzanTableview.footerRefreshingText = @"正在刷新中...";
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -127,7 +158,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (dianZan) {
+    if (tableView.tag == 2) {
         return 2;
     }
     return _tuCaoList.count;
@@ -136,7 +167,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
    
-    if (dianZan) {
+    if (tableView.tag == 2) {
 
         CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
         dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -158,7 +189,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (dianZan) {
+    if (tableView.tag == 2) {
         return 48;
     }else{
         UITableViewCell *cell = [self tableView:tableview cellForRowAtIndexPath:indexPath];
@@ -296,6 +327,44 @@
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [tableview footerEndRefreshing];
         tableview.showsVerticalScrollIndicator = YES;
+    });
+}
+
+- (void)dianzanheaderRereshing
+{
+    dianzanTableview.showsVerticalScrollIndicator = NO;
+    // 1.添加假数据
+    for (NSInteger i = 0; i<5; i++) {
+        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
+    }
+    
+    // 2.2秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 刷新表格
+        [dianzanTableview reloadData];
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [dianzanTableview headerEndRefreshing];
+        dianzanTableview.showsVerticalScrollIndicator = YES;
+    });
+}
+
+- (void)dianzanfooterRereshing
+{
+    dianzanTableview.showsVerticalScrollIndicator = NO;
+    // 1.添加假数据
+    for (NSInteger i = 0; i<5; i++) {
+        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
+    }
+    
+    // 2.2秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 刷新表格
+        [dianzanTableview reloadData];
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [dianzanTableview footerEndRefreshing];
+        dianzanTableview.showsVerticalScrollIndicator = YES;
     });
 }
 
