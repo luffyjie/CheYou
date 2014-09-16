@@ -669,7 +669,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的设置" id="7z6-U5-MRm">
-                        <barButtonItem key="rightBarButtonItem" title="设置" id="MMM-26-Ou1"/>
+                        <barButtonItem key="rightBarButtonItem" title="设置" id="MMM-26-Ou1">
+                            <connections>
+                                <action selector="setButton:" destination="jYq-Xk-4aF" id="7OF-jf-goA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="greenLabel" destination="MOH-Xa-hex" id="Ioi-Sm-Q4U"/>
@@ -679,6 +683,7 @@
                         <outlet property="oilButton" destination="6jG-JX-mJz" id="kmk-DD-EIj"/>
                         <outlet property="oil_num" destination="dFI-qq-HPG" id="6W9-qs-ARy"/>
                         <outlet property="photoView" destination="AEf-Py-Vov" id="s9T-Ef-YUl"/>
+                        <outlet property="setButton" destination="MMM-26-Ou1" id="l6N-tC-27k"/>
                         <outlet property="signLabel" destination="Svd-32-iva" id="ufv-Sf-sZk"/>
                     </connections>
                 </viewController>

@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *labaButton;
 @property (weak, nonatomic) IBOutlet UILabel *laba_num;
 @property (strong, nonatomic) IBOutlet UILabel *greenLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *setButton;
 
 @end
 
@@ -126,7 +127,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (dianZan) {
+        return 2;
+    }
     return _tuCaoList.count;
 }
 
@@ -257,7 +260,6 @@
     NSLog(@"MJTableViewController--dealloc---");
 }
 
-
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
@@ -296,5 +298,11 @@
         tableview.showsVerticalScrollIndicator = YES;
     });
 }
+
+#pragma 设置按钮
+- (IBAction)setButton:(id)sender {
+    
+}
+
 
 @end
