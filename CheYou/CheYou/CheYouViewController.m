@@ -99,6 +99,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+    //添加点赞加油点击按钮
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:overbutton];
@@ -128,11 +129,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
         cell.gasolineLabel.textColor = [UIColor redColor];
     }
-}
-
-- (void)commentbuttonAction:(id)sender
-{
-    [self performSegueWithIdentifier:@"comment_segue" sender:self];
 }
 
 #pragma 生成吐槽的图片

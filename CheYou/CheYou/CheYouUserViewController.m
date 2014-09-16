@@ -15,6 +15,7 @@
 #import "MJPhoto.h"
 #import "MJRefresh.h"
 #import "CheYouDianzanViewCell.h"
+#import "CheYouCommentViewController.h"
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -178,11 +179,10 @@
         CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
         tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
-        //评论
-        UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
-        [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
-        [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
-        [tucaoCell.contentView addSubview:commentbutton];
+        //添加点赞加油点击按钮
+        UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
+        [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
+        [tucaoCell.contentView addSubview:overbutton];
         [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
         return tucaoCell;
     }
@@ -200,14 +200,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-}
-
-#pragma 评论 点赞 点击附件图片 事件处理
-
-- (void)commentbuttonAction:(id)sender
-{
-    
+    if (tableView.tag == 1) {
+        [self performSegueWithIdentifier:@"my_comment_segue" sender:self];
+    }
 }
 
 #pragma 生成吐槽的图片
@@ -373,5 +368,32 @@
     
 }
 
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"my_comment_segue"]) {
+        CheYouCommentViewController *commentView = (CheYouCommentViewController *)segue.destinationViewController;
+        commentView.hidesBottomBarWhenPushed = YES;
+        NSIndexPath *indexPath = [tableview indexPathForSelectedRow];
+        commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        commentView.indexpath = indexPath;
+    }
+    
+}
+
+#pragma 评论 点赞
+#pragma 评论 点赞 点击附件图片 事件处理
+- (void)gasolinebuttonAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+    CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    if (button.selected) {
+        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
+        cell.gasolineLabel.textColor = [UIColor redColor];
+    }
+}
 
 @end
