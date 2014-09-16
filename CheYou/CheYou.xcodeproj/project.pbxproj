@@ -73,6 +73,7 @@
 		E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27C19AD9DD200E2824E /* iTunesArtwork.png */; };
 		E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */; };
 		E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E968E28219ADA16200E2824E /* LuJieCommon.m */; };
+		E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */; };
 		E97C562A19C53522003AB1B9 /* CheYouCommentTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */; };
 		E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
 		E981F9D419AC323F007BD2DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D319AC323F007BD2DE /* CoreGraphics.framework */; };
@@ -226,6 +227,8 @@
 		E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		E968E28119ADA16200E2824E /* LuJieCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuJieCommon.h; sourceTree = "<group>"; };
 		E968E28219ADA16200E2824E /* LuJieCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuJieCommon.m; sourceTree = "<group>"; };
+		E97B4A1D19C7E317009B5E36 /* CheYouDianzanViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouDianzanViewCell.h; sourceTree = "<group>"; };
+		E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouDianzanViewCell.m; sourceTree = "<group>"; };
 		E97C562819C53522003AB1B9 /* CheYouCommentTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentTopViewCell.h; sourceTree = "<group>"; };
 		E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouCommentTopViewCell.m; sourceTree = "<group>"; };
 		E981F9CE19AC323F007BD2DE /* CheYou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheYou.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +335,8 @@
 				E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */,
 				E97C562819C53522003AB1B9 /* CheYouCommentTopViewCell.h */,
 				E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */,
+				E97B4A1D19C7E317009B5E36 /* CheYouDianzanViewCell.h */,
+				E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */,
 			);
 			name = TableCell;
 			sourceTree = "<group>";
@@ -714,6 +719,7 @@
 				E9617A9019B81740000543D2 /* UIImage+MultiFormat.m in Sources */,
 				E964151119B55D8900FD2A08 /* CheYouDucheViewController.m in Sources */,
 				E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */,
+				E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */,
 				E9617A8819B81740000543D2 /* SDWebImageDecoder.m in Sources */,
 				E9617A8619B81740000543D2 /* SDImageCache.m in Sources */,
 				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,

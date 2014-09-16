@@ -668,7 +668,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="我的设置" id="7z6-U5-MRm"/>
+                    <navigationItem key="navigationItem" title="我的设置" id="7z6-U5-MRm">
+                        <barButtonItem key="rightBarButtonItem" title="设置" id="MMM-26-Ou1"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="greenLabel" destination="MOH-Xa-hex" id="Ioi-Sm-Q4U"/>
                         <outlet property="labaButton" destination="zGL-1l-KRq" id="Hk3-NG-8UE"/>

@@ -14,6 +14,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "MJRefresh.h"
+#import "CheYouDianzanViewCell.h"
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -31,6 +32,7 @@
 {
     UITableView *tableview;
     NSMutableArray *_tuCaoList;
+    BOOL dianZan;
 }
 
 -(void)viewDidLoad{
@@ -88,12 +90,15 @@
 #pragma 按钮事件
 - (void)oilButtonAction:(id)sender
 {
+    dianZan = YES;
+    [tableview reloadData];
     self.greenLabel.frame = CGRectMake(108, 198, 104, 2);
 }
 
 - (void)labaButtonAction:(id)sender
 {
-    
+    dianZan = NO;
+    [tableview reloadData];
     self.greenLabel.frame = CGRectMake(1, 198, 104, 2);
 }
 
@@ -101,9 +106,6 @@
 
 -(void)refreshConfig
 {
-    //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MJTableViewCellIdentifier];
-    
-    tableview.showsVerticalScrollIndicator = NO;
     [tableview addHeaderWithTarget:self action:@selector(headerRereshing)];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     tableview.headerPullToRefreshText = @"下拉可以刷新了";
@@ -130,35 +132,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    //    CheYouTuCaoTableViewCell *tucaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
-    //    if (tucaoCell == nil){
-    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
-    //    }
-    tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
-    //添加吐槽下方点赞按钮
-//    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 80.f, tucaoCell.frame.size.height - 34.f, 20.f, 20.f)];
-//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
-//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
-//    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
-//    [tucaoCell.contentView addSubview:gasolinebutton];
-    //添加一个透明的按钮到点赞按钮上方，增大接触面积
-    UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
-    //    overbutton.backgroundColor = [UIColor redColor];
-    [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
-    [tucaoCell.contentView addSubview:overbutton];
-    //评论
-    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
-    [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
-    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
-    [tucaoCell.contentView addSubview:commentbutton];
-    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
-    return tucaoCell;
+   
+    if (dianZan) {
+
+        CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+        dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        dianzanCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        return dianzanCell;
+    }else{
+        
+        CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+        tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        //评论
+        UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
+        [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
+        [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
+        [tucaoCell.contentView addSubview:commentbutton];
+        [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
+        return tucaoCell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self tableView:tableview cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    if (dianZan) {
+        return 48;
+    }else{
+        UITableViewCell *cell = [self tableView:tableview cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
+    }
 }
 
 
@@ -168,32 +170,10 @@
 }
 
 #pragma 评论 点赞 点击附件图片 事件处理
-- (void)gasolinebuttonAction:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    button.selected = !button.selected;
-    CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
-    if (button.selected) {
-        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
-        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
-        cell.gasolineLabel.textColor = [UIColor redColor];
-    }else
-    {
-        //        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
-        //        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] - 1];
-        //        cell.gasolineLabel.textColor = [UIColor blackColor];
-    }
-}
 
 - (void)commentbuttonAction:(id)sender
 {
     
-}
-
-- (void)photoPress:(id)sender
-{
-    //   UIImageView *photo = (UIImageView *)sender;
-    NSLog(@"photoPress");
 }
 
 #pragma 生成吐槽的图片
@@ -281,6 +261,7 @@
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
+    tableview.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -293,11 +274,13 @@
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [tableview headerEndRefreshing];
+        tableview.showsVerticalScrollIndicator = YES;
     });
 }
 
 - (void)footerRereshing
 {
+    tableview.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -310,6 +293,7 @@
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [tableview footerEndRefreshing];
+        tableview.showsVerticalScrollIndicator = YES;
     });
 }
 

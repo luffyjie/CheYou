@@ -70,9 +70,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 -(void)refreshConfig
 {
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MJTableViewCellIdentifier];
-    
-    self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
@@ -99,29 +96,12 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-//    CheYouTuCaoTableViewCell *tucaoCell = (CheYouTuCaoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"sconddentifier"];
-//    if (tucaoCell == nil){
     CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
-//    }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
-    //添加吐槽下方点赞按钮
-//    UIButton *gasolinebutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 80.f, tucaoCell.frame.size.height - 26.f, 15.f, 15.f)];
-//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_unselect"] forState:UIControlStateNormal];
-//    [gasolinebutton setImage:[UIImage imageNamed:@"tc_gasoline_select"] forState:UIControlStateSelected];
-//    [gasolinebutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
-//    [tucaoCell.contentView addSubview:gasolinebutton];
-    //添加一个透明的按钮到点赞按钮上方，增大接触面积
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
-//    overbutton.backgroundColor = [UIColor redColor];
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:overbutton];
-    //评论
-//    UIButton *commentbutton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 30, tucaoCell.frame.size.height - 25.f, 15.f, 15.f)];
-//    [commentbutton setImage:[UIImage imageNamed:@"tc_comment"] forState:UIControlStateNormal];
-//    [commentbutton addTarget:self action:@selector(commentbuttonAction:)forControlEvents:UIControlEventTouchDown];
-//    [tucaoCell.contentView addSubview:commentbutton];
-    
     [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
     return tucaoCell;
 }
@@ -240,6 +220,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
+    self.tableView.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -252,11 +233,13 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView headerEndRefreshing];
+        self.tableView.showsVerticalScrollIndicator = YES;
     });
 }
 
 - (void)footerRereshing
 {
+    self.tableView.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -269,6 +252,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView footerEndRefreshing];
+        self.tableView.showsVerticalScrollIndicator = YES;
     });
 }
 
