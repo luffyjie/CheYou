@@ -73,6 +73,7 @@
 		E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27C19AD9DD200E2824E /* iTunesArtwork.png */; };
 		E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */; };
 		E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E968E28219ADA16200E2824E /* LuJieCommon.m */; };
+		E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E976FBB519C9BF320019646A /* VPImageCropperViewController.m */; };
 		E978F86119C91B8500436F09 /* CheYouSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86019C91B8500436F09 /* CheYouSetViewController.m */; };
 		E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */; };
 		E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */; };
@@ -229,6 +230,8 @@
 		E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		E968E28119ADA16200E2824E /* LuJieCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuJieCommon.h; sourceTree = "<group>"; };
 		E968E28219ADA16200E2824E /* LuJieCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuJieCommon.m; sourceTree = "<group>"; };
+		E976FBB419C9BF320019646A /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		E976FBB519C9BF320019646A /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		E978F85F19C91B8500436F09 /* CheYouSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetViewController.h; sourceTree = "<group>"; };
 		E978F86019C91B8500436F09 /* CheYouSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetViewController.m; sourceTree = "<group>"; };
 		E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouGeRenViewController.h; sourceTree = "<group>"; };
@@ -496,9 +499,19 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		E976FBB319C9BED30019646A /* Circleimage */ = {
+			isa = PBXGroup;
+			children = (
+				E976FBB419C9BF320019646A /* VPImageCropperViewController.h */,
+				E976FBB519C9BF320019646A /* VPImageCropperViewController.m */,
+			);
+			name = Circleimage;
+			sourceTree = "<group>";
+		};
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E976FBB319C9BED30019646A /* Circleimage */,
 				E911672F19BB107D007EA117 /* MJRefresh */,
 				E9617A4319B81715000543D2 /* Photo */,
 				E93AD96C19B30D2C0081259E /* Camera */,
@@ -735,6 +748,7 @@
 				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,
 				E9617A8F19B81740000543D2 /* UIImage+GIF.m in Sources */,
 				E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */,
+				E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */,
 				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
 				E9617A8219B81740000543D2 /* MJPhotoToolbar.m in Sources */,
 				E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */,

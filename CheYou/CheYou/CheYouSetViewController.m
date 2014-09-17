@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"返回"
+                                   initWithTitle:@""
                                    style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     backButton.image = [UIImage imageNamed:@"back"];
     [self.navigationItem setLeftBarButtonItem:backButton];
