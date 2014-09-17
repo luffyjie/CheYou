@@ -16,6 +16,7 @@
 #import "MJRefresh.h"
 #import "CheYouDianzanViewCell.h"
 #import "CheYouCommentViewController.h"
+#import "CheYouSetViewController.h"
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -366,6 +367,7 @@
 #pragma 设置按钮
 - (IBAction)setButton:(id)sender {
     
+    [self performSegueWithIdentifier:@"set_segue" sender:self];
 }
 
 #pragma mark 处理segue
@@ -378,6 +380,10 @@
         NSIndexPath *indexPath = [tableview indexPathForSelectedRow];
         commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         commentView.indexpath = indexPath;
+    }
+    if ([segue.identifier isEqual:@"set_segue"]) {
+        CheYouSetViewController *setView = (CheYouSetViewController *)segue.destinationViewController;
+        setView.hidesBottomBarWhenPushed = YES;
     }
     
 }
