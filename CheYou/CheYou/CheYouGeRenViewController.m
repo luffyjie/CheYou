@@ -1,19 +1,18 @@
 //
-//  CheYouSetViewController.m
+//  CheYouGeRenViewController.m
 //  CheYou
 //
 //  Created by lujie on 14-9-17.
 //  Copyright (c) 2014年 CheYou. All rights reserved.
 //
 
-#import "CheYouSetViewController.h"
+#import "CheYouGeRenViewController.h"
 
-@interface CheYouSetViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *logbutton;
+@interface CheYouGeRenViewController ()
 
 @end
 
-@implementation CheYouSetViewController
+@implementation CheYouGeRenViewController
 
 - (void)viewDidLoad
 {
@@ -27,8 +26,7 @@
     backButton.image = [UIImage imageNamed:@"back"];
     [self.navigationItem setLeftBarButtonItem:backButton];
     
-    //设置退出按钮位置
-    self.logbutton.frame = CGRectMake(30, self.view.frame.size.height - 120, self.view.frame.size.width - 60, 30);
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,31 +39,7 @@
 - (void)backAction:(id)sender
 {
     //    [self dismissViewControllerAnimated:YES completion: nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES]; 
 }
-
-#pragma 设置按钮
-
-- (IBAction)geRenButton:(id)sender {
-    
-        [self performSegueWithIdentifier:@"geren_segue" sender:self];
-}
-
-- (IBAction)yiJianButton:(id)sender {
-    
-}
-
-- (IBAction)cacheButton:(id)sender {
-    
-}
-
-- (IBAction)about:(id)sender {
-    
-}
-
-- (IBAction)logOutButton:(id)sender {
-    
-}
-
 
 @end

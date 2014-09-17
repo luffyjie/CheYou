@@ -74,6 +74,7 @@
 		E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */; };
 		E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E968E28219ADA16200E2824E /* LuJieCommon.m */; };
 		E978F86119C91B8500436F09 /* CheYouSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86019C91B8500436F09 /* CheYouSetViewController.m */; };
+		E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */; };
 		E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */; };
 		E97C562A19C53522003AB1B9 /* CheYouCommentTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */; };
 		E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
@@ -230,6 +231,8 @@
 		E968E28219ADA16200E2824E /* LuJieCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuJieCommon.m; sourceTree = "<group>"; };
 		E978F85F19C91B8500436F09 /* CheYouSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetViewController.h; sourceTree = "<group>"; };
 		E978F86019C91B8500436F09 /* CheYouSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetViewController.m; sourceTree = "<group>"; };
+		E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouGeRenViewController.h; sourceTree = "<group>"; };
+		E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouGeRenViewController.m; sourceTree = "<group>"; };
 		E97B4A1D19C7E317009B5E36 /* CheYouDianzanViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouDianzanViewCell.h; sourceTree = "<group>"; };
 		E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouDianzanViewCell.m; sourceTree = "<group>"; };
 		E97C562819C53522003AB1B9 /* CheYouCommentTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentTopViewCell.h; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 				E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */,
 				E978F85F19C91B8500436F09 /* CheYouSetViewController.h */,
 				E978F86019C91B8500436F09 /* CheYouSetViewController.m */,
+				E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */,
+				E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */,
 				E981F9E919AC323F007BD2DE /* Images.xcassets */,
 				E981F9D819AC323F007BD2DE /* Supporting Files */,
 			);
@@ -732,6 +737,7 @@
 				E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */,
 				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
 				E9617A8219B81740000543D2 /* MJPhotoToolbar.m in Sources */,
+				E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */,
 				E9617A8719B81740000543D2 /* SDWebImageCompat.m in Sources */,
 				E9617A7C19B81740000543D2 /* MBProgressHUD.m in Sources */,
 				E9617A8319B81740000543D2 /* MJPhotoView.m in Sources */,

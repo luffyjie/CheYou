@@ -1,0 +1,13 @@
+//
+//  CheYouGeRenViewController.h
+//  CheYou
+//
+//  Created by lujie on 14-9-17.
+//  Copyright (c) 2014年 CheYou. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CheYouGeRenViewController : UIViewController
+
+@end
