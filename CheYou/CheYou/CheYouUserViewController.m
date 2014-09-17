@@ -51,7 +51,8 @@
     
     //用户图片设置
     self.photoView.frame = CGRectMake( 10, 86, 60, 60);
-    
+    [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
+    self.photoView.layer.masksToBounds = YES;
     //初始化喇叭
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
     [self.view addSubview:tableview];

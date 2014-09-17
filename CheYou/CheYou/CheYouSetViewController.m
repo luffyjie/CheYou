@@ -28,7 +28,7 @@
     [self.navigationItem setLeftBarButtonItem:backButton];
     
     //设置退出按钮位置
-    self.logbutton.frame = CGRectMake(30, self.view.frame.size.height - 120, self.view.frame.size.width - 60, 30);
+    self.logbutton.frame = CGRectMake(30, self.view.frame.size.height - 130, self.view.frame.size.width - 60, 40);
 }
 
 - (void)didReceiveMemoryWarning

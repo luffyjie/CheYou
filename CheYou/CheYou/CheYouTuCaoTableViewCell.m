@@ -127,6 +127,8 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [userImage setFrame:[self userImageFrame]];
+    [userImage.layer setCornerRadius:CGRectGetHeight([userImage bounds]) / 2];
+    userImage.layer.masksToBounds = YES;
     [screen_name setFrame:[self screen_nameFrame]];
     [tuCaoTag setFrame:[self tuCaoTagFrame]];
     [created_at setFrame:[self created_atFrame]];
