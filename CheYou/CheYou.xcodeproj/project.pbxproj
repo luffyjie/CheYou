@@ -96,6 +96,18 @@
 		E99BBA9F19C0374200AF4C1B /* CheYouCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBA9E19C0374200AF4C1B /* CheYouCommentViewController.m */; };
 		E99BBAA419C18BBA00AF4C1B /* CheYouCommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */; };
 		E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99EE50B19BEE506004CBABA /* CheYouUserViewController.m */; };
+		E9B49D2C19CAC4B700F6F562 /* ICETutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B49D2819CAC4B700F6F562 /* ICETutorialPage.m */; };
+		E9B49D2D19CAC4B700F6F562 /* ICETutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B49D2A19CAC4B700F6F562 /* ICETutorialController.m */; };
+		E9B49D3319CAC4D400F6F562 /* tutorial_background_00@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D2E19CAC4D400F6F562 /* tutorial_background_00@2x.jpg */; };
+		E9B49D3419CAC4D400F6F562 /* tutorial_background_01@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D2F19CAC4D400F6F562 /* tutorial_background_01@2x.jpg */; };
+		E9B49D3519CAC4D400F6F562 /* tutorial_background_02@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3019CAC4D400F6F562 /* tutorial_background_02@2x.jpg */; };
+		E9B49D3619CAC4D400F6F562 /* tutorial_background_03@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3119CAC4D400F6F562 /* tutorial_background_03@2x.jpg */; };
+		E9B49D3719CAC4D400F6F562 /* tutorial_background_04@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3219CAC4D400F6F562 /* tutorial_background_04@2x.jpg */; };
+		E9B49D3C19CAC59E00F6F562 /* background-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3819CAC59E00F6F562 /* background-gradient.png */; };
+		E9B49D3D19CAC59E00F6F562 /* background-gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3919CAC59E00F6F562 /* background-gradient@2x.png */; };
+		E9B49D3E19CAC59E00F6F562 /* button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3A19CAC59E00F6F562 /* button-background.png */; };
+		E9B49D3F19CAC59E00F6F562 /* button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D3B19CAC59E00F6F562 /* button-background@2x.png */; };
+		E9B49D4119CAC5B400F6F562 /* ICETutorialController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9B49D4019CAC5B400F6F562 /* ICETutorialController_iPhone.xib */; };
 		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
 		E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */; };
@@ -267,6 +279,20 @@
 		E99BBAA319C18BBA00AF4C1B /* CheYouCommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouCommentViewCell.m; sourceTree = "<group>"; };
 		E99EE50A19BEE506004CBABA /* CheYouUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouUserViewController.h; sourceTree = "<group>"; };
 		E99EE50B19BEE506004CBABA /* CheYouUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouUserViewController.m; sourceTree = "<group>"; };
+		E9B49D2819CAC4B700F6F562 /* ICETutorialPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialPage.m; sourceTree = "<group>"; };
+		E9B49D2919CAC4B700F6F562 /* ICETutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICETutorialController.h; sourceTree = "<group>"; };
+		E9B49D2A19CAC4B700F6F562 /* ICETutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialController.m; sourceTree = "<group>"; };
+		E9B49D2B19CAC4B700F6F562 /* ICETutorialPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICETutorialPage.h; sourceTree = "<group>"; };
+		E9B49D2E19CAC4D400F6F562 /* tutorial_background_00@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_00@2x.jpg"; sourceTree = "<group>"; };
+		E9B49D2F19CAC4D400F6F562 /* tutorial_background_01@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_01@2x.jpg"; sourceTree = "<group>"; };
+		E9B49D3019CAC4D400F6F562 /* tutorial_background_02@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_02@2x.jpg"; sourceTree = "<group>"; };
+		E9B49D3119CAC4D400F6F562 /* tutorial_background_03@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_03@2x.jpg"; sourceTree = "<group>"; };
+		E9B49D3219CAC4D400F6F562 /* tutorial_background_04@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial_background_04@2x.jpg"; sourceTree = "<group>"; };
+		E9B49D3819CAC59E00F6F562 /* background-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-gradient.png"; sourceTree = "<group>"; };
+		E9B49D3919CAC59E00F6F562 /* background-gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-gradient@2x.png"; sourceTree = "<group>"; };
+		E9B49D3A19CAC59E00F6F562 /* button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background.png"; sourceTree = "<group>"; };
+		E9B49D3B19CAC59E00F6F562 /* button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background@2x.png"; sourceTree = "<group>"; };
+		E9B49D4019CAC5B400F6F562 /* ICETutorialController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ICETutorialController_iPhone.xib; sourceTree = "<group>"; };
 		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E9ECC9AD19B0983400C894E5 /* CheYouTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTabBarViewController.h; sourceTree = "<group>"; };
 		E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTabBarViewController.m; sourceTree = "<group>"; };
@@ -472,6 +498,15 @@
 		E968E26719AD9C2B00E2824E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E9B49D3819CAC59E00F6F562 /* background-gradient.png */,
+				E9B49D3919CAC59E00F6F562 /* background-gradient@2x.png */,
+				E9B49D3A19CAC59E00F6F562 /* button-background.png */,
+				E9B49D3B19CAC59E00F6F562 /* button-background@2x.png */,
+				E9B49D2E19CAC4D400F6F562 /* tutorial_background_00@2x.jpg */,
+				E9B49D2F19CAC4D400F6F562 /* tutorial_background_01@2x.jpg */,
+				E9B49D3019CAC4D400F6F562 /* tutorial_background_02@2x.jpg */,
+				E9B49D3119CAC4D400F6F562 /* tutorial_background_03@2x.jpg */,
+				E9B49D3219CAC4D400F6F562 /* tutorial_background_04@2x.jpg */,
 				E968E27C19AD9DD200E2824E /* iTunesArtwork.png */,
 				E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */,
 				E968E26819AD9DBC00E2824E /* Icon-60.png */,
@@ -511,6 +546,7 @@
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E9B49D2719CAC49E00F6F562 /* Welcome */,
 				E976FBB319C9BED30019646A /* Circleimage */,
 				E911672F19BB107D007EA117 /* MJRefresh */,
 				E9617A4319B81715000543D2 /* Photo */,
@@ -612,6 +648,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9B49D2719CAC49E00F6F562 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				E9B49D4019CAC5B400F6F562 /* ICETutorialController_iPhone.xib */,
+				E9B49D2819CAC4B700F6F562 /* ICETutorialPage.m */,
+				E9B49D2919CAC4B700F6F562 /* ICETutorialController.h */,
+				E9B49D2A19CAC4B700F6F562 /* ICETutorialController.m */,
+				E9B49D2B19CAC4B700F6F562 /* ICETutorialPage.h */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -694,20 +742,30 @@
 			files = (
 				E968E27A19AD9DBC00E2824E /* Icon.png in Resources */,
 				E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */,
+				E9B49D3419CAC4D400F6F562 /* tutorial_background_01@2x.jpg in Resources */,
 				E911674019BB107D007EA117 /* MJRefresh.bundle in Resources */,
 				E968E27B19AD9DBC00E2824E /* Icon@2x.png in Resources */,
 				E968E27719AD9DBC00E2824E /* Icon-Small-50@2x.png in Resources */,
+				E9B49D3F19CAC59E00F6F562 /* button-background@2x.png in Resources */,
+				E9B49D3D19CAC59E00F6F562 /* background-gradient@2x.png in Resources */,
+				E9B49D3719CAC4D400F6F562 /* tutorial_background_04@2x.jpg in Resources */,
 				E968E27519AD9DBC00E2824E /* Icon-72@2x.png in Resources */,
+				E9B49D3E19CAC59E00F6F562 /* button-background.png in Resources */,
 				E981F9EA19AC323F007BD2DE /* Images.xcassets in Resources */,
 				E968E27319AD9DBC00E2824E /* Icon-60@2x.png in Resources */,
 				E981F9DC19AC323F007BD2DE /* InfoPlist.strings in Resources */,
 				E968E27219AD9DBC00E2824E /* Icon-60.png in Resources */,
+				E9B49D3319CAC4D400F6F562 /* tutorial_background_00@2x.jpg in Resources */,
 				E968E27619AD9DBC00E2824E /* Icon-Small-50.png in Resources */,
 				E981F9E519AC323F007BD2DE /* Main.storyboard in Resources */,
 				E9617A3D19B7FAAC000543D2 /* UzysAssetsPickerController.xib in Resources */,
+				E9B49D3C19CAC59E00F6F562 /* background-gradient.png in Resources */,
 				E9617A7B19B81740000543D2 /* MBProgressHUD.bundle in Resources */,
 				E9617A3B19B7FAAC000543D2 /* UzysAssetPickerController.bundle in Resources */,
+				E9B49D4119CAC5B400F6F562 /* ICETutorialController_iPhone.xib in Resources */,
 				E9617A7E19B81740000543D2 /* MJPhotoBrowser.bundle in Resources */,
+				E9B49D3519CAC4D400F6F562 /* tutorial_background_02@2x.jpg in Resources */,
+				E9B49D3619CAC4D400F6F562 /* tutorial_background_03@2x.jpg in Resources */,
 				E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */,
 				E968E27819AD9DBC00E2824E /* Icon-Small.png in Resources */,
 				E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */,
@@ -745,6 +803,7 @@
 				E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */,
 				E9617A8819B81740000543D2 /* SDWebImageDecoder.m in Sources */,
 				E9617A8619B81740000543D2 /* SDImageCache.m in Sources */,
+				E9B49D2C19CAC4B700F6F562 /* ICETutorialPage.m in Sources */,
 				E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */,
 				E9617A8F19B81740000543D2 /* UIImage+GIF.m in Sources */,
 				E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */,
@@ -773,6 +832,7 @@
 				E93648D619AF336300CE5542 /* TuCao.m in Sources */,
 				E9617A8419B81740000543D2 /* MKAnnotationView+WebCache.m in Sources */,
 				E95FDFF919C6AE3B007585AF /* CheYouPbCommentViewController.m in Sources */,
+				E9B49D2D19CAC4B700F6F562 /* ICETutorialController.m in Sources */,
 				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E911674419BB107D007EA117 /* MJRefreshHeaderView.m in Sources */,
 				E9617A4219B7FAAC000543D2 /* UzysWrapperPickerController.m in Sources */,
