@@ -1,10 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="dGi-3X-pDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wZg-Vq-jyH">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Che You Login View Controller-->
+        <scene sceneID="kIN-Od-18H">
+            <objects>
+                <viewController id="tSV-MR-17P" customClass="CheYouLoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GyR-g3-m38">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KDL-hS-nes"/>
+                    <connections>
+                        <segue destination="PFZ-3a-WmH" kind="push" identifier="login_segue" id="cKp-9r-E4I"/>
+                        <segue destination="IeX-nd-ceS" kind="push" identifier="register_segue" id="hMq-hN-lh4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hpt-v5-Ejv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2631" y="174"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="baL-jC-bPr">
+            <objects>
+                <viewController id="PFZ-3a-WmH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ra0-uJ-Jff">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NYn-Tf-vRo">
+                                <rect key="frame" x="31" y="125" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" minimumFontSize="17" id="lno-zd-23a">
+                                <rect key="frame" x="95" y="125" width="205" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i1Y-xK-uki">
+                                <rect key="frame" x="0.0" y="163" width="320" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密   码:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J78-wI-Bfc">
+                                <rect key="frame" x="31" y="91" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" id="MeO-mZ-5u0">
+                                <rect key="frame" x="95" y="87" width="205" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sCJ-Zi-CMR">
+                                <rect key="frame" x="0.0" y="116" width="320" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="rEq-gX-Gho">
+                                <rect key="frame" x="0.0" y="165" width="320" height="405"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iyh-CE-ehu">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="wdT-lL-gLs">
+                            <connections>
+                                <segue destination="dGi-3X-pDZ" kind="modal" id="NBm-3e-fdi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XKH-9n-k3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2058" y="-114"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Cja-4s-BHi">
+            <objects>
+                <viewController id="IeX-nd-ceS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="inQ-IZ-C14">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Iye-sH-GuM"/>
+                    <connections>
+                        <segue destination="3pX-ak-Oj2" kind="push" identifier="duanx_segue" id="tp5-E3-6xM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J8o-Kc-mbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2058" y="678"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="T2G-4O-JyB">
+            <objects>
+                <viewController id="3pX-ak-Oj2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nnf-Qb-Bs0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="t6a-Je-ihJ"/>
+                    <connections>
+                        <segue destination="Beq-xK-Cge" kind="push" identifier="reginfo_segue" id="mX2-zx-zJc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dhm-6s-Tg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1602" y="664"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Fpt-C9-4JN">
+            <objects>
+                <viewController id="Beq-xK-Cge" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PM9-Fm-fHi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="F7M-iI-mHI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E8N-xm-1LS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1164" y="678"/>
+        </scene>
         <!--Che You Tab Bar View Controller-->
         <scene sceneID="W71-ds-An0">
             <objects>
@@ -24,7 +164,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jmu-hp-F5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1607" y="170"/>
+            <point key="canvasLocation" x="-1439" y="-114"/>
         </scene>
         <!--Che You Publish View Controller-->
         <scene sceneID="i5G-VC-Pbr">
@@ -98,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eA7-Q2-Gbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804" y="154"/>
+            <point key="canvasLocation" x="-430" y="-114"/>
         </scene>
         <!--Che You Fa Xian View Controller - 发现-->
         <scene sceneID="rTg-Ur-nzm">
@@ -155,7 +295,7 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="947" y="-260"/>
+            <point key="canvasLocation" x="1457" y="-100"/>
         </scene>
         <!--Che You Duche View Controller - 堵车-->
         <scene sceneID="EWN-xb-kRy">
@@ -283,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rqn-Ig-xkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="188"/>
+            <point key="canvasLocation" x="2544" y="-150"/>
         </scene>
         <!--Che You Tie Tao View Controller - 贴条-->
         <scene sceneID="2JP-gq-f5l">
@@ -412,7 +552,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmc-ho-3dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="963" y="664"/>
+            <point key="canvasLocation" x="1515" y="640"/>
         </scene>
         <!--Che You View Controller - 车友吐槽-->
         <scene sceneID="RTE-ap-ftn">
@@ -691,7 +831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeL-vP-PYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-454" y="1465"/>
+            <point key="canvasLocation" x="-430" y="1465"/>
         </scene>
         <!--Che You Set View Controller - 设置-->
         <scene sceneID="sE0-cf-xrb">
@@ -819,7 +959,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oV-Lz-g4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="98" y="1465"/>
+            <point key="canvasLocation" x="90" y="1465"/>
         </scene>
         <!--Che You Ge Ren View Controller - 个人-->
         <scene sceneID="jNn-RX-DtX">
@@ -958,7 +1098,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXA-yR-P5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517" y="1465"/>
+            <point key="canvasLocation" x="593" y="1465"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Hc-xD-ujB">
@@ -977,7 +1117,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9g-22-lN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-938" y="1473"/>
+            <point key="canvasLocation" x="-862" y="1473"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cvV-4H-EUP">
@@ -1014,7 +1154,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnD-t3-bgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="371" y="-276"/>
+            <point key="canvasLocation" x="817" y="-100"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ANt-mT-IEP">
@@ -1032,7 +1172,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yaf-2i-mPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="400" y="664"/>
+            <point key="canvasLocation" x="812" y="640"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FiL-GA-tBg">
@@ -1050,7 +1190,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVf-OV-bRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="154"/>
+            <point key="canvasLocation" x="1963" y="-150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ncQ-OT-v4f">
@@ -1069,6 +1209,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UvH-yB-e8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="911" y="-999"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="so0-bD-Mi8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZg-Vq-jyH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TyT-M8-VKL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tSV-MR-17P" kind="relationship" relationship="rootViewController" id="4WV-iu-OxH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kXv-Zs-6m3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3103" y="162"/>
         </scene>
     </scenes>
     <resources>

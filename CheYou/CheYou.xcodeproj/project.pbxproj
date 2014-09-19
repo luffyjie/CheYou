@@ -20,6 +20,7 @@
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
 		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
+		E953C5D919CC2DC100C0510F /* CheYouLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */; };
 		E95FDFF919C6AE3B007585AF /* CheYouPbCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */; };
 		E9617A0719B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = E9617A0419B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.m */; };
 		E9617A0819B7F95F000543D2 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = E9617A0519B7F95F000543D2 /* easing.c */; };
@@ -150,6 +151,8 @@
 		E93AD96219B2CCBB0081259E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
+		E953C5D719CC2DC100C0510F /* CheYouLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouLoginViewController.h; sourceTree = "<group>"; };
+		E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginViewController.m; sourceTree = "<group>"; };
 		E95FDFF719C6AE3B007585AF /* CheYouPbCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouPbCommentViewController.h; sourceTree = "<group>"; };
 		E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouPbCommentViewController.m; sourceTree = "<group>"; };
 		E9617A0319B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
@@ -612,6 +615,8 @@
 				E978F86019C91B8500436F09 /* CheYouSetViewController.m */,
 				E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */,
 				E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */,
+				E953C5D719CC2DC100C0510F /* CheYouLoginViewController.h */,
+				E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */,
 				E981F9E919AC323F007BD2DE /* Images.xcassets */,
 				E981F9D819AC323F007BD2DE /* Supporting Files */,
 			);
@@ -836,6 +841,7 @@
 				E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */,
 				E911674419BB107D007EA117 /* MJRefreshHeaderView.m in Sources */,
 				E9617A4219B7FAAC000543D2 /* UzysWrapperPickerController.m in Sources */,
+				E953C5D919CC2DC100C0510F /* CheYouLoginViewController.m in Sources */,
 				E9617A8E19B81740000543D2 /* UIButton+WebCache.m in Sources */,
 				E9617A8919B81740000543D2 /* SDWebImageDownloader.m in Sources */,
 				E911674619BB107D007EA117 /* UIScrollView+MJRefresh.m in Sources */,
