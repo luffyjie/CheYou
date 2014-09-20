@@ -66,14 +66,11 @@
     __unsafe_unretained typeof(self) weakSelf = self;
     // Set button 1 action.
     [self.viewController setButton1Block:^(UIButton *button){
-        NSLog(@"Button 1 pressed.");
         [weakSelf performSegueWithIdentifier:@"login_segue" sender:weakSelf];
     }];
     
     // Set button 2 action, stop the scrolling.
     [self.viewController setButton2Block:^(UIButton *button){
-        NSLog(@"Button 2 pressed.");
-        NSLog(@"Auto-scrolling stopped.");
         [weakSelf performSegueWithIdentifier:@"register_segue" sender:weakSelf];        
 //        [weakSelf.viewController stopScrolling];
     }];
@@ -99,16 +96,5 @@
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

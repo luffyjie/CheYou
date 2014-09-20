@@ -39,7 +39,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入4-20密码" minimumFontSize="17" id="lno-zd-23a">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入4-20位密码" minimumFontSize="17" id="lno-zd-23a">
                                 <rect key="frame" x="90" y="130" width="205" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,6 +77,20 @@
                             <view contentMode="scaleToFill" id="rEq-gX-Gho">
                                 <rect key="frame" x="0.0" y="168" width="320" height="403"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9UW-0d-4Dc">
+                                        <rect key="frame" x="20" y="20" width="280" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="登录" backgroundImage="login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="LoginButton:" destination="PFZ-3a-WmH" eventType="touchDown" id="7aG-wg-DEj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qfC-c8-2hS">
@@ -91,6 +105,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="使用手机号登录" id="iyh-CE-ehu"/>
                     <connections>
+                        <outlet property="phoneText" destination="MeO-mZ-5u0" id="ulT-rv-KJr"/>
+                        <outlet property="pwdText" destination="lno-zd-23a" id="rmk-GY-Gnu"/>
                         <segue destination="dGi-3X-pDZ" kind="modal" identifier="home_segue" modalTransitionStyle="crossDissolve" id="vc2-of-iKH"/>
                     </connections>
                 </viewController>
@@ -1236,6 +1252,7 @@
     <resources>
         <image name="keyboard_image" width="20" height="20"/>
         <image name="keyboard_sharp" width="20" height="20"/>
+        <image name="login" width="180" height="45"/>
         <image name="luoli" width="48" height="48"/>
         <image name="my_talk" width="106" height="35"/>
         <image name="pb_close" width="48" height="48"/>
