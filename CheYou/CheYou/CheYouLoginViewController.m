@@ -80,6 +80,7 @@
     
     // Run it.
     [self.viewController startScrolling];
+    self.viewController.view.frame = self.view.frame;
     [self.view addSubview: self.viewController.view];
 }
 
