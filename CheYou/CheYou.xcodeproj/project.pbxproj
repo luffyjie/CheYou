@@ -82,6 +82,7 @@
 		E97B2F2A19CD188F00D902C0 /* CheYouRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2919CD188F00D902C0 /* CheYouRegisterViewController.m */; };
 		E97B2F2D19CD1D3E00D902C0 /* CheYouSetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */; };
 		E97B2F3019CD21C500D902C0 /* CheYouSetInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */; };
+		E97B2F3219CD721900D902C0 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97B2F3119CD721900D902C0 /* area.plist */; };
 		E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */; };
 		E97C562A19C53522003AB1B9 /* CheYouCommentTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */; };
 		E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
@@ -264,6 +265,7 @@
 		E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetPwdViewController.m; sourceTree = "<group>"; };
 		E97B2F2E19CD21C500D902C0 /* CheYouSetInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetInfoViewController.h; sourceTree = "<group>"; };
 		E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetInfoViewController.m; sourceTree = "<group>"; };
+		E97B2F3119CD721900D902C0 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		E97B4A1D19C7E317009B5E36 /* CheYouDianzanViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouDianzanViewCell.h; sourceTree = "<group>"; };
 		E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouDianzanViewCell.m; sourceTree = "<group>"; };
 		E97C562819C53522003AB1B9 /* CheYouCommentTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentTopViewCell.h; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 		E981F9D819AC323F007BD2DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E97B2F3119CD721900D902C0 /* area.plist */,
 				E981F9D919AC323F007BD2DE /* CheYou-Info.plist */,
 				E981F9DA19AC323F007BD2DE /* InfoPlist.strings */,
 				E981F9DD19AC323F007BD2DE /* main.m */,
@@ -794,6 +797,7 @@
 				E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */,
 				E968E27819AD9DBC00E2824E /* Icon-Small.png in Resources */,
 				E968E27419AD9DBC00E2824E /* Icon-72.png in Resources */,
+				E97B2F3219CD721900D902C0 /* area.plist in Resources */,
 				E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */,
 				E968E27919AD9DBC00E2824E /* Icon-Small@2x.png in Resources */,
 			);
