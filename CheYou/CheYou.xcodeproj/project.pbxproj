@@ -79,6 +79,9 @@
 		E978F86119C91B8500436F09 /* CheYouSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86019C91B8500436F09 /* CheYouSetViewController.m */; };
 		E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */; };
 		E97B2F2719CD094300D902C0 /* ICETutorialController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E97B2F2619CD094300D902C0 /* ICETutorialController_iPhone.xib */; };
+		E97B2F2A19CD188F00D902C0 /* CheYouRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2919CD188F00D902C0 /* CheYouRegisterViewController.m */; };
+		E97B2F2D19CD1D3E00D902C0 /* CheYouSetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */; };
+		E97B2F3019CD21C500D902C0 /* CheYouSetInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */; };
 		E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */; };
 		E97C562A19C53522003AB1B9 /* CheYouCommentTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E97C562919C53522003AB1B9 /* CheYouCommentTopViewCell.m */; };
 		E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
@@ -255,6 +258,12 @@
 		E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouGeRenViewController.h; sourceTree = "<group>"; };
 		E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouGeRenViewController.m; sourceTree = "<group>"; };
 		E97B2F2619CD094300D902C0 /* ICETutorialController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ICETutorialController_iPhone.xib; sourceTree = "<group>"; };
+		E97B2F2819CD188F00D902C0 /* CheYouRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouRegisterViewController.h; sourceTree = "<group>"; };
+		E97B2F2919CD188F00D902C0 /* CheYouRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouRegisterViewController.m; sourceTree = "<group>"; };
+		E97B2F2B19CD1D3E00D902C0 /* CheYouSetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetPwdViewController.h; sourceTree = "<group>"; };
+		E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetPwdViewController.m; sourceTree = "<group>"; };
+		E97B2F2E19CD21C500D902C0 /* CheYouSetInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetInfoViewController.h; sourceTree = "<group>"; };
+		E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSetInfoViewController.m; sourceTree = "<group>"; };
 		E97B4A1D19C7E317009B5E36 /* CheYouDianzanViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouDianzanViewCell.h; sourceTree = "<group>"; };
 		E97B4A1E19C7E317009B5E36 /* CheYouDianzanViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouDianzanViewCell.m; sourceTree = "<group>"; };
 		E97C562819C53522003AB1B9 /* CheYouCommentTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouCommentTopViewCell.h; sourceTree = "<group>"; };
@@ -622,6 +631,12 @@
 				E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */,
 				E953C5DA19CC43A900C0510F /* CheYouLoginCheckViewController.h */,
 				E953C5DB19CC43A900C0510F /* CheYouLoginCheckViewController.m */,
+				E97B2F2819CD188F00D902C0 /* CheYouRegisterViewController.h */,
+				E97B2F2919CD188F00D902C0 /* CheYouRegisterViewController.m */,
+				E97B2F2B19CD1D3E00D902C0 /* CheYouSetPwdViewController.h */,
+				E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */,
+				E97B2F2E19CD21C500D902C0 /* CheYouSetInfoViewController.h */,
+				E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */,
 				E981F9E919AC323F007BD2DE /* Images.xcassets */,
 				E981F9D819AC323F007BD2DE /* Supporting Files */,
 			);
@@ -819,12 +834,14 @@
 				E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */,
 				E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */,
 				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
+				E97B2F3019CD21C500D902C0 /* CheYouSetInfoViewController.m in Sources */,
 				E9617A8219B81740000543D2 /* MJPhotoToolbar.m in Sources */,
 				E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */,
 				E9617A8719B81740000543D2 /* SDWebImageCompat.m in Sources */,
 				E9617A7C19B81740000543D2 /* MBProgressHUD.m in Sources */,
 				E9617A8319B81740000543D2 /* MJPhotoView.m in Sources */,
 				E9617A4019B7FAAC000543D2 /* UzysGroupPickerViewController.m in Sources */,
+				E97B2F2D19CD1D3E00D902C0 /* CheYouSetPwdViewController.m in Sources */,
 				E9617A4119B7FAAC000543D2 /* UzysGroupViewCell.m in Sources */,
 				E978F86119C91B8500436F09 /* CheYouSetViewController.m in Sources */,
 				E9617A8C19B81740000543D2 /* SDWebImageManager.m in Sources */,
@@ -853,6 +870,7 @@
 				E911674619BB107D007EA117 /* UIScrollView+MJRefresh.m in Sources */,
 				E911674519BB107D007EA117 /* UIScrollView+MJExtension.m in Sources */,
 				E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */,
+				E97B2F2A19CD188F00D902C0 /* CheYouRegisterViewController.m in Sources */,
 				E9F9DC5719B708A000401C35 /* UIImageExt.m in Sources */,
 				E9617A9219B81740000543D2 /* UIImageView+MJWebCache.m in Sources */,
 				E9617A0719B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.m in Sources */,
