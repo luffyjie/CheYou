@@ -64,6 +64,7 @@
     [self.viewController setCommonPageSubTitleStyle:subStyle];
     [self.viewController setCommonPageDescriptionStyle:descStyle];
     __unsafe_unretained typeof(self) weakSelf = self;
+    [self.viewController stopScrolling];
     // Set button 1 action.
     [self.viewController setButton1Block:^(UIButton *button){
         [weakSelf performSegueWithIdentifier:@"login_segue" sender:weakSelf];
@@ -71,8 +72,7 @@
     
     // Set button 2 action, stop the scrolling.
     [self.viewController setButton2Block:^(UIButton *button){
-        [weakSelf performSegueWithIdentifier:@"register_segue" sender:weakSelf];        
-//        [weakSelf.viewController stopScrolling];
+        [weakSelf performSegueWithIdentifier:@"register_segue" sender:weakSelf];
     }];
     
     // Run it.
