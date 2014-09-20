@@ -69,7 +69,6 @@
                 self.timeLabel.text= strTime;
             });
             timeout--;
-            
         }  
     });  
     dispatch_resume(_timer);

@@ -18,11 +18,12 @@
                     <connections>
                         <segue destination="PFZ-3a-WmH" kind="push" identifier="login_segue" id="cKp-9r-E4I"/>
                         <segue destination="IeX-nd-ceS" kind="push" identifier="register_segue" id="hMq-hN-lh4"/>
+                        <segue destination="dGi-3X-pDZ" kind="modal" identifier="me_sgeue" modalTransitionStyle="crossDissolve" id="7lY-M2-WHd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpt-v5-Ejv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2631" y="174"/>
+            <point key="canvasLocation" x="-2677" y="156"/>
         </scene>
         <!--Che You Login Check View Controller - 使用手机号登录-->
         <scene sceneID="baL-jC-bPr">
@@ -112,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKH-9n-k3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2058" y="-114"/>
+            <point key="canvasLocation" x="-2106" y="-418"/>
         </scene>
         <!--Che You Register View Controller - 验证手机（1/3）-->
         <scene sceneID="Cja-4s-BHi">
@@ -377,7 +378,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jmu-hp-F5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1439" y="-114"/>
+            <point key="canvasLocation" x="-1329" y="-204"/>
         </scene>
         <!--Che You Publish View Controller-->
         <scene sceneID="i5G-VC-Pbr">
@@ -1439,7 +1440,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kXv-Zs-6m3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3103" y="162"/>
+            <point key="canvasLocation" x="-3141" y="156"/>
         </scene>
     </scenes>
     <resources>
@@ -1461,6 +1462,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="7lY-M2-WHd"/>
         <segue reference="sBe-fT-Yqq"/>
     </inferredMetricsTieBreakers>
 </document>

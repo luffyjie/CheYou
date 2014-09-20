@@ -92,6 +92,13 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (YES) {
+//        [self performSegueWithIdentifier:@"me_sgeue" sender:self];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
