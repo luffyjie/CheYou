@@ -11,6 +11,8 @@
 @interface CheYouSetPwdViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
 @property (weak, nonatomic) IBOutlet UITextField *yzmText;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -31,19 +33,47 @@
     self.pwdText.returnKeyType = UIReturnKeyDone;
     self.pwdText.secureTextEntry = YES;
     self.yzmText.keyboardType = UIKeyboardTypeNumberPad;
+    //发送验证码按钮
+//    self.sendButton.enabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     [self.pwdText becomeFirstResponder];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)timeShow
+{
+    __block int timeout=60; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout<=0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.timeLabel.text= @"";
+                self.sendButton.enabled = YES;
+            });
+        }else{
+            NSString *strTime = [NSString stringWithFormat:@"%.2d秒后重发验证码", timeout];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.timeLabel.text= strTime;
+            });
+            timeout--;
+            
+        }  
+    });  
+    dispatch_resume(_timer);
+
 }
 
 #pragma UITextFeild 委托
@@ -57,9 +87,7 @@
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
             NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            
             [alert show];
             [self.pwdText becomeFirstResponder];
             return FALSE;
@@ -74,7 +102,8 @@
 #pragma  重发验证码按钮
 
 - (IBAction)sendAction:(id)sender {
-    
+    self.sendButton.enabled = NO;
+    [self timeShow];
 }
 
 #pragma 导航按钮
@@ -86,7 +115,16 @@
 
 - (IBAction)nextAction:(id)sender {
     
-      [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
+    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"密码为空或验证码错误！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
 }
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheYouSetInfoViewController : UIViewController
+@interface CheYouSetInfoViewController : UIViewController <UITextFieldDelegate>
 
 @end

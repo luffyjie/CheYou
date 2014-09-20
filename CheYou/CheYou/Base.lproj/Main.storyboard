@@ -191,19 +191,25 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wQV-rp-KEO">
-                                        <rect key="frame" x="58" y="41" width="190" height="38"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wQV-rp-KEO">
+                                        <rect key="frame" x="58" y="38" width="190" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="重发验证码" backgroundImage="login">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="获取验证码" backgroundImage="login">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="sendAction:" destination="3pX-ak-Oj2" eventType="touchDown" id="Y8G-hj-acn"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DkG-cS-VvC">
+                                        <rect key="frame" x="178" y="10" width="132" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -245,6 +251,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="pwdText" destination="gm2-xC-TxP" id="sjd-EQ-G5b"/>
+                        <outlet property="sendButton" destination="wQV-rp-KEO" id="sll-g1-rXv"/>
+                        <outlet property="timeLabel" destination="DkG-cS-VvC" id="1Me-se-Hym"/>
                         <outlet property="yzmText" destination="vsy-51-bMx" id="sC2-GQ-2hg"/>
                         <segue destination="Beq-xK-Cge" kind="push" identifier="reginfo_segue" id="mX2-zx-zJc"/>
                     </connections>
@@ -305,6 +313,9 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="photoButton:" destination="Beq-xK-Cge" eventType="touchDown" id="HHi-35-pMw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人图像" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eod-vp-lW1">
                                 <rect key="frame" x="130" y="87" width="60" height="21"/>
@@ -318,6 +329,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="areaButton:" destination="Beq-xK-Cge" eventType="touchDown" id="fb1-iI-sP1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地区" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OvE-rn-xtY">
                                 <rect key="frame" x="10" y="194" width="42" height="21"/>
@@ -335,6 +349,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nameText" destination="pl2-s8-nMz" id="5Vx-oy-RiS"/>
+                        <outlet property="photoView" destination="A4x-rh-cTf" id="F2m-NB-WQi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8N-xm-1LS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
