@@ -7,6 +7,7 @@
 //
 
 #import "CheYouLoginCheckViewController.h"
+#import "AFNetworking.h"
 
 @interface CheYouLoginCheckViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneText;
@@ -55,18 +56,39 @@
     if ([string isEqualToString:@"\n"]) {
         // Be sure to test for equality using the "isEqualToString" message
         [self.pwdText resignFirstResponder];
-        // Return FALSE so that the final '\n' character doesn't get added
+        if (self.phoneText.text.length <1) {
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"手机号不能为空", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+            [self.phoneText becomeFirstResponder];
+            return false;
+        }
         if (self.pwdText.text.length <4) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
             NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            
             [alert show];
             [self.pwdText becomeFirstResponder];
-            return FALSE;
+            return false;
         }
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSDictionary *parameters = @{@"lng0": @"120.124860",@"lng1": @"120.138812",@"lat0": @"30.298737",@"lat1": @"30.304822"};
+        [manager POST:@"http://114.215.187.69/citypin/rs/park/search/round/area" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        NSLog(@"JSON: %@", responseObject);
+            [self performSegueWithIdentifier:@"home_segue" sender:self];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //        NSLog(@"Error: %@", error);
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+        }];
 
         return FALSE;
     }
@@ -104,9 +126,7 @@
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"手机号不能为空", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        
         [alert show];
         [self.phoneText becomeFirstResponder];
         return;
@@ -115,15 +135,26 @@
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        
         [alert show];
         [self.pwdText becomeFirstResponder];
         return;
     }
-    
-    [self performSegueWithIdentifier:@"home_segue" sender:self];
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"lng0": @"120.124860",@"lng1": @"120.138812",@"lat0": @"30.298737",@"lat1": @"30.304822"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/park/search/round/area" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+        [self performSegueWithIdentifier:@"home_segue" sender:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end
