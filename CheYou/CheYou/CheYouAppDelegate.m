@@ -54,9 +54,9 @@
 //    [self.window makeKeyAndVisible];
 //    [self.window bringSubviewToFront:scroll];
 
-    welcomeImage.alpha = 1.0f;
+    welcomeImage.alpha = 8.0f;
     [UIView beginAnimations:@"fadeIn" context:nil];
-    [UIView setAnimationDuration: 5.0f];
+    [UIView setAnimationDuration: 2.0f];
     welcomeImage.alpha = 0.0f;
     [UIView commitAnimations];
     
