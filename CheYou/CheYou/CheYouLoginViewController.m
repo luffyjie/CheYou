@@ -95,7 +95,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     if (YES) {
-//        [self performSegueWithIdentifier:@"me_sgeue" sender:self];
+        [self performSegueWithIdentifier:@"me_sgeue" sender:self];
     }
 }
 

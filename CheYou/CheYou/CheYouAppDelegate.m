@@ -11,9 +11,22 @@
 
 @implementation CheYouAppDelegate
 
+{
+    UIImageView *welcomeImage;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //显示window 为了显示程序欢迎界面
+    [self.window makeKeyAndVisible];
+    
+    //程序欢迎图片
+    welcomeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"welcome"]];
+    welcomeImage.frame = CGRectMake(0, 0,self.window.bounds.size.width, self.window.bounds.size.height);
+    //very good 用于屏蔽当前自己的点击事件,防止下层视图
+    [self.window  addSubview:welcomeImage];
+    
     //设置全局导航栏的背景颜色
     [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x37D077]];
    //设置导航栏自定义的按钮的颜色
@@ -41,6 +54,12 @@
 //    [self.window makeKeyAndVisible];
 //    [self.window bringSubviewToFront:scroll];
 
+    welcomeImage.alpha = 1.0f;
+    [UIView beginAnimations:@"fadeIn" context:nil];
+    [UIView setAnimationDuration: 5.0f];
+    welcomeImage.alpha = 0.0f;
+    [UIView commitAnimations];
+    
     return YES;
 }
 
