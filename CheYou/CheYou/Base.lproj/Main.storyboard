@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpt-v5-Ejv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2677" y="156"/>
+            <point key="canvasLocation" x="-2628" y="148"/>
         </scene>
         <!--Che You Login Check View Controller - 使用手机号登录-->
         <scene sceneID="baL-jC-bPr">
@@ -362,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8N-xm-1LS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1135" y="658"/>
+            <point key="canvasLocation" x="-787" y="498"/>
         </scene>
         <!--Che You Tab Bar View Controller-->
         <scene sceneID="W71-ds-An0">
@@ -1174,6 +1174,7 @@
                     <connections>
                         <outlet property="logbutton" destination="qeN-YJ-dno" id="sQ1-cY-n8v"/>
                         <segue destination="upX-KC-G9E" kind="push" identifier="geren_segue" id="EJh-Qc-OzS"/>
+                        <segue destination="tSV-MR-17P" kind="push" identifier="backlogin_segue" id="l2n-kK-D2S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oV-Lz-g4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1468,6 +1469,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="7lY-M2-WHd"/>
+        <segue reference="l2n-kK-D2S"/>
         <segue reference="sBe-fT-Yqq"/>
     </inferredMetricsTieBreakers>
 </document>

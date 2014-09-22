@@ -146,6 +146,9 @@
     NSDictionary *parameters = @{@"lng0": @"120.124860",@"lng1": @"120.138812",@"lat0": @"30.298737",@"lat1": @"30.304822"};
     [manager POST:@"http://114.215.187.69/citypin/rs/park/search/round/area" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"JSON: %@", responseObject);
+        //缓存用户信息到本地
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:self.phoneText.text forKey:@"phoneNum"];
         [self performSegueWithIdentifier:@"home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        NSLog(@"Error: %@", error);

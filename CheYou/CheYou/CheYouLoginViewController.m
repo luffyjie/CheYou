@@ -94,7 +94,11 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    if (YES) {
+    //缓存用户信息到本地
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    NSString *myString = [userDefaultes stringForKey:@"phoneNum"];
+    NSLog(@"%@",myString);
+    if (myString) {
         [self performSegueWithIdentifier:@"me_sgeue" sender:self];
     }
 }
