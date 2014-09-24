@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CheYouSetPwdViewController : UIViewController <UITextFieldDelegate>
+@property (nonatomic, strong) NSString *phoneNum;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CheYouSetPwdViewController.h"
+#import "CCPRestSDK.h"
 
 @interface CheYouSetPwdViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
@@ -17,7 +18,9 @@
 @end
 
 @implementation CheYouSetPwdViewController
-
+{
+    NSString *userYzm;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -98,9 +101,19 @@
 }
 
 
-#pragma  重发验证码按钮
+#pragma  发验证码按钮
 
 - (IBAction)sendAction:(id)sender {
+    //ip格式如下，不需要带https://
+    userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
+                     arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
+    CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"sandboxapp.cloopen.com" andserverPort:8883];
+    [ccpRestSdk setApp_ID:@"8a48b551488d07a80148a8096bd70bcc"];
+    [ccpRestSdk enableLog:YES];
+    [ccpRestSdk setAccountWithAccountSid: @"8a48b551488d07a80148a807b2dd0bca" andAccountToken:@"95d9d8e056854594a6fea59996ae01ca"];
+    NSArray*  arr = [NSArray arrayWithObjects:userYzm, @"30", nil];
+    NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"1" andDatas:arr];
+    NSLog(@"dict----%@",[dict description]);
     self.sendButton.enabled = NO;
     [self timeShow];
 }
@@ -116,14 +129,28 @@
     
     if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码为空或验证码错误！", nil);
+        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         return;
     }
-    
+    if (![userYzm isEqualToString:self.yzmText.text]) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"验证码错误！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
+}
+
+-(int)getRandomNumber:(int)from to:(int)to
+{
+    
+    return (int)(from + (arc4random() % (to - from + 1)));
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CheYouRegisterViewController.h"
+#import "CheYouSetPwdViewController.h"
 
 @interface CheYouRegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneText;
@@ -63,5 +64,14 @@
     [self performSegueWithIdentifier:@"duanx_segue" sender:self];
 }
 
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"duanx_segue"]) {
+        CheYouSetPwdViewController *setPwdView = (CheYouSetPwdViewController*)segue.destinationViewController;
+        setPwdView.phoneNum = self.phoneText.text;
+    }
+}
 
 @end
