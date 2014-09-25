@@ -12,6 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "PRButton.h"
 #import "LuJieCommon.h"
+#import "UpYun.h"
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
@@ -135,7 +136,24 @@
 }
 
 - (IBAction)finishAction:(id)sender {
-    
+    UpYun *uy = [[UpYun alloc] init];
+    uy.successBlocker = ^(id data)
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"---%@",data);
+    };
+    uy.failBlocker = ^(NSError * error)
+    {
+        NSString *message = [error.userInfo objectForKey:@"message"];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"%@",error);
+    };
+    /**
+     *	@brief	根据 UIImage 上传
+     */
+    [uy uploadFile:self.photoView.image saveKey:[self getSaveKey]];
 }
 
 #pragma 个人设置
@@ -387,7 +405,7 @@
 {
 	if (component == PROVINCE_COMPONENT) {
         selectedProvince = [province objectAtIndex: row];
-        NSDictionary *tmp = [NSDictionary dictionaryWithDictionary: [areaDic objectForKey: [NSString stringWithFormat:@"%d", row]]];
+        NSDictionary *tmp = [NSDictionary dictionaryWithDictionary: [areaDic objectForKey: [NSString stringWithFormat:@"%ld", (long)row]]];
         NSDictionary *dic = [NSDictionary dictionaryWithDictionary: [tmp objectForKey: selectedProvince]];
         NSArray *cityArray = [dic allKeys];
         NSArray *sortedArray = [cityArray sortedArrayUsingComparator: ^(id obj1, id obj2) {
@@ -419,7 +437,7 @@
         
     }
     else if (component == CITY_COMPONENT) {
-        NSString *provinceIndex = [NSString stringWithFormat: @"%d", [province indexOfObject: selectedProvince]];
+        NSString *provinceIndex = [NSString stringWithFormat: @"%lu", (unsigned long)[province indexOfObject: selectedProvince]];
         NSDictionary *tmp = [NSDictionary dictionaryWithDictionary: [areaDic objectForKey: provinceIndex]];
         NSDictionary *dic = [NSDictionary dictionaryWithDictionary: [tmp objectForKey: selectedProvince]];
         NSArray *dicKeyArray = [dic allKeys];
@@ -519,6 +537,46 @@
     }
     NSString *showMsg = [NSString stringWithFormat: @"%@ %@ %@", provinceStr, cityStr, districtStr];
     self.areaLabel.text =showMsg;
+}
+
+#pragma upyun
+
+-(NSString * )getSaveKey {
+    /**
+     *	@brief	方式1 由开发者生成saveKey
+     */
+    NSDate *d = [NSDate date];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.jpg",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
+    
+    /**
+     *	@brief	方式2 由服务器生成saveKey
+     */
+    //    return [NSString stringWithFormat:@"/{year}/{mon}/{filename}{.suffix}"];
+    
+    /**
+     *	@brief	更多方式 参阅 http://wiki.upyun.com/index.php?title=Policy_%E5%86%85%E5%AE%B9%E8%AF%A6%E8%A7%A3
+     */
+    
+}
+
+- (int)getYear:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSYearCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger year=[comps year];
+    return (int)year;
+}
+
+- (int)getMonth:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger month = [comps month];
+    return (int)month;
 }
 
 @end

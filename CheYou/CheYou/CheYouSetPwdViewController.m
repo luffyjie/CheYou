@@ -107,6 +107,7 @@
     //ip格式如下，不需要带https://
     userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
                      arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
+    NSLog(@"YZM--- %@",userYzm);
     CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"sandboxapp.cloopen.com" andserverPort:8883];
     [ccpRestSdk setApp_ID:@"8a48b551488d07a80148a8096bd70bcc"];
     [ccpRestSdk enableLog:YES];
