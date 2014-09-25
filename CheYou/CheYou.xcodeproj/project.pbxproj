@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		678A64372E514F4EADD3AAC3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD9C6B95A44433846B649B /* libPods.a */; };
 		E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */; };
 		E911674019BB107D007EA117 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E911673019BB107D007EA117 /* MJRefresh.bundle */; };
 		E911674119BB107D007EA117 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E911673319BB107D007EA117 /* MJRefreshBaseView.m */; };
@@ -17,6 +16,9 @@
 		E911674519BB107D007EA117 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E911673B19BB107D007EA117 /* UIScrollView+MJExtension.m */; };
 		E911674619BB107D007EA117 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E911673D19BB107D007EA117 /* UIScrollView+MJRefresh.m */; };
 		E911674719BB107D007EA117 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E911673F19BB107D007EA117 /* UIView+MJExtension.m */; };
+		E92C577619D46AF200B144F0 /* UpYun.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C577019D46AF200B144F0 /* UpYun.m */; };
+		E92C577719D46AF200B144F0 /* NSData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C577519D46AF200B144F0 /* NSData+Utils.m */; };
+		E92C577919D46C8800B144F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E92C577819D46C8800B144F0 /* libPods.a */; };
 		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
 		E9375F3F19D31B8A00053F0B /* libCCPRestSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F3D19D31B8A00053F0B /* libCCPRestSDK.a */; };
@@ -98,7 +100,6 @@
 		E981F9E519AC323F007BD2DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E981F9E319AC323F007BD2DE /* Main.storyboard */; };
 		E981F9E819AC323F007BD2DE /* CheYouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E981F9E719AC323F007BD2DE /* CheYouViewController.m */; };
 		E981F9EA19AC323F007BD2DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E981F9E919AC323F007BD2DE /* Images.xcassets */; };
-		E981F9F119AC323F007BD2DE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9F019AC323F007BD2DE /* XCTest.framework */; };
 		E981F9F219AC323F007BD2DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D119AC323F007BD2DE /* Foundation.framework */; };
 		E981F9F319AC323F007BD2DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E981F9D519AC323F007BD2DE /* UIKit.framework */; };
 		E981F9FB19AC323F007BD2DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E981F9F919AC323F007BD2DE /* InfoPlist.strings */; };
@@ -135,7 +136,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		61AD9C6B95A44433846B649B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		721A5254B50F434AA1B75A09 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTieTaoViewController.h; sourceTree = "<group>"; };
 		E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTieTaoViewController.m; sourceTree = "<group>"; };
@@ -155,6 +155,12 @@
 		E911673D19BB107D007EA117 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		E911673E19BB107D007EA117 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		E911673F19BB107D007EA117 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		E92C576F19D46AF200B144F0 /* UpYun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpYun.h; sourceTree = "<group>"; };
+		E92C577019D46AF200B144F0 /* UpYun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpYun.m; sourceTree = "<group>"; };
+		E92C577119D46AF200B144F0 /* UpYunSDK2.0-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UpYunSDK2.0-Prefix.pch"; sourceTree = "<group>"; };
+		E92C577419D46AF200B144F0 /* NSData+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Utils.h"; sourceTree = "<group>"; };
+		E92C577519D46AF200B144F0 /* NSData+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Utils.m"; sourceTree = "<group>"; };
+		E92C577819D46C8800B144F0 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		E93648D419AF336300CE5542 /* TuCao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuCao.h; sourceTree = "<group>"; };
 		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
 		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
@@ -295,7 +301,6 @@
 		E981F9E719AC323F007BD2DE /* CheYouViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheYouViewController.m; sourceTree = "<group>"; };
 		E981F9E919AC323F007BD2DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E981F9EF19AC323F007BD2DE /* CheYouTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheYouTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E981F9F019AC323F007BD2DE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E981F9F819AC323F007BD2DE /* CheYouTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheYouTests-Info.plist"; sourceTree = "<group>"; };
 		E981F9FA19AC323F007BD2DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E981F9FC19AC323F007BD2DE /* CheYouTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheYouTests.m; sourceTree = "<group>"; };
@@ -334,13 +339,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92C577919D46C8800B144F0 /* libPods.a in Frameworks */,
 				E9375F4319D31D3600053F0B /* SystemConfiguration.framework in Frameworks */,
 				E9375F4119D31D2400053F0B /* libz.1.2.5.dylib in Frameworks */,
 				E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */,
 				E981F9D419AC323F007BD2DE /* CoreGraphics.framework in Frameworks */,
 				E981F9D619AC323F007BD2DE /* UIKit.framework in Frameworks */,
 				E981F9D219AC323F007BD2DE /* Foundation.framework in Frameworks */,
-				678A64372E514F4EADD3AAC3 /* libPods.a in Frameworks */,
 				E9375F3F19D31B8A00053F0B /* libCCPRestSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,7 +354,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E981F9F119AC323F007BD2DE /* XCTest.framework in Frameworks */,
 				E981F9F319AC323F007BD2DE /* UIKit.framework in Frameworks */,
 				E981F9F219AC323F007BD2DE /* Foundation.framework in Frameworks */,
 			);
@@ -379,6 +383,34 @@
 				E911673F19BB107D007EA117 /* UIView+MJExtension.m */,
 			);
 			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		E92C576319D469F200B144F0 /* Upyun */ = {
+			isa = PBXGroup;
+			children = (
+				E92C576F19D46AF200B144F0 /* UpYun.h */,
+				E92C577019D46AF200B144F0 /* UpYun.m */,
+				E92C577119D46AF200B144F0 /* UpYunSDK2.0-Prefix.pch */,
+				E92C577219D46AF200B144F0 /* Utils */,
+			);
+			name = Upyun;
+			sourceTree = "<group>";
+		};
+		E92C577219D46AF200B144F0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E92C577319D46AF200B144F0 /* Data */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E92C577319D46AF200B144F0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E92C577419D46AF200B144F0 /* NSData+Utils.h */,
+				E92C577519D46AF200B144F0 /* NSData+Utils.m */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E93648D319AF324700CE5542 /* Model */ = {
@@ -586,6 +618,7 @@
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E92C576319D469F200B144F0 /* Upyun */,
 				E9375F3C19D31B6C00053F0B /* MS */,
 				E9B49D2719CAC49E00F6F562 /* Welcome */,
 				E976FBB319C9BED30019646A /* Circleimage */,
@@ -615,14 +648,13 @@
 		E981F9D019AC323F007BD2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E92C577819D46C8800B144F0 /* libPods.a */,
 				E9375F4219D31D3600053F0B /* SystemConfiguration.framework */,
 				E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */,
 				E93AD96219B2CCBB0081259E /* QuartzCore.framework */,
 				E981F9D119AC323F007BD2DE /* Foundation.framework */,
 				E981F9D319AC323F007BD2DE /* CoreGraphics.framework */,
 				E981F9D519AC323F007BD2DE /* UIKit.framework */,
-				E981F9F019AC323F007BD2DE /* XCTest.framework */,
-				61AD9C6B95A44433846B649B /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -881,6 +913,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92C577719D46AF200B144F0 /* NSData+Utils.m in Sources */,
 				E9617A0819B7F95F000543D2 /* easing.c in Sources */,
 				E9617A8D19B81740000543D2 /* SDWebImagePrefetcher.m in Sources */,
 				E9617A8119B81740000543D2 /* MJPhotoProgressView.m in Sources */,
@@ -892,6 +925,7 @@
 				E9617A9019B81740000543D2 /* UIImage+MultiFormat.m in Sources */,
 				E964151119B55D8900FD2A08 /* CheYouDucheViewController.m in Sources */,
 				E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */,
+				E92C577619D46AF200B144F0 /* UpYun.m in Sources */,
 				E97B4A1F19C7E317009B5E36 /* CheYouDianzanViewCell.m in Sources */,
 				E9617A8819B81740000543D2 /* SDWebImageDecoder.m in Sources */,
 				E9617A8619B81740000543D2 /* SDImageCache.m in Sources */,
@@ -1084,6 +1118,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1104,6 +1139,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
