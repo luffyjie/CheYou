@@ -126,22 +126,22 @@
 
 - (IBAction)nextAction:(id)sender {
     
-//    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
-//        NSString *title = NSLocalizedString(@"提示", nil);
-//        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
-//        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-//    if (![userYzm isEqualToString:self.yzmText.text]) {
-//        NSString *title = NSLocalizedString(@"提示", nil);
-//        NSString *message = NSLocalizedString(@"验证码错误！", nil);
-//        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
+    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    if (![userYzm isEqualToString:self.yzmText.text]) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"验证码错误！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     //本地保存用户秘密
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];

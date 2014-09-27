@@ -286,7 +286,7 @@
 
 // Setup the layers with the page index.
 - (void)setLayersPicturesWithIndex:(NSInteger)index{
-    _currentPageIndex = index;
+    _currentPageIndex = (int)index;
     [self setLayersPrimaryAlphaWithPageIndex:index];
     [self setFrontLayerPictureWithPageIndex:index];
     [self setBackLayerPictureWithPageIndex:index];

@@ -23,20 +23,20 @@
     // Do any additional setup after loading the view.
     //欢迎页
     // Init the pages texts, and pictures.
-    ICETutorialPage *layer1 = [[ICETutorialPage alloc] initWithSubTitle:@"杭州"
-                                                            description:@"这一夜"
+    ICETutorialPage *layer1 = [[ICETutorialPage alloc] initWithSubTitle:@""
+                                                            description:@""
                                                             pictureName:@"tutorial_background_00@2x.jpg"];
-    ICETutorialPage *layer2 = [[ICETutorialPage alloc] initWithSubTitle:@"北京"
-                                                            description:@"刀郎的世纪"
+    ICETutorialPage *layer2 = [[ICETutorialPage alloc] initWithSubTitle:@""
+                                                            description:@""
                                                             pictureName:@"tutorial_background_01@2x.jpg"];
-    ICETutorialPage *layer3 = [[ICETutorialPage alloc] initWithSubTitle:@"上海"
-                                                            description:@"我在这里路过"
+    ICETutorialPage *layer3 = [[ICETutorialPage alloc] initWithSubTitle:@""
+                                                            description:@""
                                                             pictureName:@"tutorial_background_02@2x.jpg"];
-    ICETutorialPage *layer4 = [[ICETutorialPage alloc] initWithSubTitle:@"广州"
-                                                            description:@"这里有我和你"
+    ICETutorialPage *layer4 = [[ICETutorialPage alloc] initWithSubTitle:@""
+                                                            description:@""
                                                             pictureName:@"tutorial_background_03@2x.jpg"];
-    ICETutorialPage *layer5 = [[ICETutorialPage alloc] initWithSubTitle:@"深圳"
-                                                            description:@"最前沿"
+    ICETutorialPage *layer5 = [[ICETutorialPage alloc] initWithSubTitle:@""
+                                                            description:@""
                                                             pictureName:@"tutorial_background_04@2x.jpg"];
     // Set the common style for SubTitles and Description (can be overrided on each page).
     ICETutorialLabelStyle *subStyle = [[ICETutorialLabelStyle alloc] init];
