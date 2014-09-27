@@ -15,6 +15,7 @@
 #import "MJPhoto.h"
 #import "MJRefresh.h"
 #import "CheYouCommentViewController.h"
+#import "AFNetworking.h"
 
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
@@ -40,6 +41,23 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //刷新获取数据
     [self refreshConfig];
+    //第一次获取数据
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    NSString *userArea = [userDefaults stringForKey:@"userArea"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"location": @"西湖区", @"starttime": @"20140901", @"page.page": @"1", @"page.size:": @"10",
+                                 @"page.sort:": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +121,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:overbutton];
-    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
+    [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:(int)indexPath.row];
     return tucaoCell;
 }
 
