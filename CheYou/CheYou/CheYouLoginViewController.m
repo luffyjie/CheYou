@@ -94,10 +94,10 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //缓存用户信息到本地
-    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    NSString *myString = [userDefaultes stringForKey:@"userPhone"];
-    if (myString) {
+    //用户登录过直接跳转首页
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userOut = [userDefaults integerForKey:@"userOut"];
+    if (userOut == 0) {
         [self performSegueWithIdentifier:@"me_sgeue" sender:self];
     }
 }

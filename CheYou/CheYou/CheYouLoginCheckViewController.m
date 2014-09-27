@@ -80,6 +80,10 @@
         NSString *userPwd = [userDefaults stringForKey:@"userPhone"];
         if (userPhone && userPwd) {
             if ([userPwd isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
+                //设置用户登录状态
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setInteger:0 forKey:@"userOut"];
+                [userDefaults synchronize];
                 [self performSegueWithIdentifier:@"home_segue" sender:self];
                 return FALSE;
             }
@@ -93,6 +97,8 @@
             //缓存用户手机号，密码到本地
             [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
             [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
+            [userDefaults setInteger:0 forKey:@"userOut"];
+            [userDefaults synchronize];
             [self performSegueWithIdentifier:@"home_segue" sender:self];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -155,9 +161,14 @@
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
-    NSString *userPwd = [userDefaults stringForKey:@"userPhone"];
-    if (userPhone && userPwd) {
-        if ([userPwd isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
+    NSString *userPwd = [userDefaults stringForKey:@"userPwd"];
+    NSLog(@"%@,%@",userPhone,userPwd);
+    if (userPhone.length>1 && userPwd.length>1) {
+        if ([userPhone isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
+            //设置用户登录状态
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setInteger:0 forKey:@"userOut"];
+            [userDefaults synchronize];
             [self performSegueWithIdentifier:@"home_segue" sender:self];
             return;
         }
@@ -171,6 +182,10 @@
         //缓存用户手机号，密码到本地
         [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
         [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
+        //设置用户登录状态
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setInteger:0 forKey:@"userOut"];
+        [userDefaults synchronize];
         [self performSegueWithIdentifier:@"home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

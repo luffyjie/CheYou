@@ -49,7 +49,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSDictionary *parameters = @{@"location": @"西湖区", @"starttime": @"20140901", @"page.page": @"1", @"page.size:": @"10",
                                  @"page.sort:": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"JSON: %@", responseObject); 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);

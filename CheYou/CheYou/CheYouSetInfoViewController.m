@@ -171,8 +171,6 @@
     [userDefaults setObject:name forKey:@"userName"];
     [userDefaults setObject:self.areaLabel.text forKey:@"useraArea"];
     [userDefaults setObject:photoUrl forKey:@"photoUrl"];
-    
-    
     NSLog(@"%@ %@ %@ %@ %@ %@",[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userPwd"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userName"],[userDefaults stringForKey:@"photoUrl"],[userDefaults stringForKey:@"useraArea"]);
     //注册用户
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -182,6 +180,10 @@
                                  @"hpic":[userDefaults stringForKey:@"photoUrl"], @"location":[userDefaults stringForKey:@"useraArea"]};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
+        //设置用户登录状态
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setInteger:0 forKey:@"userOut"];
+        [userDefaults synchronize];
         [self performSegueWithIdentifier:@"register_home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
