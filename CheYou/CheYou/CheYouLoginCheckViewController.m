@@ -162,7 +162,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
     NSString *userPwd = [userDefaults stringForKey:@"userPwd"];
-    NSLog(@"%@,%@",userPhone,userPwd);
     if (userPhone.length>1 && userPwd.length>1) {
         if ([userPhone isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
             //设置用户登录状态

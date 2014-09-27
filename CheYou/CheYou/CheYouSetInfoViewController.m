@@ -169,15 +169,14 @@
     //缓存用户信息到本地
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:name forKey:@"userName"];
-    [userDefaults setObject:self.areaLabel.text forKey:@"useraArea"];
     [userDefaults setObject:photoUrl forKey:@"photoUrl"];
-    NSLog(@"%@ %@ %@ %@ %@ %@",[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userPwd"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userName"],[userDefaults stringForKey:@"photoUrl"],[userDefaults stringForKey:@"useraArea"]);
+    NSLog(@"%@ %@ %@ %@ %@ %@",[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userPwd"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userName"],[userDefaults stringForKey:@"photoUrl"],[userDefaults stringForKey:@"userArea"]);
     //注册用户
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"], @"passwd":[userDefaults stringForKey:@"userPwd"],
                                  @"phone":[userDefaults stringForKey:@"userPhone"], @"nkname":[userDefaults stringForKey:@"userName"],
-                                 @"hpic":[userDefaults stringForKey:@"photoUrl"], @"location":[userDefaults stringForKey:@"useraArea"]};
+                                 @"hpic":[userDefaults stringForKey:@"photoUrl"], @"location":[userDefaults stringForKey:@"userArea"]};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         //设置用户登录状态
@@ -575,8 +574,10 @@
     else if ([cityStr isEqualToString: districtStr]) {
         districtStr = @"";
     }
-    NSString *showMsg = [NSString stringWithFormat: @"%@-%@-%@", provinceStr, cityStr, districtStr];
-    self.areaLabel.text =showMsg;
+    self.areaLabel.text = [NSString stringWithFormat: @"%@-%@-%@", provinceStr, cityStr, districtStr];
+    //缓存用户信息到本地
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[NSString stringWithFormat: @"%@-%@", cityStr, districtStr] forKey:@"userArea"];
 }
 
 #pragma upyun
