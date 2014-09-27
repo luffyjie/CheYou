@@ -60,7 +60,9 @@
         [self.phoneText becomeFirstResponder];
         return;
     }
-    
+    //缓存用户手机号码到本地
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
     [self performSegueWithIdentifier:@"duanx_segue" sender:self];
 }
 

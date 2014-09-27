@@ -24,7 +24,8 @@
     //程序欢迎图片
     welcomeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"welcome"]];
     welcomeImage.frame = CGRectMake(0, 0,self.window.bounds.size.width, self.window.bounds.size.height);
-    //very good 用于屏蔽当前自己的点击事件,防止下层视图
+    //very good 用于屏蔽当前自己的点击事件,防止下层视图会响屏幕的点击
+    welcomeImage.userInteractionEnabled = YES;
     [self.window  addSubview:welcomeImage];
     
     //设置全局导航栏的背景颜色

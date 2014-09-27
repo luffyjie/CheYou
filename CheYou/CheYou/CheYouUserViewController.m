@@ -208,7 +208,7 @@
 }
 
 #pragma 生成吐槽的图片
--(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(int)row
+-(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(long)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     if (tucao.pic_urls.count == 1) {

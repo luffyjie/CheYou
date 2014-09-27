@@ -66,7 +66,8 @@
 - (IBAction)logOutButton:(id)sender {
     //缓存用户信息到本地
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:@"phoneNum"];
+    [userDefaults removeObjectForKey:@"userPhone"];
+    [userDefaults removeObjectForKey:@"userPwd"];
     [userDefaults synchronize];
     [self performSegueWithIdentifier:@"backlogin_segue" sender:self];
 }

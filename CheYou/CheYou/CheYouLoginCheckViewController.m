@@ -140,18 +140,26 @@
         [self.pwdText becomeFirstResponder];
         return;
     }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
+    NSString *userPwd = [userDefaults stringForKey:@"userPhone"];
+    if (userPhone && userPwd) {
+        if ([userPwd isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
+            [self performSegueWithIdentifier:@"home_segue" sender:self];
+        }
+    }
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"lng0": @"120.124860",@"lng1": @"120.138812",@"lat0": @"30.298737",@"lat1": @"30.304822"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/park/search/round/area" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-        //缓存用户信息到本地
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:self.phoneText.text forKey:@"phoneNum"];
+    NSDictionary *parameters = @{@"account": self.phoneText.text,@"passwd": self.pwdText.text};
+    [manager POST:@"http://114.215.187.69/citypin/rs/user/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        //缓存用户手机号，密码到本地
+        [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
+        [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
         [self performSegueWithIdentifier:@"home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
+        NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);

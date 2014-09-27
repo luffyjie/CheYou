@@ -76,7 +76,7 @@
     }];
     
     // Run it.
-    [self.viewController startScrolling];
+//    [self.viewController startScrolling];
     self.viewController.view.frame = self.view.frame;
     [self.view addSubview: self.viewController.view];
 }
@@ -96,7 +96,7 @@
 {
     //缓存用户信息到本地
     NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    NSString *myString = [userDefaultes stringForKey:@"phoneNum"];
+    NSString *myString = [userDefaultes stringForKey:@"userPhone"];
     if (myString) {
         [self performSegueWithIdentifier:@"me_sgeue" sender:self];
     }

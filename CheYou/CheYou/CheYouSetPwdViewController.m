@@ -102,12 +102,10 @@
 
 
 #pragma  发验证码按钮
-
 - (IBAction)sendAction:(id)sender {
     //ip格式如下，不需要带https://
     userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
                      arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
-    NSLog(@"YZM--- %@",userYzm);
     CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"sandboxapp.cloopen.com" andserverPort:8883];
     [ccpRestSdk setApp_ID:@"8a48b551488d07a80148a8096bd70bcc"];
     [ccpRestSdk enableLog:YES];
@@ -128,22 +126,25 @@
 
 - (IBAction)nextAction:(id)sender {
     
-    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    if (![userYzm isEqualToString:self.yzmText.text]) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"验证码错误！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
+//    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+//    if (![userYzm isEqualToString:self.yzmText.text]) {
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"验证码错误！", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
+//        return;
+//    }
+    //本地保存用户秘密
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
     [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
 }
 

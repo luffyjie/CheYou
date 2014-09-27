@@ -13,6 +13,7 @@
 #import "PRButton.h"
 #import "LuJieCommon.h"
 #import "UpYun.h"
+#import "AFNetworking.h"
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
@@ -38,6 +39,7 @@
     NSArray *city;
     NSArray *district;
     NSString *selectedProvince;
+    NSString *photoUrl;
 }
 
 - (void)viewDidLoad
@@ -50,9 +52,9 @@
     areapicker.delegate = self;
     areapicker.showsSelectionIndicator = YES;
     [areapicker selectRow: 0 inComponent: 0 animated: YES];
-    selectedProvince = [province objectAtIndex: 0];
     self.areaText.inputView = areapicker;
     self.areaText.inputAccessoryView = [self makeareaBarView];
+    selectedProvince = [province objectAtIndex: 0];
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@" "
@@ -136,24 +138,60 @@
 }
 
 - (IBAction)finishAction:(id)sender {
+    
+    //上传图片
     UpYun *uy = [[UpYun alloc] init];
-    uy.successBlocker = ^(id data)
-    {
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    NSString *url = [self getSaveKey];
+    [uy uploadFile:self.photoView.image saveKey:url];
+    photoUrl = [@"http://v0.api.upyun.com/cheyou01" stringByAppendingString:url];
+    
+    //验证昵称
+    NSString *name = [self.nameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (name.length <1) {
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"昵称不能为空", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+            [self.nameText becomeFirstResponder];
+            return;
+        }
+    //验证地区
+    if (self.areaLabel.text.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"地区不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
-        NSLog(@"---%@",data);
-    };
-    uy.failBlocker = ^(NSError * error)
-    {
-        NSString *message = [error.userInfo objectForKey:@"message"];
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [self.areaText becomeFirstResponder];
+        return;
+    }
+    //缓存用户信息到本地
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:name forKey:@"userName"];
+    [userDefaults setObject:self.areaLabel.text forKey:@"useraArea"];
+    [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+    
+    
+    NSLog(@"%@ %@ %@ %@ %@ %@",[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userPwd"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"userName"],[userDefaults stringForKey:@"photoUrl"],[userDefaults stringForKey:@"useraArea"]);
+    //注册用户
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"], @"passwd":[userDefaults stringForKey:@"userPwd"],
+                                 @"phone":[userDefaults stringForKey:@"userPhone"], @"nkname":[userDefaults stringForKey:@"userName"],
+                                 @"hpic":[userDefaults stringForKey:@"photoUrl"], @"location":[userDefaults stringForKey:@"useraArea"]};
+    [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        [self performSegueWithIdentifier:@"register_home_segue" sender:self];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络异常，注册失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
-        NSLog(@"%@",error);
-    };
-    /**
-     *	@brief	根据 UIImage 上传
-     */
-    [uy uploadFile:self.photoView.image saveKey:[self getSaveKey]];
+    }];
+    
 }
 
 #pragma 个人设置
@@ -535,7 +573,7 @@
     else if ([cityStr isEqualToString: districtStr]) {
         districtStr = @"";
     }
-    NSString *showMsg = [NSString stringWithFormat: @"%@ %@ %@", provinceStr, cityStr, districtStr];
+    NSString *showMsg = [NSString stringWithFormat: @"%@-%@-%@", provinceStr, cityStr, districtStr];
     self.areaLabel.text =showMsg;
 }
 
@@ -546,7 +584,7 @@
      *	@brief	方式1 由开发者生成saveKey
      */
     NSDate *d = [NSDate date];
-    return [NSString stringWithFormat:@"/%d/%d/%.0f.jpg",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.png",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
     
     /**
      *	@brief	方式2 由服务器生成saveKey
