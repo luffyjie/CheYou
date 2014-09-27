@@ -46,8 +46,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSString *userArea = [userDefaults stringForKey:@"userArea"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": userArea, @"starttime": @"20140901", @"page.page": @"1", @"page.size:": @"10",
-                                 @"page.sort:": @"createTime", @"page.sort.dir": @"desc"};
+    NSDictionary *parameters = @{@"location": userArea, @"starttime": @"20140901", @"page.page": @"1", @"page.size": @"10",
+                                 @"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject); 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

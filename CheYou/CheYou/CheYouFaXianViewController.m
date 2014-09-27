@@ -8,6 +8,8 @@
 
 #import "CheYouFaXianViewController.h"
 #import "LuJieCommon.h"
+#import "AFNetworking.h"
+#import "UpYun.h"
 
 @interface CheYouFaXianViewController ()
 @property (weak, nonatomic) IBOutlet UIView *keyboarbarView;
@@ -26,6 +28,7 @@
     UIView *accessoryView;
     UILabel *promptLabel;
     NSMutableArray *userPhotoList;
+    NSString *imgStr;
 }
 - (void)viewDidLoad
 {
@@ -160,6 +163,31 @@
 - (IBAction)sendAction:(id)sender {
     
     [self.textView resignFirstResponder];
+    //发送数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+    NSLog(@"%@",timeSp);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"location": [userDefaults stringForKey:@"userArea"],
+                                 @"type": @"3", @"img": [self getImgStr],@"huati":self.textView.text};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/pub" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
+        NSLog(@"JSON: %@", responseObject);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"发送成功！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self dismissViewControllerAnimated:YES completion: nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，发送失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma accessry 键盘工具栏按钮事件
@@ -222,5 +250,75 @@
     [alert show];
 }
 
+#pragma upyun
+
+-(NSString * )getSaveKey {
+    /**
+     *	@brief	方式1 由开发者生成saveKey
+     */
+    NSDate *d = [NSDate date];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.png",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
+    
+    /**
+     *	@brief	方式2 由服务器生成saveKey
+     */
+    //    return [NSString stringWithFormat:@"/{year}/{mon}/{filename}{.suffix}"];
+    
+    /**
+     *	@brief	更多方式 参阅 http://wiki.upyun.com/index.php?title=Policy_%E5%86%85%E5%AE%B9%E8%AF%A6%E8%A7%A3
+     */
+    
+}
+
+- (int)getYear:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSYearCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger year=[comps year];
+    return (int)year;
+}
+
+- (int)getMonth:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger month = [comps month];
+    return (int)month;
+}
+
+- (NSString *)getImgStr
+{
+    imgStr = @"";
+    if (userPhotoList.count == 0) {
+        return imgStr;
+    }
+    
+    if (userPhotoList.count == 1) {
+        //上传图片
+        UpYun *uy = [[UpYun alloc] init];
+        NSString *photoUrl = [self getSaveKey];
+        [uy uploadFile:[[userPhotoList objectAtIndex:0] image] saveKey:photoUrl];
+        imgStr = [imgStr stringByAppendingString:photoUrl];
+        return imgStr;
+    }
+    
+    for (int i=0; i<=userPhotoList.count-2; i++) {
+        //上传图片
+        UpYun *uy = [[UpYun alloc] init];
+        NSString *photoUrl = [self getSaveKey];
+        [uy uploadFile:[[userPhotoList objectAtIndex:i] image] saveKey:photoUrl];
+        imgStr = [imgStr stringByAppendingString:photoUrl];
+        imgStr = [imgStr stringByAppendingString:@";"];
+    }
+    UpYun *uy = [[UpYun alloc] init];
+    NSString *photoUrl = [self getSaveKey];
+    [uy uploadFile:[[userPhotoList lastObject] image] saveKey:photoUrl];
+    imgStr = [imgStr stringByAppendingString:photoUrl];
+    return imgStr;
+}
 
 @end
