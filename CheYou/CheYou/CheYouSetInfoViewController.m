@@ -178,7 +178,7 @@
         NSLog(@"JSON: %@", responseObject);
         //设置用户登录状态
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setInteger:0 forKey:@"userOut"];
+        [userDefaults setInteger:2 forKey:@"userOut"];
         [userDefaults synchronize];
         [self performSegueWithIdentifier:@"register_home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

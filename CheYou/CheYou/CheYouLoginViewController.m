@@ -97,7 +97,7 @@
     //用户登录过直接跳转首页
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userOut = [userDefaults integerForKey:@"userOut"];
-    if (userOut == 0) {
+    if (userOut == 2) {
         [self performSegueWithIdentifier:@"me_sgeue" sender:self];
     }
 }
