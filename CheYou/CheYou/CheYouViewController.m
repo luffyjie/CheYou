@@ -33,7 +33,9 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 {
     [super viewDidLoad];
     //获取测试数据
-    [self getDataFormFiles];
+    _tuCaoList = [[NSMutableArray alloc] init];
+//    [self getDataFormFiles];
+    [self getData];
 	// Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
@@ -41,23 +43,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //刷新获取数据
     [self refreshConfig];
-    //第一次获取数据
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *userArea = [userDefaults stringForKey:@"userArea"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": userArea, @"starttime": @"20140901", @"page.page": @"1", @"page.size": @"10",
-                                 @"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject); 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +54,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 #pragma mark 获取属性文件数据
 -(void)getDataFormFiles
 {
-    _tuCaoList = [[NSMutableArray alloc] init];
 	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
 	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
                               @"tuCaotag", @"created_at", @"pic_urls",nil];
@@ -82,6 +66,49 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 		}
 		[_tuCaoList addObject:tucao];
 	}
+}
+
+#pragma getData
+
+- (void)getData
+{
+    //第一次获取数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"],@"page.page": @"1", @"page.size": @"1",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSArray *labaDic = [responseObject objectForKey:@"data"];
+        //        NSLog(@"JSON: %@", labaDic);
+        NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
+        NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
+        for (NSDictionary *laba in labaDic) {
+            TuCao *tucao  = [[TuCao alloc] init];
+            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"screen_name"];
+            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"profile_image_url"];
+            for (int i= 0; i < propertyNames.count-1; i++) {
+                [tucao setValue:[laba objectForKey:propertyNames[i]] forKey:modelNames[i]];
+            }
+            NSArray *imgUrl = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
+            if (imgUrl.count > 0) {
+                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            }else
+            {
+                imgUrl = [[NSArray alloc] init];
+                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            }
+            [_tuCaoList addObject:tucao];
+        }
+        [self.tableView reloadData ];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma refresh config
@@ -108,7 +135,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return _tuCaoList.count;
 }
 
@@ -156,7 +182,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     if (tucao.pic_urls.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
@@ -172,7 +198,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
+//            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -189,7 +216,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
+//            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;

@@ -9,6 +9,7 @@
 #import "CheYouTuCaoTableViewCell.h"
 #import "LuJieCommon.h"
 #import "UIImageExt.h"
+#import "UIImageView+MJWebCache.h"
 
 #define IMAGE_HEIGHT_SIZE   34.f
 #define IMAGE_WIDTH_SIZE    34.f
@@ -151,9 +152,12 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
+//        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
+        // 下载图片
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.profile_image_url] placeholder:placeholder];
         screen_name.text = _tucao.screen_name;
-        created_at.text = _tucao.created_at;
+        created_at.text = @"123";//_tucao.created_at;
         tuCaoTag.text = [NSString stringWithFormat:@"#%@", _tucao.tuCaotag];
         tuCaoText.text = _tucao.tuCaotext;
         gasolineLabel.text = _tucao.tu_id;
