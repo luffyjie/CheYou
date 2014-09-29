@@ -171,9 +171,11 @@
     //获得当前cell高度
     CGRect frame = [self frame];
     //设置label的最大行数
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     tuCaoText.numberOfLines = 0;
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
-    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+//    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //设置图片的位置和大小
     if (_tucao.pic_urls.count > 0) {

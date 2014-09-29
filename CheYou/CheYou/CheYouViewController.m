@@ -76,11 +76,10 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"],@"page.page": @"1", @"page.size": @"1",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1", @"page.size": @"5",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
-        //        NSLog(@"JSON: %@", labaDic);
         NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
         NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
         for (NSDictionary *laba in labaDic) {
@@ -237,7 +236,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+//        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:i]];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView

@@ -107,9 +107,9 @@
     userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
                      arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
     CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"sandboxapp.cloopen.com" andserverPort:8883];
-    [ccpRestSdk setApp_ID:@"8a48b551488d07a80148a8096bd70bcc"];
+    [ccpRestSdk setApp_ID:@"aaf98f89488d0aad0148a13a157107e0"];
     [ccpRestSdk enableLog:YES];
-    [ccpRestSdk setAccountWithAccountSid: @"8a48b551488d07a80148a807b2dd0bca" andAccountToken:@"95d9d8e056854594a6fea59996ae01ca"];
+    [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
     NSArray*  arr = [NSArray arrayWithObjects:userYzm, @"30", nil];
     NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"1" andDatas:arr];
     NSLog(@"dict----%@",[dict description]);

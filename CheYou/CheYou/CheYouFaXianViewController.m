@@ -257,7 +257,7 @@
      *	@brief	方式1 由开发者生成saveKey
      */
     NSDate *d = [NSDate date];
-    return [NSString stringWithFormat:@"/%d/%d/%.0f.png",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.png",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]*1000];
     
     /**
      *	@brief	方式2 由服务器生成saveKey

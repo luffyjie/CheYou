@@ -175,14 +175,18 @@
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": self.phoneText.text,@"passwd": self.pwdText.text};
-    [manager POST:@"http://114.215.187.69/citypin/rs/user/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *parameters = @{@"account": self.phoneText.text};
+    [manager POST:@"http://114.215.187.69/citypin/rs/user/info" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        //缓存用户手机号，密码到本地
+        NSDictionary *userDic =  [responseObject objectForKey:@"data"];
+        NSLog(@"%@",[userDic objectForKey:@"account"]);
+        //缓存用户休息到本地
         [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
         [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
+        [userDefaults setObject:[userDic objectForKey:@"hpic"] forKey:@"photoUrl"];
+        [userDefaults setObject:[userDic objectForKey:@"nkname"] forKey:@"userName"];
+        [userDefaults setObject:[userDic objectForKey:@"location"] forKey:@"userArea"];
         //设置用户登录状态
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setInteger:2 forKey:@"userOut"];
         [userDefaults synchronize];
         [self performSegueWithIdentifier:@"home_segue" sender:self];
