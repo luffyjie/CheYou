@@ -24,16 +24,20 @@
     // require iOS 5+
     //设置home页三个功能按钮
     UINavigationController *hmNavController = self.viewControllers[0];
-    UITabBarItem *hmitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:0];
-    [hmitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_home_select"]
-              withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
+//    UITabBarItem *hmitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:0];
+//    [hmitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_home_select"]
+//              withFinishedUnselectedImage:[UIImage imageNamed:@"tab_home_unselect"]];
+   UITabBarItem *hmitem = [[UITabBarItem alloc]initWithTitle:@""image:[UIImage imageNamed:@"tab_home_unselect"]
+                                               selectedImage:[UIImage imageNamed:@"tab_home_select"]];
     hmNavController.tabBarItem = hmitem;
     hmitem.imageInsets  = UIEdgeInsetsMake(6, -15, -6, 15);
     
     UINavigationController *myNavController = self.viewControllers[1];
-    UITabBarItem *myitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:1];
-    [myitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_my_select"]
-           withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
+//    UITabBarItem *myitem = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:1];
+//    [myitem setFinishedSelectedImage:[UIImage imageNamed:@"tab_my_select"]
+//           withFinishedUnselectedImage:[UIImage imageNamed:@"tab_my_unselect"]];
+   UITabBarItem *myitem = [[UITabBarItem alloc]initWithTitle:@""image:[UIImage imageNamed:@"tab_my_unselect"]
+                         selectedImage:[UIImage imageNamed:@"tab_my_select"]];
     myNavController.tabBarItem = myitem;
     myitem.imageInsets  = UIEdgeInsetsMake(6, 15, -6, -15);
 

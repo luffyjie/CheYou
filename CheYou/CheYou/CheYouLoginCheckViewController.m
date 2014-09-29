@@ -160,18 +160,18 @@
         return;
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
-    NSString *userPwd = [userDefaults stringForKey:@"userPwd"];
-    if (userPhone.length>1 && userPwd.length>1) {
-        if ([userPhone isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
-            //设置用户登录状态
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setInteger:2 forKey:@"userOut"];
-            [userDefaults synchronize];
-            [self performSegueWithIdentifier:@"home_segue" sender:self];
-            return;
-        }
-    }
+//    NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
+//    NSString *userPwd = [userDefaults stringForKey:@"userPwd"];
+//    if (userPhone.length>1 && userPwd.length>1) {
+//        if ([userPhone isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
+//            //设置用户登录状态
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//            [userDefaults setInteger:2 forKey:@"userOut"];
+//            [userDefaults synchronize];
+//            [self performSegueWithIdentifier:@"home_segue" sender:self];
+//            return;
+//        }
+//    }
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];

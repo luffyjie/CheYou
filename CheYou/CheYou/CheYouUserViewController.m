@@ -17,6 +17,7 @@
 #import "CheYouDianzanViewCell.h"
 #import "CheYouCommentViewController.h"
 #import "CheYouSetViewController.h"
+#import "AFNetworking.h"
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -36,12 +37,16 @@
     UITableView *tableview;
     UITableView *dianzanTableview;
     NSMutableArray *_tuCaoList;
+    NSMutableArray *_zanList;
 }
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    _tuCaoList = [[NSMutableArray alloc] init];
+    _zanList = [[NSMutableArray alloc] init];
     //获取测试数据
     [self getDataFormFiles];
+    [self getData];
     //设置按钮选择状态
     [self.oilButton  setImage:[UIImage imageNamed:@"my_talk_select"] forState:UIControlStateHighlighted];
     [self.oilButton  addTarget:self action:@selector(oilButtonAction:)forControlEvents:UIControlEventTouchDown];
@@ -51,8 +56,12 @@
     
     //用户图片设置
     self.photoView.frame = CGRectMake( 10, 86, 60, 60);
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+    [self.photoView setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [userDefaults objectForKey:@"photoUrl"]] placeholder:placeholder];
     [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
     self.photoView.layer.masksToBounds = YES;
+    self.nameView.text = [userDefaults objectForKey:@"userName"];
     //初始化喇叭
     tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
     [self.view addSubview:tableview];
@@ -88,7 +97,6 @@
 #pragma mark 获取属性文件数据
 -(void)getDataFormFiles
 {
-    _tuCaoList = [[NSMutableArray alloc] init];
 	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
 	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
                               @"tuCaotag", @"created_at", @"pic_urls",nil];
@@ -99,11 +107,51 @@
             
             [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
 		}
-		[_tuCaoList addObject:tucao];
+		[_zanList addObject:tucao];
 	}
 }
 
+#pragma getData
 
+- (void)getData
+{
+    //第一次获取数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": @"1", @"page.size": @"5",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSArray *labaDic = [responseObject objectForKey:@"data"];
+        NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
+        NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
+        for (NSDictionary *laba in labaDic) {
+            TuCao *tucao  = [[TuCao alloc] init];
+            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"screen_name"];
+            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"profile_image_url"];
+            for (int i= 0; i < propertyNames.count-1; i++) {
+                [tucao setValue:[laba objectForKey:propertyNames[i]] forKey:modelNames[i]];
+            }
+            NSArray *imgUrl = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
+            if (imgUrl.count > 0) {
+                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            }else
+            {
+                imgUrl = [[NSArray alloc] init];
+                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            }
+            [_tuCaoList addObject:tucao];
+        }
+        [tableview reloadData ];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
+}
 
 #pragma 按钮事件
 - (void)oilButtonAction:(id)sender
@@ -162,7 +210,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 2) {
-        return 2;
+        return _zanList.count;
     }
     return _tuCaoList.count;
 }
@@ -174,7 +222,7 @@
 
         CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
         dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        dianzanCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        dianzanCell.tucao = [_zanList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
         
@@ -214,7 +262,7 @@
     if (tucao.pic_urls.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
@@ -230,7 +278,8 @@
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
+            //            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -247,7 +296,8 @@
         for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
+            //            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -267,7 +317,8 @@
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+//        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:i]];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView

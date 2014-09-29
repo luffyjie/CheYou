@@ -106,12 +106,12 @@
     //ip格式如下，不需要带https://
     userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
                      arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
-    CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"sandboxapp.cloopen.com" andserverPort:8883];
-    [ccpRestSdk setApp_ID:@"aaf98f89488d0aad0148a13a157107e0"];
+    CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"app.cloopen.com" andserverPort:8883];
+    [ccpRestSdk setApp_ID:@"aaf98f8948bbabac0148c07edb9902e4"];
     [ccpRestSdk enableLog:YES];
     [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
     NSArray*  arr = [NSArray arrayWithObjects:userYzm, @"30", nil];
-    NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"1" andDatas:arr];
+    NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
     NSLog(@"dict----%@",[dict description]);
     self.sendButton.enabled = NO;
     [self timeShow];
