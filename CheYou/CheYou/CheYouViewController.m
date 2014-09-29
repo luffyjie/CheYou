@@ -78,7 +78,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1", @"page.size": @"5",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"--------JSON: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
         NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
@@ -139,7 +139,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+    static NSString *tucaoIdentifier=@"tucaoIdentifier";
+    CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:tucaoIdentifier];
+    if (!tucaoCell) {
+         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tucaoIdentifier];
+    }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     //添加点赞加油点击按钮
