@@ -157,8 +157,13 @@
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
         [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.profile_image_url] placeholder:placeholder];
         screen_name.text = _tucao.screen_name;
-        created_at.text = @"123";//_tucao.created_at;
-        tuCaoTag.text = [NSString stringWithFormat:@"#%@", _tucao.tuCaotag];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+        [formatter setDateFormat:@"MM-dd HH:mm"];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.created_at doubleValue]/1000];
+        created_at.text = [formatter stringFromDate: confromTimesp];
+//        tuCaoTag.text = [NSString stringWithFormat:@"#%@", _tucao.tuCaotag];
         tuCaoText.text = _tucao.tuCaotext;
         gasolineLabel.text = _tucao.tu_id;
         commentLabel.text = _tucao.tu_id;
@@ -174,7 +179,6 @@
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     tuCaoText.numberOfLines = 0;
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
-//    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
     CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //设置图片的位置和大小
