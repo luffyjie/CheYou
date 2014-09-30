@@ -38,16 +38,15 @@
     UITableView *tucaotableview;
     UITableView *dianzanTableview;
     NSMutableArray *_tuCaoList;
-    NSMutableArray *_dianzanList;
+    NSMutableArray *_jyouList;
 }
 
 -(void)viewDidLoad{
     [super viewDidLoad];
     _tuCaoList = [[NSMutableArray alloc] init];
-    _dianzanList = [[NSMutableArray alloc] init];
+    _jyouList = [[NSMutableArray alloc] init];
     //获取测试数据
     [self geTuCaoData];
-    [self getZanData];
     //设置按钮选择状态
     [self.oilButton  setImage:[UIImage imageNamed:@"my_talk_select"] forState:UIControlStateHighlighted];
     [self.oilButton  addTarget:self action:@selector(oilButtonAction:)forControlEvents:UIControlEventTouchDown];
@@ -103,9 +102,9 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
-                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": @"1",
+                                 @"page.size": @"1000",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
@@ -138,6 +137,7 @@
                         [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
                         [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
                         [tucao.jyouList addObject:pinglun];
+                        [_jyouList addObject:pinglun];
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
@@ -156,6 +156,7 @@
         }
         //请求完毕，刷新table
         [tucaotableview reloadData ];
+        [dianzanTableview reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -165,75 +166,6 @@
         [alert show];
     }];
 
-}
-
-- (void)getZanData
-{
-    //第一次获取数据
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
-                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *labaDic = [responseObject objectForKey:@"data"];
-        //遍历喇叭
-        for (NSDictionary *laba in labaDic) {
-            TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[laba objectForKey:@"hpic"] forKey:@"hpic"];
-            [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
-            [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
-            [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
-            [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
-            [tucao setValue:[laba objectForKey:@"huati"] forKey:@"huati"];
-            [tucao setValue:[laba objectForKey:@"jyou"] forKey:@"jyou"];
-            [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
-            [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
-            [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
-            if ([[laba objectForKey:@"img"] length] > 1) {
-                NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
-                [tucao setValue:imgList forKey:@"imgList"];
-            }
-            //区分评论和点赞
-            NSArray *comments = [laba objectForKey:@"comments"];
-            if (comments.count > 0) {
-                for (NSDictionary *comment in comments) {
-                    if ([[comment objectForKey:@"content"] length] == 1) {
-                        PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
-                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
-                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
-                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
-                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
-                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
-                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
-                        [tucao.jyouList addObject:pinglun];
-                    }else
-                    {
-                        PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
-                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
-                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
-                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
-                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
-                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
-                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
-                        [tucao.commentList addObject:pinglun];
-                    }
-                }
-            }
-            [_dianzanList addObject:tucao];
-        }
-        //请求完毕，刷新table
-        [dianzanTableview reloadData ];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-    }];
 }
 
 #pragma 按钮事件
@@ -293,7 +225,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 2) {
-        return _dianzanList.count;
+        return _jyouList.count;
     }
     return _tuCaoList.count;
 }
@@ -301,9 +233,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
     if (tableView.tag == 2) {
-        CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dianzanIdentifier"];
+        static NSString *dianzanIdentifier=@"dianzanIdentifier";
+        CheYouDianzanViewCell *dianzanCell = [tableView dequeueReusableCellWithIdentifier:dianzanIdentifier];
+        if (!dianzanCell) {
+             dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dianzanIdentifier];
+        }
         dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        dianzanCell.tucao = [_dianzanList objectAtIndex:indexPath.row];
+        dianzanCell.dianzan = [_jyouList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
         CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usertucaoIdentifier"];

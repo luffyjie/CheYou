@@ -97,19 +97,22 @@
     // Configure the view for the selected state
 }
 
--(void)setTucao:(TuCao *)tucao
+-(void)setDianzan:(PingLun *)dianzan
 {
-    if (_tucao != tucao) {
-        _tucao = tucao;
+    if (_dianzan != dianzan) {
+        _dianzan = dianzan;
         // 下载图片
+        if (!_dianzan.hpic) {
+            _dianzan.hpic = @"/2014/9/1411953899.png";
+        }
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.hpic] placeholder:placeholder];
-        screen_name.text = _tucao.nkname;
+        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _dianzan.hpic] placeholder:placeholder];
+        screen_name.text = _dianzan.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
-        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_dianzan.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
     }
 }

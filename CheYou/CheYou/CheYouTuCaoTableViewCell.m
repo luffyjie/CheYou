@@ -139,6 +139,9 @@
     if (_tucao != tucao) {
         _tucao = tucao;
         // 下载图片
+        if (!_tucao.hpic) {
+            _tucao.hpic = @"/2014/9/1411953899.png";
+        }
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
         [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.hpic] placeholder:placeholder];
         screen_name.text = _tucao.nkname;

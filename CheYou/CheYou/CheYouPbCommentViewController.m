@@ -90,7 +90,8 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"],@"lbid": self.lbid, @"content":self.textView.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/comment" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
+        [self dismissViewControllerAnimated:YES completion: nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);

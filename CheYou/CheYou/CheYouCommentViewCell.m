@@ -99,10 +99,10 @@
     if (_pinglun != pinglun) {
         _pinglun = pinglun;
         // 下载图片
-        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
         if (!_pinglun.hpic) {
             _pinglun.hpic = @"/2014/9/1411953899.png";
         }
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
         [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _pinglun.hpic] placeholder:placeholder];
         screen_name.text = _pinglun.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
