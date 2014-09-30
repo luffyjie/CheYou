@@ -142,9 +142,18 @@
         [alert show];
         return;
     }
-    //本地保存用户秘密
+    //清空本地用户数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"userPhone"];
+    [userDefaults removeObjectForKey:@"photoUrl"];
+    [userDefaults removeObjectForKey:@"userName"];
+    [userDefaults removeObjectForKey:@"userArea"];
+    [userDefaults removeObjectForKey:@"userPwd"];
+    [userDefaults removeObjectForKey:@"userOut"];
+    [userDefaults synchronize];
+    //保存新注册的用户手机号和密码
     [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
+    [userDefaults setObject:self.phoneNum forKey:@"userPhone"];
     [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
 }
 

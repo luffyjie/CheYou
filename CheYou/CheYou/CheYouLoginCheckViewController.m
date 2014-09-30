@@ -31,7 +31,7 @@
     //设置键盘类型
     self.phoneText.delegate = self;
     self.pwdText.delegate = self;
-    self.phoneText.keyboardType = UIKeyboardTypePhonePad;
+    self.phoneText.keyboardType = UIKeyboardTypeNumberPad;
     self.phoneText.tag = 1;
     self.pwdText.returnKeyType = UIReturnKeyDone;
     self.pwdText.secureTextEntry = YES;
@@ -74,42 +74,6 @@
             [self.pwdText becomeFirstResponder];
             return false;
         }
-        //和上次登录信息进行验证
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
-        NSString *userPwd = [userDefaults stringForKey:@"userPhone"];
-        if (userPhone && userPwd) {
-            if ([userPwd isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
-                //设置用户登录状态
-                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                [userDefaults setInteger:2 forKey:@"userOut"];
-                [userDefaults synchronize];
-                [self performSegueWithIdentifier:@"home_segue" sender:self];
-                return FALSE;
-            }
-        }
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        NSDictionary *parameters = @{@"account": self.phoneText.text,@"passwd": self.pwdText.text};
-        [manager POST:@"http://114.215.187.69/citypin/rs/user/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            //缓存用户手机号，密码到本地
-            [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
-            [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
-            [userDefaults setInteger:2 forKey:@"userOut"];
-            [userDefaults synchronize];
-            [self performSegueWithIdentifier:@"home_segue" sender:self];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            NSString *title = NSLocalizedString(@"提示", nil);
-            NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            [alert show];
-        }];
-
-        return FALSE;
     }
     if (textField.tag == 1) {
          return [self validateNumber:string];
@@ -150,9 +114,9 @@
         [self.phoneText becomeFirstResponder];
         return;
     }
-    if (self.pwdText.text.length <4) {
+    if (self.pwdText.text.length <7) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
+        NSString *message = NSLocalizedString(@"密码不能为空或小于7位", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
@@ -165,9 +129,8 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": self.phoneText.text, @"passwd": self.pwdText.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/passwd/valid" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
         NSInteger result = (int)[responseObject objectForKey:@"r"];
-        if (result == -1) {
+        if (result == -13) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
             NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);

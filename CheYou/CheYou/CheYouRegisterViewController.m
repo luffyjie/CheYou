@@ -49,20 +49,15 @@
 }
 
 - (IBAction)nextAction:(id)sender {
-    if (self.phoneText.text.length <1) {
+    if (self.phoneText.text.length <11) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"手机号不能为空", nil);
+        NSString *message = NSLocalizedString(@"手机号码有误！", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        
         [alert show];
         [self.phoneText becomeFirstResponder];
         return;
     }
-    //缓存用户手机号码到本地
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
     [self performSegueWithIdentifier:@"duanx_segue" sender:self];
 }
 
