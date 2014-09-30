@@ -62,14 +62,14 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
-                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+                                 @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
-            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"hpic"] forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
             [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
             [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
             [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
@@ -88,7 +88,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
                 for (NSDictionary *comment in comments) {
                     if ([[comment objectForKey:@"content"] length] == 1) {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -99,7 +99,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];

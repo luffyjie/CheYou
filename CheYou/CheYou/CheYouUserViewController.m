@@ -110,8 +110,8 @@
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
-            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"hpic"] forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
             [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
             [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
             [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
@@ -130,7 +130,7 @@
                 for (NSDictionary *comment in comments) {
                     if ([[comment objectForKey:@"content"] length] == 1) {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -141,7 +141,7 @@
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -180,8 +180,8 @@
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
-            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"hpic"] forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
             [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
             [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
             [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
@@ -200,7 +200,7 @@
                 for (NSDictionary *comment in comments) {
                     if ([[comment objectForKey:@"content"] length] == 1) {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -211,7 +211,7 @@
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];

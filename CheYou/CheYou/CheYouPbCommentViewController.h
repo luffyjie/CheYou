@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CheYouPbCommentViewController : UIViewController <UITextViewDelegate>
+@property (nonatomic, strong) NSString *lbid;
 
 @end

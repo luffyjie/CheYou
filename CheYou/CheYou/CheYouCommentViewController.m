@@ -14,6 +14,7 @@
 #import "CheYouCommentViewCell.h"
 #import "CheYouCommentTopViewCell.h"
 #import "PingLun.h"
+#import "CheYouPbCommentViewController.h"
 
 @interface CheYouCommentViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -289,7 +290,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    if ([segue.identifier isEqual:@"pb_comment_segue"]) {
+        UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
+        CheYouPbCommentViewController *pbcommentView = (CheYouPbCommentViewController*)nav.topViewController;
+        pbcommentView.lbid = self.tucao.lbid;
+    }
 }
 
 @end
