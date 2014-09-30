@@ -22,10 +22,10 @@
     UIImageView *userImage;
     UILabel *screen_name;
     UILabel *created_at;
-    UILabel *tuCaoText;
+    UILabel *pingLunText;
 }
 
-@synthesize tucao = _tucao;
+@synthesize pinglun = _pinglun;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -43,15 +43,15 @@
         created_at.font = [UIFont boldSystemFontOfSize:10.f];
         [self.contentView addSubview: created_at];
         
-        tuCaoText = [[UILabel alloc] init];
-        tuCaoText.font = [UIFont systemFontOfSize:14.f];
-        [self.contentView addSubview: tuCaoText];
+        pingLunText = [[UILabel alloc] init];
+        pingLunText.font = [UIFont systemFontOfSize:14.f];
+        [self.contentView addSubview: pingLunText];
         
         //add by lujie for debug
         //        userImage.backgroundColor = [UIColor lightGrayColor];
         //        screen_name.backgroundColor = [UIColor blueColor];
         //        created_at.backgroundColor = [UIColor yellowColor];
-        //        tuCaoText.backgroundColor = [UIColor greenColor];
+        //        pingLunText.backgroundColor = [UIColor greenColor];
         //        self.contentView.backgroundColor = [UIColor blackColor];
     }
     return self;
@@ -94,28 +94,24 @@
     // Configure the view for the selected state
 }
 
--(void)setTucao:(TuCao *)tucao
+-(void)setPinglun:(PingLun *)pinglun
 {
-    if (_tucao != tucao) {
-        _tucao = tucao;
+    if (_pinglun != pinglun) {
+        _pinglun = pinglun;
         // 下载图片
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.hpic] placeholder:placeholder];
-        screen_name.text = _tucao.nkname;
+        if (!_pinglun.hpic) {
+            _pinglun.hpic = @"/2014/9/1411953899.png";
+        }
+        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _pinglun.hpic] placeholder:placeholder];
+        screen_name.text = _pinglun.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         [formatter setDateFormat:@"MM-dd HH:mm"];
-        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_pinglun.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-        paragraphStyle.firstLineHeadIndent = 50.f;
-        paragraphStyle.headIndent = 50.f;
-        paragraphStyle.alignment = NSTextAlignmentLeft;
-        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-        NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                      NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName:[UIColor blackColor]};
-        tuCaoText.attributedText = [[NSAttributedString alloc]initWithString: _tucao.huati attributes:attributes];
+        pingLunText.text = _pinglun.content;
         [self makeContentFrame];
     }
 }
@@ -126,10 +122,10 @@
     CGRect frame = [self frame];
     //设置label的最大行数
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-    tuCaoText.numberOfLines = 0;
-    CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
-    CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
+    pingLunText.numberOfLines = 0;
+    CGSize size = CGSizeMake(frame.size.width - 55.f - 15.f, 1000);
+    CGSize textSize = [pingLunText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    pingLunText.frame = CGRectMake(60.f, 61.f, textSize.width, textSize.height);
     //计算出cell自适应的高度
     frame.size.height = textSize.height + 70.f;
     self.frame = frame;

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TuCao.h"
+#import "PingLun.h"
 
 @interface CheYouCommentViewCell : UITableViewCell
-@property (nonatomic, strong) TuCao *tucao;
+@property (nonatomic, strong) PingLun *pinglun;
 
 @end

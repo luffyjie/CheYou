@@ -13,6 +13,7 @@
 #import "MJPhoto.h"
 #import "CheYouCommentViewCell.h"
 #import "CheYouCommentTopViewCell.h"
+#import "PingLun.h"
 
 @interface CheYouCommentViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -34,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getDataFormFiles];
+    commentList = self.tucao.commentList;
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@""
@@ -62,24 +63,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark 获取属性文件数据
--(void)getDataFormFiles
-{
-    commentList = [[NSMutableArray alloc] init];
-	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
-	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
-                              @"tuCaotag", @"created_at", @"pic_urls",nil];
-    
-	for (NSDictionary *tuCaoDic in parkDictionaries) {
-		TuCao *tucao = [[TuCao alloc] init];
-		for (NSString *property in propertyNames) {
-            
-            [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
-		}
-		[commentList addObject:tucao];
-	}
 }
 
 #pragma 底部工具栏
@@ -190,15 +173,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        topCell = [[CheYouCommentTopViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+        topCell = [[CheYouCommentTopViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commtheaddentifier"];
         topCell.selectionStyle = UITableViewCellSelectionStyleNone;
         topCell.tucao = self.tucao;
         [self makeUserPhotos:self.tucao over:topCell over:indexPath.row];
         return topCell;
     }
-    CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+    CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commtdentifier"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.tucao = [commentList objectAtIndex:indexPath.row];
+    cell.pinglun = [commentList objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -214,9 +197,9 @@
     if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [tucao.imgList objectAtIndex:0] placeholder:placeholder];
+        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString:[tucao.imgList objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
-        photo.tag = 0;
+        photo.tag = (10*row);
         photo.clipsToBounds = YES;
         photo.contentMode = UIViewContentModeScaleAspectFill;
         photo.userInteractionEnabled = YES;
@@ -226,11 +209,10 @@
     }
     
     if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.imgList objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString:[tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -243,11 +225,10 @@
     
     if(tucao.imgList.count > 3)
     {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.imgList objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString:[tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -267,7 +248,7 @@
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-        NSString *url = [[[self.tucao imgList] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [self.tucao.imgList objectAtIndex:i]];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView
