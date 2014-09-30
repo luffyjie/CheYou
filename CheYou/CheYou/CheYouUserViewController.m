@@ -123,22 +123,25 @@
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
-        NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
-        NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"screen_name"];
-            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"profile_image_url"];
-            for (int i= 0; i < propertyNames.count-1; i++) {
-                [tucao setValue:[laba objectForKey:propertyNames[i]] forKey:modelNames[i]];
-            }
-            NSArray *imgUrl = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
-            if (imgUrl.count > 0) {
-                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
+            [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
+            [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
+            [tucao setValue:[laba objectForKey:@"huati"] forKey:@"huati"];
+            [tucao setValue:[laba objectForKey:@"jyou"] forKey:@"jyou"];
+            [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
+            [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
+            [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
+            NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
+            if (imgList.count > 0) {
+                [tucao setValue:imgList forKey:@"imgList"];
             }else
             {
-                imgUrl = [[NSArray alloc] init];
-                [tucao setValue:imgUrl forKey:@"pic_urls"];
+                imgList = [[NSArray alloc] init];
+                [tucao setValue:imgList forKey:@"imgList"];
             }
             [_tuCaoList addObject:tucao];
         }
@@ -218,7 +221,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
     static NSString *dianzanIdentifier=@"dianzanIdentifier";
-    static NSString *tucaoIdentifier=@"tucaoIdentifier";
+    static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     if (tableView.tag == 2) {
         CheYouDianzanViewCell *dianzanCell = [tableView dequeueReusableCellWithIdentifier:dianzanIdentifier];
         if (!dianzanCell) {
@@ -228,9 +231,9 @@
         dianzanCell.tucao = [_zanList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
-        CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:tucaoIdentifier];
+        CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:usertucaoIdentifier];
         if (!tucaoCell) {
-            tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tucaoIdentifier];
+            tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:usertucaoIdentifier];
         }
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         //添加点赞加油点击按钮

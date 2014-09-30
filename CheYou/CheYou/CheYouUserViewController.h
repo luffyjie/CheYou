@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheYouUserViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface CheYouUserViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

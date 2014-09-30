@@ -21,7 +21,6 @@
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 @interface CheYouViewController ()
-@property (nonatomic, strong) UIImageView *scroll;
 
 @end
 
@@ -35,7 +34,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     [super viewDidLoad];
     //获取测试数据
     _tuCaoList = [[NSMutableArray alloc] init];
-//    [self getDataFormFiles];
     [self getData];
 	// Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
@@ -43,30 +41,13 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //刷新获取数据
-    [self refreshConfig];
+//    [self refreshConfig];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark 获取属性文件数据
--(void)getDataFormFiles
-{
-	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
-	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
-                              @"tuCaotag", @"created_at", @"pic_urls",nil];
-    
-	for (NSDictionary *tuCaoDic in parkDictionaries) {
-		TuCao *tucao = [[TuCao alloc] init];
-		for (NSString *property in propertyNames) {
-            
-            [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
-		}
-		[_tuCaoList addObject:tucao];
-	}
 }
 
 #pragma getData
@@ -78,9 +59,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
-                                 @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"--------JSON: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
@@ -95,12 +75,8 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
             [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
             [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
             [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
-            NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
-            if (imgList.count > 0) {
-                [tucao setValue:imgList forKey:@"imgList"];
-            }else
-            {
-                imgList = [[NSArray alloc] init];
+            if ([[laba objectForKey:@"img"] length] > 1) {
+                NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
                 [tucao setValue:imgList forKey:@"imgList"];
             }
             //区分评论和点赞
@@ -131,7 +107,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
                     }
                 }
             }
-            NSLog(@"%@",tucao.description);
             [_tuCaoList addObject:tucao];
         }
         //请求完毕，刷新table
@@ -175,11 +150,12 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    static NSString *tucaoIdentifier=@"tucaoIdentifier";
-    CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:tucaoIdentifier];
-    if (!tucaoCell) {
-         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tucaoIdentifier];
-    }
+    static NSString *hometucaoIdentifier=@"hometucaoIdentifier";
+//    CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:hometucaoIdentifier];
+//    if (!tucaoCell) {
+//         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
+//    }
+    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     //添加点赞加油点击按钮
@@ -206,7 +182,17 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
-    CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    //这里7.0以上版本和之前版本取值不同，程序会crash
+    CheYouTuCaoTableViewCell *cell;
+    float version=[[[UIDevice currentDevice] systemVersion] floatValue];
+    if(version>=7.0)
+    {
+        cell=(CheYouTuCaoTableViewCell *)[[button superview] superview];
+    }
+    else
+    {
+        cell = (CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    }
     if (button.selected) {
         cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
@@ -219,12 +205,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     if (tucao.imgList.count == 1) {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
         [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
-        photo.tag = 0;
+        photo.tag = (10*row);
         photo.clipsToBounds = YES;
         photo.contentMode = UIViewContentModeScaleAspectFill;
         photo.userInteractionEnabled = YES;
@@ -234,7 +219,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     }
     
     if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
@@ -251,7 +235,6 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     
     if(tucao.imgList.count > 3)
     {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片

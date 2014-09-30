@@ -93,7 +93,7 @@
 //        tuCaoTag.backgroundColor = [UIColor redColor];
 //        tuCaoText.backgroundColor = [UIColor greenColor];
 //        userPhotoView.backgroundColor = [UIColor redColor];
-//        self.contentView.backgroundColor = [UIColor blackColor];
+//          self.contentView.backgroundColor = [UIColor blackColor];
     }
     return self;
 }

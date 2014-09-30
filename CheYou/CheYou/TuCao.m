@@ -17,12 +17,13 @@
     if (self) {
         _commentList = [[NSMutableArray alloc] init];
         _jyouList = [[NSMutableArray alloc] init];
+        _imgList = [[NSArray alloc] init];
     }
     return self;
 }
 
 -(void)setCommentList:(NSMutableArray*) array{
-    if(_commentList != nil)
+    if(_commentList!= nil)
     {
         _commentList = nil;
     }
@@ -30,11 +31,19 @@
 }
 
 -(void)setJyouList :(NSMutableArray*) array{
-    if(_jyouList  != nil)
+    if(_jyouList!= nil)
     {
         _jyouList = nil;
     }
     _jyouList = [array mutableCopy];
+}
+
+-(void)setImgList :(NSArray*) array{
+    if(_imgList!= nil)
+    {
+        _imgList = nil;
+    }
+    _imgList = [array mutableCopy];
 }
 
 - (NSString *)description
