@@ -217,17 +217,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-   
+    static NSString *dianzanIdentifier=@"dianzanIdentifier";
+    static NSString *tucaoIdentifier=@"tucaoIdentifier";
     if (tableView.tag == 2) {
-
-        CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
+        CheYouDianzanViewCell *dianzanCell = [tableView dequeueReusableCellWithIdentifier:dianzanIdentifier];
+        if (!dianzanCell) {
+            dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dianzanIdentifier];
+        }
         dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
         dianzanCell.tucao = [_zanList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
-        
-        CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sconddentifier"];
-        tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:tucaoIdentifier];
+        if (!tucaoCell) {
+            tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tucaoIdentifier];
+        }
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         //添加点赞加油点击按钮
         UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
@@ -259,10 +263,10 @@
 -(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(long)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    if (tucao.pic_urls.count == 1) {
+    if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:0]] placeholder:placeholder];
+        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
@@ -273,13 +277,12 @@
         
     }
     
-    if (tucao.pic_urls.count >1 && tucao.pic_urls.count < 4) {
+    if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
-            //            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -290,14 +293,13 @@
         }
     }
     
-    if(tucao.pic_urls.count > 3)
+    if(tucao.imgList.count > 3)
     {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
-            //            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -312,13 +314,12 @@
 - (void)tapImage:(UITapGestureRecognizer *)tap
 {
     TuCao *tucao = [_tuCaoList objectAtIndex:(tap.view.tag/10)];
-    NSInteger count =  [[tucao pic_urls] count];
+    NSInteger count =  [[tucao imgList] count];
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-//        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:i]];
+        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:i]];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView

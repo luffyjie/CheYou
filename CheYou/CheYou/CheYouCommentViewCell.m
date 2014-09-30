@@ -97,9 +97,14 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
-        screen_name.text = _tucao.screen_name;
-        created_at.text = _tucao.created_at;
+        userImage.image = [UIImage imageNamed:_tucao.hpic];
+        screen_name.text = _tucao.nkname;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+        [formatter setDateFormat:@"MM-dd HH:mm"];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
+        created_at.text = [formatter stringFromDate: confromTimesp];
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.firstLineHeadIndent = 50.f;
         paragraphStyle.headIndent = 50.f;
@@ -107,7 +112,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:14],
                                       NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName:[UIColor blackColor]};
-        tuCaoText.attributedText = [[NSAttributedString alloc]initWithString: _tucao.tuCaotext attributes:attributes];
+        tuCaoText.attributedText = [[NSAttributedString alloc]initWithString: _tucao.huati attributes:attributes];
         [self makeContentFrame];
     }
 }
@@ -117,9 +122,10 @@
     //获得当前cell高度
     CGRect frame = [self frame];
     //设置label的最大行数
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     tuCaoText.numberOfLines = 0;
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
-    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //计算出cell自适应的高度
     frame.size.height = textSize.height + 70.f;

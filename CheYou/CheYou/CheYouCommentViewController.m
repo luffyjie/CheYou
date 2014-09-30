@@ -151,14 +151,14 @@
     
     gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 45.f,
                                                                        sectionView.frame.size.height - 29.f, 40.f, 20.f)];
-    gasolineLabel.text = self.tucao.tu_id;
+    gasolineLabel.text = [NSString stringWithFormat:@"%d",self.tucao.jyou];
     gasolineLabel.font = [UIFont systemFontOfSize:14];
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
     
     commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 11,
                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
-    commentLabel.text = self.tucao.tu_id;
+    commentLabel.text = [NSString stringWithFormat:@"%d",(int)self.tucao.commentList.count];
     commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:commentLabel];
@@ -211,10 +211,10 @@
 -(void)makeUserPhotos:(TuCao *)tucao over:(CheYouCommentTopViewCell *)cell over:(NSInteger)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    if (tucao.pic_urls.count == 1) {
+    if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+        [photo setImageURLStr: [tucao.imgList objectAtIndex:0] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
@@ -225,12 +225,12 @@
         
     }
     
-    if (tucao.pic_urls.count >1 && tucao.pic_urls.count < 4) {
+    if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [tucao.imgList objectAtIndex:idx] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -241,13 +241,13 @@
         }
     }
     
-    if(tucao.pic_urls.count > 3)
+    if(tucao.imgList.count > 3)
     {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:idx] placeholder:placeholder];
+            [photo setImageURLStr: [tucao.imgList objectAtIndex:idx] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -262,12 +262,12 @@
 #pragma 点击照片浏览
 - (void)tapImage:(UITapGestureRecognizer *)tap
 {
-    NSInteger count =  [[self.tucao pic_urls] count];
+    NSInteger count =  [[self.tucao imgList] count];
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-        NSString *url = [[[self.tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        NSString *url = [[[self.tucao imgList] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView

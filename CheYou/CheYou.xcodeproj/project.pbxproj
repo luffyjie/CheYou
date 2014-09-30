@@ -26,6 +26,7 @@
 		E9375F4319D31D3600053F0B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F4219D31D3600053F0B /* SystemConfiguration.framework */; };
 		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
+		E9521CF619DA6DE30058F36D /* PingLun.m in Sources */ = {isa = PBXBuildFile; fileRef = E9521CF519DA6DE30058F36D /* PingLun.m */; };
 		E953C5D919CC2DC100C0510F /* CheYouLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */; };
 		E953C5DC19CC43A900C0510F /* CheYouLoginCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5DB19CC43A900C0510F /* CheYouLoginCheckViewController.m */; };
 		E95FDFF919C6AE3B007585AF /* CheYouPbCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */; };
@@ -172,6 +173,8 @@
 		E93AD96219B2CCBB0081259E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
+		E9521CF419DA6DE30058F36D /* PingLun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingLun.h; sourceTree = "<group>"; };
+		E9521CF519DA6DE30058F36D /* PingLun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingLun.m; sourceTree = "<group>"; };
 		E953C5D719CC2DC100C0510F /* CheYouLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouLoginViewController.h; sourceTree = "<group>"; };
 		E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginViewController.m; sourceTree = "<group>"; };
 		E953C5DA19CC43A900C0510F /* CheYouLoginCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouLoginCheckViewController.h; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 				E93648D519AF336300CE5542 /* TuCao.m */,
 				E982164A19B9A07000F088BB /* PRButton.h */,
 				E982164B19B9A07000F088BB /* PRButton.m */,
+				E9521CF419DA6DE30058F36D /* PingLun.h */,
+				E9521CF519DA6DE30058F36D /* PingLun.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -935,6 +940,7 @@
 				E99EE50C19BEE506004CBABA /* CheYouUserViewController.m in Sources */,
 				E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */,
 				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
+				E9521CF619DA6DE30058F36D /* PingLun.m in Sources */,
 				E97B2F3019CD21C500D902C0 /* CheYouSetInfoViewController.m in Sources */,
 				E9617A8219B81740000543D2 /* MJPhotoToolbar.m in Sources */,
 				E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */,

@@ -100,9 +100,14 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
-        screen_name.text = _tucao.screen_name;
-        created_at.text = _tucao.created_at;
+        userImage.image = [UIImage imageNamed:_tucao.hpic];
+        screen_name.text = _tucao.nkname;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+        [formatter setDateFormat:@"MM-dd HH:mm"];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
+        created_at.text = [formatter stringFromDate: confromTimesp];
     }
 }
 

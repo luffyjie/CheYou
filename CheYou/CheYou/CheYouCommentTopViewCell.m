@@ -105,7 +105,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
     // Configure the view for the selected state
 }
 
@@ -113,10 +112,15 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
-        screen_name.text = _tucao.screen_name;
-        created_at.text = _tucao.created_at;
-        tuCaoText.text = _tucao.tuCaotext;
+        userImage.image = [UIImage imageNamed:_tucao.hpic];
+        screen_name.text = _tucao.nkname;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+        [formatter setDateFormat:@"MM-dd HH:mm"];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
+        created_at.text = [formatter stringFromDate: confromTimesp];
+        tuCaoText.text = _tucao.huati;
         [self makeContentFrame];
     }
 }
@@ -126,16 +130,17 @@
     //获得当前cell高度
     CGRect frame = [self frame];
     //设置label的最大行数
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     tuCaoText.numberOfLines = 0;
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
-    CGSize textSize = [tuCaoText.text sizeWithFont:tuCaoText.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //设置图片的位置和大小
-    if (_tucao.pic_urls.count > 0) {
-        if (_tucao.pic_urls.count ==1) {
+    if (_tucao.imgList.count > 0) {
+        if (_tucao.imgList.count ==1) {
             userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width,100);
         }else{
-            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
+            userPhotoView.frame = _tucao.imgList.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
             : CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
         }
     }

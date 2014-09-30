@@ -22,7 +22,6 @@
     UIImageView *userImage;
     UILabel *screen_name;
     UILabel *created_at;
-    UILabel *tuCaoTag;
     UILabel *tuCaoText;
     UILabel *midLine;
     UILabel *footLine;
@@ -48,12 +47,6 @@
         screen_name = [[UILabel alloc] init];
         screen_name.font = [UIFont boldSystemFontOfSize:14.f];
         [self.contentView addSubview: screen_name];
-        
-        tuCaoTag = [[UILabel alloc] init];
-        tuCaoTag.textAlignment = NSTextAlignmentRight;
-        tuCaoTag.font = [UIFont boldSystemFontOfSize:14.f];
-        tuCaoTag.textColor = [LuJieCommon UIColorFromRGB:0x3498db];
-//        [self.contentView addSubview: tuCaoTag];
         
         created_at = [[UILabel alloc] init];
         created_at.font = [UIFont boldSystemFontOfSize:10.f];
@@ -115,11 +108,6 @@
     return CGRectMake(IMAGE_WIDTH_SIZE + 12.f + 15.f, 15.f, NAME_DISTANCE_WIDTH, 20.f);
 }
 
-- (CGRect)tuCaoTagFrame {
-    CGRect contentViewBounds = self.contentView.bounds;
-    return CGRectMake(contentViewBounds.size.width - 12.f - TAG_DISTANCE_WIDTH, 15.f, TAG_DISTANCE_WIDTH, 20.f);
-}
-
 - (CGRect)created_atFrame {
     
     return CGRectMake(IMAGE_WIDTH_SIZE + 12.f + 15.f, 38.f, 100.f, 12.f);
@@ -131,7 +119,6 @@
     [userImage.layer setCornerRadius:CGRectGetHeight([userImage bounds]) / 2];
     userImage.layer.masksToBounds = YES;
     [screen_name setFrame:[self screen_nameFrame]];
-    [tuCaoTag setFrame:[self tuCaoTagFrame]];
     [created_at setFrame:[self created_atFrame]];
 
 }
@@ -144,7 +131,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -152,21 +138,19 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-//        userImage.image = [UIImage imageNamed:_tucao.profile_image_url];
         // 下载图片
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.profile_image_url] placeholder:placeholder];
-        screen_name.text = _tucao.screen_name;
+        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.hpic] placeholder:placeholder];
+        screen_name.text = _tucao.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         [formatter setDateFormat:@"MM-dd HH:mm"];
-        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.created_at doubleValue]/1000];
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
-//        tuCaoTag.text = [NSString stringWithFormat:@"#%@", _tucao.tuCaotag];
-        tuCaoText.text = _tucao.tuCaotext;
-        gasolineLabel.text = _tucao.tu_id;
-        commentLabel.text = _tucao.tu_id;
+        tuCaoText.text = _tucao.huati;
+        gasolineLabel.text = [NSString stringWithFormat:@"%d",_tucao.jyou];
+        commentLabel.text = [NSString stringWithFormat:@"%d",(int)_tucao.commentList.count];
         [self makeContentFrame];
     }
 }
@@ -182,11 +166,11 @@
     CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
     //设置图片的位置和大小
-    if (_tucao.pic_urls.count > 0) {
-        if (_tucao.pic_urls.count ==1) {
+    if (_tucao.imgList.count > 0) {
+        if (_tucao.imgList.count ==1) {
             userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width,100);
         }else{
-            userPhotoView.frame = _tucao.pic_urls.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
+            userPhotoView.frame = _tucao.imgList.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
             : CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
         }
     }

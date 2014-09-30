@@ -16,6 +16,7 @@
 #import "MJRefresh.h"
 #import "CheYouCommentViewController.h"
 #import "AFNetworking.h"
+#import "PingLun.h"
 
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
@@ -76,29 +77,64 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1", @"page.size": @"5",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
+                                 @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"--------JSON: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
-        NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"huati", @"createtime", @"img", nil];
-        NSArray *modelNames = [[NSArray alloc] initWithObjects:@"tuCaotext", @"created_at", @"pic_urls", nil];
+        //遍历喇叭
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
-            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"screen_name"];
-            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"profile_image_url"];
-            for (int i= 0; i < propertyNames.count-1; i++) {
-                [tucao setValue:[laba objectForKey:propertyNames[i]] forKey:modelNames[i]];
-            }
-            NSArray *imgUrl = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
-            if (imgUrl.count > 0) {
-                [tucao setValue:imgUrl forKey:@"pic_urls"];
+            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
+            [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
+            [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
+            [tucao setValue:[laba objectForKey:@"huati"] forKey:@"huati"];
+            [tucao setValue:[laba objectForKey:@"jyou"] forKey:@"jyou"];
+            [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
+            [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
+            [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
+            NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
+            if (imgList.count > 0) {
+                [tucao setValue:imgList forKey:@"imgList"];
             }else
             {
-                imgUrl = [[NSArray alloc] init];
-                [tucao setValue:imgUrl forKey:@"pic_urls"];
+                imgList = [[NSArray alloc] init];
+                [tucao setValue:imgList forKey:@"imgList"];
             }
+            //区分评论和点赞
+            NSArray *comments = [laba objectForKey:@"comments"];
+            if (comments.count > 0) {
+                for (NSDictionary *comment in comments) {
+                    if ([[comment objectForKey:@"content"] length] == 1) {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.jyouList addObject:pinglun];
+                    }else
+                    {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.commentList addObject:pinglun];
+                    }
+                }
+            }
+            NSLog(@"%@",tucao.description);
             [_tuCaoList addObject:tucao];
         }
+        //请求完毕，刷新table
         [self.tableView reloadData ];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -182,10 +218,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 -(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(int)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    if (tucao.pic_urls.count == 1) {
+    if (tucao.imgList.count == 1) {
+        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:0]] placeholder:placeholder];
+        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
         photo.tag = 0;
         photo.clipsToBounds = YES;
@@ -196,13 +233,12 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
     }
     
-    if (tucao.pic_urls.count >1 && tucao.pic_urls.count < 4) {
+    if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
-//            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -213,14 +249,13 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
         }
     }
     
-    if(tucao.pic_urls.count > 3)
+    if(tucao.imgList.count > 3)
     {
         cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
-        for (int idx = 0; idx < tucao.pic_urls.count; idx++) {
+        for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:idx]] placeholder:placeholder];
-//            [photo setImageURLStr: [tucao.pic_urls objectAtIndex:0] placeholder:placeholder];
+            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -235,13 +270,12 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)tapImage:(UITapGestureRecognizer *)tap
 {
     TuCao *tucao = [_tuCaoList objectAtIndex:(tap.view.tag/10)];
-    NSInteger count =  [[tucao pic_urls] count];
+    NSInteger count =  [[tucao imgList] count];
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
-//        NSString *url = [[[tucao pic_urls] objectAtIndex:i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.pic_urls objectAtIndex:i]];
+        NSString *url = [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:i]];
         MJPhoto *photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径]
         photo.srcImageView = tap.view.superview.subviews[i]; // 来源于哪个UIImageView
