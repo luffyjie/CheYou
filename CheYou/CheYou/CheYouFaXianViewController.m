@@ -156,7 +156,7 @@
 #pragma 导航按钮事件
 
 - (IBAction)cancelAction:(id)sender {
-    
+    [self.textView resignFirstResponder];    
     [self dismissViewControllerAnimated:YES completion: nil];
 }
 

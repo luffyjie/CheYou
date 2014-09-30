@@ -73,17 +73,18 @@
 
 #pragma 导航按钮
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [self.textView becomeFirstResponder];
 }
 
 - (IBAction)canceButton:(id)sender {
-    
+    [self.textView resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion: nil];
 }
 
 - (IBAction)sendButton:(id)sender {
+    [self.textView resignFirstResponder];
     //发表评论到服务端
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
