@@ -308,6 +308,7 @@
     }else{
         CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usertucaoIdentifier"];
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
+        tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         //添加点赞加油点击按钮
         UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
         [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];

@@ -33,7 +33,7 @@
     
     UINavigationController *myNavController = self.viewControllers[1];
     UIImage *tab_my_select = [UIImage imageNamed:@"tab_my_select"];
-    tab_my_select = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    tab_my_select = [tab_my_select imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UITabBarItem *myitem = [[UITabBarItem alloc]initWithTitle:@""image:[UIImage imageNamed:@"tab_my_unselect"]
                          selectedImage:tab_my_select];
     myNavController.tabBarItem = myitem;
