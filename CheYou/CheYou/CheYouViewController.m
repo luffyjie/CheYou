@@ -41,7 +41,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //刷新获取数据
-//    [self refreshConfig];
+    [self refreshConfig];
 }
 
 - (void)didReceiveMemoryWarning

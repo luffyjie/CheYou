@@ -18,6 +18,7 @@
 #import "CheYouCommentViewController.h"
 #import "CheYouSetViewController.h"
 #import "AFNetworking.h"
+#import "PingLun.h"
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -34,19 +35,19 @@
 
 @implementation CheYouUserViewController
 {
-    UITableView *tableview;
+    UITableView *tucaotableview;
     UITableView *dianzanTableview;
     NSMutableArray *_tuCaoList;
-    NSMutableArray *_zanList;
+    NSMutableArray *_dianzanList;
 }
 
 -(void)viewDidLoad{
     [super viewDidLoad];
     _tuCaoList = [[NSMutableArray alloc] init];
-    _zanList = [[NSMutableArray alloc] init];
+    _dianzanList = [[NSMutableArray alloc] init];
     //获取测试数据
-    [self getDataFormFiles];
-    [self getData];
+    [self geTuCaoData];
+    [self getZanData];
     //设置按钮选择状态
     [self.oilButton  setImage:[UIImage imageNamed:@"my_talk_select"] forState:UIControlStateHighlighted];
     [self.oilButton  addTarget:self action:@selector(oilButtonAction:)forControlEvents:UIControlEventTouchDown];
@@ -63,14 +64,14 @@
     self.photoView.layer.masksToBounds = YES;
     self.nameView.text = [userDefaults objectForKey:@"userName"];
     //初始化喇叭
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
-    [self.view addSubview:tableview];
-    tableview.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
-    tableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,5)];
-    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableview.delegate = self;
-    tableview.dataSource = self;
-    tableview.tag = 1;
+    tucaotableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
+    [self.view addSubview:tucaotableview];
+    tucaotableview.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
+    tucaotableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,5)];
+    tucaotableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tucaotableview.delegate = self;
+    tucaotableview.dataSource = self;
+    tucaotableview.tag = 1;
     //创建刷新
     [self refreshConfig];
     
@@ -94,35 +95,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark 获取属性文件数据
--(void)getDataFormFiles
-{
-	NSArray *parkDictionaries = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TuCaoList" ofType:@"plist"]];
-	NSArray *propertyNames = [[NSArray alloc] initWithObjects:@"tu_id", @"screen_name", @"profile_image_url", @"tuCaotext",
-                              @"tuCaotag", @"created_at", @"pic_urls",nil];
-    
-	for (NSDictionary *tuCaoDic in parkDictionaries) {
-		TuCao *tucao = [[TuCao alloc] init];
-		for (NSString *property in propertyNames) {
-            
-            [tucao setValue:[tuCaoDic objectForKey:property] forKey:property];
-		}
-		[_zanList addObject:tucao];
-	}
-}
-
 #pragma getData
 
-- (void)getData
+- (void)geTuCaoData
 {
     //第一次获取数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": @"1", @"page.size": @"5",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
+                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *labaDic = [responseObject objectForKey:@"data"];
+        //遍历喇叭
         for (NSDictionary *laba in labaDic) {
             TuCao *tucao  = [[TuCao alloc] init];
             [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
@@ -135,17 +120,112 @@
             [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
             [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
             [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
-            NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
-            if (imgList.count > 0) {
+            if ([[laba objectForKey:@"img"] length] > 1) {
+                NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
                 [tucao setValue:imgList forKey:@"imgList"];
-            }else
-            {
-                imgList = [[NSArray alloc] init];
-                [tucao setValue:imgList forKey:@"imgList"];
+            }
+            //区分评论和点赞
+            NSArray *comments = [laba objectForKey:@"comments"];
+            if (comments.count > 0) {
+                for (NSDictionary *comment in comments) {
+                    if ([[comment objectForKey:@"content"] length] == 1) {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.jyouList addObject:pinglun];
+                    }else
+                    {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.commentList addObject:pinglun];
+                    }
+                }
             }
             [_tuCaoList addObject:tucao];
         }
-        [tableview reloadData ];
+        //请求完毕，刷新table
+        [tucaotableview reloadData ];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
+
+}
+
+- (void)getZanData
+{
+    //第一次获取数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
+                                 @"page.size": @"20",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *labaDic = [responseObject objectForKey:@"data"];
+        //遍历喇叭
+        for (NSDictionary *laba in labaDic) {
+            TuCao *tucao  = [[TuCao alloc] init];
+            [tucao setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+            [tucao setValue:[userDefaults stringForKey:@"photoUrl"]forKey:@"hpic"];
+            [tucao setValue:[laba objectForKey:@"lbid"] forKey:@"lbid"];
+            [tucao setValue:[laba objectForKey:@"account"] forKey:@"account"];
+            [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
+            [tucao setValue:[laba objectForKey:@"huati"] forKey:@"huati"];
+            [tucao setValue:[laba objectForKey:@"jyou"] forKey:@"jyou"];
+            [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
+            [tucao setValue:[laba objectForKey:@"createtime"] forKey:@"createtime"];
+            [tucao setValue:[laba objectForKey:@"updatetime"] forKey:@"updatetime"];
+            if ([[laba objectForKey:@"img"] length] > 1) {
+                NSArray *imgList = [[laba objectForKey:@"img"] componentsSeparatedByString:@";"];
+                [tucao setValue:imgList forKey:@"imgList"];
+            }
+            //区分评论和点赞
+            NSArray *comments = [laba objectForKey:@"comments"];
+            if (comments.count > 0) {
+                for (NSDictionary *comment in comments) {
+                    if ([[comment objectForKey:@"content"] length] == 1) {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.jyouList addObject:pinglun];
+                    }else
+                    {
+                        PingLun * pinglun = [[PingLun alloc] init];
+                        [pinglun setValue:[userDefaults stringForKey:@"userName"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                        [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                        [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                        [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                        [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                        [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                        [tucao.commentList addObject:pinglun];
+                    }
+                }
+            }
+            [_dianzanList addObject:tucao];
+        }
+        //请求完毕，刷新table
+        [dianzanTableview reloadData ];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -160,15 +240,15 @@
 - (void)oilButtonAction:(id)sender
 {
     dianzanTableview.hidden = NO;
-    tableview.hidden = YES;
-    [tableview reloadData];
+    tucaotableview.hidden = YES;
+    [tucaotableview reloadData];
     self.greenLabel.frame = CGRectMake(108, 198, 104, 2);
 }
 
 - (void)labaButtonAction:(id)sender
 {
     dianzanTableview.hidden = YES;
-    tableview.hidden = NO;
+    tucaotableview.hidden = NO;
     [dianzanTableview reloadData];
     self.greenLabel.frame = CGRectMake(1, 198, 104, 2);
 }
@@ -177,17 +257,17 @@
 
 -(void)refreshConfig
 {
-    [tableview addHeaderWithTarget:self action:@selector(headerRereshing)];
+    [tucaotableview addHeaderWithTarget:self action:@selector(headerRereshing)];
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    tableview.headerPullToRefreshText = @"下拉可以刷新了";
-    tableview.headerReleaseToRefreshText = @"松开马上刷新了";
-    tableview.headerRefreshingText = @"正在刷新中...";
+    tucaotableview.headerPullToRefreshText = @"下拉可以刷新了";
+    tucaotableview.headerReleaseToRefreshText = @"松开马上刷新了";
+    tucaotableview.headerRefreshingText = @"正在刷新中...";
     
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [tableview addFooterWithTarget:self action:@selector(footerRereshing)];
-    tableview.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    tableview.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    tableview.footerRefreshingText = @"正在刷新中...";
+    [tucaotableview addFooterWithTarget:self action:@selector(footerRereshing)];
+    tucaotableview.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    tucaotableview.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    tucaotableview.footerRefreshingText = @"正在刷新中...";
 }
 
 -(void)refreshDianzanConfig
@@ -213,28 +293,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 2) {
-        return _zanList.count;
+        return _dianzanList.count;
     }
     return _tuCaoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    static NSString *dianzanIdentifier=@"dianzanIdentifier";
-    static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     if (tableView.tag == 2) {
-        CheYouDianzanViewCell *dianzanCell = [tableView dequeueReusableCellWithIdentifier:dianzanIdentifier];
-        if (!dianzanCell) {
-            dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dianzanIdentifier];
-        }
+        CheYouDianzanViewCell *dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dianzanIdentifier"];
         dianzanCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        dianzanCell.tucao = [_zanList objectAtIndex:indexPath.row];
+        dianzanCell.tucao = [_dianzanList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
-        CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:usertucaoIdentifier];
-        if (!tucaoCell) {
-            tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:usertucaoIdentifier];
-        }
+        CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usertucaoIdentifier"];
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         //添加点赞加油点击按钮
         UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
@@ -249,7 +321,7 @@
     if (tableView.tag == 2) {
         return 48;
     }else{
-        UITableViewCell *cell = [self tableView:tableview cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [self tableView:tucaotableview cellForRowAtIndexPath:indexPath];
         return cell.frame.size.height;
     }
 }
@@ -271,7 +343,7 @@
         // 下载图片
         [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
         // 事件监听
-        photo.tag = 0;
+        photo.tag = (10*row);
         photo.clipsToBounds = YES;
         photo.contentMode = UIViewContentModeScaleAspectFill;
         photo.userInteractionEnabled = YES;
@@ -281,7 +353,6 @@
     }
     
     if (tucao.imgList.count >1 && tucao.imgList.count < 4) {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 80);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
@@ -298,7 +369,6 @@
     
     if(tucao.imgList.count > 3)
     {
-        cell.userPhotoView.frame = CGRectMake(0, cell.tuCaoText.bounds.size.height + 70.f, cell.contentView.bounds.size.width, 170);
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
@@ -346,7 +416,7 @@
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    tableview.showsVerticalScrollIndicator = NO;
+    tucaotableview.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -355,17 +425,17 @@
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [tableview reloadData];
+        [tucaotableview reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [tableview headerEndRefreshing];
-        tableview.showsVerticalScrollIndicator = YES;
+        [tucaotableview headerEndRefreshing];
+        tucaotableview.showsVerticalScrollIndicator = YES;
     });
 }
 
 - (void)footerRereshing
 {
-    tableview.showsVerticalScrollIndicator = NO;
+    tucaotableview.showsVerticalScrollIndicator = NO;
     // 1.添加假数据
     for (NSInteger i = 0; i<5; i++) {
         [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
@@ -374,11 +444,11 @@
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [tableview reloadData];
+        [tucaotableview reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [tableview footerEndRefreshing];
-        tableview.showsVerticalScrollIndicator = YES;
+        [tucaotableview footerEndRefreshing];
+        tucaotableview.showsVerticalScrollIndicator = YES;
     });
 }
 
@@ -433,7 +503,7 @@
     if ([segue.identifier isEqual:@"my_comment_segue"]) {
         CheYouCommentViewController *commentView = (CheYouCommentViewController *)segue.destinationViewController;
         commentView.hidesBottomBarWhenPushed = YES;
-        NSIndexPath *indexPath = [tableview indexPathForSelectedRow];
+        NSIndexPath *indexPath = [tucaotableview indexPathForSelectedRow];
         commentView.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         commentView.indexpath = indexPath;
     }
@@ -450,7 +520,17 @@
 {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
-    CheYouTuCaoTableViewCell *cell=(CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    //这里7.0以上版本和之前版本取值不同，程序会crash
+    CheYouTuCaoTableViewCell *cell;
+    float version=[[[UIDevice currentDevice] systemVersion] floatValue];
+    if(version>=7.0)
+    {
+        cell=(CheYouTuCaoTableViewCell *)[[button superview] superview];
+    }
+    else
+    {
+        cell = (CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
+    }
     if (button.selected) {
         cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];

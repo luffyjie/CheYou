@@ -160,36 +160,44 @@
         return;
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSString *userPhone = [userDefaults stringForKey:@"userPhone"];
-//    NSString *userPwd = [userDefaults stringForKey:@"userPwd"];
-//    if (userPhone.length>1 && userPwd.length>1) {
-//        if ([userPhone isEqualToString:self.phoneText.text] && [userPwd isEqualToString:self.pwdText.text]) {
-//            //设置用户登录状态
-//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//            [userDefaults setInteger:2 forKey:@"userOut"];
-//            [userDefaults synchronize];
-//            [self performSegueWithIdentifier:@"home_segue" sender:self];
-//            return;
-//        }
-//    }
-
+    //验证用户账号和密码
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": self.phoneText.text};
-    [manager POST:@"http://114.215.187.69/citypin/rs/user/info" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *parameters = @{@"account": self.phoneText.text, @"passwd": self.pwdText.text};
+    [manager POST:@"http://114.215.187.69/citypin/rs/user/passwd/valid" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSDictionary *userDic =  [responseObject objectForKey:@"data"];
-        NSLog(@"%@",[userDic objectForKey:@"account"]);
-        //缓存用户休息到本地
-        [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
-        [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
-        [userDefaults setObject:[userDic objectForKey:@"hpic"] forKey:@"photoUrl"];
-        [userDefaults setObject:[userDic objectForKey:@"nkname"] forKey:@"userName"];
-        [userDefaults setObject:[userDic objectForKey:@"location"] forKey:@"userArea"];
-        //设置用户登录状态
-        [userDefaults setInteger:2 forKey:@"userOut"];
-        [userDefaults synchronize];
-        [self performSegueWithIdentifier:@"home_segue" sender:self];
+        NSInteger result = (int)[responseObject objectForKey:@"r"];
+        if (result == -1) {
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+            return ;
+        }
+        //获取用户信息保存本地
+        NSDictionary *parameters = @{@"account": self.phoneText.text};
+        [manager POST:@"http://114.215.187.69/citypin/rs/user/info" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+            NSDictionary *userDic =  [responseObject objectForKey:@"data"];
+            //缓存用户休息到本地
+            [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
+            [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
+            [userDefaults setObject:[userDic objectForKey:@"hpic"] forKey:@"photoUrl"];
+            [userDefaults setObject:[userDic objectForKey:@"nkname"] forKey:@"userName"];
+            [userDefaults setObject:[userDic objectForKey:@"location"] forKey:@"userArea"];
+            //设置用户登录状态
+            [userDefaults setInteger:2 forKey:@"userOut"];
+            [userDefaults synchronize];
+            [self performSegueWithIdentifier:@"home_segue" sender:self];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"网络错误，登录失败！", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+        }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);

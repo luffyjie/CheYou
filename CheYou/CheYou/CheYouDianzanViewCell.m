@@ -9,6 +9,7 @@
 #import "CheYouDianzanViewCell.h"
 #import "LuJieCommon.h"
 #import "UIImageExt.h"
+#import "UIImageView+MJWebCache.h"
 
 #define IMAGE_HEIGHT_SIZE   24.f
 #define IMAGE_WIDTH_SIZE    24.f
@@ -100,12 +101,14 @@
 {
     if (_tucao != tucao) {
         _tucao = tucao;
-        userImage.image = [UIImage imageNamed:_tucao.hpic];
+        // 下载图片
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _tucao.hpic] placeholder:placeholder];
         screen_name.text = _tucao.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         [formatter setTimeStyle:NSDateFormatterShortStyle];
-        [formatter setDateFormat:@"MM-dd HH:mm"];
+        [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
         NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
     }
