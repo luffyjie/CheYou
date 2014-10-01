@@ -296,28 +296,27 @@
     if (userPhotoList.count == 0) {
         return imgStr;
     }
-    
+    //调用up yun 上传图片接口
+    UpYun *uy = [[UpYun alloc] init];
     if (userPhotoList.count == 1) {
         //上传图片
-        UpYun *uy = [[UpYun alloc] init];
         NSString *photoUrl = [self getSaveKey];
         [uy uploadFile:[[userPhotoList objectAtIndex:0] image] saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
-        return imgStr;
-    }
-    
-    for (int i=0; i<=userPhotoList.count-2; i++) {
-        //上传图片
-        UpYun *uy = [[UpYun alloc] init];
+    }else
+    {
+        //多张图片上传
+        for (int i=0; i<=userPhotoList.count-2; i++) {
+            //上传图片
+            NSString *photoUrl = [self getSaveKey];
+            [uy uploadFile:[[userPhotoList objectAtIndex:i] image] saveKey:photoUrl];
+            imgStr = [imgStr stringByAppendingString:photoUrl];
+            imgStr = [imgStr stringByAppendingString:@";"];
+        }
         NSString *photoUrl = [self getSaveKey];
-        [uy uploadFile:[[userPhotoList objectAtIndex:i] image] saveKey:photoUrl];
+        [uy uploadFile:[[userPhotoList lastObject] image] saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
-        imgStr = [imgStr stringByAppendingString:@";"];
     }
-    UpYun *uy = [[UpYun alloc] init];
-    NSString *photoUrl = [self getSaveKey];
-    [uy uploadFile:[[userPhotoList lastObject] image] saveKey:photoUrl];
-    imgStr = [imgStr stringByAppendingString:photoUrl];
     return imgStr;
 }
 
