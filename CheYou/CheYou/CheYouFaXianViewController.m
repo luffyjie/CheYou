@@ -298,6 +298,19 @@
     }
     //调用up yun 上传图片接口
     UpYun *uy = [[UpYun alloc] init];
+//    uy.successBlocker = ^(id data)
+//    {
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alert show];
+//        NSLog(@"%@",data);
+//    };
+//    uy.failBlocker = ^(NSError * error)
+//    {
+//        NSString *message = [error.userInfo objectForKey:@"message"];
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alert show];
+//        NSLog(@"%@",error);
+//    };
     if (userPhotoList.count == 1) {
         //上传图片
         NSString *photoUrl = [self getSaveKey];
