@@ -165,7 +165,21 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
     }];
-
+    //获取喇叭，油桶总数
+    parameters = @{@"account": [userDefaults stringForKey:@"userPhone"]};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/stat" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+        NSLog(@"/laba/stat: %@", dataDic);
+        self.oil_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"ytcount"]];
+        self.laba_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"labacount"]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma 按钮事件
