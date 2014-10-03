@@ -76,6 +76,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.areaText resignFirstResponder];
+}
+
 #pragma 获取省市数据
 - (void)getCity
 {

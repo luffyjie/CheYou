@@ -169,7 +169,7 @@
     parameters = @{@"account": [userDefaults stringForKey:@"userPhone"]};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/stat" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dataDic = [responseObject objectForKey:@"data"];
-        NSLog(@"/laba/stat: %@", dataDic);
+//        NSLog(@"/laba/stat: %@", dataDic);
         self.oil_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"ytcount"]];
         self.laba_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"labacount"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheYouGeRenViewController : UIViewController
+@interface CheYouGeRenViewController : UIViewController <UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSource>
 
 @end
