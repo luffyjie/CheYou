@@ -120,7 +120,6 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
         NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"],@"phone":[userDefaults stringForKey:@"userPhone"], @"hpic":photoUrl, @"location":newArea};
-        NSLog(@"%@",parameters.description);
         [manager POST:@"http://114.215.187.69/citypin/rs/user/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"更新成功", nil);
