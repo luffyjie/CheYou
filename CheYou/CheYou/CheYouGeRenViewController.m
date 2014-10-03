@@ -101,23 +101,51 @@
 
 - (void)editAction:(id)sender
 {
+    NSString *photoUrl;
     //验证地区
     if (imgData.length >1 || newArea.length >1) {
-     
         if (imgData.length >1 ) {
             //上传图片
             UpYun *uy = [[UpYun alloc] init];
-            NSString *photoUrl = [self getSaveKey];
+            photoUrl = [self getSaveKey];
             [uy uploadFile:imgData saveKey:photoUrl];
         }
-        
-        [self.navigationController popViewControllerAnimated:YES];
+        photoUrl = imgData.length>1?photoUrl:[userDefaults stringForKey:@"photoUrl"];
+        newArea = newArea.length>1?newArea:[userDefaults stringForKey:@"userArea"];
+        if ([photoUrl isEqualToString:[userDefaults stringForKey:@"photoUrl"]] && [newArea isEqualToString:[userDefaults stringForKey:@"userArea"]])
+        {
+            return;
+        }
+        //更新用户信息到服务器
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"],@"phone":[userDefaults stringForKey:@"userPhone"], @"hpic":photoUrl, @"location":newArea};
+        NSLog(@"%@",parameters.description);
+        [manager POST:@"http://114.215.187.69/citypin/rs/user/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"更新成功", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+            //更新本地用户信息
+            [userDefaults setObject:newArea forKey:@"userArea"];
+            [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"网络异常，更新失败！", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+        }];
+    }else{
+        //没有修改内容弹出提示
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"请选择修改的内容", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
     }
-    NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = NSLocalizedString(@"请选择修改的内容", nil);
-    NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-    [alert show];
 }
 
 #pragma 按钮 事件
@@ -539,6 +567,7 @@
         districtStr = @"";
     }
     self.areaLabel.text = [NSString stringWithFormat: @"%@-%@-%@", provinceStr, cityStr, districtStr];
+    newArea = [NSString stringWithFormat: @"%@-%@", cityStr, districtStr];
 }
 
 #pragma upyun
