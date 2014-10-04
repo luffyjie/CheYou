@@ -178,10 +178,6 @@
     [self presentViewController:picker animated:YES completion:^{}];
 }
 
-- (IBAction)sharpAction:(id)sender {
-    
-}
-
 -(void)doneAction:(id)sender
 {
     [self.tietiaoTimeButton resignFirstResponder];
@@ -248,10 +244,10 @@
     [accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
     [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accphoto];
-    UIButton *  accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
-    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accsharp];
+//    UIButton *  accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
+//    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
+//    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
+//    [accessoryView addSubview:accsharp];
     
     return accessoryView;
 }

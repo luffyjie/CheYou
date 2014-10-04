@@ -72,10 +72,10 @@
     [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accphoto];
     
-    accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
-    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
-    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
-    [accessoryView addSubview:accsharp];
+//    accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
+//    [accsharp setBackgroundImage:[UIImage imageNamed:@"keyboard_sharp"] forState:UIControlStateNormal];
+//    [accsharp addTarget:self action:@selector(sharpAction:) forControlEvents:UIControlEventTouchDown];
+//    [accessoryView addSubview:accsharp];
     [self.view addSubview:accessoryView];
     accessoryView.hidden = YES;
 }
@@ -203,10 +203,6 @@
     picker.maximumNumberOfSelectionVideo = 0;
     picker.maximumNumberOfSelectionPhoto = 6;
     [self presentViewController:picker animated:YES completion:^{}];
-}
-
-- (IBAction)sharpAction:(id)sender {
-    
 }
 
 #pragma mark - UzysAssetsPickerControllerDelegate methods

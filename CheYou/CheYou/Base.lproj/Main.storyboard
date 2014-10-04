@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wZg-Vq-jyH">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -500,16 +501,6 @@
                                 <action selector="photoAction:" destination="RaD-ac-D9K" eventType="touchDown" id="akI-vC-5rw"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qch-KZ-rSR">
-                            <rect key="frame" x="83" y="13" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="keyboard_sharp">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="sharpAction:" destination="RaD-ac-D9K" eventType="touchDown" id="mWA-JD-ta7"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -584,16 +575,6 @@
                                         </state>
                                         <connections>
                                             <action selector="photoAction:" destination="asP-GS-l4h" eventType="touchDown" id="Yxu-mC-NCS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X7v-0X-FiL">
-                                        <rect key="frame" x="56" y="12" width="75" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="keyboard_sharp">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sharpAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="NHX-3R-35p"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -710,17 +691,6 @@
                                         <connections>
                                             <action selector="photoAction:" destination="UQi-3m-Aii" eventType="touchUpInside" id="vk0-tq-Nhp"/>
                                             <action selector="photoAction:" destination="asP-GS-l4h" eventType="touchDown" id="zlW-fb-PBp"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UNu-Ho-QnU">
-                                        <rect key="frame" x="56" y="12" width="75" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="keyboard_sharp">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sharpAction:" destination="asP-GS-l4h" eventType="touchUpInside" id="IrJ-2L-zgB"/>
-                                            <action selector="sharpAction:" destination="UQi-3m-Aii" eventType="touchUpInside" id="xcW-PX-WIW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1332,7 +1302,6 @@
     <resources>
         <image name="default_photo" width="100" height="67"/>
         <image name="keyboard_image" width="20" height="20"/>
-        <image name="keyboard_sharp" width="20" height="20"/>
         <image name="login" width="180" height="45"/>
         <image name="luoli" width="48" height="48"/>
         <image name="my_talk" width="106" height="35"/>
