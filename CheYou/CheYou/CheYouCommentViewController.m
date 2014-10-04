@@ -57,7 +57,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height + 10) animated:YES];
+    if (commentList.count > 1) {
+        [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height) animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning

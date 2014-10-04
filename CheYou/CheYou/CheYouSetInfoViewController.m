@@ -245,7 +245,7 @@
             [self presentViewController:controller
                                animated:YES
                              completion:^(void){
-                                 NSLog(@"Picker View Controller is presented");
+//                                 NSLog(@"Picker View Controller is presented");
                              }];
         }
         
@@ -261,7 +261,7 @@
             [self presentViewController:controller
                                animated:YES
                              completion:^(void){
-                                 NSLog(@"Picker View Controller is presented");
+//                                 NSLog(@"Picker View Controller is presented");
                              }];
         }
     }

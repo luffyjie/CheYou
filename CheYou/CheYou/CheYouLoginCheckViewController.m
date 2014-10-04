@@ -141,7 +141,7 @@
         //获取用户信息保存本地
         NSDictionary *parameters = @{@"account": self.phoneText.text};
         [manager POST:@"http://114.215.187.69/citypin/rs/user/info" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+//            NSLog(@"JSON: %@", responseObject);
             NSDictionary *userDic =  [responseObject objectForKey:@"data"];
             //缓存用户休息到本地
             [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];
