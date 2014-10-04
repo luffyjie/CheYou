@@ -391,11 +391,9 @@ static int page;
 - (void)headerRereshing
 {
     tucaotableview.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    //1.添加数据
+    page = 1;
+    [self geTuCaoData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
@@ -410,11 +408,9 @@ static int page;
 - (void)footerRereshing
 {
     tucaotableview.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    // 1.添加数据
+    page++;
+    [self geTuCaoData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
