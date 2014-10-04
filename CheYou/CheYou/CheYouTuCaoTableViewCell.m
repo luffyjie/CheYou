@@ -185,10 +185,10 @@
     footLine.frame = CGRectMake(0, frame.size.height - 5.f, frame.size.width, 5.f);
     midLine.frame = CGRectMake(0, frame.size.height - 34.f, frame.size.width, 1.0f);
     //设置评论计数位置
-    gasolineLabel.frame = CGRectMake(frame.size.width - 52.f, frame.size.height - 29.f, 40.f, 20.f);
-    commentLabel.frame = CGRectMake(frame.size.width/2 - 2, frame.size.height - 29.f, 40.f, 20.f);
-    gasolineView.frame = CGRectMake(frame.size.width - 80.f, frame.size.height - 26.f, 15.f, 15.f);
-    commentView.frame = CGRectMake(frame.size.width/2 - 30, frame.size.height - 25.f, 15.f, 15.f);
+    gasolineLabel.frame = CGRectMake(frame.size.width - 33.f, frame.size.height - 29.f, 40.f, 20.f);
+    commentLabel.frame = CGRectMake(frame.size.width/2 + 15, frame.size.height - 29.f, 40.f, 20.f);
+    gasolineView.frame = CGRectMake(frame.size.width - 57.f, frame.size.height - 26.f, 15.f, 15.f);
+    commentView.frame = CGRectMake(frame.size.width/2-10, frame.size.height - 25.f, 15.f, 15.f);
 }
 
 @end

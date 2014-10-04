@@ -133,26 +133,26 @@
     UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40.f)];
     sectionView.backgroundColor = [UIColor whiteColor];//[LuJieCommon UIColorFromRGB:0xd7d7d7];
     
-    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 45.f,
+    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 32.f,
                                                                        sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     gasolineLabel.text = [NSString stringWithFormat:@"%d",self.tucao.jyou];
     gasolineLabel.font = [UIFont systemFontOfSize:14];
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
     
-    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 11,
+    commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 15,
                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     commentLabel.text = [NSString stringWithFormat:@"%d",(int)self.tucao.commentList.count];
     commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:commentLabel];
-    
-    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 75.f,
+
+    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 57.f,
                                                                               sectionView.frame.size.height - 26.f, 15.f, 15.f)];
     gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
     [sectionView addSubview:gasolineView];
     
-    UIImageView *commentView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 - 20,
+    UIImageView *commentView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 -10,
                                                                              sectionView.frame.size.height - 25.f, 15.f, 15.f)];
     commentView.image = [UIImage imageNamed:@"tc_comment"];
     [sectionView addSubview:commentView];
