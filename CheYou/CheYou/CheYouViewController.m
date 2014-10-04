@@ -42,7 +42,7 @@ static int page;
     _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
     page = 1;
-    [self getData:page];
+//    [self getData:page];
 	// Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
@@ -50,6 +50,7 @@ static int page;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //刷新获取数据
     [self refreshConfig];
+    [self.tableView headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,8 +123,13 @@ static int page;
                 [_tuCaoList addObject:tucao];
             }
         }
+        if (page==1) {
+            [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
+                return [obj1.createtime intValue] < [obj2.createtime intValue];
+            }];
+        }
         //请求完毕，刷新table
-        [self.tableView reloadData ];
+//        [self.tableView reloadData ];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -326,7 +332,7 @@ static int page;
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-//        [self.tableView reloadData];
+        [self.tableView reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView headerEndRefreshing];
@@ -343,7 +349,7 @@ static int page;
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-//        [self.tableView reloadData];
+        [self.tableView reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView footerEndRefreshing];

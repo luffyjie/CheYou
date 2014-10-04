@@ -20,6 +20,8 @@
 #import "AFNetworking.h"
 #import "PingLun.h"
 
+static int page;
+
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet UILabel *nameView;
@@ -39,14 +41,19 @@
     UITableView *dianzanTableview;
     NSMutableArray *_tuCaoList;
     NSMutableArray *_jyouList;
+    NSMutableSet *_tuCaoSet;
+    NSMutableSet *_jyouSet;
 }
 
 -(void)viewDidLoad{
     [super viewDidLoad];
     _tuCaoList = [[NSMutableArray alloc] init];
     _jyouList = [[NSMutableArray alloc] init];
-    //获取测试数据
-    [self geTuCaoData];
+    _tuCaoSet = [[NSMutableSet alloc] init];
+    _jyouSet = [[NSMutableSet alloc] init];
+    //获取数据
+    page = 1;
+    [self geTuCaoData:page];
     //设置按钮选择状态
     [self.oilButton  setImage:[UIImage imageNamed:@"my_talk_select"] forState:UIControlStateHighlighted];
     [self.oilButton  addTarget:self action:@selector(oilButtonAction:)forControlEvents:UIControlEventTouchDown];
@@ -96,14 +103,14 @@
 
 #pragma getData
 
-- (void)geTuCaoData
+- (void)geTuCaoData:(int)page
 {
     //第一次获取数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": @"1",
-                                 @"page.size": @"1000",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": [NSString stringWithFormat:@"%d",page],
+                                 @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
@@ -137,7 +144,11 @@
                         [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
                         [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
                         [tucao.jyouList addObject:pinglun];
-                        [_jyouList addObject:pinglun];
+                        //去掉重复加油
+                        if (![_jyouSet containsObject:pinglun.lcid]) {
+                            [_jyouSet addObject:pinglun.lcid];
+                            [_jyouList addObject:pinglun];
+                        }
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
@@ -152,7 +163,19 @@
                     }
                 }
             }
-            [_tuCaoList addObject:tucao];
+            //如果该数据是新的则添加进去
+            if (![_tuCaoSet containsObject:tucao.lbid]) {
+                [_tuCaoSet addObject:tucao.lbid];
+                [_tuCaoList addObject:tucao];
+            }
+        }
+        if (page==1) {
+            [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
+                return [obj1.createtime intValue] < [obj2.createtime intValue];
+            }];
+            [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+                return [obj1.createtime intValue] < [obj2.createtime intValue];
+            }];
         }
         //请求完毕，刷新table
         [tucaotableview reloadData ];
@@ -260,7 +283,7 @@
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         //添加点赞加油点击按钮
-        UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 95.f, tucaoCell.frame.size.height - 35.f, 65.f, 30.f)];
+        UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
         [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
         [tucaoCell.contentView addSubview:overbutton];
         [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:indexPath.row];
@@ -406,15 +429,13 @@
 - (void)dianzanheaderRereshing
 {
     dianzanTableview.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    //1.添加数据
+    page = 1;
+    [self geTuCaoData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [dianzanTableview reloadData];
+//        [dianzanTableview reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [dianzanTableview headerEndRefreshing];
@@ -425,11 +446,9 @@
 - (void)dianzanfooterRereshing
 {
     dianzanTableview.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    // 1.添加数据
+    page++;
+    [self geTuCaoData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
