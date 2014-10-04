@@ -19,6 +19,7 @@
 #import "PingLun.h"
 
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
+static int page;
 
 @interface CheYouViewController ()
 
@@ -29,6 +30,7 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     NSMutableArray *_tuCaoList;
     NSMutableSet *_zanSet;
     NSUserDefaults *userDefaults;
+    NSMutableSet *_tuCaoSet;
 }
 
 - (void)viewDidLoad
@@ -37,8 +39,10 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
     //初始化
      userDefaults = [NSUserDefaults standardUserDefaults];
     _zanSet = [[NSMutableSet alloc] init];
+    _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
-    [self getData];
+    page = 1;
+    [self getData:page];
 	// Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
@@ -56,14 +60,16 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 
 #pragma getData
 
-- (void)getData
+- (void)getData:(int)page
 {
     //第一次获取数据
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901", @"page.page": @"1",
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901",
+                                 @"page.page": [NSString stringWithFormat:@"%d",page],
                                  @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"responseObject: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
@@ -110,7 +116,11 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
                     }
                 }
             }
-            [_tuCaoList addObject:tucao];
+            //如果该数据是新的则添加进去
+            if (![_tuCaoSet containsObject:tucao.lbid]) {
+                [_tuCaoSet addObject:tucao.lbid];
+                [_tuCaoList addObject:tucao];
+            }
         }
         //请求完毕，刷新table
         [self.tableView reloadData ];
@@ -310,15 +320,13 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)headerRereshing
 {
     self.tableView.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    //1.添加数据
+    page = 1;
+    [self getData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView headerEndRefreshing];
@@ -329,15 +337,13 @@ NSString *const MJTableViewCellIdentifier = @"sconddentifier";
 - (void)footerRereshing
 {
     self.tableView.showsVerticalScrollIndicator = NO;
-    // 1.添加假数据
-    for (NSInteger i = 0; i<5; i++) {
-        [_tuCaoList addObject:[_tuCaoList objectAtIndex:i]];
-    }
-    
+    // 1.添加数据
+    page++;
+    [self getData:page];
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [self.tableView footerEndRefreshing];
