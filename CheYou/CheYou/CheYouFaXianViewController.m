@@ -10,6 +10,7 @@
 #import "LuJieCommon.h"
 #import "AFNetworking.h"
 #import "UpYun.h"
+#import "UIImageExt.h"
 
 @interface CheYouFaXianViewController ()
 @property (weak, nonatomic) IBOutlet UIView *keyboarbarView;
@@ -165,15 +166,12 @@
     [self.textView resignFirstResponder];
     //发送数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
-    NSLog(@"%@",timeSp);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"location": [userDefaults stringForKey:@"userArea"],
                                  @"type": @"3", @"img": [self getImgStr],@"huati":self.textView.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/pub" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"发送成功！", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
@@ -214,7 +212,7 @@
 #pragma mark - UzysAssetsPickerControllerDelegate methods
 - (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
-    DLog(@"assets %@",assets);
+//    DLog(@"assets %@",assets);
     for(UIImageView* view in userPhotoList)
     {
         [view removeFromSuperview];
@@ -225,12 +223,11 @@
     {
         [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ALAsset *representation = obj;
-            
             UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
                                                scale:representation.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
             UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, (idx/3)*102, 92, 92)];
-            userImage.image = img;
+            userImage.image = [img imageByScalingAndCroppingForSize:CGSizeMake(150, 100)];
             userImage.clipsToBounds = YES;
             userImage.contentMode = UIViewContentModeScaleAspectFill;
             [self.photoView addSubview:userImage];
@@ -298,23 +295,11 @@
     }
     //调用up yun 上传图片接口
     UpYun *uy = [[UpYun alloc] init];
-//    uy.successBlocker = ^(id data)
-//    {
-//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [alert show];
-//        NSLog(@"%@",data);
-//    };
-//    uy.failBlocker = ^(NSError * error)
-//    {
-//        NSString *message = [error.userInfo objectForKey:@"message"];
-//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"error" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [alert show];
-//        NSLog(@"%@",error);
-//    };
     if (userPhotoList.count == 1) {
         //上传图片
         NSString *photoUrl = [self getSaveKey];
-        [uy uploadFile:[[userPhotoList objectAtIndex:0] image] saveKey:photoUrl];
+        NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:0] image], 0.3);
+        [uy uploadFile:imgdata saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
     }else
     {
@@ -322,7 +307,8 @@
         for (int i=0; i<=userPhotoList.count-2; i++) {
             //上传图片
             NSString *photoUrl = [self getSaveKey];
-            [uy uploadFile:[[userPhotoList objectAtIndex:i] image] saveKey:photoUrl];
+            NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:i] image], 0.3);
+            [uy uploadFile:imgdata saveKey:photoUrl];
             imgStr = [imgStr stringByAppendingString:photoUrl];
             imgStr = [imgStr stringByAppendingString:@";"];
         }

@@ -33,12 +33,12 @@
 
 {
     UIPickerView *areapicker;
-    UIButton *button;
     NSDictionary *areaDic;
     NSArray *province;
     NSArray *city;
     NSArray *district;
     NSString *selectedProvince;
+    NSData *imgData;
 }
 
 - (void)viewDidLoad
@@ -146,7 +146,7 @@
     //上传图片
     UpYun *uy = [[UpYun alloc] init];
     NSString *photoUrl = [self getSaveKey];
-    [uy uploadFile:self.photoView.image saveKey:photoUrl];
+    [uy uploadFile:imgData saveKey:photoUrl];
     
     //验证昵称
     NSString *name = [self.nameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -217,6 +217,7 @@
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     self.photoView.image = editedImage;
+    imgData = UIImageJPEGRepresentation(editedImage, 0.3);
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
     }];
