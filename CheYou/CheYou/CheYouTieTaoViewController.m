@@ -9,6 +9,9 @@
 #import "CheYouTieTaoViewController.h"
 #import "LuJieCommon.h"
 #import "PRButton.h"
+#import "AFNetworking.h"
+#import "UpYun.h"
+#import "UIImageExt.h"
 
 @interface CheYouTieTaoViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
@@ -29,6 +32,8 @@
 {
     UILabel *promptLabel;
     NSMutableArray *userPhotoList;
+    NSString *imgStr;
+    NSString *tttime;
 }
 
 - (void)viewDidLoad
@@ -38,7 +43,7 @@
     
     //    self.photoView.backgroundColor = [UIColor redColor];
     //    self.textView.backgroundColor = [UIColor greenColor];
-    
+    tttime = [NSString stringWithFormat:@"%0.f",[[NSDate date] timeIntervalSince1970]];
     self.sendButton.enabled = NO;
     userPhotoList = [[NSMutableArray alloc] init];
     self.textView.text = @"";
@@ -159,6 +164,40 @@
 - (IBAction)sendAction:(id)sender {
     
     [self.textView resignFirstResponder];
+    [self.tietiaoTimeButton resignFirstResponder];
+    
+    if ([self.timeLable.text length] < 1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"请选择贴条时间", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.tietiaoTimeButton becomeFirstResponder];
+        return;
+    }
+    
+    //发送数据
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"location": [userDefaults stringForKey:@"userArea"],
+                                 @"type": @"1", @"img": [self getImgStr],@"huati":self.textView.text,@"tttime":tttime};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/pub" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        NSLog(@"JSON: %@", responseObject);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"发送成功！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self dismissViewControllerAnimated:YES completion: nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，发送失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma accessry 键盘工具栏按钮事件
@@ -227,6 +266,7 @@
 
 - (void)updateDatePickerLabel {
     self.timeLable.text = [self.dateFormatter stringFromDate:self.datePicker.date];
+    tttime = [NSString stringWithFormat:@"%0.f",[self.datePicker.date timeIntervalSince1970]];
 }
 
 - (void)switchValueDidChange:(UISwitch *)aSwitch {
@@ -263,6 +303,80 @@
     [accessoryView addSubview:done];
     
     return accessoryView;
+}
+
+#pragma upyun
+
+-(NSString * )getSaveKey {
+    /**
+     *	@brief	方式1 由开发者生成saveKey
+     */
+    NSDate *d = [NSDate date];
+    return [NSString stringWithFormat:@"/%d/%d/%.0f.png",[self getYear:d],[self getMonth:d],[[NSDate date] timeIntervalSince1970]*1000];
+    
+    /**
+     *	@brief	方式2 由服务器生成saveKey
+     */
+    //    return [NSString stringWithFormat:@"/{year}/{mon}/{filename}{.suffix}"];
+    
+    /**
+     *	@brief	更多方式 参阅 http://wiki.upyun.com/index.php?title=Policy_%E5%86%85%E5%AE%B9%E8%AF%A6%E8%A7%A3
+     */
+    
+}
+
+- (int)getYear:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSYearCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger year=[comps year];
+    return (int)year;
+}
+
+- (int)getMonth:(NSDate *) date{
+    NSDateFormatter *formatter =[[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSInteger month = [comps month];
+    return (int)month;
+}
+
+#pragma 获取图片路径
+
+- (NSString *)getImgStr
+{
+    imgStr = @"";
+    if (userPhotoList.count == 0) {
+        return imgStr;
+    }
+    //调用up yun 上传图片接口
+    UpYun *uy = [[UpYun alloc] init];
+    if (userPhotoList.count == 1) {
+        //上传图片
+        NSString *photoUrl = [self getSaveKey];
+        NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:0] image], 0.3);
+        [uy uploadFile:imgdata saveKey:photoUrl];
+        imgStr = [imgStr stringByAppendingString:photoUrl];
+    }else
+    {
+        //多张图片上传
+        for (int i=0; i<=userPhotoList.count-2; i++) {
+            //上传图片
+            NSString *photoUrl = [self getSaveKey];
+            NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:i] image], 0.3);
+            [uy uploadFile:imgdata saveKey:photoUrl];
+            imgStr = [imgStr stringByAppendingString:photoUrl];
+            imgStr = [imgStr stringByAppendingString:@";"];
+        }
+        NSString *photoUrl = [self getSaveKey];
+        [uy uploadFile:[[userPhotoList lastObject] image] saveKey:photoUrl];
+        imgStr = [imgStr stringByAppendingString:photoUrl];
+    }
+    return imgStr;
 }
 
 @end
