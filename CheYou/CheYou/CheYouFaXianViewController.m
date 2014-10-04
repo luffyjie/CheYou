@@ -91,6 +91,12 @@
     [self.textView becomeFirstResponder];
 }
 
+#pragma 点击空白地方隐藏键盘
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.textView resignFirstResponder];
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)adjustSelection:(UITextView *)textView {

@@ -84,7 +84,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    self.textView.delegate = self;
+    [self.textView becomeFirstResponder];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -92,12 +93,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // Listen for will show/hide notifications
-    self.textView.delegate = self;
-    [self.textView becomeFirstResponder];
+#pragma 点击空白地方隐藏键盘
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.textView resignFirstResponder];
 }
 
 #pragma mark - UITextViewDelegate
