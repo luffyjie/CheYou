@@ -201,7 +201,7 @@
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
     picker.maximumNumberOfSelectionVideo = 0;
-    picker.maximumNumberOfSelectionPhoto = 6;
+    picker.maximumNumberOfSelectionPhoto = 3;
     [self presentViewController:picker animated:YES completion:^{}];
 }
 
@@ -236,7 +236,7 @@
 - (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"目前只允许选择6张图片！"
+                                                    message:@"目前只允许选择3张图片！"
                                                    delegate:nil
                                           cancelButtonTitle:@"确认"
                                           otherButtonTitles:nil];
