@@ -21,6 +21,8 @@
 #import "PingLun.h"
 
 static int page;
+static NSString *dianzanIdentifier=@"dianzanIdentifier";
+static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
 
 @interface CheYouUserViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -270,7 +272,6 @@ static int page;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
     if (tableView.tag == 2) {
-        static NSString *dianzanIdentifier=@"dianzanIdentifier";
         CheYouDianzanViewCell *dianzanCell = [tableView dequeueReusableCellWithIdentifier:dianzanIdentifier];
         if (!dianzanCell) {
              dianzanCell = [[CheYouDianzanViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dianzanIdentifier];
@@ -279,7 +280,10 @@ static int page;
         dianzanCell.dianzan = [_jyouList objectAtIndex:indexPath.row];
         return dianzanCell;
     }else{
-        CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usertucaoIdentifier"];
+        CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:usertucaoIdentifier];
+        if (!tucaoCell) {
+            tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:usertucaoIdentifier];
+        }
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         //添加点赞加油点击按钮
@@ -312,6 +316,8 @@ static int page;
 -(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(long)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+    //因为复用了cell，所以必须remove复用的cell的图片,不然会有bug
+    [cell.userPhotoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片

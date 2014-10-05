@@ -176,6 +176,9 @@
             userPhotoView.frame = _tucao.imgList.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
             : CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
         }
+    }else{
+        //如果不添加这个处理，cell复用会保留之前的数据，造成bug
+        userPhotoView.frame = CGRectZero;
     }
     //计算出cell自适应的高度
     frame.size.height = textSize.height + userPhotoView.bounds.size.height + 113.f;

@@ -19,6 +19,7 @@
 #import "PingLun.h"
 
 NSString *const MJTableViewCellIdentifier = @"sconddentifier";
+static NSString *hometucaoIdentifier=@"hometucaoIdentifier";
 static int page;
 
 @interface CheYouViewController ()
@@ -169,12 +170,11 @@ static int page;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
-    static NSString *hometucaoIdentifier=@"hometucaoIdentifier";
-//    CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:hometucaoIdentifier];
-//    if (!tucaoCell) {
-//         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
-//    }
-    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
+    CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:hometucaoIdentifier];
+    if (!tucaoCell) {
+         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
+    }
+//    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     tucaoCell.tag = [tucaoCell.tucao.lbid integerValue];
@@ -246,6 +246,8 @@ static int page;
 -(void)makeUserPhotos:(TuCao *)tucao over:(CheYouTuCaoTableViewCell *)cell over:(int)row
 {
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+    //因为复用了cell，所以必须remove复用的cell的图片,不然会有bug
+    [cell.userPhotoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片

@@ -57,7 +57,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (commentList.count > 1) {
+    if (commentList.count > 0) {
         [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height) animated:YES];
     }
 }

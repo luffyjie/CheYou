@@ -29,6 +29,7 @@
 		E9521CF619DA6DE30058F36D /* PingLun.m in Sources */ = {isa = PBXBuildFile; fileRef = E9521CF519DA6DE30058F36D /* PingLun.m */; };
 		E953C5D919CC2DC100C0510F /* CheYouLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */; };
 		E953C5DC19CC43A900C0510F /* CheYouLoginCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5DB19CC43A900C0510F /* CheYouLoginCheckViewController.m */; };
+		E95488D919E133E700CEAA12 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E95488D819E133E700CEAA12 /* Podfile */; };
 		E95FDFF919C6AE3B007585AF /* CheYouPbCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */; };
 		E9617A0719B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = E9617A0419B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.m */; };
 		E9617A0819B7F95F000543D2 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = E9617A0519B7F95F000543D2 /* easing.c */; };
@@ -179,6 +180,7 @@
 		E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginViewController.m; sourceTree = "<group>"; };
 		E953C5DA19CC43A900C0510F /* CheYouLoginCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouLoginCheckViewController.h; sourceTree = "<group>"; };
 		E953C5DB19CC43A900C0510F /* CheYouLoginCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginCheckViewController.m; sourceTree = "<group>"; };
+		E95488D819E133E700CEAA12 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		E95FDFF719C6AE3B007585AF /* CheYouPbCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouPbCommentViewController.h; sourceTree = "<group>"; };
 		E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouPbCommentViewController.m; sourceTree = "<group>"; };
 		E9617A0319B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 		E968E26719AD9C2B00E2824E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E95488D819E133E700CEAA12 /* Podfile */,
 				E9B49D3819CAC59E00F6F562 /* background-gradient.png */,
 				E9B49D3919CAC59E00F6F562 /* background-gradient@2x.png */,
 				E9B49D3A19CAC59E00F6F562 /* button-background.png */,
@@ -856,6 +859,7 @@
 				E9617A3D19B7FAAC000543D2 /* UzysAssetsPickerController.xib in Resources */,
 				E9B49D3C19CAC59E00F6F562 /* background-gradient.png in Resources */,
 				E9617A7B19B81740000543D2 /* MBProgressHUD.bundle in Resources */,
+				E95488D919E133E700CEAA12 /* Podfile in Resources */,
 				E9617A3B19B7FAAC000543D2 /* UzysAssetPickerController.bundle in Resources */,
 				E97B2F2719CD094300D902C0 /* ICETutorialController_iPhone.xib in Resources */,
 				E9617A7E19B81740000543D2 /* MJPhotoBrowser.bundle in Resources */,
