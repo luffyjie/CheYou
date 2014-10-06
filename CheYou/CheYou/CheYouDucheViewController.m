@@ -373,8 +373,10 @@
 {
     UIView * accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0,  self.view.bounds.size.height - 46, self.view.bounds.size.width, 46)];
     accessoryView.backgroundColor = [LuJieCommon UIColorFromRGB:0xE4E4E4];
-    UIButton * accphoto = [[UIButton alloc] initWithFrame:CGRectMake(21, 13, 20, 20)];
-    [accphoto setBackgroundImage:[UIImage imageNamed:@"keyboard_image"] forState:UIControlStateNormal];
+    UIImageView *cameraview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"keyboard_image"]];
+    cameraview.frame = CGRectMake(21, 13, 20, 20);
+    [accessoryView addSubview:cameraview];
+    UIButton *accphoto = [[UIButton alloc] initWithFrame:CGRectMake(10, 3, 60, 40)];
     [accphoto addTarget:self action:@selector(photoAction:) forControlEvents:UIControlEventTouchDown];
     [accessoryView addSubview:accphoto];
 //    UIButton *  accsharp = [[UIButton alloc] initWithFrame:CGRectMake(83, 13, 20, 20)];
