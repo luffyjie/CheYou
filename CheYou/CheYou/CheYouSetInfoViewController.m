@@ -217,7 +217,7 @@
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     self.photoView.image = editedImage;
-    imgData = UIImageJPEGRepresentation(editedImage, 0.3);
+    imgData = UIImageJPEGRepresentation(editedImage, 0.4);
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
     }];

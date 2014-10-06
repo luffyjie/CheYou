@@ -251,7 +251,7 @@ static int page;
     if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
+        [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:0],@"!fithw"] placeholder:placeholder];
         // 事件监听
         photo.tag = (10*row);
         photo.clipsToBounds = YES;
@@ -266,7 +266,7 @@ static int page;
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
+            [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:idx],@"!fithwsmall"] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -282,7 +282,7 @@ static int page;
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
+            [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:idx],@"!fithwsmall"] placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;

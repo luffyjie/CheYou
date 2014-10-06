@@ -100,10 +100,10 @@
         _pinglun = pinglun;
         // 下载图片
         if (!_pinglun.hpic) {
-            _pinglun.hpic = @"/2014/9/1411953899.png";
+            _pinglun.hpic = @"";
         }
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _pinglun.hpic] placeholder:placeholder];
+        [userImage setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",_pinglun.hpic,@"!small"] placeholder:placeholder];
         screen_name.text = _pinglun.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];

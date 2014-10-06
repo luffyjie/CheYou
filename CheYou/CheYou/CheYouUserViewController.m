@@ -67,7 +67,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     self.photoView.frame = CGRectMake( 10, 86, 60, 60);
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    [self.photoView setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [userDefaults objectForKey:@"photoUrl"]] placeholder:placeholder];
+    [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[userDefaults objectForKey:@"photoUrl"],@"!basicimg"] placeholder:placeholder];
     [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
     self.photoView.layer.masksToBounds = YES;
     self.nameView.text = [userDefaults objectForKey:@"userName"];
@@ -321,7 +321,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     if (tucao.imgList.count == 1) {
         UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 150, 100)];
         // 下载图片
-        [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:0]] placeholder:placeholder];
+        [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:0],@"!fithw"] placeholder:placeholder];
         // 事件监听
         photo.tag = (10*row);
         photo.clipsToBounds = YES;
@@ -336,7 +336,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
+            [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:idx],@"!fithwsmall"]  placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;
@@ -352,7 +352,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         for (int idx = 0; idx < tucao.imgList.count; idx++) {
             UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*80+(idx%3+1)*10, (idx/3)*80+(idx/3)*5, 80, 80)];
             // 下载图片
-            [photo setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [tucao.imgList objectAtIndex:idx]] placeholder:placeholder];
+            [photo setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[tucao.imgList objectAtIndex:idx],@"!fithwsmall"]  placeholder:placeholder];
             // 事件监听
             photo.tag = idx+(10*row);
             photo.clipsToBounds = YES;

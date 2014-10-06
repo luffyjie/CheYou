@@ -65,7 +65,7 @@
     
     //用户图片设置
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-    [self.portraitImageView setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: [userDefaults objectForKey:@"photoUrl"]] placeholder:placeholder];
+    [self.portraitImageView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[userDefaults objectForKey:@"photoUrl"],@"!small"] placeholder:placeholder];
     [self.portraitImageView.layer setCornerRadius:CGRectGetHeight([self.portraitImageView bounds]) / 2];
     self.portraitImageView.layer.masksToBounds = YES;
 
@@ -167,7 +167,7 @@
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     self.portraitImageView.image = editedImage;
-    imgData = UIImageJPEGRepresentation(editedImage, 0.3);
+    imgData = UIImageJPEGRepresentation(editedImage, 0.4);
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
     }];

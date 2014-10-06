@@ -229,7 +229,8 @@
                                                scale:representation.defaultRepresentation.scale
                                          orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
             UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, (idx/3)*102, 92, 92)];
-            userImage.image = [img imageByScalingAndCroppingForSize:CGSizeMake(150, 100)];
+//            userImage.image = [img imageByScalingAndCroppingForSize:CGSizeMake(326, 248)];
+            userImage.image = [img scaleToSize:CGSizeMake(326, 248)];
             userImage.clipsToBounds = YES;
             userImage.contentMode = UIViewContentModeScaleAspectFill;
             [self.photoView addSubview:userImage];
@@ -292,6 +293,7 @@
 - (NSString *)getImgStr
 {
     imgStr = @"";
+    NSData *imgdata;
     if (userPhotoList.count == 0) {
         return imgStr;
     }
@@ -300,7 +302,7 @@
     if (userPhotoList.count == 1) {
         //上传图片
         NSString *photoUrl = [self getSaveKey];
-        NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:0] image], 0.3);
+        imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:0] image], 0.4);
         [uy uploadFile:imgdata saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
     }else
@@ -309,13 +311,15 @@
         for (int i=0; i<=userPhotoList.count-2; i++) {
             //上传图片
             NSString *photoUrl = [self getSaveKey];
-            NSData *imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:i] image], 0.3);
+            imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:i] image], 0.4);
             [uy uploadFile:imgdata saveKey:photoUrl];
             imgStr = [imgStr stringByAppendingString:photoUrl];
             imgStr = [imgStr stringByAppendingString:@";"];
         }
+        //之前没注意，留下的bug 2014-10-6
         NSString *photoUrl = [self getSaveKey];
-        [uy uploadFile:[[userPhotoList lastObject] image] saveKey:photoUrl];
+        imgdata = UIImageJPEGRepresentation([[userPhotoList lastObject] image], 0.4);
+        [uy uploadFile:imgdata saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
     }
     return imgStr;

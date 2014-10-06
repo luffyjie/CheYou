@@ -103,10 +103,10 @@
         _dianzan = dianzan;
         // 下载图片
         if (!_dianzan.hpic) {
-            _dianzan.hpic = @"/2014/9/1411953899.png";
+            _dianzan.hpic = @"";
         }
         UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
-        [userImage setImageURLStr: [@"http://cheyoulianmeng.b0.upaiyun.com" stringByAppendingString: _dianzan.hpic] placeholder:placeholder];
+        [userImage setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",_dianzan.hpic,@"!small"] placeholder:placeholder];
         screen_name.text = _dianzan.nkname;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
