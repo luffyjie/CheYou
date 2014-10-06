@@ -52,7 +52,7 @@
     if (self.phoneText.text.length <11) {
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"手机号码有误！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         [self.phoneText becomeFirstResponder];

@@ -16,7 +16,7 @@
 #import "UIImageView+MJWebCache.h"
 #import "UpYun.h"
 
-#define ORIGINAL_MAX_WIDTH 180.0f
+#define ORIGINAL_MAX_WIDTH 360.0f
 
 #define PROVINCE_COMPONENT  0
 #define CITY_COMPONENT      1
@@ -123,7 +123,7 @@
         [manager POST:@"http://114.215.187.69/citypin/rs/user/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"更新成功", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
             //更新本地用户信息
@@ -141,7 +141,7 @@
         //没有修改内容弹出提示
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"请选择修改的内容", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
     }

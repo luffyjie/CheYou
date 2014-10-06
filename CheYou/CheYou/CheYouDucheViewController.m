@@ -279,7 +279,7 @@
                                          orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
             UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, 10, 92, 92)];
             //            userImage.image = [img imageByScalingAndCroppingForSize:CGSizeMake(326, 248)];
-            userImage.image = [img scaleToSize:CGSizeMake(326, 248)];
+            userImage.image = [img scaleToSize:CGSizeMake(640, 480)];
             userImage.clipsToBounds = YES;
             userImage.contentMode = UIViewContentModeScaleAspectFill;
             [self.photoView addSubview:userImage];

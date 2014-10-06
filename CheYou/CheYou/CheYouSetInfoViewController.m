@@ -15,7 +15,7 @@
 #import "UpYun.h"
 #import "AFNetworking.h"
 
-#define ORIGINAL_MAX_WIDTH 640.0f
+#define ORIGINAL_MAX_WIDTH 360.0f
 
 #define PROVINCE_COMPONENT  0
 #define CITY_COMPONENT      1
@@ -153,7 +153,7 @@
         if (name.length <1) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"昵称不能为空", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
             [self.nameText becomeFirstResponder];
@@ -163,7 +163,7 @@
     if (self.areaLabel.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"地区不能为空", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         [self.areaText becomeFirstResponder];

@@ -59,7 +59,7 @@
         if (self.phoneText.text.length <1) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"手机号不能为空", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
             [self.phoneText becomeFirstResponder];
@@ -68,7 +68,7 @@
         if (self.pwdText.text.length <4) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
             [self.pwdText becomeFirstResponder];
@@ -108,7 +108,7 @@
     if (self.phoneText.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"手机号不能为空", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         [self.phoneText becomeFirstResponder];
@@ -117,7 +117,7 @@
     if (self.pwdText.text.length <7) {
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"密码不能为空或小于7位", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"OK", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         [self.pwdText becomeFirstResponder];
