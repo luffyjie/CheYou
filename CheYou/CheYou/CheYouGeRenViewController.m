@@ -129,6 +129,8 @@
             //更新本地用户信息
             [userDefaults setObject:newArea forKey:@"userArea"];
             [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+            //之前忘记加同步代码，造成bug
+            [userDefaults synchronize];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             NSString *title = NSLocalizedString(@"提示", nil);
