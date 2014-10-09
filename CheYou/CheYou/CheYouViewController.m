@@ -32,13 +32,17 @@ static int page;
     NSMutableSet *_zanSet;
     NSUserDefaults *userDefaults;
     NSMutableSet *_tuCaoSet;
+    NSString *starttime;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //初始化
-     userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyyMMdd"];
+    starttime = [df stringFromDate:[[NSDate date] dateByAddingTimeInterval:-30*24*60*60]];
+    userDefaults = [NSUserDefaults standardUserDefaults];
     _zanSet = [[NSMutableSet alloc] init];
     _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
@@ -67,7 +71,7 @@ static int page;
     //第一次获取数据
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901",
+    NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": starttime,
                                  @"page.page": [NSString stringWithFormat:@"%d",page],
                                  @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
