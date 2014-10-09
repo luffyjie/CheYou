@@ -195,8 +195,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/stat" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dataDic = [responseObject objectForKey:@"data"];
 //        NSLog(@"/laba/stat: %@", dataDic);
-        self.oil_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"ytcount"]];
-        self.laba_num.text = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"labacount"]];
+        self.oil_num.text =  [dataDic objectForKey:@"ytcount"]?[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"ytcount"]]:@"0";
+        self.laba_num.text = [dataDic objectForKey:@"labacount"]?[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"labacount"]]:@"0";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);

@@ -181,11 +181,11 @@
                                  @"type": @"3", @"img": [self getImgStr],@"huati":self.textView.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/pub" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"JSON: %@", responseObject);
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"发送成功！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"发送成功！", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
         [self dismissViewControllerAnimated:YES completion: nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

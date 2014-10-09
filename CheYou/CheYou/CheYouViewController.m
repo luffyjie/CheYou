@@ -70,7 +70,6 @@ static int page;
     NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901",
                                  @"page.page": [NSString stringWithFormat:@"%d",page],
                                  @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
-    NSLog(@"root--  %@%@%@",[userDefaults stringForKey:@"userArea"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"photoUrl"]);
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"responseObject: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
@@ -333,7 +332,7 @@ static int page;
     page = 1;
     [self getData:page];
     // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         
@@ -350,7 +349,7 @@ static int page;
     page++;
     [self getData:page];
     // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         
