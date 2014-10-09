@@ -8,6 +8,9 @@
 
 #import "CheYouSetPwdViewController.h"
 #import "CCPRestSDK.h"
+#import "CheYouSetInfoViewController.h"
+
+static NSString *sendYzm;
 
 @interface CheYouSetPwdViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
@@ -18,9 +21,7 @@
 @end
 
 @implementation CheYouSetPwdViewController
-{
-    NSString *userYzm;
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,13 +37,24 @@
     self.pwdText.returnKeyType = UIReturnKeyDone;
     self.pwdText.secureTextEntry = YES;
     self.yzmText.keyboardType = UIKeyboardTypeNumberPad;
-    //发送验证码按钮
-//    self.sendButton.enabled = NO;
+    //发送验证码按钮默认是不能点击
+    self.sendButton.enabled = NO;
+    //开启短信计时
+    [self timeShow];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.pwdText becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.pwdText becomeFirstResponder];
+    //调用发送验证码方法
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self sendcloopen];
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,18 +116,27 @@
 #pragma  发验证码按钮
 
 - (IBAction)sendAction:(id)sender {
-    //ip格式如下，不需要带https://
-    userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
-                     arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
+    self.sendButton.enabled = NO;
+    //倒计时
+    [self timeShow];
+    //调用发送验证码方法
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self sendcloopen];
+    });
+}
+
+- (void)sendcloopen
+{
+    //采用云通讯第三方SDK发送短信验证码,ip格式如下，不需要带https://
+    sendYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
+               arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
     CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"app.cloopen.com" andserverPort:8883];
     [ccpRestSdk setApp_ID:@"aaf98f8948bbabac0148c07edb9902e4"];
     [ccpRestSdk enableLog:YES];
     [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
-    NSArray*  arr = [NSArray arrayWithObjects:userYzm, @"30", nil];
+    NSArray*  arr = [NSArray arrayWithObjects:sendYzm, @"30", nil];
     NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
     NSLog(@"dict----%@",[dict description]);
-    self.sendButton.enabled = NO;
-    [self timeShow];
 }
 
 #pragma 导航按钮
@@ -127,34 +148,32 @@
 
 - (IBAction)nextAction:(id)sender {
     
-    if (self.pwdText.text.length <1 || self.yzmText.text.length <1) {
+    if (self.pwdText.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码为空或验证码为空！", nil);
+        NSString *message = NSLocalizedString(@"密码不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.pwdText becomeFirstResponder];
+        return;
+    }
+    if (self.yzmText.text.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"验证码不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.yzmText becomeFirstResponder];
+        return;
+    }
+    if (![sendYzm isEqualToString:self.yzmText.text]) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"验证码错误", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         return;
     }
-    if (![userYzm isEqualToString:self.yzmText.text]) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"验证码错误！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    //清空本地用户数据
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:@"userPhone"];
-    [userDefaults removeObjectForKey:@"photoUrl"];
-    [userDefaults removeObjectForKey:@"userName"];
-    [userDefaults removeObjectForKey:@"userArea"];
-    [userDefaults removeObjectForKey:@"userPwd"];
-    [userDefaults removeObjectForKey:@"userOut"];
-    [userDefaults synchronize];
-    //保存新注册的用户手机号和密码
-    [userDefaults setObject:self.pwdText.text forKey:@"userPwd"];
-    [userDefaults setObject:self.phoneNum forKey:@"userPhone"];
     [self performSegueWithIdentifier:@"reginfo_segue" sender:self];
 }
 
@@ -163,6 +182,18 @@
     
     return (int)(from + (arc4random() % (to - from + 1)));
     
+}
+
+
+#pragma mark 处理segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"reginfo_segue"]) {
+        CheYouSetInfoViewController *setInfodView = (CheYouSetInfoViewController*)segue.destinationViewController;
+        setInfodView.phoneNum = self.phoneNum;
+        setInfodView.pwd = self.pwdText.text;
+    }
 }
 
 @end

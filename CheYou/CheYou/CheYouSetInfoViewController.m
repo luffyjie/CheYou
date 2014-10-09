@@ -39,6 +39,7 @@
     NSArray *district;
     NSString *selectedProvince;
     NSData *imgData;
+    NSString *chooseArea;
 }
 
 - (void)viewDidLoad
@@ -149,8 +150,8 @@
     [uy uploadFile:imgData saveKey:photoUrl];
     
     //验证昵称
-    NSString *name = [self.nameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-        if (name.length <1) {
+    NSString *nkname = [self.nameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (nkname.length <1) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"昵称不能为空", nil);
             NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
@@ -169,21 +170,24 @@
         [self.areaText becomeFirstResponder];
         return;
     }
-    //缓存用户信息到本地
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:name forKey:@"userName"];
-    [userDefaults setObject:photoUrl forKey:@"photoUrl"];
     //注册用户
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"], @"passwd":[userDefaults stringForKey:@"userPwd"],
-                                 @"phone":[userDefaults stringForKey:@"userPhone"], @"nkname":[userDefaults stringForKey:@"userName"],
-                                 @"hpic":photoUrl, @"location":[userDefaults stringForKey:@"userArea"]};
+    NSDictionary *parameters = @{@"account":self.phoneNum, @"passwd":self.pwd,
+                                 @"phone":self.phoneNum, @"nkname":nkname,
+                                 @"hpic":photoUrl, @"location":chooseArea};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        //设置用户登录状态
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //更新本地用户数据
+        [userDefaults setObject:@"userPhone" forKey:self.phoneNum];
+        [userDefaults setObject:@"userPwd" forKey:self.pwd];
+        [userDefaults setObject:@"userName" forKey:nkname];
+        [userDefaults setObject:@"userArea" forKey:chooseArea];
+        [userDefaults setObject:@"photoUrl" forKey:photoUrl];
+        //设置用户登录状态
         [userDefaults setInteger:2 forKey:@"userOut"];
+        //同步本地数据
         [userDefaults synchronize];
         [self performSegueWithIdentifier:@"register_home_segue" sender:self];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -578,9 +582,7 @@
         districtStr = @"";
     }
     self.areaLabel.text = [NSString stringWithFormat: @"%@-%@-%@", provinceStr, cityStr, districtStr];
-    //缓存用户信息到本地
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[NSString stringWithFormat: @"%@-%@", cityStr, districtStr] forKey:@"userArea"];
+    chooseArea = [NSString stringWithFormat: @"%@-%@", cityStr, districtStr];
 }
 
 #pragma upyun
