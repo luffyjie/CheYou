@@ -56,21 +56,11 @@
     if ([string isEqualToString:@"\n"]) {
         // Be sure to test for equality using the "isEqualToString" message
         [self.pwdText resignFirstResponder];
-        if (self.phoneText.text.length <1) {
-            NSString *title = NSLocalizedString(@"提示", nil);
-            NSString *message = NSLocalizedString(@"手机号不能为空", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            [alert show];
+        if (self.phoneText.text.length < 1) {
             [self.phoneText becomeFirstResponder];
             return false;
         }
-        if (self.pwdText.text.length <4) {
-            NSString *title = NSLocalizedString(@"提示", nil);
-            NSString *message = NSLocalizedString(@"密码不能为空或小于4位", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            [alert show];
+        if (self.pwdText.text.length < 1) {
             [self.pwdText becomeFirstResponder];
             return false;
         }
@@ -104,19 +94,20 @@
 }
 
 #pragma 登录按钮
+
 - (IBAction)LoginButton:(id)sender {
     if (self.phoneText.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"手机号不能为空", nil);
+        NSString *message = NSLocalizedString(@"手机号码不能为空", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
         [self.phoneText becomeFirstResponder];
         return;
     }
-    if (self.pwdText.text.length <7) {
+    if (self.pwdText.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码不能为空或小于7位", nil);
+        NSString *message = NSLocalizedString(@"密码不能为空", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
@@ -129,10 +120,11 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": self.phoneText.text, @"passwd": self.pwdText.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/passwd/valid" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSInteger result = (int)[responseObject objectForKey:@"r"];
-        if (result == -13) {
+//        NSLog(@"%@",responseObject);
+        NSString *result = [responseObject objectForKey:@"r"];
+        if ([result integerValue] == -1) {
             NSString *title = NSLocalizedString(@"提示", nil);
-            NSString *message = NSLocalizedString(@"密码或手机号码错误", nil);
+            NSString *message = NSLocalizedString(@"手机号码或密码错误", nil);
             NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
@@ -141,7 +133,7 @@
         //获取用户信息保存本地
         NSDictionary *parameters = @{@"account": self.phoneText.text};
         [manager POST:@"http://114.215.187.69/citypin/rs/user/info" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"JSON: %@", responseObject);
             NSDictionary *userDic =  [responseObject objectForKey:@"data"];
             //缓存用户休息到本地
             [userDefaults setObject:self.phoneText.text forKey:@"userPhone"];

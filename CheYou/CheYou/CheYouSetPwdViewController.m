@@ -102,6 +102,7 @@
 
 
 #pragma  发验证码按钮
+
 - (IBAction)sendAction:(id)sender {
     //ip格式如下，不需要带https://
     userYzm = [NSString stringWithFormat:@"%u%u%u%u",arc4random_uniform(9 + 1),
@@ -112,7 +113,7 @@
     [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
     NSArray*  arr = [NSArray arrayWithObjects:userYzm, @"30", nil];
     NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
-//    NSLog(@"dict----%@",[dict description]);
+    NSLog(@"dict----%@",[dict description]);
     self.sendButton.enabled = NO;
     [self timeShow];
 }

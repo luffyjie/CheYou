@@ -88,7 +88,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="LoginButton:" destination="PFZ-3a-WmH" eventType="touchDown" id="7aG-wg-DEj"/>
+                                            <action selector="LoginButton:" destination="PFZ-3a-WmH" eventType="touchUpInside" id="7De-Y5-N4I"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -227,7 +227,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="sendAction:" destination="3pX-ak-Oj2" eventType="touchDown" id="Y8G-hj-acn"/>
+                                            <action selector="sendAction:" destination="3pX-ak-Oj2" eventType="touchUpInside" id="ZWz-sT-Vl3"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DkG-cS-VvC">
@@ -1327,7 +1327,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ixH-K2-sYR"/>
+        <segue reference="vc2-of-iKH"/>
         <segue reference="4WV-iu-OxH"/>
         <segue reference="sBe-fT-Yqq"/>
     </inferredMetricsTieBreakers>
