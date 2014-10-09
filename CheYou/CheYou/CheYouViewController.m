@@ -70,6 +70,7 @@ static int page;
     NSDictionary *parameters = @{@"location": [userDefaults stringForKey:@"userArea"], @"starttime": @"20140901",
                                  @"page.page": [NSString stringWithFormat:@"%d",page],
                                  @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
+    NSLog(@"root--  %@%@%@",[userDefaults stringForKey:@"userArea"],[userDefaults stringForKey:@"userPhone"],[userDefaults stringForKey:@"photoUrl"]);
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"responseObject: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];

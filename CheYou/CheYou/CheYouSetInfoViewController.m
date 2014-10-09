@@ -177,28 +177,44 @@
                                  @"phone":self.phoneNum, @"nkname":nkname,
                                  @"hpic":photoUrl, @"location":chooseArea};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        //更新本地用户数据
-        [userDefaults setObject:@"userPhone" forKey:self.phoneNum];
-        [userDefaults setObject:@"userPwd" forKey:self.pwd];
-        [userDefaults setObject:@"userName" forKey:nkname];
-        [userDefaults setObject:@"userArea" forKey:chooseArea];
-        [userDefaults setObject:@"photoUrl" forKey:photoUrl];
-        //设置用户登录状态
-        [userDefaults setInteger:2 forKey:@"userOut"];
-        //同步本地数据
-        [userDefaults synchronize];
-        [self performSegueWithIdentifier:@"register_home_segue" sender:self];
+        NSString *msg = [responseObject objectForKey:@"msg"];
+        NSString *result = [responseObject objectForKey:@"r"];
+        if ([result integerValue] == 1) {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            //更新本地用户数据
+            [userDefaults setObject:self.phoneNum forKey:@"userPhone"];
+            [userDefaults setObject:self.pwd forKey:@"userPwd" ];
+            [userDefaults setObject:nkname forKey:@"userName"];
+            [userDefaults setObject:chooseArea forKey:@"userArea"];
+            [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+            //设置用户登录状态
+            [userDefaults setInteger:2 forKey:@"userOut"];
+            //同步本地数据
+            [userDefaults synchronize];
+            [self performSegueWithIdentifier:@"register_home_segue" sender:self];
+            return ;
+        }
+        if (msg) {
+            NSString *title = NSLocalizedString(@"提示", nil);
+            NSString *message = NSLocalizedString(@"该手机号已经已经被注册", nil);
+            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络异常，注册失败", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"网络异常，注册失败！", nil);
+        NSString *message = NSLocalizedString(@"网络异常，注册失败", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
     }];
-    
 }
 
 #pragma 个人设置
