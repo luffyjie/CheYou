@@ -140,8 +140,8 @@ static NSString *sendYzm;
     [ccpRestSdk enableLog:NO];
     [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
     NSArray*  arr = [NSArray arrayWithObjects:sendYzm, @"30", nil];
-    [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
-//    NSLog(@"dict----%@",[dict description]);
+    NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
+    NSLog(@"dict----%@",[dict description]);
 }
 
 #pragma 导航按钮
