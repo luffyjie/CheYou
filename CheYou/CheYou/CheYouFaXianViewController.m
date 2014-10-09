@@ -171,7 +171,7 @@
 }
 
 - (IBAction)sendAction:(id)sender {
-    
+    self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
     //发送数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

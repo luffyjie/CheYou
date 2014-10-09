@@ -162,7 +162,7 @@
 }
 
 - (IBAction)sendAction:(id)sender {
-    
+    self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
     [self.tietiaoTimeButton resignFirstResponder];
     

@@ -171,6 +171,7 @@
 }
 
 - (IBAction)sendAction:(id)sender {
+    self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
     [self.ducheCaseButton resignFirstResponder];
     [self.ducheTimeButton resignFirstResponder];
