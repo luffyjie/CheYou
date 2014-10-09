@@ -15,6 +15,7 @@
 #import "CheYouCommentTopViewCell.h"
 #import "PingLun.h"
 #import "CheYouPbCommentViewController.h"
+#import "AFNetworking.h"
 
 @interface CheYouCommentViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,11 +32,13 @@
     UILabel *gasolinefootLabel;
     UILabel *commentfootLabel;
     CheYouCommentTopViewCell *topCell;
+    NSMutableSet *_pinglunSet;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _pinglunSet = [[NSMutableSet alloc] init];
     commentList = self.tucao.commentList;
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -52,14 +55,15 @@
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
     //底部工具栏
     [self footBar];
+    //设置topcell偏移位置
+    if (commentList.count > 0) {
+        [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height) animated:YES];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (commentList.count > 0) {
-        [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height) animated:YES];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -285,6 +289,7 @@
 
 - (void)commentbuttonAction:(id)sender
 {
+
     [self performSegueWithIdentifier:@"pb_comment_segue" sender:self];
 }
 
@@ -297,6 +302,55 @@
         CheYouPbCommentViewController *pbcommentView = (CheYouPbCommentViewController*)nav.topViewController;
         pbcommentView.lbid = self.tucao.lbid;
     }
+}
+
+#pragma 请求评论数据
+- (void)getData:(int)page
+{
+    //第一次获取数据
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"lbid":self.tucao.lbid};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/comment/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        NSLog(@"responseObject: %@", responseObject);
+        NSArray *labaDic = [responseObject objectForKey:@"data"];
+        //遍历喇叭
+        for (NSDictionary *comment in labaDic) {
+            //区分评论和点赞
+            if ([[comment objectForKey:@"content"] length] == 1) {
+                PingLun * pinglun = [[PingLun alloc] init];
+                [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
+                [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                //如果该数据是新的则添加进去
+            
+            }else
+            {
+                PingLun * pinglun = [[PingLun alloc] init];
+                [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
+                [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+                [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+                [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+                [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+                [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+                [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+                //如果该数据是新的则添加进去
+            }
+        }
+        //请求完毕，刷新table
+        //        [self.tableView reloadData ];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end

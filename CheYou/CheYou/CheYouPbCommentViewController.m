@@ -41,6 +41,11 @@
     [self.textView addSubview:promptLabel];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.textView becomeFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -72,11 +77,6 @@
 }
 
 #pragma 导航按钮
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.textView becomeFirstResponder];
-}
 
 - (IBAction)canceButton:(id)sender {
     [self.textView resignFirstResponder];

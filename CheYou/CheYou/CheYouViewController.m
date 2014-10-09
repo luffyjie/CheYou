@@ -100,7 +100,7 @@ static int page;
                 for (NSDictionary *comment in comments) {
                     if ([[comment objectForKey:@"content"] length] == 1) {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -111,7 +111,7 @@ static int page;
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -345,8 +345,8 @@ static int page;
     //1.添加数据
     page = 1;
     [self getData:page];
-    // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 1秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         
@@ -362,8 +362,8 @@ static int page;
     // 1.添加数据
     page++;
     [self getData:page];
-    // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 1秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         
