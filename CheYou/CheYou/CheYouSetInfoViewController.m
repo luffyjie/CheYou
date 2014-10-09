@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet PRButton *areaText;
 @property (weak, nonatomic) IBOutlet UILabel *areaLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *finishButton;
 
 @end
 
@@ -143,7 +144,7 @@
 }
 
 - (IBAction)finishAction:(id)sender {
-    
+    self.finishButton.enabled = NO;
     //上传图片
     UpYun *uy = [[UpYun alloc] init];
     NSString *photoUrl = [self getSaveKey];

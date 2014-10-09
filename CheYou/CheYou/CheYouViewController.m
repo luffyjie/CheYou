@@ -122,6 +122,16 @@ static int page;
             if (![_tuCaoSet containsObject:tucao.lbid]) {
                 [_tuCaoSet addObject:tucao.lbid];
                 [_tuCaoList addObject:tucao];
+            }else
+            {
+                for (TuCao *htucao in _tuCaoList) {
+                    if ([htucao.lbid integerValue]==[tucao.lbid integerValue]) {
+                        [htucao setJyou:tucao.jyou];
+                        [htucao setCommentList:tucao.commentList];
+                        [htucao setJyouList:tucao.jyouList];
+                        [htucao setHpic:tucao.hpic];
+                    }
+                }
             }
         }
         if (page==1) {
