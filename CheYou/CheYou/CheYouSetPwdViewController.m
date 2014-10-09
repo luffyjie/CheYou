@@ -21,13 +21,15 @@ static NSString *sendYzm;
 @end
 
 @implementation CheYouSetPwdViewController
-
+{
+    UIBarButtonItem *backButton;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // 设置返回按钮
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+    backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@" "
                                    style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     backButton.image = [UIImage imageNamed:@"back"];
@@ -39,6 +41,7 @@ static NSString *sendYzm;
     self.yzmText.keyboardType = UIKeyboardTypeNumberPad;
     //发送验证码按钮默认是不能点击
     self.sendButton.enabled = NO;
+    backButton.enabled = NO;
     //开启短信计时
     [self timeShow];
 }
@@ -76,6 +79,7 @@ static NSString *sendYzm;
                 //设置界面的按钮显示 根据自己需求设置
                 self.timeLabel.text= @"";
                 self.sendButton.enabled = YES;
+                backButton.enabled = YES;
             });
         }else{
             NSString *strTime = [NSString stringWithFormat:@"%.2d秒后重发验证码", timeout];
@@ -117,6 +121,7 @@ static NSString *sendYzm;
 
 - (IBAction)sendAction:(id)sender {
     self.sendButton.enabled = NO;
+    backButton.enabled = NO;
     //倒计时
     [self timeShow];
     //调用发送验证码方法
@@ -132,11 +137,11 @@ static NSString *sendYzm;
                arc4random_uniform(9 + 1),arc4random_uniform(9 + 1),arc4random_uniform(9 + 1)];
     CCPRestSDK* ccpRestSdk = [[CCPRestSDK alloc] initWithServerIP:@"app.cloopen.com" andserverPort:8883];
     [ccpRestSdk setApp_ID:@"aaf98f8948bbabac0148c07edb9902e4"];
-    [ccpRestSdk enableLog:YES];
+    [ccpRestSdk enableLog:NO];
     [ccpRestSdk setAccountWithAccountSid: @"aaf98f89488d0aad0148a133e9fd07c6" andAccountToken:@"077f68f924974d9d8c212cb20e53f346"];
     NSArray*  arr = [NSArray arrayWithObjects:sendYzm, @"30", nil];
-    NSMutableDictionary *dict = [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
-    NSLog(@"dict----%@",[dict description]);
+    [ccpRestSdk sendTemplateSMSWithTo:self.phoneNum andTemplateId:@"4833" andDatas:arr];
+//    NSLog(@"dict----%@",[dict description]);
 }
 
 #pragma 导航按钮
