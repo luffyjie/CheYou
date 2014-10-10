@@ -9,6 +9,7 @@
 #import "CheYouPbCommentViewController.h"
 #import "LuJieCommon.h"
 #import "AFNetworking.h"
+#include "PingLun.h"
 
 @interface CheYouPbCommentViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -20,6 +21,7 @@
 
 {
     UILabel *promptLabel;
+    PingLun *newpl;
 }
 
 - (void)viewDidLoad
@@ -88,16 +90,21 @@
     [self.textView resignFirstResponder];
     //发表评论到服务端
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //构建返回的评论
+    newpl = [[PingLun alloc] init];
+    newpl.lbid = self.lbid;
+    newpl.content = self.textView.text;
+    newpl.account = [userDefaults objectForKey:@"userPhone"];
+    newpl.hpic = [userDefaults objectForKey:@"photoUrl"];
+    newpl.nkname = [userDefaults objectForKey:@"userName"];
+    newpl.createtime = [NSString stringWithFormat:@"%.0f",[[NSDate date] timeIntervalSince1970]*1000];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"],@"lbid": self.lbid, @"content":self.textView.text};
+    NSDictionary *parameters = @{@"account":[userDefaults objectForKey:@"userPhone"], @"lbid":self.lbid, @"content":self.textView.text};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/comment" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject){
-//        NSLog(@"JSON: %@", responseObject);
-//        NSString *title = NSLocalizedString(@"提示", nil);
-//        NSString *message = NSLocalizedString(@"评论成功", nil);
-//        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-//        [alert show];
+//        NSLog(@"laba/comment%@",responseObject);
+        //通过委托协议传值
+        [self.delegate pbComment:newpl];
         [self dismissViewControllerAnimated:YES completion: nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

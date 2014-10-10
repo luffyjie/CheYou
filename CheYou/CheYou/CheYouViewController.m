@@ -98,7 +98,7 @@ static int page;
             NSArray *comments = [laba objectForKey:@"comments"];
             if (comments.count > 0) {
                 for (NSDictionary *comment in comments) {
-                    if ([[comment objectForKey:@"content"] length] == 1) {
+                    if ([[comment objectForKey:@"content"] intValue] == 0) {
                         PingLun * pinglun = [[PingLun alloc] init];
                         [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
@@ -140,7 +140,7 @@ static int page;
         }
         if (page==1) {
             [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
-                return [obj1.createtime intValue] < [obj2.createtime intValue];
+                return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
             }];
         }
         //请求完毕，刷新table
@@ -345,8 +345,8 @@ static int page;
     //1.添加数据
     page = 1;
     [self getData:page];
-    // 1秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 2.2秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         
@@ -362,8 +362,8 @@ static int page;
     // 1.添加数据
     page++;
     [self getData:page];
-    // 1秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 2.2秒后刷新表格UI
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [self.tableView reloadData];
         

@@ -136,7 +136,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
             NSArray *comments = [laba objectForKey:@"comments"];
             if (comments.count > 0) {
                 for (NSDictionary *comment in comments) {
-                    if ([[comment objectForKey:@"content"] length] == 1) {
+                    if ([[comment objectForKey:@"content"] intValue] == 0) {
                         PingLun * pinglun = [[PingLun alloc] init];
                         [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
@@ -173,10 +173,10 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         }
         if (page==1) {
             [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
-                return [obj1.createtime intValue] < [obj2.createtime intValue];
+                return [obj1.createtime integerValue] < [obj2.createtime integerValue];
             }];
             [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
-                return [obj1.createtime intValue] < [obj2.createtime intValue];
+                return [obj1.createtime integerValue] < [obj2.createtime integerValue];
             }];
         }
         //请求完毕，刷新table

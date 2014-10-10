@@ -17,7 +17,7 @@
 #import "CheYouPbCommentViewController.h"
 #import "AFNetworking.h"
 
-@interface CheYouCommentViewController ()
+@interface CheYouCommentViewController () <PbCommentDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -32,14 +32,15 @@
     UILabel *gasolinefootLabel;
     UILabel *commentfootLabel;
     CheYouCommentTopViewCell *topCell;
-    NSMutableSet *_pinglunSet;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _pinglunSet = [[NSMutableSet alloc] init];
     commentList = self.tucao.commentList;
+    [commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+        return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
+    }];
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@""
@@ -301,6 +302,7 @@
         UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
         CheYouPbCommentViewController *pbcommentView = (CheYouPbCommentViewController*)nav.topViewController;
         pbcommentView.lbid = self.tucao.lbid;
+        pbcommentView.delegate = self;
     }
 }
 
@@ -351,6 +353,16 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
     }];
+}
+
+#pragma 已经发布评论,点赞的委托
+
+-(void)pbComment:(PingLun *)pinglun{
+    [commentList addObject:pinglun];
+    [commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+        return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
+    }];
+    [self.tableView reloadData];
 }
 
 @end
