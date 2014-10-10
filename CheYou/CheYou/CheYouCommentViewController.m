@@ -139,7 +139,7 @@
     UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40.f)];
     sectionView.backgroundColor = [UIColor whiteColor];//[LuJieCommon UIColorFromRGB:0xd7d7d7];
     
-    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 32.f,
+    gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 33.f,
                                                                        sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     gasolineLabel.text = [NSString stringWithFormat:@"%d",self.tucao.jyou];
     gasolineLabel.font = [UIFont systemFontOfSize:14];

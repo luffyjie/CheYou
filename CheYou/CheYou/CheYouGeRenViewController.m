@@ -41,6 +41,7 @@
     NSUserDefaults *userDefaults;
     NSData *imgData;
     NSString *newArea;
+    UIBarButtonItem *editButton;
 }
 
 - (void)viewDidLoad
@@ -57,7 +58,7 @@
     backButton.image = [UIImage imageNamed:@"back"];
     [self.navigationItem setLeftBarButtonItem:backButton];
     
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
+    editButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@" "
                                    style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
     editButton.image = [UIImage imageNamed:@"my_edit"];
@@ -101,6 +102,7 @@
 
 - (void)editAction:(id)sender
 {
+    editButton.enabled = NO;
     NSString *photoUrl;
     //验证地区
     if (imgData.length >1 || newArea.length >1) {
@@ -138,6 +140,7 @@
             NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
             [alert show];
+            editButton.enabled = YES;
         }];
     }else{
         //没有修改内容弹出提示

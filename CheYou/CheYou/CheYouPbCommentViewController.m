@@ -84,6 +84,7 @@
 }
 
 - (IBAction)sendButton:(id)sender {
+    self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
     //发表评论到服务端
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
