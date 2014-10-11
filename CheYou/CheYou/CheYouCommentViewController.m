@@ -26,16 +26,19 @@
 {
     UILabel *commentLabel;
     UILabel *gasolineLabel;
+    UIImageView *gasolineView;
     UIImageView *gasolinefootView;
     UIImageView *commentfootView;
     UILabel *gasolinefootLabel;
     UILabel *commentfootLabel;
     CheYouCommentTopViewCell *topCell;
+    NSUserDefaults *userDefaults;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    userDefaults = [NSUserDefaults standardUserDefaults];
     [self.tucao.commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
         return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
     }];
@@ -152,7 +155,7 @@
     commentLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:commentLabel];
 
-    UIImageView *gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 57.f,
+    gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 57.f,
                                                                               sectionView.frame.size.height - 26.f, 15.f, 15.f)];
     gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
     [sectionView addSubview:gasolineView];
@@ -165,7 +168,14 @@
     UIImageView *commentFoot = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, sectionView.frame.size.width, 40.f)];
     commentFoot.image = [UIImage imageNamed:@"comment_foot"];
     [sectionView addSubview:commentFoot];
-    
+    //判断用户是否点过赞
+    for (PingLun *jy in self.tucao.jyouList) {
+        if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+            gasolinefootView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+            gasolineLabel.textColor = [UIColor redColor];
+            gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+        }
+    }
     return sectionView;
 }
 
@@ -277,13 +287,35 @@
 #pragma 评论 点赞
 - (void)gasolinebuttonAction:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    button.selected = !button.selected;
-    if (button.selected) {
-        gasolinefootView.image = [UIImage imageNamed:@"tc_gasoline_select"];
-        gasolineLabel.text = [NSString stringWithFormat: @"%d", [gasolineLabel.text intValue] + 1];
-        gasolinefootLabel.textColor = [UIColor redColor];
+    for (PingLun *jy in self.tucao.jyouList) {
+        if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+            return;
+        }
     }
+    gasolinefootView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+    gasolineLabel.text = [NSString stringWithFormat: @"%d", [gasolineLabel.text intValue] + 1];
+    gasolinefootLabel.textColor = [UIColor redColor];
+    gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+    gasolineLabel.textColor = [UIColor redColor];
+    PingLun *newzan = [[PingLun alloc] init];
+    newzan.lbid = self.tucao.lbid;
+    newzan.account = [userDefaults objectForKey:@"userPhone"];
+    newzan.content = @"0";
+    [self.tucao.jyouList addObject:newzan];
+    //点赞发送服务端
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":self.tucao.lbid};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 - (void)commentbuttonAction:(id)sender

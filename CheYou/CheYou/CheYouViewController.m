@@ -29,7 +29,6 @@ static int page;
 @implementation CheYouViewController
 {
     NSMutableArray *_tuCaoList;
-    NSMutableSet *_zanSet;
     NSUserDefaults *userDefaults;
     NSMutableSet *_tuCaoSet;
     NSString *starttime;
@@ -43,7 +42,6 @@ static int page;
     [df setDateFormat:@"yyyyMMdd"];
     starttime = [df stringFromDate:[[NSDate date] dateByAddingTimeInterval:-30*24*60*60]];
     userDefaults = [NSUserDefaults standardUserDefaults];
-    _zanSet = [[NSMutableSet alloc] init];
     _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
     page = 1;
@@ -187,15 +185,15 @@ static int page;
     if (!tucaoCell) {
          tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
     }
-//    CheYouTuCaoTableViewCell *tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
     tucaoCell.tag = [tucaoCell.tucao.lbid integerValue];
     //如果用户之前点过赞，则显示红色
-    if ([_zanSet containsObject:[NSNumber numberWithInteger:tucaoCell.tag]]) {
-        tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
-        tucaoCell.gasolineLabel.textColor = [UIColor redColor];
-        tucaoCell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [tucaoCell.gasolineLabel.text intValue] + 1];
+    for (PingLun *jy in [[_tuCaoList objectAtIndex:indexPath.row] jyouList]) {
+        if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+           tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+            tucaoCell.gasolineLabel.textColor = [UIColor redColor];
+        }
     }
     //添加点赞加油点击按钮
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
@@ -232,27 +230,35 @@ static int page;
     {
         cell = (CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
     }
-    if (button.selected && ![_zanSet containsObject:[NSNumber numberWithInteger:cell.tag]]) {
-        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
-        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
-        cell.gasolineLabel.textColor = [UIColor redColor];
-        [_zanSet addObject:[NSNumber numberWithInteger:cell.tag]];
-        //点赞发送服务端
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":[NSNumber numberWithInteger:cell.tag]};
-        [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSLog(@"JSON: %@", responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"Error: %@", error);
-            NSString *title = NSLocalizedString(@"提示", nil);
-            NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
-            NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-            [alert show];
-        }];
-
+    //判断是否点过赞
+    for (PingLun *jy in [[cell tucao] jyouList]) {
+        if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+            return;
+        }
     }
+    PingLun *newzan = [[PingLun alloc] init];
+    newzan.lbid = [NSString stringWithFormat:@"%d",cell.tag];
+    newzan.account = [userDefaults objectForKey:@"userPhone"];
+    newzan.content = @"0";
+    for (TuCao *tc in _tuCaoList) {
+        if ([tc.lbid integerValue]==cell.tag) {
+            [tc.jyouList addObject:newzan];
+        }
+    }
+    //点赞发送服务端
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":[NSNumber numberWithInteger:cell.tag]};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma 生成吐槽的图片
