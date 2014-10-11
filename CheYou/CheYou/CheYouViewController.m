@@ -140,7 +140,7 @@ static int page;
         }
         if (page==1) {
             [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
-                return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
+                return [obj1.createtime integerValue] < [obj2.createtime integerValue];
             }];
         }
         //请求完毕，刷新table
