@@ -166,11 +166,11 @@
     [self.tietiaoTimeButton resignFirstResponder];
     
     if ([self.timeLable.text length] < 1) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"请选择贴条时间", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"请选择贴条时间", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
         [self.tietiaoTimeButton becomeFirstResponder];
         return;
     }

@@ -176,20 +176,20 @@
     [self.ducheTimeButton resignFirstResponder];
     
     if ([self.ducheLable.text length] < 1) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"请选择堵车原因", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"请选择堵车原因", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
         [self.ducheCaseButton becomeFirstResponder];
         return;
     }
     if ([self.timeLable.text length] < 1) {
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"请选择堵车时间", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
+//        NSString *title = NSLocalizedString(@"提示", nil);
+//        NSString *message = NSLocalizedString(@"请选择堵车时间", nil);
+//        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+//        [alert show];
         [self.ducheTimeButton becomeFirstResponder];
         return;
     }
