@@ -236,6 +236,9 @@ static int page;
             return;
         }
     }
+    cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+    cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
+    cell.gasolineLabel.textColor = [UIColor redColor];
     PingLun *newzan = [[PingLun alloc] init];
     newzan.lbid = [NSString stringWithFormat:@"%d",cell.tag];
     newzan.account = [userDefaults objectForKey:@"userPhone"];
