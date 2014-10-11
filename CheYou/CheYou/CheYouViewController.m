@@ -240,7 +240,7 @@ static int page;
     cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
     cell.gasolineLabel.textColor = [UIColor redColor];
     PingLun *newzan = [[PingLun alloc] init];
-    newzan.lbid = [NSString stringWithFormat:@"%d",cell.tag];
+    newzan.lbid = [NSString stringWithFormat:@"%ld",(long)cell.tag];
     newzan.account = [userDefaults objectForKey:@"userPhone"];
     newzan.content = @"0";
     for (TuCao *tc in _tuCaoList) {
