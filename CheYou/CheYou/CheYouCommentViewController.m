@@ -24,7 +24,6 @@
 
 @implementation CheYouCommentViewController
 {
-    NSMutableArray *commentList;
     UILabel *commentLabel;
     UILabel *gasolineLabel;
     UIImageView *gasolinefootView;
@@ -37,8 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    commentList = self.tucao.commentList;
-    [commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+    [self.tucao.commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
         return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
     }];
     // 设置返回按钮
@@ -57,7 +55,7 @@
     //底部工具栏
     [self footBar];
     //设置topcell偏移位置
-    if (commentList.count > 0) {
+    if (self.tucao.commentList.count > 0) {
         [self.tableView setContentOffset:CGPointMake(0, topCell.frame.size.height) animated:YES];
     }
 }
@@ -128,7 +126,7 @@
     if (section == 0) {
         return 1;
     }
-    return commentList.count;
+    return self.tucao.commentList.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -189,7 +187,7 @@
     }
     CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commtdentifier"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.pinglun = [commentList objectAtIndex:indexPath.row];
+    cell.pinglun = [self.tucao.commentList objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -319,7 +317,7 @@
         //遍历喇叭
         for (NSDictionary *comment in labaDic) {
             //区分评论和点赞
-            if ([[comment objectForKey:@"content"] length] == 1) {
+            if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
                 PingLun * pinglun = [[PingLun alloc] init];
                 [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                 [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
@@ -356,8 +354,8 @@
 #pragma 已经发布评论,点赞的委托
 
 -(void)pbComment:(PingLun *)pinglun{
-    [commentList addObject:pinglun];
-    [commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+    [self.tucao.commentList addObject:pinglun];
+    [self.tucao.commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
         return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
     }];
     [self.tableView reloadData];

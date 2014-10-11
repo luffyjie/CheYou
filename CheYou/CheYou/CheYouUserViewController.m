@@ -138,7 +138,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
             NSArray *comments = [laba objectForKey:@"comments"];
             if (comments.count > 0) {
                 for (NSDictionary *comment in comments) {
-                    if ([[comment objectForKey:@"content"] intValue] == 0) {
+                    if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
                         PingLun * pinglun = [[PingLun alloc] init];
                         [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];

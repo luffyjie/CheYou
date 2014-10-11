@@ -47,7 +47,6 @@ static int page;
     _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
     page = 1;
-//    [self getData:page];
 	// Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
@@ -98,7 +97,7 @@ static int page;
             NSArray *comments = [laba objectForKey:@"comments"];
             if (comments.count > 0) {
                 for (NSDictionary *comment in comments) {
-                    if ([[comment objectForKey:@"content"] intValue] == 0) {
+                    if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
                         PingLun * pinglun = [[PingLun alloc] init];
                         [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
