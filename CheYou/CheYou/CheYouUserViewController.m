@@ -95,6 +95,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dianzanTableview.hidden = YES;
     //创建刷新
     [self refreshDianzanConfig];
+    [tucaotableview headerBeginRefreshing];
+    [dianzanTableview headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -181,17 +183,12 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                 }
             }
         }
-        if (page==1) {
-            [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
-                return [obj1.createtime integerValue] < [obj2.createtime integerValue];
-            }];
-            [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
-                return [obj1.createtime integerValue] < [obj2.createtime integerValue];
-            }];
-        }
-        //请求完毕，刷新table
-        [tucaotableview reloadData ];
-        [dianzanTableview reloadData];
+        [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
+            return [obj1.createtime integerValue] < [obj2.createtime integerValue];
+        }];
+        [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
+            return [obj1.createtime integerValue] < [obj2.createtime integerValue];
+        }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -414,7 +411,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [tucaotableview reloadData];
-        
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [tucaotableview headerEndRefreshing];
         tucaotableview.showsVerticalScrollIndicator = YES;
@@ -431,7 +427,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [tucaotableview reloadData];
-        
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [tucaotableview footerEndRefreshing];
         tucaotableview.showsVerticalScrollIndicator = YES;
@@ -447,8 +442,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
-//        [dianzanTableview reloadData];
-        
+        [dianzanTableview reloadData];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [dianzanTableview headerEndRefreshing];
         dianzanTableview.showsVerticalScrollIndicator = YES;
@@ -465,7 +459,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 刷新表格
         [dianzanTableview reloadData];
-        
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [dianzanTableview footerEndRefreshing];
         dianzanTableview.showsVerticalScrollIndicator = YES;

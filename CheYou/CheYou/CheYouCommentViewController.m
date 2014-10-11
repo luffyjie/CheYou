@@ -343,8 +343,6 @@
                 //如果该数据是新的则添加进去
             }
         }
-        //请求完毕，刷新table
-        //        [self.tableView reloadData ];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
