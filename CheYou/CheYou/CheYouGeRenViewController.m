@@ -102,7 +102,6 @@
 
 - (void)editAction:(id)sender
 {
-    editButton.enabled = NO;
     NSString *photoUrl;
     //验证地区
     if (imgData.length >1 || newArea.length >1) {
@@ -118,6 +117,7 @@
         {
             return;
         }
+        editButton.enabled = NO;
         //更新用户信息到服务器
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
@@ -149,6 +149,7 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
+        editButton.enabled = YES;
     }
 }
 

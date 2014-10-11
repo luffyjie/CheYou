@@ -171,7 +171,6 @@
 }
 
 - (IBAction)sendAction:(id)sender {
-    self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
     [self.ducheCaseButton resignFirstResponder];
     [self.ducheTimeButton resignFirstResponder];
@@ -194,7 +193,7 @@
         [self.ducheTimeButton becomeFirstResponder];
         return;
     }
-    
+    self.sendButton.enabled = NO;
     //发送数据
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -216,6 +215,7 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
+        self.sendButton.enabled = YES;
     }];
 }
 

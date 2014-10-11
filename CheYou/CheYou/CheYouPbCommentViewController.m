@@ -113,6 +113,7 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
+        self.sendButton.enabled = YES;
     }];
 }
 

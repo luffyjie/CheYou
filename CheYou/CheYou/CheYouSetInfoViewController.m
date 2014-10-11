@@ -144,7 +144,6 @@
 }
 
 - (IBAction)finishAction:(id)sender {
-    self.finishButton.enabled = NO;
     //上传图片
     UpYun *uy = [[UpYun alloc] init];
     NSString *photoUrl = [self getSaveKey];
@@ -171,6 +170,7 @@
         [self.areaText becomeFirstResponder];
         return;
     }
+    self.finishButton.enabled = NO;
     //注册用户
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
@@ -212,6 +212,7 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
+        self.finishButton.enabled = YES;
     }];
 }
 
@@ -250,6 +251,7 @@
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
+        self.finishButton.enabled = YES;
     }];
 }
 
