@@ -143,7 +143,7 @@
     
     gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 33.f,
                                                                        sectionView.frame.size.height - 29.f, 40.f, 20.f)];
-    gasolineLabel.text = [NSString stringWithFormat:@"%d",[self.tucao.jyouList count]];
+    gasolineLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[self.tucao.jyouList count]];
     gasolineLabel.font = [UIFont systemFontOfSize:14];
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
