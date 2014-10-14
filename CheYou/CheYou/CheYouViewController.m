@@ -206,6 +206,10 @@ static int page;
             tucaoCell.gasolineLabel.textColor = [UIColor redColor];
         }
     }
+    if ([[[_tuCaoList objectAtIndex:indexPath.row] jyouList] count] == 0) {
+        tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+        tucaoCell.gasolineLabel.textColor = [UIColor blackColor];
+    }
     //添加点赞加油点击按钮
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];

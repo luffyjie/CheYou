@@ -44,7 +44,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     NSMutableArray *_tuCaoList;
     NSMutableArray *_jyouList;
     NSMutableSet *_tuCaoSet;
-    NSMutableSet *_jyouSet;
+    NSUserDefaults *userDefaults;
 }
 
 -(void)viewDidLoad{
@@ -52,10 +52,9 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     _tuCaoList = [[NSMutableArray alloc] init];
     _jyouList = [[NSMutableArray alloc] init];
     _tuCaoSet = [[NSMutableSet alloc] init];
-    _jyouSet = [[NSMutableSet alloc] init];
+    userDefaults = [NSUserDefaults standardUserDefaults];
     //获取数据
     page = 1;
-    [self geTuCaoData:page];
     //设置按钮选择状态
     [self.oilButton  setImage:[UIImage imageNamed:@"my_talk_select"] forState:UIControlStateHighlighted];
     [self.oilButton  addTarget:self action:@selector(oilButtonAction:)forControlEvents:UIControlEventTouchDown];
@@ -65,7 +64,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     
     //用户图片设置
     self.photoView.frame = CGRectMake( 10, 86, 60, 60);
-       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[userDefaults objectForKey:@"photoUrl"],@"!basicimg"] placeholder:placeholder];
     [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
@@ -116,7 +114,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
 - (void)geTuCaoData:(int)page
 {
     //第一次获取数据
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults stringForKey:@"userPhone"], @"page.page": [NSString stringWithFormat:@"%d",page],
@@ -154,11 +151,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                         [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
                         [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
                         [tucao.jyouList addObject:pinglun];
-                        //去掉重复加油
-                        if (![_jyouSet containsObject:pinglun.lcid]) {
-                            [_jyouSet addObject:pinglun.lcid];
-                            [_jyouList addObject:pinglun];
-                        }
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
@@ -192,6 +184,13 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
             return [obj1.createtime integerValue] < [obj2.createtime integerValue];
         }];
+        for (TuCao *htuco in _tuCaoList) {
+            if ([htuco.jyouList count] > 0) {
+                for (PingLun *pl in htuco.jyouList) {
+                    [_jyouList addObject:pl];
+                }
+            }
+        }
         [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
             return [obj1.createtime integerValue] < [obj2.createtime integerValue];
         }];
@@ -299,6 +298,18 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         }
         tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
         tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        tucaoCell.tag = [tucaoCell.tucao.lbid integerValue];
+        //如果用户之前点过赞，则显示红色
+        for (PingLun *jy in [[_tuCaoList objectAtIndex:indexPath.row] jyouList]) {
+            if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+                tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+                tucaoCell.gasolineLabel.textColor = [UIColor redColor];
+            }
+        }
+        if ([[[_tuCaoList objectAtIndex:indexPath.row] jyouList] count] == 0) {
+            tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
+            tucaoCell.gasolineLabel.textColor = [UIColor blackColor];
+        }
         //添加点赞加油点击按钮
         UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
         [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
@@ -496,7 +507,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
 }
 
 #pragma 评论 点赞
-#pragma 评论 点赞 点击附件图片 事件处理
 - (void)gasolinebuttonAction:(id)sender
 {
     UIButton *button = (UIButton *)sender;
@@ -512,11 +522,38 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     {
         cell = (CheYouTuCaoTableViewCell *)[[[button superview] superview]superview];
     }
-    if (button.selected) {
-        cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
-        cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
-        cell.gasolineLabel.textColor = [UIColor redColor];
+    //判断是否点过赞
+    for (PingLun *jy in [[cell tucao] jyouList]) {
+        if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
+            return;
+        }
     }
+    cell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+    cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
+    cell.gasolineLabel.textColor = [UIColor redColor];
+    PingLun *newzan = [[PingLun alloc] init];
+    newzan.lbid = [NSString stringWithFormat:@"%ld",(long)cell.tag];
+    newzan.account = [userDefaults objectForKey:@"userPhone"];
+    newzan.content = @"0";
+    for (TuCao *tc in _tuCaoList) {
+        if ([tc.lbid integerValue]==cell.tag) {
+            [tc.jyouList addObject:newzan];
+        }
+    }
+    //点赞发送服务端
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":[NSNumber numberWithInteger:cell.tag]};
+    [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //            NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //            NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 #pragma 处理用户更新信息
@@ -527,6 +564,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     NSString *photoUrl = [theData objectForKey:@"hpic"];
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",photoUrl,@"!basicimg"] placeholder:placeholder];
+    [tucaotableview headerBeginRefreshing];
+    [dianzanTableview headerBeginRefreshing];
 }
 
 @end
