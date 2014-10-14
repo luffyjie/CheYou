@@ -220,7 +220,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dianzanTableview.hidden = NO;
     tucaotableview.hidden = YES;
     [tucaotableview reloadData];
-    self.greenLabel.frame = CGRectMake(108, 198, 104, 2);
+    self.greenLabel.frame = CGRectMake(162, 198, 157, 2);
 }
 
 - (void)labaButtonAction:(id)sender
@@ -228,7 +228,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     dianzanTableview.hidden = YES;
     tucaotableview.hidden = NO;
     [dianzanTableview reloadData];
-    self.greenLabel.frame = CGRectMake(1, 198, 104, 2);
+    self.greenLabel.frame = CGRectMake(1, 198, 157, 2);
 }
 
 #pragma refresh config

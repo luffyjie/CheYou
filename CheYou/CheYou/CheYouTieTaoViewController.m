@@ -90,7 +90,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.textView.delegate = self;
-    [self.textView becomeFirstResponder];
+//    [self.textView becomeFirstResponder];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
