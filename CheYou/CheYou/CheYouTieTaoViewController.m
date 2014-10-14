@@ -188,6 +188,11 @@
 //        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
 //        [alert show];
+        //向通知中心发送消息
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"pbNewNotification"
+         object:nil
+         userInfo:nil];
         [self dismissViewControllerAnimated:YES completion: nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

@@ -53,10 +53,15 @@ static int page;
     //刷新获取数据
     [self refreshConfig];
     [self.tableView headerBeginRefreshing];
-    //注册用户更改了个人信息的观察
+    //注册用户更改了个人信息的观察者
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo:)
                                                  name:@"UpdateUserInfoNotification"
+                                               object:nil];
+    //注册用户发表了新喇叭的观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserInfo:)
+                                                 name:@"pbNewNotification"
                                                object:nil];
 }
 
@@ -405,7 +410,7 @@ static int page;
 - (void)updateUserInfo:(NSNotification*)notification
 {
     //接受notification的userInfo，可以把参数存进此变量
-    [self headerRereshing];
+    [self.tableView headerBeginRefreshing];
 }
 
 @end
