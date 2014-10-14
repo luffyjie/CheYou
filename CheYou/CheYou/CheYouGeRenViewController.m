@@ -133,6 +133,11 @@
             [userDefaults setObject:photoUrl forKey:@"photoUrl"];
             //之前忘记加同步代码，造成bug
             [userDefaults synchronize];
+            //向通知中心发送消息
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"UpdateUsernPhotoNotification"
+             object:nil
+             userInfo:parameters];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             NSString *title = NSLocalizedString(@"提示", nil);

@@ -65,7 +65,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     
     //用户图片设置
     self.photoView.frame = CGRectMake( 10, 86, 60, 60);
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",[userDefaults objectForKey:@"photoUrl"],@"!basicimg"] placeholder:placeholder];
     [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
@@ -97,12 +97,18 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     [self refreshDianzanConfig];
     [tucaotableview headerBeginRefreshing];
     [dianzanTableview headerBeginRefreshing];
+    //注册用户更改了个人信息的观察
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserPhoto:)
+                                                 name:@"UpdateUsernPhotoNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma getData
@@ -511,6 +517,16 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         cell.gasolineLabel.text = [NSString stringWithFormat: @"%d", [cell.gasolineLabel.text intValue] + 1];
         cell.gasolineLabel.textColor = [UIColor redColor];
     }
+}
+
+#pragma 处理用户更新图像
+- (void)updateUserPhoto:(NSNotification*)notification
+{
+    //接受notification的userInfo，可以把参数存进此变量
+    NSDictionary *theData = [notification userInfo];
+    NSString *photoUrl = [theData objectForKey:@"hpic"];
+    UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+    [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",photoUrl,@"!basicimg"] placeholder:placeholder];
 }
 
 @end
