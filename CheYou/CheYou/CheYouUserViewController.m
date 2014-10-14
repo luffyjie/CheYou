@@ -99,8 +99,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     [dianzanTableview headerBeginRefreshing];
     //注册用户更改了个人信息的观察
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateUserPhoto:)
-                                                 name:@"UpdateUsernPhotoNotification"
+                                             selector:@selector(updateUserInfo:)
+                                                 name:@"UpdateUserInfoNotification"
                                                object:nil];
 }
 
@@ -519,8 +519,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     }
 }
 
-#pragma 处理用户更新图像
-- (void)updateUserPhoto:(NSNotification*)notification
+#pragma 处理用户更新信息
+- (void)updateUserInfo:(NSNotification*)notification
 {
     //接受notification的userInfo，可以把参数存进此变量
     NSDictionary *theData = [notification userInfo];

@@ -135,7 +135,7 @@
             [userDefaults synchronize];
             //向通知中心发送消息
             [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"UpdateUsernPhotoNotification"
+             postNotificationName:@"UpdateUserInfoNotification"
              object:nil
              userInfo:parameters];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

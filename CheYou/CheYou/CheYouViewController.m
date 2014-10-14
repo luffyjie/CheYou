@@ -53,12 +53,18 @@ static int page;
     //刷新获取数据
     [self refreshConfig];
     [self.tableView headerBeginRefreshing];
+    //注册用户更改了个人信息的观察
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserInfo:)
+                                                 name:@"UpdateUserInfoNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma getData
@@ -393,6 +399,13 @@ static int page;
         commentView.indexpath = indexPath;
     }
     
+}
+
+#pragma 处理用户更新信息
+- (void)updateUserInfo:(NSNotification*)notification
+{
+    //接受notification的userInfo，可以把参数存进此变量
+    [self headerRereshing];
 }
 
 @end
