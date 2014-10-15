@@ -152,7 +152,7 @@
         NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
         tuCaoText.text = _tucao.huati;
-        gasolineLabel.text = [NSString stringWithFormat:@"%d",_tucao.jyou];
+        gasolineLabel.text = [NSString stringWithFormat:@"%d",(int)_tucao.jyouList.count];
         commentLabel.text = [NSString stringWithFormat:@"%d",(int)_tucao.commentList.count];
         [self makeContentFrame];
     }

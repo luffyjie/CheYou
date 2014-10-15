@@ -281,6 +281,11 @@
 - (void)backAction:(id)sender
 {
 //    [self dismissViewControllerAnimated:YES completion: nil];
+    //向通知中心发送消息
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"pbZanOrPlNotification"
+     object:nil
+     userInfo:[NSDictionary dictionaryWithObject:self.indexpath forKey:@"indexpath"]];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -307,7 +312,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":self.tucao.lbid};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSLog(@"JSON: %@", responseObject);
+//                    NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -335,7 +340,7 @@
         pbcommentView.delegate = self;
     }
 }
-
+/*
 #pragma 请求评论数据
 - (void)getData:(int)page
 {
@@ -382,7 +387,7 @@
         [alert show];
     }];
 }
-
+*/
 #pragma 已经发布评论,点赞的委托
 
 -(void)pbComment:(PingLun *)pinglun{

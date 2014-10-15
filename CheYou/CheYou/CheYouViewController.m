@@ -63,6 +63,11 @@ static int page;
                                              selector:@selector(updateUserInfo:)
                                                  name:@"pbNewNotification"
                                                object:nil];
+    //注册用户发表了新喇叭的观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pbZanOrPlInfo:)
+                                                 name:@"pbZanOrPlNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -413,8 +418,15 @@ static int page;
 #pragma 处理用户更新信息
 - (void)updateUserInfo:(NSNotification*)notification
 {
-    //接受notification的userInfo，可以把参数存进此变量
     [self.tableView headerBeginRefreshing];
+}
+
+- (void)pbZanOrPlInfo:(NSNotification*)notification
+{
+    //接受notification的userInfo，可以把参数存进此变量
+    NSDictionary *theData = [notification userInfo];
+    NSIndexPath *indexpath = [theData objectForKey:@"indexpath"];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexpath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
