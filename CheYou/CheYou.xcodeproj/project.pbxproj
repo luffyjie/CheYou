@@ -83,6 +83,7 @@
 		E968E27E19AD9DD200E2824E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27C19AD9DD200E2824E /* iTunesArtwork.png */; };
 		E968E27F19AD9DD200E2824E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */; };
 		E968E28319ADA16200E2824E /* LuJieCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E968E28219ADA16200E2824E /* LuJieCommon.m */; };
+		E96AD82B19EEC0F200D62E50 /* PickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E96AD82A19EEC0F200D62E50 /* PickerItem.m */; };
 		E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E976FBB519C9BF320019646A /* VPImageCropperViewController.m */; };
 		E978F86119C91B8500436F09 /* CheYouSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86019C91B8500436F09 /* CheYouSetViewController.m */; };
 		E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */; };
@@ -180,7 +181,7 @@
 		E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginViewController.m; sourceTree = "<group>"; };
 		E953C5DA19CC43A900C0510F /* CheYouLoginCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouLoginCheckViewController.h; sourceTree = "<group>"; };
 		E953C5DB19CC43A900C0510F /* CheYouLoginCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouLoginCheckViewController.m; sourceTree = "<group>"; };
-		E95488D819E133E700CEAA12 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		E95488D819E133E700CEAA12 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E95FDFF719C6AE3B007585AF /* CheYouPbCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouPbCommentViewController.h; sourceTree = "<group>"; };
 		E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouPbCommentViewController.m; sourceTree = "<group>"; };
 		E9617A0319B7F95F000543D2 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
@@ -273,6 +274,8 @@
 		E968E27D19AD9DD200E2824E /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		E968E28119ADA16200E2824E /* LuJieCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuJieCommon.h; sourceTree = "<group>"; };
 		E968E28219ADA16200E2824E /* LuJieCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuJieCommon.m; sourceTree = "<group>"; };
+		E96AD82919EEC0F200D62E50 /* PickerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerItem.h; sourceTree = "<group>"; };
+		E96AD82A19EEC0F200D62E50 /* PickerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerItem.m; sourceTree = "<group>"; };
 		E976FBB419C9BF320019646A /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		E976FBB519C9BF320019646A /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		E978F85F19C91B8500436F09 /* CheYouSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSetViewController.h; sourceTree = "<group>"; };
@@ -427,6 +430,8 @@
 				E982164B19B9A07000F088BB /* PRButton.m */,
 				E9521CF419DA6DE30058F36D /* PingLun.h */,
 				E9521CF519DA6DE30058F36D /* PingLun.m */,
+				E96AD82919EEC0F200D62E50 /* PickerItem.h */,
+				E96AD82A19EEC0F200D62E50 /* PickerItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -922,6 +927,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E96AD82B19EEC0F200D62E50 /* PickerItem.m in Sources */,
 				E92C577719D46AF200B144F0 /* NSData+Utils.m in Sources */,
 				E9617A0819B7F95F000543D2 /* easing.c in Sources */,
 				E9617A8D19B81740000543D2 /* SDWebImagePrefetcher.m in Sources */,
