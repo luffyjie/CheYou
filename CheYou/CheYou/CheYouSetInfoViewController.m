@@ -147,6 +147,9 @@
     //上传图片
     UpYun *uy = [[UpYun alloc] init];
     NSString *photoUrl = [self getSaveKey];
+    if (!imgData) {
+        imgData = UIImageJPEGRepresentation(self.photoView.image, 0.4);
+    }
     [uy uploadFile:imgData saveKey:photoUrl];
     
     //验证昵称
