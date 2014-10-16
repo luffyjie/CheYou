@@ -1119,7 +1119,7 @@
                                             <action selector="ChangePhotoAction:" destination="upX-KC-G9E" eventType="touchDown" id="hDt-X2-8Ft"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="luoli" id="TKt-wm-iPz">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_photo" id="TKt-wm-iPz">
                                         <rect key="frame" x="20" y="15" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -1313,7 +1313,6 @@
         <image name="default_photo" width="120" height="120"/>
         <image name="keyboard_image" width="20" height="20"/>
         <image name="login" width="180" height="45"/>
-        <image name="luoli" width="48" height="48"/>
         <image name="my_talk" width="106" height="35"/>
         <image name="pb_close" width="48" height="48"/>
         <image name="pb_duche" width="140" height="140"/>
