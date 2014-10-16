@@ -49,7 +49,7 @@
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"deletePhotoNotification"
      object:nil
-     userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d",_imgid] forKey:@"imgid"]];
+     userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d",(int)_imgid] forKey:@"imgid"]];
 }
 
 @end
