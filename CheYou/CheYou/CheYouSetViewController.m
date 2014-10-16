@@ -48,19 +48,25 @@
 
 - (IBAction)geRenButton:(id)sender {
     
-        [self performSegueWithIdentifier:@"geren_segue" sender:self];
+    [self performSegueWithIdentifier:@"geren_segue" sender:self];
 }
 
 - (IBAction)yiJianButton:(id)sender {
     
+    [self performSegueWithIdentifier:@"segue_suggest" sender:self];
 }
 
 - (IBAction)cacheButton:(id)sender {
-    
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = NSLocalizedString(@"缓存清除成功！", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    [alert show];
 }
 
 - (IBAction)about:(id)sender {
     
+    [self performSegueWithIdentifier:@"segue_about" sender:self];
 }
 
 - (IBAction)logOutButton:(id)sender {
@@ -70,6 +76,5 @@
     [userDefaults synchronize];
     [self performSegueWithIdentifier:@"backlogin_segue" sender:self];
 }
-
 
 @end

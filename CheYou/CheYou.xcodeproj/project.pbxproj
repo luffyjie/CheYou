@@ -122,6 +122,8 @@
 		E9BCBCC919EFFA7F00236A0E /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BCBCBD19EFFA7F00236A0E /* Icon-60.png */; };
 		E9BCBCCA19EFFA7F00236A0E /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BCBCBE19EFFA7F00236A0E /* iTunesArtwork@2x.png */; };
 		E9BCBCCB19EFFA7F00236A0E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BCBCBF19EFFA7F00236A0E /* iTunesArtwork.png */; };
+		E9BCBCCE19F00E4D00236A0E /* CheYouSuggestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BCBCCD19F00E4D00236A0E /* CheYouSuggestController.m */; };
+		E9BCBCD119F0164200236A0E /* CheYouAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BCBCD019F0164200236A0E /* CheYouAboutController.m */; };
 		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
 		E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */; };
@@ -333,6 +335,10 @@
 		E9BCBCBD19EFFA7F00236A0E /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		E9BCBCBE19EFFA7F00236A0E /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		E9BCBCBF19EFFA7F00236A0E /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		E9BCBCCC19F00E4D00236A0E /* CheYouSuggestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouSuggestController.h; sourceTree = "<group>"; };
+		E9BCBCCD19F00E4D00236A0E /* CheYouSuggestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSuggestController.m; sourceTree = "<group>"; };
+		E9BCBCCF19F0164200236A0E /* CheYouAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouAboutController.h; sourceTree = "<group>"; };
+		E9BCBCD019F0164200236A0E /* CheYouAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouAboutController.m; sourceTree = "<group>"; };
 		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E9ECC9AD19B0983400C894E5 /* CheYouTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTabBarViewController.h; sourceTree = "<group>"; };
 		E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTabBarViewController.m; sourceTree = "<group>"; };
@@ -700,6 +706,10 @@
 				E95FDFF819C6AE3B007585AF /* CheYouPbCommentViewController.m */,
 				E978F85F19C91B8500436F09 /* CheYouSetViewController.h */,
 				E978F86019C91B8500436F09 /* CheYouSetViewController.m */,
+				E9BCBCCC19F00E4D00236A0E /* CheYouSuggestController.h */,
+				E9BCBCCD19F00E4D00236A0E /* CheYouSuggestController.m */,
+				E9BCBCCF19F0164200236A0E /* CheYouAboutController.h */,
+				E9BCBCD019F0164200236A0E /* CheYouAboutController.m */,
 				E978F86219C92E2F00436F09 /* CheYouGeRenViewController.h */,
 				E978F86319C92E2F00436F09 /* CheYouGeRenViewController.m */,
 				E953C5D719CC2DC100C0510F /* CheYouLoginViewController.h */,
@@ -937,6 +947,7 @@
 				E9617A8A19B81740000543D2 /* SDWebImageDownloaderOperation.m in Sources */,
 				E9617A3A19B7FAAC000543D2 /* UzysAppearanceConfig.m in Sources */,
 				E97C562A19C53522003AB1B9 /* CheYouCommentTopViewCell.m in Sources */,
+				E9BCBCD119F0164200236A0E /* CheYouAboutController.m in Sources */,
 				E9617A9019B81740000543D2 /* UIImage+MultiFormat.m in Sources */,
 				E964151119B55D8900FD2A08 /* CheYouDucheViewController.m in Sources */,
 				E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */,
@@ -951,6 +962,7 @@
 				E976FBB619C9BF320019646A /* VPImageCropperViewController.m in Sources */,
 				E9045E8119B636EB00292DA0 /* CheYouTieTaoViewController.m in Sources */,
 				E9521CF619DA6DE30058F36D /* PingLun.m in Sources */,
+				E9BCBCCE19F00E4D00236A0E /* CheYouSuggestController.m in Sources */,
 				E97B2F3019CD21C500D902C0 /* CheYouSetInfoViewController.m in Sources */,
 				E9617A8219B81740000543D2 /* MJPhotoToolbar.m in Sources */,
 				E978F86419C92E2F00436F09 /* CheYouGeRenViewController.m in Sources */,
