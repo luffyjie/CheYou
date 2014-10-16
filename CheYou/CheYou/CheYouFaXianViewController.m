@@ -87,6 +87,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma 点击空白地方隐藏键盘

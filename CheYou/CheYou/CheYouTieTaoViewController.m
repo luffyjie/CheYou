@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "UpYun.h"
 #import "UIImageExt.h"
+#import "PickerItem.h"
 
 @interface CheYouTieTaoViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
@@ -50,6 +51,7 @@
     self.textView.returnKeyType = UIReturnKeyDone;
     self.textView.selectedRange = NSMakeRange(0,0);
     self.textView.font = [UIFont systemFontOfSize:16.f];
+    self.textView.delegate = self;
     self.textView.inputAccessoryView = [self makekeywordBarView];
     [self.view addSubview: self.textView];
     
@@ -79,22 +81,18 @@
     //switch
     [self.locationSwitch setOn:YES animated:YES];
     [self.locationSwitch addTarget:self action:@selector(switchValueDidChange:) forControlEvents:UIControlEventValueChanged];
+    
+    //注册用户发表了新喇叭的观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(deletePhoto:)
+                                                 name:@"deletePhotoNotification"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    self.textView.delegate = self;
-//    [self.textView becomeFirstResponder];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -241,20 +239,17 @@
     
     if([[assets[0] valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) //Photo
     {
-        [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            ALAsset *representation = obj;
-            
-            UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
-                                               scale:representation.defaultRepresentation.scale
-                                         orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
-            UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake((idx%3)*92+(idx%3+1)*10, 10, 92, 92)];
-            //            userImage.image = [img imageByScalingAndCroppingForSize:CGSizeMake(326, 248)];
-            userImage.image = [img scaleToSize:CGSizeMake(640, 480)];
-            userImage.clipsToBounds = YES;
-            userImage.contentMode = UIViewContentModeScaleAspectFill;
-            [self.photoView addSubview:userImage];
-            [userPhotoList addObject:userImage];
-        }];
+        for (int i = 0; i < assets.count; i++) {
+            ALAsset *asset = assets[i];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage  *image = [[UIImage alloc] initWithCGImage:asset.defaultRepresentation.fullScreenImage];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    PickerItem *pickeritem = [[PickerItem alloc] initWithimage:i toimg: image frame:CGRectMake((i%3)*92+(i%3+1)*10, (i/3)*102, 92, 92)];
+                    [self.photoView addSubview:pickeritem];
+                    [userPhotoList addObject:pickeritem];
+                });
+            });
+        }
     }
 }
 
@@ -367,7 +362,7 @@
     if (userPhotoList.count == 1) {
         //上传图片
         NSString *photoUrl = [self getSaveKey];
-        imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:0] image], 0.4);
+        imgdata = UIImageJPEGRepresentation([[[userPhotoList objectAtIndex:0] imageView] image], 0.4);
         [uy uploadFile:imgdata saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
     }else
@@ -376,18 +371,37 @@
         for (int i=0; i<=userPhotoList.count-2; i++) {
             //上传图片
             NSString *photoUrl = [self getSaveKey];
-            imgdata = UIImageJPEGRepresentation([[userPhotoList objectAtIndex:i] image], 0.4);
+            imgdata = UIImageJPEGRepresentation([[[userPhotoList objectAtIndex:i] imageView] image], 0.4);
             [uy uploadFile:imgdata saveKey:photoUrl];
             imgStr = [imgStr stringByAppendingString:photoUrl];
             imgStr = [imgStr stringByAppendingString:@";"];
         }
         //之前没注意，留下的bug 2014-10-6
         NSString *photoUrl = [self getSaveKey];
-        imgdata = UIImageJPEGRepresentation([[userPhotoList lastObject] image], 0.4);
+        imgdata = UIImageJPEGRepresentation([[[userPhotoList lastObject] imageView] image], 0.4);
         [uy uploadFile:imgdata saveKey:photoUrl];
         imgStr = [imgStr stringByAppendingString:photoUrl];
     }
     return imgStr;
+}
+
+#pragma 处理删除选择的图片
+
+- (void)deletePhoto:(NSNotification*)notification
+{
+    //接受notification的userInfo，可以把参数存进此变量
+    NSDictionary *theData = [notification userInfo];
+    NSInteger imgid = [[theData objectForKey:@"imgid"] integerValue];
+    NSArray *list = [NSArray arrayWithArray: userPhotoList];
+    for (PickerItem *pick in list) {
+        if (pick.imgid == imgid) {
+            [userPhotoList removeObject:pick];
+        }
+    }
+    for (int i=0; i<userPhotoList.count; i++) {
+        [[userPhotoList objectAtIndex:i] setFrame:CGRectMake((i%3)*92+(i%3+1)*10, (i/3)*102, 92, 92)];
+        [self.photoView addSubview:userPhotoList[i]];
+    }
 }
 
 @end
