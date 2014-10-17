@@ -25,6 +25,8 @@
 		E9375F4119D31D2400053F0B /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */; };
 		E9375F4319D31D3600053F0B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F4219D31D3600053F0B /* SystemConfiguration.framework */; };
 		E93AD96319B2CCBB0081259E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93AD96219B2CCBB0081259E /* QuartzCore.framework */; };
+		E94BCC7419F0B292008F66D3 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94BCC7219F0B292008F66D3 /* libMobClickLibrary.a */; };
+		E94BCC7619F0B2BB008F66D3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94BCC7519F0B2BB008F66D3 /* libz.dylib */; };
 		E94FC05419B0E60100392F33 /* CheYouFaXianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */; };
 		E9521CF619DA6DE30058F36D /* PingLun.m in Sources */ = {isa = PBXBuildFile; fileRef = E9521CF519DA6DE30058F36D /* PingLun.m */; };
 		E953C5D919CC2DC100C0510F /* CheYouLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E953C5D819CC2DC100C0510F /* CheYouLoginViewController.m */; };
@@ -124,7 +126,6 @@
 		E9BCBCCB19EFFA7F00236A0E /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BCBCBF19EFFA7F00236A0E /* iTunesArtwork.png */; };
 		E9BCBCCE19F00E4D00236A0E /* CheYouSuggestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BCBCCD19F00E4D00236A0E /* CheYouSuggestController.m */; };
 		E9BCBCD119F0164200236A0E /* CheYouAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BCBCD019F0164200236A0E /* CheYouAboutController.m */; };
-		E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9ECC9A519B019D200C894E5 /* TuCaoList.plist */; };
 		E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */; };
 		E9ECC9B419B0C0A400C894E5 /* CheYouPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9ECC9B319B0C0A400C894E5 /* CheYouPublishViewController.m */; };
 		E9F9DC5719B708A000401C35 /* UIImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F9DC5619B708A000401C35 /* UIImageExt.m */; };
@@ -175,6 +176,9 @@
 		E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		E9375F4219D31D3600053F0B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E93AD96219B2CCBB0081259E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E94BCC7219F0B292008F66D3 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		E94BCC7319F0B292008F66D3 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		E94BCC7519F0B2BB008F66D3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E94FC05219B0E60100392F33 /* CheYouFaXianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouFaXianViewController.h; sourceTree = "<group>"; };
 		E94FC05319B0E60100392F33 /* CheYouFaXianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouFaXianViewController.m; sourceTree = "<group>"; };
 		E9521CF419DA6DE30058F36D /* PingLun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingLun.h; sourceTree = "<group>"; };
@@ -339,7 +343,6 @@
 		E9BCBCCD19F00E4D00236A0E /* CheYouSuggestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouSuggestController.m; sourceTree = "<group>"; };
 		E9BCBCCF19F0164200236A0E /* CheYouAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouAboutController.h; sourceTree = "<group>"; };
 		E9BCBCD019F0164200236A0E /* CheYouAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouAboutController.m; sourceTree = "<group>"; };
-		E9ECC9A519B019D200C894E5 /* TuCaoList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TuCaoList.plist; sourceTree = "<group>"; };
 		E9ECC9AD19B0983400C894E5 /* CheYouTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTabBarViewController.h; sourceTree = "<group>"; };
 		E9ECC9AE19B0983400C894E5 /* CheYouTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTabBarViewController.m; sourceTree = "<group>"; };
 		E9ECC9B219B0C0A400C894E5 /* CheYouPublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouPublishViewController.h; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94BCC7619F0B2BB008F66D3 /* libz.dylib in Frameworks */,
+				E94BCC7419F0B292008F66D3 /* libMobClickLibrary.a in Frameworks */,
 				E92C577919D46C8800B144F0 /* libPods.a in Frameworks */,
 				E9375F4319D31D3600053F0B /* SystemConfiguration.framework in Frameworks */,
 				E9375F4119D31D2400053F0B /* libz.1.2.5.dylib in Frameworks */,
@@ -503,6 +508,15 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		E94BCC7119F0B232008F66D3 /* UmSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E94BCC7219F0B292008F66D3 /* libMobClickLibrary.a */,
+				E94BCC7319F0B292008F66D3 /* MobClick.h */,
+			);
+			name = UmSDK;
+			sourceTree = "<group>";
+		};
 		E9617A4319B81715000543D2 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +651,7 @@
 		E981F9C519AC323F007BD2DE = {
 			isa = PBXGroup;
 			children = (
+				E94BCC7119F0B232008F66D3 /* UmSDK */,
 				E92C576319D469F200B144F0 /* Upyun */,
 				E9375F3C19D31B6C00053F0B /* MS */,
 				E9B49D2719CAC49E00F6F562 /* Welcome */,
@@ -667,6 +682,7 @@
 		E981F9D019AC323F007BD2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E94BCC7519F0B2BB008F66D3 /* libz.dylib */,
 				E92C577819D46C8800B144F0 /* libPods.a */,
 				E9375F4219D31D3600053F0B /* SystemConfiguration.framework */,
 				E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */,
@@ -736,7 +752,6 @@
 				E981F9DA19AC323F007BD2DE /* InfoPlist.strings */,
 				E981F9DD19AC323F007BD2DE /* main.m */,
 				E981F9DF19AC323F007BD2DE /* CheYou-Prefix.pch */,
-				E9ECC9A519B019D200C894E5 /* TuCaoList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -885,7 +900,6 @@
 				E9BCBCC419EFFA7F00236A0E /* Icon-Small-50@2x.png in Resources */,
 				E9BCBCC219EFFA7F00236A0E /* Icon-Small@2x.png in Resources */,
 				E97B2F3219CD721900D902C0 /* area.plist in Resources */,
-				E9ECC9A619B019D200C894E5 /* TuCaoList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

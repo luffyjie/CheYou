@@ -8,6 +8,7 @@
 
 #import "CheYouAppDelegate.h"
 #import "LuJieCommon.h"
+#import "MobClick.h"
 
 @implementation CheYouAppDelegate
 
@@ -61,6 +62,10 @@
     welcomeImage.alpha = 0.0f;
     [UIView commitAnimations];
     
+    //友盟统计SDK
+    [MobClick startWithAppkey:@"544079c9fd98c585d6010657" reportPolicy:BATCH channelId:@"appStore"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
     return YES;
 }
 
