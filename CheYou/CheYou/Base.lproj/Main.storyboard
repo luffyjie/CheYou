@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wZg-Vq-jyH">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -492,7 +493,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyboard_image" id="eeW-lA-S1t">
-                            <rect key="frame" x="21" y="13" width="20" height="20"/>
+                            <rect key="frame" x="21" y="13" width="25" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gn7-Xb-Ijf">
@@ -582,7 +583,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyboard_image" id="gqP-wf-WoK">
-                                        <rect key="frame" x="21" y="13" width="20" height="20"/>
+                                        <rect key="frame" x="21" y="13" width="25" height="19"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -700,7 +701,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyboard_image" id="dGw-Ya-3CG">
-                                        <rect key="frame" x="21" y="13" width="20" height="20"/>
+                                        <rect key="frame" x="21" y="13" width="25" height="19"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -1360,9 +1361,9 @@
     </scenes>
     <resources>
         <image name="default_photo" width="120" height="120"/>
-        <image name="keyboard_image" width="20" height="20"/>
+        <image name="keyboard_image" width="50" height="38"/>
         <image name="login" width="180" height="45"/>
-        <image name="my_talk" width="106" height="35"/>
+        <image name="my_talk" width="154" height="35"/>
         <image name="pb_close" width="48" height="48"/>
         <image name="pb_duche" width="140" height="140"/>
         <image name="pb_faxian" width="140" height="140"/>
