@@ -1233,7 +1233,7 @@
         <scene sceneID="5Hc-xD-ujB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W0o-Ds-9wf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_my_unselect" id="aQd-76-7Ab"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_my_un" id="aQd-76-7Ab"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ILU-IM-TVN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1252,7 +1252,7 @@
         <scene sceneID="cvV-4H-EUP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vdG-0Z-OXR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_home_select" id="BgO-ab-oJ0"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_home" id="BgO-ab-oJ0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kbE-MW-Z4S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1367,8 +1367,8 @@
         <image name="pb_duche" width="140" height="140"/>
         <image name="pb_faxian" width="140" height="140"/>
         <image name="pb_tietiao" width="140" height="140"/>
-        <image name="tab_home_select" width="24" height="24"/>
-        <image name="tab_my_unselect" width="24" height="24"/>
+        <image name="tab_home" width="40" height="40"/>
+        <image name="tab_my_un" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

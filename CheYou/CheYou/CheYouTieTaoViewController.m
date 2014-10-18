@@ -208,7 +208,7 @@
     
 #if 1
     UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
-    appearanceConfig.finishSelectionButtonColor = [LuJieCommon UIColorFromRGB:0x37D077];
+    appearanceConfig.finishSelectionButtonColor = [LuJieCommon UIColorFromRGB:0x354b60];
     appearanceConfig.assetsGroupSelectedImageName = @"checker";
     [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
 #endif

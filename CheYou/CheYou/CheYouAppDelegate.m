@@ -30,7 +30,7 @@
     [self.window  addSubview:welcomeImage];
     
     //设置全局导航栏的背景颜色
-    [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x37D077]];
+    [[UINavigationBar appearance] setBarTintColor: [LuJieCommon UIColorFromRGB:0x354b60]];
    //设置导航栏自定义的按钮的颜色
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     NSDictionary *buttonItemAttributes = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
