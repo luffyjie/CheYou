@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet PRButton *areaText;
 @property (weak, nonatomic) IBOutlet UILabel *areaLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *finishButton;
+@property (weak, nonatomic) IBOutlet UITextField *aicheText;
 
 @end
 
@@ -69,6 +70,11 @@
     //昵称
     self.nameText.delegate = self;
     self.nameText.returnKeyType = UIReturnKeyDone;
+    self.nameText.tag = 1;
+    //爱车
+    self.aicheText.delegate = self;
+    self.aicheText.returnKeyType = UIReturnKeyDone;
+    self.aicheText.tag = 2;
     
 }
 
@@ -128,7 +134,11 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([string isEqualToString:@"\n"]) {
         // Be sure to test for equality using the "isEqualToString" message
-        [self.nameText resignFirstResponder];
+        if (textField.tag ==1) {
+            [self.nameText resignFirstResponder];
+        }else{
+            [self.aicheText resignFirstResponder];
+        }
         // Return FALSE so that the final '\n' character doesn't get added
         return FALSE;
     }
@@ -163,6 +173,17 @@
             [self.nameText becomeFirstResponder];
             return;
         }
+    //验证爱车
+    NSString *userAiche = [self.aicheText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (userAiche.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"爱车不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.aicheText becomeFirstResponder];
+        return;
+    }
     //验证地区
     if (self.areaLabel.text.length <1) {
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -179,7 +200,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account":self.phoneNum, @"passwd":self.pwd,
                                  @"phone":self.phoneNum, @"nkname":nkname,
-                                 @"hpic":photoUrl, @"location":chooseArea};
+                                 @"hpic":photoUrl, @"location":chooseArea,@"vehtype":userAiche};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *msg = [responseObject objectForKey:@"msg"];
         NSString *result = [responseObject objectForKey:@"r"];
@@ -191,6 +212,7 @@
                 [userDefaults setObject:nkname forKey:@"userName"];
                 [userDefaults setObject:chooseArea forKey:@"userArea"];
                 [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+                [userDefaults setObject:userAiche forKey:@"userAiche"];
                 //设置用户登录状态
                 [userDefaults setInteger:2 forKey:@"userOut"];
                 //同步本地数据
@@ -200,7 +222,7 @@
             }
         if (msg) {
                 //假如已经注册，则更新用户
-                [self updatePwd:nkname urlTo:photoUrl];
+            [self updatePwd:nkname urlTo:photoUrl aicheTo:userAiche];
             return;
         }
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -219,13 +241,13 @@
     }];
 }
 
-- (void)updatePwd:(NSString *)nkname urlTo:(NSString *)photoUrl
+- (void)updatePwd:(NSString *)nkname urlTo:(NSString *)photoUrl aicheTo:(NSString *)userAiche
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account":self.phoneNum, @"passwd":self.pwd,
                                  @"phone":self.phoneNum, @"nkname":nkname,
-                                 @"hpic":photoUrl, @"location":chooseArea};
+                                 @"hpic":photoUrl, @"location":chooseArea,@"vehtype":userAiche};
     [manager POST:@"http://114.215.187.69/citypin/rs/user/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *result = [responseObject objectForKey:@"r"];
         if ([result integerValue] == 1) {
@@ -236,6 +258,7 @@
             [userDefaults setObject:nkname forKey:@"userName"];
             [userDefaults setObject:chooseArea forKey:@"userArea"];
             [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+            [userDefaults setObject:userAiche forKey:@"userAiche"];
             //设置用户登录状态
             [userDefaults setInteger:2 forKey:@"userOut"];
             [userDefaults synchronize];

@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *portraitImageView;
 @property (weak, nonatomic) IBOutlet PRButton *areaText;
 @property (weak, nonatomic) IBOutlet UILabel *areaLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nknameText;
+@property (weak, nonatomic) IBOutlet UITextField *aicheText;
 
 @end
 
@@ -80,7 +82,16 @@
     self.areaText.inputView = areapicker;
     self.areaText.inputAccessoryView = [self makeareaBarView];
     selectedProvince = [province objectAtIndex: 0];
-
+    //昵称
+    self.nknameText.delegate = self;
+    self.nknameText.returnKeyType = UIReturnKeyDone;
+    self.nknameText.tag = 1;
+    self.nknameText.text = [userDefaults objectForKey:@"userName"];
+    //爱车
+    self.aicheText.delegate = self;
+    self.aicheText.returnKeyType = UIReturnKeyDone;
+    self.aicheText.tag = 2;
+    self.aicheText.text = [userDefaults objectForKey:@"userAiche"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,6 +105,22 @@
     [self.areaText resignFirstResponder];
 }
 
+#pragma UITextFeild 委托
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        if (textField.tag ==1) {
+            [self.nknameText resignFirstResponder];
+        }else{
+            [self.aicheText resignFirstResponder];
+        }
+        // Return FALSE so that the final '\n' character doesn't get added
+        return FALSE;
+    }
+    return YES;
+}
+
 #pragma 导航返回
 - (void)backAction:(id)sender
 {
@@ -102,26 +129,63 @@
 
 - (void)editAction:(id)sender
 {
-    NSString *photoUrl;
+    //验证昵称
+    NSString *nkname = [self.nknameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (nkname.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"昵称不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.nknameText becomeFirstResponder];
+        return;
+    }
+    //验证爱车
+    NSString *userAiche = [self.aicheText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (userAiche.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"爱车不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.aicheText becomeFirstResponder];
+        return;
+    }
     //验证地区
-    if (imgData.length >1 || newArea.length >1) {
-        if (imgData.length >1 ) {
-            //上传图片
-            UpYun *uy = [[UpYun alloc] init];
-            photoUrl = [self getSaveKey];
-            [uy uploadFile:imgData saveKey:photoUrl];
-        }
-        photoUrl = imgData.length>1?photoUrl:[userDefaults stringForKey:@"photoUrl"];
-        newArea = newArea.length>1?newArea:[userDefaults stringForKey:@"userArea"];
-        if ([photoUrl isEqualToString:[userDefaults stringForKey:@"photoUrl"]] && [newArea isEqualToString:[userDefaults stringForKey:@"userArea"]])
-        {
-            return;
-        }
+    if (self.areaLabel.text.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"地区不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.areaText becomeFirstResponder];
+        return;
+    }
+    BOOL change = NO;
+    if (![newArea isEqualToString:[userDefaults stringForKey:@"userArea"]]) {
+        change = YES;
+    }
+    if (![self.nknameText.text isEqualToString:[userDefaults stringForKey:@"userName"]]) {
+        change = YES;
+    }
+    if (![self.aicheText.text isEqualToString:[userDefaults stringForKey:@"userAiche"]]) {
+        change = YES;
+    }
+    NSString *photoUrl;
+    if (imgData.length >1 ) {
+        //上传图片
+        UpYun *uy = [[UpYun alloc] init];
+        photoUrl = [self getSaveKey];
+        [uy uploadFile:imgData saveKey:photoUrl];
+        change = YES;
+    }
+    //发送更新用户资料请求
+    if (change) {
         editButton.enabled = NO;
         //更新用户信息到服务器
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"],@"phone":[userDefaults stringForKey:@"userPhone"], @"hpic":photoUrl, @"location":newArea,@"passwd":[userDefaults stringForKey:@"userPwd"]};
+        NSDictionary *parameters = @{@"account":[userDefaults stringForKey:@"userPhone"],@"phone":[userDefaults stringForKey:@"userPhone"], @"hpic":photoUrl, @"location":newArea,@"passwd":[userDefaults stringForKey:@"userPwd"],@"vehtype":userAiche,@"nkname":nkname};
         [manager POST:@"http://114.215.187.69/citypin/rs/user/update" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *title = NSLocalizedString(@"提示", nil);
             NSString *message = NSLocalizedString(@"更新成功", nil);
