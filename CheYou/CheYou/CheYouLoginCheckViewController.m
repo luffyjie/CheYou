@@ -141,6 +141,7 @@
             [userDefaults setObject:[userDic objectForKey:@"hpic"] forKey:@"photoUrl"];
             [userDefaults setObject:[userDic objectForKey:@"nkname"] forKey:@"userName"];
             [userDefaults setObject:[userDic objectForKey:@"location"] forKey:@"userArea"];
+            [userDefaults setObject:[userDic objectForKey:@"vehtype"] forKey:@"userAiche"];
             //设置用户登录状态
             [userDefaults setInteger:2 forKey:@"userOut"];
             [userDefaults synchronize];

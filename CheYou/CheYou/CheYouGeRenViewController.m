@@ -162,6 +162,7 @@
         return;
     }
     BOOL change = NO;
+    newArea = newArea.length>1?newArea:[userDefaults stringForKey:@"userArea"];
     if (![newArea isEqualToString:[userDefaults stringForKey:@"userArea"]]) {
         change = YES;
     }
@@ -171,7 +172,7 @@
     if (![self.aicheText.text isEqualToString:[userDefaults stringForKey:@"userAiche"]]) {
         change = YES;
     }
-    NSString *photoUrl;
+    NSString *photoUrl = [userDefaults stringForKey:@"photoUrl"];
     if (imgData.length >1 ) {
         //上传图片
         UpYun *uy = [[UpYun alloc] init];
@@ -195,6 +196,8 @@
             //更新本地用户信息
             [userDefaults setObject:newArea forKey:@"userArea"];
             [userDefaults setObject:photoUrl forKey:@"photoUrl"];
+            [userDefaults setObject:userAiche forKey:@"userAiche"];
+            [userDefaults setObject:nkname forKey:@"userName"];
             //之前忘记加同步代码，造成bug
             [userDefaults synchronize];
             //向通知中心发送消息

@@ -69,6 +69,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     [self.photoView.layer setCornerRadius:CGRectGetHeight([self.photoView bounds]) / 2];
     self.photoView.layer.masksToBounds = YES;
     self.nameView.text = [userDefaults objectForKey:@"userName"];
+    self.signLabel.text = [@"爱车：" stringByAppendingString:[userDefaults objectForKey:@"userAiche"]];
     //初始化喇叭
     tucaotableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 203, self.view.bounds.size.width, self.view.bounds.size.height - 203 - 64)];
     [self.view addSubview:tucaotableview];
@@ -564,6 +565,8 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     NSString *photoUrl = [theData objectForKey:@"hpic"];
     UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
     [self.photoView setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",photoUrl,@"!basicimg"] placeholder:placeholder];
+    self.nameView.text = [theData objectForKey:@"nkname"];
+    self.signLabel.text = [@"爱车：" stringByAppendingString:[theData objectForKey:@"vehtype"]];
     [tucaotableview headerBeginRefreshing];
     [dianzanTableview headerBeginRefreshing];
 }
