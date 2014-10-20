@@ -147,6 +147,7 @@ static int page;
                         [htucao setCommentList:tucao.commentList];
                         [htucao setJyouList:tucao.jyouList];
                         [htucao setHpic:tucao.hpic];
+                        [htucao setNkname:tucao.nkname];
                     }
                 }
             }

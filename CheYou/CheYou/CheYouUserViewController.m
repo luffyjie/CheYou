@@ -144,7 +144,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                 for (NSDictionary *comment in comments) {
                     if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -155,7 +155,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                     }else
                     {
                         PingLun * pinglun = [[PingLun alloc] init];
-                        [tucao setValue:[laba objectForKey:@"nkname"] forKey:@"nkname"];
+                        [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
                         [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
                         [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
                         [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
@@ -178,6 +178,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                         [htucao setCommentList:tucao.commentList];
                         [htucao setJyouList:tucao.jyouList];
                         [htucao setHpic:tucao.hpic];
+                        [htucao setNkname:tucao.nkname];
                     }
                 }
             }
