@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet PRButton *tietiaoTimeButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
-@property (weak, nonatomic) IBOutlet UISwitch *locationSwitch;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
@@ -77,10 +76,6 @@
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     self.datePicker.minuteInterval = 1;
     [self.datePicker addTarget:self action:@selector(updateDatePickerLabel) forControlEvents:UIControlEventValueChanged];
-    
-    //switch
-    [self.locationSwitch setOn:YES animated:YES];
-    [self.locationSwitch addTarget:self action:@selector(switchValueDidChange:) forControlEvents:UIControlEventValueChanged];
     
     //注册用户发表了新喇叭的观察者
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -268,10 +263,6 @@
 - (void)updateDatePickerLabel {
     self.timeLable.text = [self.dateFormatter stringFromDate:self.datePicker.date];
     tttime = [NSString stringWithFormat:@"%0.f",[self.datePicker.date timeIntervalSince1970]];
-}
-
-- (void)switchValueDidChange:(UISwitch *)aSwitch {
-    NSLog(@"A switch changed its value: %d.", aSwitch.on);
 }
 
 #pragma made keyworad toolbar

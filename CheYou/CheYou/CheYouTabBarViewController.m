@@ -42,12 +42,11 @@
     myitem.imageInsets  = UIEdgeInsetsMake(6, 15, -6, -15);
 
     //添加发布按钮
-    self.pb_fabu = [[UIButton alloc] initWithFrame:CGRectMake(self.hmtabBar.frame.size.width/2 - 34, 8, 60, 34)];
+    self.pb_fabu = [[UIButton alloc] initWithFrame:CGRectMake(self.hmtabBar.frame.size.width/2 - 34, 0, 70, 40)];
 //    [self.pb_fabu setBackgroundImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [self.pb_fabu addTarget:self action:@selector(pb_fabuAction:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.pb_fabu];
     [self.hmtabBar addSubview:self.pb_fabu];
-    
     //实现tab透明
     UIImage *bgImg = [[UIImage alloc] init];
     [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_bg"]];
