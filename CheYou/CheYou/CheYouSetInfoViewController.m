@@ -154,14 +154,6 @@
 }
 
 - (IBAction)finishAction:(id)sender {
-    //上传图片
-    UpYun *uy = [[UpYun alloc] init];
-    NSString *photoUrl = [self getSaveKey];
-    if (!imgData) {
-        imgData = UIImageJPEGRepresentation(self.photoView.image, 0.4);
-    }
-    [uy uploadFile:imgData saveKey:photoUrl];
-    
     //验证昵称
     NSString *nkname = [self.nameText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (nkname.length <1) {
@@ -194,6 +186,13 @@
         [self.areaText becomeFirstResponder];
         return;
     }
+    //上传图片
+    UpYun *uy = [[UpYun alloc] init];
+    NSString *photoUrl = [self getSaveKey];
+    if (!imgData) {
+        imgData = UIImageJPEGRepresentation(self.photoView.image, 0.4);
+    }
+    [uy uploadFile:imgData saveKey:photoUrl];
     self.finishButton.enabled = NO;
     //注册用户
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

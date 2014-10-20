@@ -161,6 +161,10 @@
         [self.areaText becomeFirstResponder];
         return;
     }
+    //验证完毕
+    [self.aicheText resignFirstResponder];
+    [self.nknameText resignFirstResponder];
+    [self.areaText resignFirstResponder];
     BOOL change = NO;
     newArea = newArea.length>1?newArea:[userDefaults stringForKey:@"userArea"];
     if (![newArea isEqualToString:[userDefaults stringForKey:@"userArea"]]) {
