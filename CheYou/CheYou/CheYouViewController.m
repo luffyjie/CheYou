@@ -63,7 +63,7 @@ static int page;
                                              selector:@selector(updateUserInfo:)
                                                  name:@"pbNewNotification"
                                                object:nil];
-    //注册用户发表了新喇叭的观察者
+    //注册用户点赞的观察者
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pbZanOrPlInfo:)
                                                  name:@"pbZanOrPlNotification"

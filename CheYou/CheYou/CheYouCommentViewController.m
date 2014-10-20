@@ -396,6 +396,11 @@
         return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
     }];
     [self.tableView reloadData];
+    //向通知中心发送消息
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"pbZanOrPlNotification"
+     object:nil
+     userInfo:[NSDictionary dictionaryWithObject:self.indexpath forKey:@"indexpath"]];
 }
 
 @end
