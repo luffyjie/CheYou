@@ -8,6 +8,7 @@
 
 #import "CheYouSuggestController.h"
 #import "LuJieCommon.h"
+#import "AFNetworking.h"
 
 @interface CheYouSuggestController ()
 @property (nonatomic, strong) UITextView *textView;
@@ -121,6 +122,34 @@
 - (IBAction)sendAction:(id)sender {
     self.sendButton.enabled = NO;
     [self.textView resignFirstResponder];
+    //验证昵称
+    NSString *commtext = [self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (commtext.length <1) {
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"内容不能为空", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+        [self.textView becomeFirstResponder];
+        return;
+    }
+    //发送用户意见
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"account":[userDefaults objectForKey:@"userPhone"], @"content":commtext};
+    [manager POST:@"http://114.215.187.69/citypin/rs/jianyi/save" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        NSString *title = NSLocalizedString(@"提示", nil);
+        NSString *message = NSLocalizedString(@"网络异常，发送失败", nil);
+        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+        [alert show];
+         self.sendButton.enabled = YES;
+    }];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
