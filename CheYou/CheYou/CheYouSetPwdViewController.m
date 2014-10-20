@@ -152,10 +152,11 @@ static NSString *sendYzm;
 }
 
 - (IBAction)nextAction:(id)sender {
-    
-    if (self.pwdText.text.length <1) {
+    //验证昵称
+    NSString *pwd = [self.pwdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (pwd.length <8) {
         NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"密码不能为空", nil);
+        NSString *message = NSLocalizedString(@"密码不能小于8位", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
@@ -197,7 +198,7 @@ static NSString *sendYzm;
     if ([segue.identifier isEqual:@"reginfo_segue"]) {
         CheYouSetInfoViewController *setInfodView = (CheYouSetInfoViewController*)segue.destinationViewController;
         setInfodView.phoneNum = self.phoneNum;
-        setInfodView.pwd = self.pwdText.text;
+        setInfodView.pwd = [self.pwdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
 }
 
