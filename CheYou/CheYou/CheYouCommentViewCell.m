@@ -114,6 +114,15 @@
         pingLunText.text = _pinglun.content;
         [self makeContentFrame];
     }
+    if (![_pinglun.hpic isEqualToString:pinglun.hpic]) {
+        // 下载图片
+        if (!_pinglun.hpic) {
+            _pinglun.hpic = @"";
+        }
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+        [userImage setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",_pinglun.hpic,@"!small"] placeholder:placeholder];
+        screen_name.text = _pinglun.nkname;
+    }
 }
 
 -(void)makeContentFrame

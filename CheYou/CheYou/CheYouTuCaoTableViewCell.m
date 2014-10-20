@@ -156,6 +156,15 @@
         commentLabel.text = [NSString stringWithFormat:@"%d",(int)_tucao.commentList.count];
         [self makeContentFrame];
     }
+    if (![_tucao.hpic isEqualToString:tucao.hpic]) {
+        // 下载图片
+        if (!_tucao.hpic) {
+            _tucao.hpic = @"";
+        }
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+        [userImage setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",_tucao.hpic,@"!small"] placeholder:placeholder];
+        screen_name.text = _tucao.nkname;
+    }
 }
 
 -(void)makeContentFrame

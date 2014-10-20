@@ -95,7 +95,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     //创建刷新
     [self refreshDianzanConfig];
     [tucaotableview headerBeginRefreshing];
-    [dianzanTableview headerBeginRefreshing];
     //注册用户更改了个人信息的观察
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserInfo:)
@@ -170,6 +169,9 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
             if (![_tuCaoSet containsObject:tucao.lbid]) {
                 [_tuCaoSet addObject:tucao.lbid];
                 [_tuCaoList addObject:tucao];
+                for (PingLun *pl in tucao.jyouList) {
+                    [_jyouList addObject:pl];
+                }
             }else
             {
                 for (TuCao *htucao in _tuCaoList) {
@@ -179,6 +181,13 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
                         [htucao setJyouList:tucao.jyouList];
                         [htucao setHpic:tucao.hpic];
                         [htucao setNkname:tucao.nkname];
+                        for (PingLun *pl in tucao.jyouList) {
+                            for (PingLun *jy in _jyouList) {
+                                if ([jy.lcid integerValue] == [pl.lcid integerValue]) {
+                                    [jy setHpic:pl.hpic];
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -186,13 +195,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
         [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
             return [obj1.createtime integerValue] < [obj2.createtime integerValue];
         }];
-        for (TuCao *htuco in _tuCaoList) {
-            if ([htuco.jyouList count] > 0) {
-                for (PingLun *pl in htuco.jyouList) {
-                    [_jyouList addObject:pl];
-                }
-            }
-        }
         [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
             return [obj1.createtime integerValue] < [obj2.createtime integerValue];
         }];
@@ -226,7 +228,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
 {
     dianzanTableview.hidden = NO;
     tucaotableview.hidden = YES;
-    [tucaotableview reloadData];
+    [dianzanTableview reloadData];
     self.greenLabel.frame = CGRectMake(162, 198, 157, 2);
 }
 
@@ -234,7 +236,7 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
 {
     dianzanTableview.hidden = YES;
     tucaotableview.hidden = NO;
-    [dianzanTableview reloadData];
+    [tucaotableview reloadData];
     self.greenLabel.frame = CGRectMake(1, 198, 157, 2);
 }
 
@@ -569,7 +571,6 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
     self.nameView.text = [theData objectForKey:@"nkname"];
     self.signLabel.text = [@"爱车：" stringByAppendingString:[theData objectForKey:@"vehtype"]];
     [tucaotableview headerBeginRefreshing];
-    [dianzanTableview headerBeginRefreshing];
 }
 
 @end

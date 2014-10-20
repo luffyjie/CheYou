@@ -115,6 +115,16 @@
         NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_dianzan.createtime doubleValue]/1000];
         created_at.text = [formatter stringFromDate: confromTimesp];
     }
+    if (![_dianzan.hpic isEqualToString:dianzan.hpic]) {
+        _dianzan = dianzan;
+        // 下载图片
+        if (!_dianzan.hpic) {
+            _dianzan.hpic = @"";
+        }
+        UIImage *placeholder = [UIImage imageNamed:@"timeline_image_loading"];
+        [userImage setImageURLStr: [NSString stringWithFormat:@"http://cheyoulianmeng.b0.upaiyun.com%@%@",_dianzan.hpic,@"!small"] placeholder:placeholder];
+        screen_name.text = _dianzan.nkname;
+    }
 }
 
 @end
