@@ -142,7 +142,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		721A5254B50F434AA1B75A09 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		3D1D240AEA8F87D7242997B4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B1B782DD7D212B245D6D6278 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E9045E7F19B636EB00292DA0 /* CheYouTieTaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTieTaoViewController.h; sourceTree = "<group>"; };
 		E9045E8019B636EB00292DA0 /* CheYouTieTaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTieTaoViewController.m; sourceTree = "<group>"; };
 		E911673019BB107D007EA117 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
@@ -381,6 +382,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		471523269218FE33E2D194F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1B782DD7D212B245D6D6278 /* Pods.debug.xcconfig */,
+				3D1D240AEA8F87D7242997B4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E911672F19BB107D007EA117 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,7 +676,7 @@
 				E981F9F619AC323F007BD2DE /* CheYouTests */,
 				E981F9D019AC323F007BD2DE /* Frameworks */,
 				E981F9CF19AC323F007BD2DE /* Products */,
-				721A5254B50F434AA1B75A09 /* Pods.xcconfig */,
+				471523269218FE33E2D194F1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -837,7 +847,7 @@
 				ORGANIZATIONNAME = CheYou;
 				TargetAttributes = {
 					E981F9CD19AC323F007BD2DE = {
-						DevelopmentTeam = QGNK59T56D;
+						DevelopmentTeam = VN3683B835;
 					};
 					E981F9EE19AC323F007BD2DE = {
 						TestTargetID = E981F9CD19AC323F007BD2DE;
@@ -926,7 +936,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D2717A44BA8140CC9E2C5DE9 /* Check Pods Manifest.lock */ = {
@@ -1148,7 +1158,7 @@
 		};
 		E981FA0119AC323F007BD2DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 721A5254B50F434AA1B75A09 /* Pods.xcconfig */;
+			baseConfigurationReference = B1B782DD7D212B245D6D6278 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1169,7 +1179,7 @@
 		};
 		E981FA0219AC323F007BD2DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 721A5254B50F434AA1B75A09 /* Pods.xcconfig */;
+			baseConfigurationReference = 3D1D240AEA8F87D7242997B4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

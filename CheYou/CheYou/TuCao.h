@@ -14,6 +14,9 @@
 @property (nonatomic, copy) NSString *nkname;
 @property (nonatomic, copy) NSString *hpic;
 @property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *dccase;
+@property (nonatomic, copy) NSString *jgtime;
+@property (nonatomic, copy) NSString *tttime;
 @property (nonatomic, copy) NSString *huati;
 @property (nonatomic, assign) int jyou;
 @property (nonatomic, copy) NSString *location;
