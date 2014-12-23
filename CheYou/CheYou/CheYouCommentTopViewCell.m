@@ -25,6 +25,11 @@
     UILabel *tuCaoText;
     UILabel *footLine;
     UIView *userPhotoView;
+    UIImageView *commentView;
+    UILabel *typeLabel;
+    UILabel *ttTimeLabel;
+    UILabel *dcTimeLabel;
+    UILabel *dcyyLbael;
 }
 
 @synthesize userPhotoView = userPhotoView;
@@ -57,6 +62,43 @@
         footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
         [self.contentView addSubview: footLine];
         
+        // add by lujie 2014-12-23 吐槽类型
+        typeLabel = [[UILabel alloc] init];
+        typeLabel.text = @"";
+        typeLabel.textAlignment = NSTextAlignmentRight;
+        typeLabel.font = [UIFont boldSystemFontOfSize:15];
+        [self.contentView addSubview:typeLabel];
+        
+        // add by lujie 2014-12-23 堵车原因
+        dcyyLbael = [[UILabel alloc] initWithFrame:CGRectZero];
+        dcyyLbael.text = @"";
+        dcyyLbael.font = [UIFont systemFontOfSize:14];
+        dcyyLbael.textAlignment = NSTextAlignmentCenter;
+        dcyyLbael.layer.borderColor = [UIColor grayColor].CGColor;
+        dcyyLbael.layer.borderWidth = 1;
+        dcyyLbael.layer.cornerRadius = 8;
+        [self.contentView addSubview:dcyyLbael];
+        
+        // add by lujie 2014-12-23 堵车时间
+        dcTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        dcTimeLabel.text = @"";
+        dcTimeLabel.font = [UIFont systemFontOfSize:14];
+        dcTimeLabel.textAlignment = NSTextAlignmentCenter;
+        dcTimeLabel.layer.borderColor = [UIColor grayColor].CGColor;
+        dcTimeLabel.layer.borderWidth = 1;
+        dcTimeLabel.layer.cornerRadius = 8;
+        [self.contentView addSubview:dcTimeLabel];
+        
+        // add by lujie 2014-12-23 贴条时间
+        ttTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        ttTimeLabel.text = @"";
+        ttTimeLabel.font = [UIFont systemFontOfSize:14];
+        ttTimeLabel.textAlignment = NSTextAlignmentCenter;
+        ttTimeLabel.layer.borderColor = [UIColor grayColor].CGColor;
+        ttTimeLabel.layer.borderWidth = 1;
+        ttTimeLabel.layer.cornerRadius = 8;
+        [self.contentView addSubview:ttTimeLabel];
+
         //add by lujie for debug
 //        userImage.backgroundColor = [UIColor lightGrayColor];
 //        screen_name.backgroundColor = [UIColor blueColor];
@@ -88,6 +130,11 @@
     return CGRectMake(IMAGE_WIDTH_SIZE + 12.f + 15.f, 38.f, 100.f, 12.f);
 }
 
+- (CGRect)typeLabel_Frame
+{
+    return CGRectMake(self.contentView.frame.size.width - 130.f, 15.f, 100.f, 20.f);
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     [userImage setFrame:[self userImageFrame]];
@@ -95,7 +142,7 @@
     userImage.layer.masksToBounds = YES;
     [screen_name setFrame:[self screen_nameFrame]];
     [created_at setFrame:[self created_atFrame]];
-    
+    [typeLabel setFrame:[self typeLabel_Frame]];
 }
 
 - (void)awakeFromNib
@@ -128,6 +175,43 @@
         created_at.text = [formatter stringFromDate: confromTimesp];
         tuCaoText.text = _tucao.huati;
         [self makeContentFrame];
+        
+        typeLabel.text = @"";
+        
+        if ([_tucao.type integerValue] == 2) {
+            typeLabel.text = @"堵车";
+            typeLabel.textColor = [UIColor orangeColor];
+            if (!_tucao.dccase || [_tucao.dccase isEqual:[NSNull null]]) {
+                dcyyLbael.text = @"大流量";
+            }else
+            {
+                dcyyLbael.text =  _tucao.dccase;
+            }
+            switch ([_tucao.jgtime integerValue]) {
+                case 0:
+                    dcTimeLabel.text = @"15分钟左右";
+                    break;
+                case 1:
+                    dcTimeLabel.text = @"半小时左右";
+                    break;
+                case 2:
+                    dcTimeLabel.text = @"堵车45分钟左右";
+                    break;
+                case 3:
+                    dcTimeLabel.text = @"大于1个小时";
+                    break;
+                default:
+                    dcTimeLabel.text = @"未知";
+                    break;
+            }
+        }
+        if ([_tucao.type integerValue] == 1) {
+            typeLabel.text = @"贴条";
+            typeLabel.textColor = [UIColor redColor];
+            [formatter setDateFormat:@"yy年MM月dd日 HH时mm分"];
+            confromTimesp = [NSDate dateWithTimeIntervalSince1970:[_tucao.tttime doubleValue]];
+            ttTimeLabel.text = [formatter stringFromDate: confromTimesp];
+        }
     }
 }
 
@@ -141,17 +225,41 @@
     CGSize size = CGSizeMake(frame.size.width - 12.f - 12.f, 1000);
     CGSize textSize = [tuCaoText.text boundingRectWithSize:size options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     tuCaoText.frame = CGRectMake(12.f, 61.f, textSize.width, textSize.height);
+    
+    float typeHeight = 0.f;
+    dcyyLbael.frame = CGRectZero;
+    dcTimeLabel.frame = CGRectZero;
+    ttTimeLabel.frame = CGRectZero;
+    
+    //add by lujie 2014-12-23 添加堵车标签
+    if ([_tucao.type integerValue] == 2) {
+        dcyyLbael.frame = CGRectMake(10.f, textSize.height + 61.f + 5.f, 120, 30);
+        dcTimeLabel.frame = CGRectMake(10.f + 120.f + 10.f, textSize.height + 61.f + 5.f, 120, 30);
+        typeHeight = dcyyLbael.frame.size.height + 5;
+    }
+    
+    //add by lujie 2014-12-23 添加贴条标签
+    if ([_tucao.type integerValue] == 1) {
+        if (_tucao.imgList.count == 0) {
+            ttTimeLabel.frame = CGRectMake(10.f, textSize.height + 61.f + 10.f, 165, 30);
+        }else
+        {
+            ttTimeLabel.frame = CGRectMake(10.f, textSize.height + 61.f + 5.f, 165, 30);
+        }
+        typeHeight = ttTimeLabel.frame.size.height + 5;
+    }
+    
     //设置图片的位置和大小
     if (_tucao.imgList.count > 0) {
         if (_tucao.imgList.count ==1) {
-            userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width,100);
+            userPhotoView.frame =  CGRectMake(0, textSize.height + 70.f + typeHeight, self.contentView.bounds.size.width,100);
         }else{
-            userPhotoView.frame = _tucao.imgList.count > 3 ? CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 170)
-            : CGRectMake(0, textSize.height + 70.f, self.contentView.bounds.size.width, 80);
+            userPhotoView.frame = _tucao.imgList.count > 3 ? CGRectMake(0, textSize.height + 70.f + typeHeight, self.contentView.bounds.size.width, 170)
+            : CGRectMake(0, textSize.height + 70.f + typeHeight, self.contentView.bounds.size.width, 80);
         }
     }
     //计算出cell自适应的高度
-    frame.size.height = textSize.height + userPhotoView.bounds.size.height + 80.f;
+    frame.size.height = textSize.height + userPhotoView.bounds.size.height + 80.f + typeHeight;
     self.frame = frame;
     self.contentView.frame = frame;
     //最后设置foot+mid 间隔框的位置
