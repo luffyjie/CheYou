@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wZg-Vq-jyH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wZg-Vq-jyH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Che You Login View Controller-->
@@ -748,7 +749,7 @@
             </objects>
             <point key="canvasLocation" x="1515" y="640"/>
         </scene>
-        <!--车友吐槽-->
+        <!--车友联盟-->
         <scene sceneID="RTE-ap-ftn">
             <objects>
                 <tableViewController id="J27-jI-jKt" customClass="CheYouViewController" sceneMemberID="viewController">
@@ -769,7 +770,7 @@
                             <outlet property="delegate" destination="J27-jI-jKt" id="aky-T4-pAp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="车友吐槽" id="mHA-bX-kBO"/>
+                    <navigationItem key="navigationItem" title="车友联盟" id="mHA-bX-kBO"/>
                     <connections>
                         <segue destination="gJF-yN-V89" kind="push" identifier="comment_segue" id="v9s-rG-dIB"/>
                     </connections>
@@ -1241,8 +1242,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  被您发现了，我们还在完善中。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idW-cQ-MeG">
-                                <rect key="frame" x="0.0" y="64" width="304" height="38"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   车友联盟是一款车友分享及相互帮助的工具。在路上，不论您身处何方，分享您的所见所闻。不论是堵车，事故，执法，或者是其他有意思的事，车友联盟都欢迎您的分享。出门靠车友，车友联盟祝您出行顺利。" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idW-cQ-MeG">
+                                <rect key="frame" x="7" y="66" width="310" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1404,8 +1405,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="l2n-kK-D2S"/>
         <segue reference="ixH-K2-sYR"/>
-        <segue reference="sBe-fT-Yqq"/>
+        <segue reference="l2n-kK-D2S"/>
+        <segue reference="v9s-rG-dIB"/>
     </inferredMetricsTieBreakers>
 </document>

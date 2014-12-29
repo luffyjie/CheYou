@@ -55,8 +55,8 @@
     [self.view addSubview: self.textView];
     
     //提示内容
-    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
-    promptLabel.text = @"别贴我...";
+    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 250, 19)];
+    promptLabel.text = @"这次悲剧被贴，下次注意避免";
     promptLabel.font = [UIFont systemFontOfSize:16];
     promptLabel.textColor = [LuJieCommon UIColorFromRGB:0x999999];
     [self.textView addSubview:promptLabel];
@@ -128,7 +128,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     if (textView.text.length == 0) {
-        promptLabel.text = @"我们是首堵...";
+        promptLabel.text = @"这次悲剧被贴，下次注意避免";
         self.sendButton.enabled = NO;
     }else{
         promptLabel.text = @"";

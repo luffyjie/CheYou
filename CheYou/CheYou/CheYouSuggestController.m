@@ -42,8 +42,8 @@
     [self.view addSubview: self.textView];
     self.textView.delegate = self;
     //提示内容
-    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 200, 19)];
-    promptLabel.text = @"希望您给我们提宝贵的意见...";
+    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 280, 19)];
+    promptLabel.text = @"您的意见，对产品很重要，请您赐教。";
     promptLabel.font = [UIFont systemFontOfSize:16.f];
     promptLabel.textColor = [LuJieCommon UIColorFromRGB:0x999999];
     [self.textView addSubview:promptLabel];
@@ -111,7 +111,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     if (textView.text.length == 0) {
-        promptLabel.text = @"希望您给我们提宝贵的意见...";
+        promptLabel.text = @"您的意见，对产品很重要，请您赐教。";
         self.sendButton.enabled = NO;
     }else{
         promptLabel.text = @"";

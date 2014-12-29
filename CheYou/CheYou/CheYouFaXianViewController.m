@@ -55,8 +55,8 @@
     [self.view addSubview:self.photoView];
     
     //提示内容
-    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 100, 19)];
-    promptLabel.text = @"最新发现...";
+    promptLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 8, 180, 19)];
+    promptLabel.text = @"看我发现了什么";
     promptLabel.font = [UIFont systemFontOfSize:16.f];
     promptLabel.textColor = [LuJieCommon UIColorFromRGB:0x999999];
     [self.textView addSubview:promptLabel];
@@ -151,7 +151,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     if (textView.text.length == 0) {
-        promptLabel.text = @"我们是首堵...";
+        promptLabel.text = @"看我发现了什么";
         self.sendButton.enabled = NO;
     }else{
         promptLabel.text = @"";
