@@ -45,7 +45,7 @@ static int page;
     _tuCaoSet = [[NSMutableSet alloc] init];
     _tuCaoList = [[NSMutableArray alloc] init];
     page = 1;
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
     //设置吐槽tale
     self.tableView.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,0,10)];
@@ -88,7 +88,7 @@ static int page;
                                  @"page.page": [NSString stringWithFormat:@"%d",page],
                                  @"page.size": @"10",@"page.sort": @"createTime", @"page.sort.dir": @"desc"};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/find/round" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"responseObject: %@", responseObject);
+        //        NSLog(@"responseObject: %@", responseObject);
         NSArray *labaDic = [responseObject objectForKey:@"data"];
         //遍历喇叭
         for (NSDictionary *laba in labaDic) {
@@ -100,7 +100,7 @@ static int page;
             [tucao setValue:[laba objectForKey:@"type"] forKey:@"type"];
             [tucao setValue:[laba objectForKey:@"dccase"] forKey:@"dccase"];
             [tucao setValue:[laba objectForKey:@"jgtime"] forKey:@"jgtime"];
-            [tucao setValue:[laba objectForKey:@"tttime"] forKey:@"tttime"]; 
+            [tucao setValue:[laba objectForKey:@"tttime"] forKey:@"tttime"];
             [tucao setValue:[laba objectForKey:@"huati"] forKey:@"huati"];
             [tucao setValue:[laba objectForKey:@"jyou"] forKey:@"jyou"];
             [tucao setValue:[laba objectForKey:@"location"] forKey:@"location"];
@@ -161,7 +161,7 @@ static int page;
             }];
         }
         //请求完毕，刷新table
-//        [self.tableView reloadData ];
+        //        [self.tableView reloadData ];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
@@ -203,7 +203,7 @@ static int page;
     // dequeue a RecipeTableViewCell, then set its towm to the towm for the current row
     CheYouTuCaoTableViewCell *tucaoCell = [tableView dequeueReusableCellWithIdentifier:hometucaoIdentifier];
     if (!tucaoCell) {
-         tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
+        tucaoCell = [[CheYouTuCaoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:hometucaoIdentifier];
     }
     tucaoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tucaoCell.tucao = [_tuCaoList objectAtIndex:indexPath.row];
@@ -211,7 +211,7 @@ static int page;
     //如果用户之前点过赞，则显示红色
     for (PingLun *jy in [[_tuCaoList objectAtIndex:indexPath.row] jyouList]) {
         if ([[userDefaults objectForKey:@"userPhone"] isEqualToString:jy.account]) {
-           tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
+            tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_select"];
             tucaoCell.gasolineLabel.textColor = [UIColor redColor];
         }
     }
@@ -219,10 +219,21 @@ static int page;
         tucaoCell.gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
         tucaoCell.gasolineLabel.textColor = [UIColor blackColor];
     }
+    for(id tmpView in tucaoCell.contentView.subviews)
+    {
+        if([tmpView isKindOfClass:[UIButton class]])
+        {
+            [tmpView removeFromSuperview];
+        }
+    }
     //添加点赞加油点击按钮
     UIButton *overbutton = [[UIButton alloc] initWithFrame: CGRectMake(self.view.bounds.size.width - 60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
     [overbutton addTarget:self action:@selector(gasolinebuttonAction:)forControlEvents:UIControlEventTouchDown];
     [tucaoCell.contentView addSubview:overbutton];
+    //添加举报按钮
+    UIButton *jubaobutton = [[UIButton alloc] initWithFrame: CGRectMake(60.f, tucaoCell.frame.size.height - 30.f, 40.f, 24.f)];
+    [jubaobutton addTarget:self action:@selector(jubaobuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [tucaoCell.contentView addSubview:jubaobutton];
     [self makeUserPhotos:[_tuCaoList objectAtIndex:indexPath.row] over:tucaoCell over:(int)indexPath.row];
     return tucaoCell;
 }
@@ -277,15 +288,24 @@ static int page;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":[NSNumber numberWithInteger:cell.tag]};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            NSLog(@"JSON: %@", responseObject);
+        //            NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"Error: %@", error);
+        //            NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
         [alert show];
     }];
+}
+
+- (void)jubaobuttonAction:(id)sender
+{
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = NSLocalizedString(@"举报成功！", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma 生成吐槽的图片
@@ -305,7 +325,7 @@ static int page;
         photo.userInteractionEnabled = YES;
         [photo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
         [cell.userPhotoView addSubview: photo];
-
+        
     }
     
     if (tucao.imgList.count >1 && tucao.imgList.count < 4) {

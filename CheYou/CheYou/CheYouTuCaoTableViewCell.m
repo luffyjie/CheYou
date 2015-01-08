@@ -31,6 +31,7 @@
     UILabel *ttTimeLabel;
     UILabel *dcTimeLabel;
     UILabel *dcyyLbael;
+    UILabel *jubaoLabel;
 }
 
 @synthesize userPhotoView = userPhotoView;
@@ -71,7 +72,7 @@
         footLine.backgroundColor = [LuJieCommon UIColorFromRGB:0xF2F2F2];
         [self.contentView addSubview: footLine];
         
-
+        
         gasolineLabel = [[UILabel alloc] init];
         gasolineLabel.text = @"0";
         gasolineLabel.font = [UIFont systemFontOfSize:14];
@@ -127,21 +128,28 @@
         ttTimeLabel.layer.cornerRadius = 8;
         [self.contentView addSubview:ttTimeLabel];
         
+        // add by lujie 2014-01-07
+        jubaoLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        jubaoLabel.text = @"举报";
+        jubaoLabel.textColor = [UIColor darkGrayColor];
+        jubaoLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:jubaoLabel];
+        //        jubaoLabel.backgroundColor = [UIColor redColor];
         //add by lujie for debug
-//        userImage.backgroundColor = [UIColor lightGrayColor];
-//        screen_name.backgroundColor = [UIColor blueColor];
-//        created_at.backgroundColor = [UIColor yellowColor];
-//        tuCaoTag.backgroundColor = [UIColor redColor];
-//        tuCaoText.backgroundColor = [UIColor greenColor];
-//        userPhotoView.backgroundColor = [UIColor redColor];
-//        self.contentView.backgroundColor = [UIColor blackColor];
-//        typeLabel.backgroundColor = [UIColor grayColor];
+        //        userImage.backgroundColor = [UIColor lightGrayColor];
+        //        screen_name.backgroundColor = [UIColor blueColor];
+        //        created_at.backgroundColor = [UIColor yellowColor];
+        //        tuCaoTag.backgroundColor = [UIColor redColor];
+        //        tuCaoText.backgroundColor = [UIColor greenColor];
+        //        userPhotoView.backgroundColor = [UIColor redColor];
+        //        self.contentView.backgroundColor = [UIColor blackColor];
+        //        typeLabel.backgroundColor = [UIColor grayColor];
     }
     return self;
 }
 
 - (CGRect)userImageFrame {
-
+    
     return CGRectMake( 12.f, 12.f, IMAGE_WIDTH_SIZE, IMAGE_HEIGHT_SIZE);
 }
 
@@ -157,7 +165,7 @@
 
 - (CGRect)typeLabel_Frame
 {
-     return CGRectMake(self.contentView.frame.size.width - 130.f, 15.f, 100.f, 20.f);
+    return CGRectMake(self.contentView.frame.size.width - 130.f, 15.f, 100.f, 20.f);
 }
 
 - (void)layoutSubviews {
@@ -216,7 +224,7 @@
             }
             switch ([_tucao.jgtime integerValue]) {
                 case 0:
-                       dcTimeLabel.text = @"15分钟左右";
+                    dcTimeLabel.text = @"15分钟左右";
                     break;
                 case 1:
                     dcTimeLabel.text = @"半小时左右";
@@ -228,7 +236,7 @@
                     dcTimeLabel.text = @"大于1个小时";
                     break;
                 default:
-                        dcTimeLabel.text = @"未知";
+                    dcTimeLabel.text = @"未知";
                     break;
             }
         }
@@ -302,7 +310,7 @@
     frame.size.height = textSize.height + userPhotoView.bounds.size.height + 113.f + typeHeight;
     self.frame = frame;
     self.contentView.frame = frame;
-
+    
     //最后设置foot+mid 间隔框的位置
     footLine.frame = CGRectMake(0, frame.size.height - 5.f, frame.size.width, 5.f);
     midLine.frame = CGRectMake(0, frame.size.height - 34.f, frame.size.width, 1.0f);
@@ -311,6 +319,7 @@
     commentLabel.frame = CGRectMake(frame.size.width/2 + 15, frame.size.height - 29.f, 40.f, 20.f);
     gasolineView.frame = CGRectMake(frame.size.width - 57.f, frame.size.height - 26.f, 15.f, 15.f);
     commentView.frame = CGRectMake(frame.size.width/2-10, frame.size.height - 25.f, 15.f, 15.f);
+    jubaoLabel.frame = CGRectMake(60, frame.size.height - 29.f, 30.f, 20.f);
 }
 
 @end

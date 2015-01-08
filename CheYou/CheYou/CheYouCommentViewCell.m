@@ -23,6 +23,7 @@
     UILabel *screen_name;
     UILabel *created_at;
     UILabel *pingLunText;
+    UILabel *jubaoLabel;
 }
 
 @synthesize pinglun = _pinglun;
@@ -47,6 +48,13 @@
         pingLunText.font = [UIFont systemFontOfSize:14.f];
         [self.contentView addSubview: pingLunText];
         
+        // add by lujie 2014-01-07
+        jubaoLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        jubaoLabel.text = @"举报";
+        jubaoLabel.textColor = [UIColor darkGrayColor];
+        jubaoLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:jubaoLabel];
+        //        jubaoLabel.backgroundColor = [UIColor redColor];
         //add by lujie for debug
         //        userImage.backgroundColor = [UIColor lightGrayColor];
         //        screen_name.backgroundColor = [UIColor blueColor];
@@ -139,6 +147,7 @@
     frame.size.height = textSize.height + 70.f;
     self.frame = frame;
     self.contentView.frame = frame;
+    jubaoLabel.frame = CGRectMake(frame.size.width - 60.f, 12.f, 30.f, 20.f);
 }
 
 @end

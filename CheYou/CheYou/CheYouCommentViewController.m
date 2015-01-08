@@ -142,21 +142,21 @@
     sectionView.backgroundColor = [UIColor whiteColor];//[LuJieCommon UIColorFromRGB:0xd7d7d7];
     
     gasolineLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 33.f,
-                                                                       sectionView.frame.size.height - 29.f, 40.f, 20.f)];
+                                                              sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     gasolineLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[self.tucao.jyouList count]];
     gasolineLabel.font = [UIFont systemFontOfSize:14];
     gasolineLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:gasolineLabel];
     
     commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionView.frame.size.width/2 + 15,
-                                                                      sectionView.frame.size.height - 29.f, 40.f, 20.f)];
+                                                             sectionView.frame.size.height - 29.f, 40.f, 20.f)];
     commentLabel.text = [NSString stringWithFormat:@"%d",(int)self.tucao.commentList.count];
     commentLabel.font = [UIFont systemFontOfSize:14];
     commentLabel.textColor = [UIColor grayColor];
     [sectionView addSubview:commentLabel];
-
+    
     gasolineView = [[UIImageView alloc] initWithFrame:CGRectMake(sectionView.frame.size.width - 57.f,
-                                                                              sectionView.frame.size.height - 26.f, 15.f, 15.f)];
+                                                                 sectionView.frame.size.height - 26.f, 15.f, 15.f)];
     gasolineView.image = [UIImage imageNamed:@"tc_gasoline_unselect"];
     [sectionView addSubview:gasolineView];
     
@@ -198,6 +198,17 @@
     CheYouCommentViewCell *cell = [[CheYouCommentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commtdentifier"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.pinglun = [self.tucao.commentList objectAtIndex:indexPath.row];
+    for(id tmpView in cell.contentView.subviews)
+    {
+        if([tmpView isKindOfClass:[UIButton class]])
+        {
+            [tmpView removeFromSuperview];
+        }
+    }
+    //添加举报按钮
+    UIButton *jubaobutton = [[UIButton alloc] initWithFrame: CGRectMake(cell.frame.size.width - 60.f, 12.f, 35.f, 25.f)];
+    [jubaobutton addTarget:self action:@selector(jubaobuttonAction:)forControlEvents:UIControlEventTouchDown];
+    [cell.contentView addSubview:jubaobutton];
     return cell;
 }
 
@@ -280,7 +291,7 @@
 #pragma 导航返回
 - (void)backAction:(id)sender
 {
-//    [self dismissViewControllerAnimated:YES completion: nil];
+    //    [self dismissViewControllerAnimated:YES completion: nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -307,14 +318,14 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters = @{@"account": [userDefaults objectForKey:@"userPhone"], @"lbid":self.tucao.lbid};
     [manager POST:@"http://114.215.187.69/citypin/rs/laba/yt/1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                    NSLog(@"JSON: %@", responseObject);
+        //                    NSLog(@"JSON: %@", responseObject);
         //向通知中心发送消息
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"pbZanOrPlNotification"
          object:nil
          userInfo:[NSDictionary dictionaryWithObject:self.indexpath forKey:@"indexpath"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"Error: %@", error);
+        NSLog(@"Error: %@", error);
         NSString *title = NSLocalizedString(@"提示", nil);
         NSString *message = NSLocalizedString(@"网络错误，点赞失败！", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
@@ -323,9 +334,18 @@
     }];
 }
 
+- (void)jubaobuttonAction:(id)sender
+{
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = NSLocalizedString(@"举报成功！", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)commentbuttonAction:(id)sender
 {
-
+    
     [self performSegueWithIdentifier:@"pb_comment_segue" sender:self];
 }
 
@@ -341,53 +361,53 @@
     }
 }
 /*
-#pragma 请求评论数据
-- (void)getData:(int)page
-{
-    //第一次获取数据
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSDictionary *parameters = @{@"lbid":self.tucao.lbid};
-    [manager POST:@"http://114.215.187.69/citypin/rs/laba/comment/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //        NSLog(@"responseObject: %@", responseObject);
-        NSArray *labaDic = [responseObject objectForKey:@"data"];
-        //遍历喇叭
-        for (NSDictionary *comment in labaDic) {
-            //区分评论和点赞
-            if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
-                PingLun * pinglun = [[PingLun alloc] init];
-                [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
-                [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
-                [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
-                [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
-                [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
-                [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
-                [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
-                //如果该数据是新的则添加进去
-            
-            }else
-            {
-                PingLun * pinglun = [[PingLun alloc] init];
-                [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
-                [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
-                [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
-                [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
-                [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
-                [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
-                [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
-                //如果该数据是新的则添加进去
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        NSString *title = NSLocalizedString(@"提示", nil);
-        NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
-        NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
-        [alert show];
-    }];
-}
-*/
+ #pragma 请求评论数据
+ - (void)getData:(int)page
+ {
+ //第一次获取数据
+ AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+ manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+ NSDictionary *parameters = @{@"lbid":self.tucao.lbid};
+ [manager POST:@"http://114.215.187.69/citypin/rs/laba/comment/find" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+ //        NSLog(@"responseObject: %@", responseObject);
+ NSArray *labaDic = [responseObject objectForKey:@"data"];
+ //遍历喇叭
+ for (NSDictionary *comment in labaDic) {
+ //区分评论和点赞
+ if ([[comment objectForKey:@"content"] isEqual:@"0"]) {
+ PingLun * pinglun = [[PingLun alloc] init];
+ [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
+ [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+ [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+ [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+ [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+ [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+ [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+ //如果该数据是新的则添加进去
+ 
+ }else
+ {
+ PingLun * pinglun = [[PingLun alloc] init];
+ [pinglun setValue:[comment objectForKey:@"nkname"] forKey:@"nkname"];
+ [pinglun setValue:[comment objectForKey:@"lcid"] forKey:@"lcid"];
+ [pinglun setValue:[comment objectForKey:@"lbid"] forKey:@"lbid"];
+ [pinglun setValue:[comment objectForKey:@"account"] forKey:@"account"];
+ [pinglun setValue:[comment objectForKey:@"hpic"] forKey:@"hpic"];
+ [pinglun setValue:[comment objectForKey:@"createtime"] forKey:@"createtime"];
+ [pinglun setValue:[comment objectForKey:@"content"] forKey:@"content"];
+ //如果该数据是新的则添加进去
+ }
+ }
+ } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+ NSLog(@"Error: %@", error);
+ NSString *title = NSLocalizedString(@"提示", nil);
+ NSString *message = NSLocalizedString(@"网络错误，没有信息！", nil);
+ NSString *cancelButtonTitle = NSLocalizedString(@"确定", nil);
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+ [alert show];
+ }];
+ }
+ */
 #pragma 已经发布评论,点赞的委托
 
 -(void)pbComment:(PingLun *)pinglun{
