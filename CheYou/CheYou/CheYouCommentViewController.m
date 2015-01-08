@@ -40,7 +40,7 @@
     [super viewDidLoad];
     userDefaults = [NSUserDefaults standardUserDefaults];
     [self.tucao.commentList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
-        return [obj1.createtime doubleValue] < [obj2.createtime doubleValue];
+        return [obj1.createtime longLongValue] < [obj2.createtime longLongValue];
     }];
     // 设置返回按钮
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]

@@ -196,10 +196,10 @@ static NSString *usertucaoIdentifier=@"usertucaoIdentifier";
             }
         }
         [_tuCaoList sortUsingComparator:^NSComparisonResult(TuCao *obj1,TuCao *obj2){
-            return [obj1.createtime integerValue] < [obj2.createtime integerValue];
+            return [obj1.createtime longLongValue] < [obj2.createtime longLongValue];
         }];
         [_jyouList sortUsingComparator:^NSComparisonResult(PingLun *obj1,PingLun *obj2){
-            return [obj1.createtime integerValue] < [obj2.createtime integerValue];
+            return [obj1.createtime longLongValue] < [obj2.createtime longLongValue];
         }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
