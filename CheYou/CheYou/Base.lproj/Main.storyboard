@@ -139,6 +139,19 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdB-rm-phQ">
+                                        <rect key="frame" x="7" y="0.0" width="177" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="XieyiAction:" destination="IeX-nd-ceS" eventType="touchUpInside" id="Wl9-5P-I42"/>
+                                            <segue destination="k2a-BP-CyJ" kind="modal" identifier="XieyiSegue" id="YEJ-AV-of0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -173,6 +186,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8o-Kc-mbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2042" y="658"/>
+        </scene>
+        <!--用户协议-->
+        <scene sceneID="OGZ-vj-hhJ">
+            <objects>
+                <viewController id="u3d-u6-Ndh" customClass="CheYouXieyiViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bTq-ea-JJ8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="m9w-9I-0hV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">《 老司机联盟软件服务使用协议 》
+1. 特别提示
+1.1 老司机联盟软件开发者同意按照本协议的规定及其不时发布的操作规则提供基于互联网以及移动网的老司机联盟服务，为获得服务，服务使用人（以下称"用户"）应当基于了解本协议全部内容，在独立思考的基础上认可、同意本协议的全部条款并按照页面上的提示完成全部的注册程序。用户在进行注册程序过程中点击"同意" 按钮即表示用户完全接受《老司机联盟软件服务使用协议》的各项规则、规范。
+1.2 用户注册成功后，老司机联盟软件服务（以下简称：本服务）将为用户基于本服务使用的客观需要而在申请、注册服务时，按照注册要求提供的帐号开通本服务，用户有权在软件开发者为其开通、并同意向其提供服务的基础上使用本服务。该用户帐号和密码由用户负责保管；用户使用本服务过程中，须对自身使用本服务的行为，对任何由用户通过本服务服务发布、公开的信息，及对由此产生的任何后果承担全部责任。用户提交、发布或显示的信息将对其他本服务用户及第三方服务及网站可见。
+1.3 为提高用户的本服务使用感受和满意度，用户同意开发者将基于用户的操作行为对用户数据进行调查研究和分析，从而进一步优化本服务。
+2. 服务内容
+2.1 本服务的具体内容由开发者根据实际情况提供，包括但不限于授权用户通过其帐号，使用本服务发布观点、评论、图片、视频、转发链接等，本公司有权对其提供的服务或产品形态进行升级或其他调整，并将及时更新页面/告知用户。
+2.2 用户理解，开发者仅提供与本服务相关的技术服务等，除此之外与相关网络服务有关的设备（如个人电脑、手机、及其他与接入互联网或移动网有关的装置）及所需的费用（如为接入互联网而支付的电话费及上网费、为使用移动网而支付的手机费）均应由用户自行负担。
+3. 服务变更、中断或终止
+3.1 鉴于网络服务的特殊性（包括但不限于服务器的稳定性问题、恶意的网络攻击等行为的存在及其他开发者无法控制的情形），用户同意开发者有权随时中断或终止部分或全部的本服务，若发生该等中断或中止本服务的情形，开发者将尽可能及时通过网页公告、系统通知、私信、短信提醒或其他合理方式通知受到影响的用户。
+3.2 用户理解，开发者需要定期或不定期地对提供本服务的平台（如互联网网站、移动网络等）或相关的设备进行检修或者维护，如因此类情况而造成服务在合理时间内的中断，开发者无需为此承担任何责任，但开发者应尽可能事先进行通告。
+3.3 如发生下列任何一种情形，开发者有权随时中断或终止向用户提供本协议项下的本服务而无需对用户或任何第三方承担任何责任： 3.3.1 用户提供的个人资料不真实； 3.3.2 用户违反法律法规国家政策或本协议中规定的使用规则；
+3.4 如用户在申请开通本服务后在任何连续90日内未实际使用，则开发者有权选择采取以下任何一种方式进行处理： 3.4.1 回收用户昵称； 3.4.2 停止为该用户提供本服务。
+4. 使用规则
+4.1 用户注册账号，制作、发布、传播信息内容的，应当使用真实身份信息，不得以虚假、冒用的居民身份信息、企业注册信息、组织机构代码信息进行注册。
+4.2 如用户违反前述4.1条之约定，依据相关法律、法规及国家政策要求，开发者有权随时中止或终止用户对本服务的使用且不承担违约责任。
+4.3 开发者将建立健全用户信息安全管理制度、落实技术安全防控措施。开发者将对用户使用本服务过程中涉及的用户隐私内容加以保护。
+4.4 用户在使用本服务时，开发者有权基于安全运营、社会公共安全的需要或国家政策的要求，要求用户提供准确的个人资料，如用户提供的个人资料有任何变动，导致用户的实际情况与用户提交给开发者的信息不一致的，用户应及时更新。
+4.5 由于本服务的存在前提是用户在申请开通本服务的过程中所提供的帐号，则用户不应将其帐号、密码转让或出借予他人使用。如用户发现其帐号或本服务遭他人非法使用，应立即通知开发者。因黑客行为或用户的保管疏忽导致帐号、密码及本服务遭他人非法使用，开发者有权拒绝承担任何责任。
+4.6 用户同意开发者在提供本服务过程中以各种方式投放各种商业性广告或其他任何类型的商业信息（包括但不限于在老司机联盟软件的任何页面上投放广告），并且，用户同意接受开发者通过电子邮件或其他方式向用户发送商品促销或其他相关商业信息。
+4.7 对于用户通过本服务公开发布的任何内容，用户同意开发者在全世界范围内具有免费的、永久性的、不可撤销的、非独家的和完全再许可的权利和许可，以使用、复制、修改、改编、出版、翻译、据以创作衍生作品、传播、表演和展示此等内容（整体或部分），和/或将此等内容编入当前已知的或以后开发的其他任何形 式的作品、媒体或技术中。
+4.8 用户在使用本服务过程中，必须遵循以下原则：： 4.8.1 遵守中国有关的法律和法规； 4.8.2 遵守所有与网络服务、本服务有关的网络协议、规定和程序； 4.8.3 不得为任何非法目的而使用本服务系统； 4.8.4 不得以任何形式使用本服务侵犯开发者的权利和/或利益； 4.8.5 不得利用本服务系统进行任何可能对互联网或移动网正常运转造成不利影响的行为； 4.8.6 不得利用开发者提供的本服务上传、展示或传播任何虚假的、骚扰性的、中伤他人的、种族歧视性的、辱骂性的、恐吓性的、成人情色的或其他任何非法的信息资料； 4.8.7 不得以任何方式侵犯其他任何人依法享有的专利权、著作权、商标权、名誉权或其他任何合法权益； 4.8.8 不得利用本服务系统进行任何不利于开发者的行为；
+4.9 开发者有权对用户使用本服务的情况进行审查和监督(包括但不限于对用户存储在老司机联盟软件平台的内容进行审核)，如用户在使用本服务时违反任何上述规定，开发者或其授权的主体有权要求用户改正或直接采取一切必要的措施（包括但不限于更改或删除用户张贴的内容等、暂停或终止用户使用本服务的权利）以消除或减轻用户不当行为造成的影响，开发者在进行前述操作前，操作过程中或操作完成后将尽可能对用户进行通知。
+4.10 开发者针对某些特定的本服务的使用通过各种方式（包括但不限于网页公告、系统通知、私信、短信提醒等）作出的任何声明、通知、警示等内容视为本协议的一部分，用户如使用该本服务，视为用户同意该等声明、通知、警示的内容。
+4.11 用户在使用本服务的过程中应文明发言，并依法尊重其它用户的人格权与个人隐私，共同建立和谐、文明、礼貌的网络社交环境。
+5. 知识产权
+5.1 开发者提供的网络服务中包含的任何文本、图片、图形、音频和/或视频资料均受著作权、商标和/或其它财产所有权法律的保护，未经相关权利人同意，上述资料均不得在任何媒体直接或间接发布、播放、出于播放或发布目的而改写或再发行，或者被用于其他任何商业目的。所有这些资料或资料的任何部分仅可作为私人和非商业用途而保存在某台计算机内。开发者不就由上述资料产生或在传送或递交全部或部分上述资料过程中产生的延误、不准确、错误和遗漏或从中产生或由此产生的任何损害赔偿，以任何形式，向用户或任何第三方负责。
+5.2 开发者为提供本服务而使用的，或者第三方针对本服务开发的在本平台上运行，供用户使用的任何软件（包括但不限于软件中所含的任何图象、照片、动 画、录像、录音、音乐、文字和附加程序、随附的帮助材料）的一切权利均属于该软件的著作权人，未经该软件的著作权人许可，用户不得对该软件进行反向工程 （reverse engineer）、反向编译（decompile）或反汇编（disassemble）。
+6. 隐私保护
+6.1 本协议所指的“隐私”包括《电信和互联网用户个人信息保护规定》第4条规定的用户个人信息的内容以及未来不时制定或修订的法律法规中明确规定的隐私应包括的内容。
+6.2 保护用户隐私是开发者的一项基本政策，开发者保证不会将单个用户的注册资料及用户在使用本服务时存储在开发者的非公开内容用于任何非法的用途，且保证将单个用户的注册资料进行商业上的利用时应事先获得用户的同意，但下列情况除外： 6.2.1 事先获得用户的明确授权； 6.2.2 根据有关的法律法规要求； 6.2.3 按照相关政府主管部门的要求； 6.2.4 为维护社会公众的利益； 6.2.5 用户侵害本协议项下开发者的合法权益的情况下而为维护开发者的合法权益所必须。
+7. 免责声明
+7.1 用户在使用本服务的过程中应遵守国家法律法规及政策规定，因其使用本服务而产生的行为后果由用户自行承担。
+7.2 通过本服务发布的任何信息，及通过本服务传递的任何观点不代表开发者之立场，开发者亦不对其完整性、真实性、准确性或可靠性负责。用户对于可能会接触到的非法的、非道德的、错误的或存在其他失宜之处的信息，及被错误归类或是带有欺骗性的发布内容，应自行做出判断。在任何情况下，对于任何信息，包括但不仅限于其发生的任何错误或遗漏；或是由于使用通过本服务发布、私信、传达、其他方式所释出的或在别处传播的信息，而造成的任何损失或伤害，应由相关行为主体承担全部责任。
+7.3 鉴于外部链接指向的网页内容非开发者实际控制的，因此开发者无法保证为向用户提供便利而设置的外部链接的准确性和完整性。
+7.4 对于因不可抗力或开发者不能控制的原因造成的本服务中断或其它缺陷，开发者不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。
+7.5 用户同意，对于开发者向用户提供的下列产品或者服务的质量缺陷本身及其引发的任何损失，开发者无需承担任何责任： 7.5.1 开发者向用户免费提供的本服务； 7.5.2 开发者向用户赠送的任何产品或者服务；
+7.6 用户知悉并同意，开发者可能会与第三方合作向用户提供产品（包括但不限于游戏、第三方应用等）并由第三方向用户提供该产品的升级、维护、客服等后续工作，由该等第三方对该产品的质量问题或其本身的原因导致的一切纠纷或用户损失承担责任，用户在此同意将向该第三方主张与此有关的一切权利和损失。
+8. 协议修改
+8.1 开发者有权随时修改本协议的任何条款，一旦本协议的内容发生变动，开发者将会在友车联盟上公布修改之后的协议内容，若用户不同意上述修改，则可以选择停止使用本服务。开发者也可选择通过其他适当方式（比如系统通知）向用户通知修改内容。
+9.2 如果不同意开发者对本协议相关条款所做的修改，用户有权停止使用本服务。如果用户继续使用本服务，则视为用户接受开发者对本协议相关条款所做的修改。
+10. 通知送达
+10.1 本协议项下开发者对于用户所有的通知均可通过网页公告、电子邮件、系统通知、管理账号主动联系、私信、手机短信或常规的信件传送等方式进行；该等通知于发送之日视为已送达收件人。
+10.2 用户对于开发者的通知应当通过开发者对外正式公布的通信地址、传真号码、电子邮件地址等联系信息进行送达。
+11. 法律适用
+11.1 本服务依据并贯彻中华人民共和国法律法规、政策规章及司法解释之要求，包括但不限于《全国人民代表大会常务委员会关于加强网络信息保护的决定》、《最高人民法院最高人民检察院适用法律若干问题的解释》等文件精神，制定《 友车联盟软件服务使用协议 》。
+11.2 本协议的订立、执行和解释及争议的解决均应适用中国法律并受中国法院管辖。
+11.3 如双方就本协议内容或其执行发生任何争议，双方应尽量友好协商解决；协商不成时，任何一方均可向开发者所在地的人民法院提起诉讼。
+12. 其他规定
+12.1 本协议构成双方对本协议之约定事项及其他有关事宜的完整协议，除本协议规定的之外，未赋予本协议各方其他权利。
+12.2 如本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，本协议的其余条款仍应有效并且有约束力。
+12.3 本协议中的标题仅为方便而设，在解释本协议时应被忽略。
+</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="用户协议" id="ZTv-kq-tz3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eaj-k8-DSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2013" y="1353"/>
         </scene>
         <!--设置密码（2/3）-->
         <scene sceneID="T2G-4O-JyB">
@@ -749,7 +839,7 @@
             </objects>
             <point key="canvasLocation" x="1515" y="640"/>
         </scene>
-        <!--车友联盟-->
+        <!--老司机联盟-->
         <scene sceneID="RTE-ap-ftn">
             <objects>
                 <tableViewController id="J27-jI-jKt" customClass="CheYouViewController" sceneMemberID="viewController">
@@ -770,7 +860,7 @@
                             <outlet property="delegate" destination="J27-jI-jKt" id="aky-T4-pAp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="车友联盟" id="mHA-bX-kBO"/>
+                    <navigationItem key="navigationItem" title="老司机联盟" id="mHA-bX-kBO"/>
                     <connections>
                         <segue destination="gJF-yN-V89" kind="push" identifier="comment_segue" id="v9s-rG-dIB"/>
                     </connections>
@@ -961,7 +1051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeL-vP-PYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-430" y="1465"/>
+            <point key="canvasLocation" x="102" y="1465"/>
         </scene>
         <!--设置-->
         <scene sceneID="sE0-cf-xrb">
@@ -1092,7 +1182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oV-Lz-g4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="1459"/>
+            <point key="canvasLocation" x="570" y="1459"/>
         </scene>
         <!--个人-->
         <scene sceneID="jNn-RX-DtX">
@@ -1208,7 +1298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXA-yR-P5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="1149"/>
+            <point key="canvasLocation" x="1005" y="1149"/>
         </scene>
         <!--意见反馈-->
         <scene sceneID="fLa-eO-NWA">
@@ -1242,9 +1332,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   车友联盟是一款车友分享及相互帮助的工具。在路上，不论您身处何方，分享您的所见所闻。不论是堵车，事故，执法，或者是其他有意思的事，车友联盟都欢迎您的分享。出门靠车友，车友联盟祝您出行顺利。" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idW-cQ-MeG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idW-cQ-MeG">
                                 <rect key="frame" x="7" y="66" width="310" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">    老司机联盟是一款车友分享及相互帮助的工具。在路上，不论您身处何方，分享您的所见所闻。不论是堵车，事故，执法，或者是其他有意思的事，老司机联盟都欢迎您的分享。出门在外，还得问老司机，老司机祝您出行顺利。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1256,7 +1347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQP-J2-dOX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="1680"/>
+            <point key="canvasLocation" x="1365" y="1680"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Hc-xD-ujB">
@@ -1275,7 +1366,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9g-22-lN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-862" y="1473"/>
+            <point key="canvasLocation" x="-330" y="1473"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cvV-4H-EUP">
@@ -1386,6 +1477,24 @@
             </objects>
             <point key="canvasLocation" x="-3141" y="156"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2uH-QB-Hpv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k2a-BP-CyJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E80-sA-Tau">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="u3d-u6-Ndh" kind="relationship" relationship="rootViewController" id="lAe-pg-fmv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IZy-H7-X0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2441" y="1353"/>
+        </scene>
     </scenes>
     <resources>
         <image name="default_photo" width="120" height="120"/>
@@ -1405,8 +1514,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ixH-K2-sYR"/>
         <segue reference="l2n-kK-D2S"/>
+        <segue reference="7lY-M2-WHd"/>
         <segue reference="v9s-rG-dIB"/>
     </inferredMetricsTieBreakers>
 </document>

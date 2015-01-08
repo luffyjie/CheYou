@@ -61,6 +61,12 @@
     [self performSegueWithIdentifier:@"duanx_segue" sender:self];
 }
 
+- (IBAction)XieyiAction:(UIButton *)sender {
+    
+    
+}
+
+
 #pragma mark 处理segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

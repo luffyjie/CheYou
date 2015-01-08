@@ -21,6 +21,7 @@
 		E92C577919D46C8800B144F0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E92C577819D46C8800B144F0 /* libPods.a */; };
 		E93648D619AF336300CE5542 /* TuCao.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D519AF336300CE5542 /* TuCao.m */; };
 		E93648DA19AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */; };
+		E93661D31A5E52BD00004F81 /* CheYouXieyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93661D21A5E52BD00004F81 /* CheYouXieyiViewController.m */; };
 		E9375F3F19D31B8A00053F0B /* libCCPRestSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F3D19D31B8A00053F0B /* libCCPRestSDK.a */; };
 		E9375F4119D31D2400053F0B /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */; };
 		E9375F4319D31D3600053F0B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9375F4219D31D3600053F0B /* SystemConfiguration.framework */; };
@@ -172,6 +173,8 @@
 		E93648D519AF336300CE5542 /* TuCao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuCao.m; sourceTree = "<group>"; };
 		E93648D819AF6C6100CE5542 /* CheYouTuCaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouTuCaoTableViewCell.h; sourceTree = "<group>"; };
 		E93648D919AF6C6100CE5542 /* CheYouTuCaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouTuCaoTableViewCell.m; sourceTree = "<group>"; };
+		E93661D11A5E52BD00004F81 /* CheYouXieyiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheYouXieyiViewController.h; sourceTree = "<group>"; };
+		E93661D21A5E52BD00004F81 /* CheYouXieyiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheYouXieyiViewController.m; sourceTree = "<group>"; };
 		E9375F3D19D31B8A00053F0B /* libCCPRestSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCCPRestSDK.a; sourceTree = "<group>"; };
 		E9375F3E19D31B8A00053F0B /* CCPRestSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPRestSDK.h; sourceTree = "<group>"; };
 		E9375F4019D31D2400053F0B /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -748,6 +751,8 @@
 				E97B2F2C19CD1D3E00D902C0 /* CheYouSetPwdViewController.m */,
 				E97B2F2E19CD21C500D902C0 /* CheYouSetInfoViewController.h */,
 				E97B2F2F19CD21C500D902C0 /* CheYouSetInfoViewController.m */,
+				E93661D11A5E52BD00004F81 /* CheYouXieyiViewController.h */,
+				E93661D21A5E52BD00004F81 /* CheYouXieyiViewController.m */,
 				E981F9E919AC323F007BD2DE /* Images.xcassets */,
 				E981F9D819AC323F007BD2DE /* Supporting Files */,
 			);
@@ -1035,6 +1040,7 @@
 				E9617A7A19B81740000543D2 /* MBProgressHUD+Add.m in Sources */,
 				E9ECC9B019B0983400C894E5 /* CheYouTabBarViewController.m in Sources */,
 				E9617A9319B81740000543D2 /* UIImageView+WebCache.m in Sources */,
+				E93661D31A5E52BD00004F81 /* CheYouXieyiViewController.m in Sources */,
 				E9617A9119B81740000543D2 /* UIImage+WebP.m in Sources */,
 				E99BBA9F19C0374200AF4C1B /* CheYouCommentViewController.m in Sources */,
 			);
